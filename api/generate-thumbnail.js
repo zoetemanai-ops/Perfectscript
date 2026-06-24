@@ -1,37 +1,36 @@
 // api/generate-thumbnail.js
 // ─────────────────────────────────────────────────────────────────────────────
-// Perfect Thumbnail · Vercel Node serverless function
+// Perfect Thumbnail · Vercel Node serverless function (GPT Image edition)
 //
 // Trigger:  POST { script_run_id }
 //   1. Loads the script run, creates a `thumbnail_runs` row (status: pending)
 //   2. Responds IMMEDIATELY with the new row id
 //   3. In the background (waitUntil): Claude art director -> 3 concepts ->
-//      Nano Banana Pro (scene render + 2-word text pass) -> upload -> row complete
+//      GPT Image (1 call per concept, creator faces as references, 2 words baked in)
+//      -> crop to 16:9 -> upload -> row complete
 //
-// The frontend polls `thumbnail_runs` for status === 'complete' (same pattern
-// your script generator already uses).
+// The frontend polls `thumbnail_runs` for status === 'complete'.
 //
 // ── Prerequisites ────────────────────────────────────────────────────────────
-//   npm i @anthropic-ai/sdk @google/genai @supabase/supabase-js @vercel/functions
+//   npm i @anthropic-ai/sdk openai sharp @supabase/supabase-js @vercel/functions
 //
 //   Env vars (Vercel project settings, all server-side):
 //     ANTHROPIC_API_KEY
-//     GEMINI_API_KEY
+//     OPENAI_API_KEY
 //     SUPABASE_URL
-//     SUPABASE_SERVICE_ROLE_KEY        (service role — bypasses RLS, reads storage)
+//     SUPABASE_SERVICE_ROLE_KEY        (service/secret key — bypasses RLS, reads storage)
 //
 //   Storage buckets:
 //     creator-photos   (PRIVATE)  ->  creator-photos/<client_slug>/photo1.jpg ... (3-6 per creator)
 //     thumbnails       (PUBLIC)   ->  finished thumbnails land here
 //
-//   Optional column on client_profiles:
-//     thumbnail_visual_notes  text   (recurring brand look; defaults to empty)
-//
-//   maxDuration 300 needs Vercel Pro. On Hobby: set 60 and render 1 concept.
+//   GPT Image has no native 16:9 — we request 1536x1024 and center-crop to 16:9.
+//   maxDuration 300 needs Vercel Pro.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import Anthropic from '@anthropic-ai/sdk';
-import { GoogleGenAI, Modality } from '@google/genai';
+import OpenAI, { toFile } from 'openai';
+import sharp from 'sharp';
 import { createClient } from '@supabase/supabase-js';
 import { waitUntil } from '@vercel/functions';
 
@@ -39,15 +38,17 @@ export const config = { maxDuration: 300 };
 
 // ── clients ──────────────────────────────────────────────────────────────────
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-const genai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
 // ── config ───────────────────────────────────────────────────────────────────
-const ART_DIRECTOR_MODEL = 'claude-opus-4-8';     // max-quality brain ('claude-sonnet-4-6' is the cheaper option)
-const IMAGE_MODEL = 'gemini-3-pro-image-preview';  // Nano Banana Pro
+const ART_DIRECTOR_MODEL = 'claude-opus-4-8';   // the brain (stays on Claude)
+const IMAGE_MODEL = 'gpt-image-1';               // newest is 'gpt-image-2' (May 2026, better) — use it if your account has API access; gpt-image-1 is the reliable GA fallback
+const IMAGE_SIZE = '1536x1024';                  // landscape; cropped to 16:9 after
+const IMAGE_QUALITY = 'high';                    // 'high' | 'medium' | 'low'
 const REF_BUCKET = 'creator-photos';
 const OUT_BUCKET = 'thumbnails';
 
@@ -97,15 +98,11 @@ THE 2-WORD OVERLAY (per concept):
 - ADDS intrigue — never repeats/summarizes the title, never reuses a title word.
 - No creator name, no hashtags. Punctuation only if it adds tension.
 - It implies, threatens, or teases. It does not explain.
-
-TEXT IS A SEPARATE PASS:
-- scene_prompt describes the image with NO overlay text in it (scene + face
-  lock only). The 2 words are applied afterward.
-- text_pass is the instruction for the second step that adds the 2 words.
+- The two words are baked directly into the scene_prompt (see below).
 
 AVOID (AI-slop tells): cluttered scenes, multiple focal points, generic stock
 look, over-saturation, plastic skin, gibberish text, extra logos/watermarks,
-any text in the scene beyond what text_pass adds.
+any text beyond the two chosen words.
 
 OUTPUT — return ONLY valid JSON, no preamble:
 {
@@ -117,13 +114,12 @@ OUTPUT — return ONLY valid JSON, no preamble:
       "angle": "<the distinct direction in a phrase>",
       "visual_metaphor": "...",
       "subject_direction": "<expression (hot but credible), pose, gesture, framing, placement>",
-      "composition": "<focal point, rule-of-thirds, fg/bg, where the negative space for text sits>",
+      "composition": "<focal point, rule-of-thirds, fg/bg, where the 2-word text sits>",
       "color_and_lighting": "...",
       "overlay": {"words": "TWO WORDS", "rationale": "...", "score": 0},
       "freshness_score": 0,
       "click_score": 0,
-      "scene_prompt": "<ONE paragraph, text-FREE, for Nano Banana Pro: 16:9 photorealistic thumbnail; describe the creator WITH an explicit instruction to keep face/identity exactly consistent with the supplied reference images; the metaphor; the hot-but-credible emotion; composition; lighting; end with 'Leave the upper area clear for a text overlay. Do not add any text, logo, or watermark. One clear focal point, readable as a small mobile thumbnail.'>",
-      "text_pass": "<instruction for the second NBP edit call: add the exact 2 words, heavy bold condensed sans, color, thick outline, placement, 'render legibly with exact spelling, no other text added.'>"
+      "scene_prompt": "<ONE paragraph for the image model: 16:9 photorealistic YouTube thumbnail; describe the creator WITH an explicit instruction to keep face and identity exactly consistent with the supplied reference images, same person; the metaphor; the hot-but-credible emotion; composition; lighting. THEN bake in the exact two overlay words as large heavy condensed bold sans-serif text, bright color with a thick contrasting outline, placed in the negative space, rendered cleanly and legibly with exact correct spelling. End with 'Do not add any other text, logo, or watermark. One clear focal point, readable as a small mobile thumbnail.'>"
     },
     { "id": "B" },
     { "id": "C" }
@@ -142,8 +138,7 @@ export default async function handler(req, res) {
   const { script_run_id } = req.body || {};
   if (!script_run_id) return res.status(400).json({ error: 'script_run_id is required' });
 
-  // Load the script we're making a thumbnail for.
-  // NOTE: confirm these column names match your script_runs table.
+  // Confirm these column names match your script_runs table.
   // We derive the "hook" from the opening of full_script (no separate hook column).
   const { data: script, error: scriptErr } = await supabase
     .from('script_runs')
@@ -152,7 +147,6 @@ export default async function handler(req, res) {
     .single();
   if (scriptErr || !script) return res.status(404).json({ error: 'script_run not found' });
 
-  // Create the thumbnail_runs row up front, return its id immediately.
   const { data: run, error: runErr } = await supabase
     .from('thumbnail_runs')
     .insert({
@@ -167,8 +161,6 @@ export default async function handler(req, res) {
   if (runErr || !run) return res.status(500).json({ error: 'Could not create thumbnail run' });
 
   res.status(202).json({ thumbnail_run_id: run.id, status: 'pending' });
-
-  // Heavy lifting continues after the response is sent.
   waitUntil(generate(run.id, script));
 }
 
@@ -200,11 +192,11 @@ async function generate(runId, script) {
     const concepts = (brief.concepts || []).filter((c) => c?.scene_prompt).slice(0, 3);
     if (!concepts.length) throw new Error('Art director returned no usable concepts');
 
-    // c) creator reference photos (face lock)
-    const refParts = await loadReferencePhotos(script.client_slug);
+    // c) creator reference photos (face lock) as OpenAI files
+    const refFiles = await loadReferencePhotos(script.client_slug);
 
-    // d) render each concept in parallel (each = scene render -> text pass -> upload)
-    const images = await Promise.all(concepts.map((c) => renderConcept(runId, c, refParts)));
+    // d) render each concept in parallel (1 GPT call -> crop 16:9 -> upload)
+    const images = await Promise.all(concepts.map((c) => renderConcept(runId, c, refFiles)));
 
     await update(runId, {
       status: 'complete',
@@ -230,22 +222,34 @@ async function runArtDirector(input) {
   return JSON.parse(stripFences(text));
 }
 
-// ── render one concept (2 sequential Banana calls) ───────────────────────────
-async function renderConcept(runId, concept, refParts) {
-  // 1) scene — text-free, creator faces locked via reference images
-  const sceneB64 = await bananaImage([...refParts, { text: concept.scene_prompt }]);
+// ── render one concept: single GPT Image call -> crop -> upload ──────────────
+async function renderConcept(runId, concept, refFiles) {
+  const b64 = refFiles.length
+    ? // with creator references -> images.edit (multi-image input)
+      (await openai.images.edit({
+        model: IMAGE_MODEL,
+        image: refFiles,
+        prompt: concept.scene_prompt,
+        size: IMAGE_SIZE,
+        quality: IMAGE_QUALITY,
+      })).data?.[0]?.b64_json
+    : // no references yet -> plain generate (no face lock)
+      (await openai.images.generate({
+        model: IMAGE_MODEL,
+        prompt: concept.scene_prompt,
+        size: IMAGE_SIZE,
+        quality: IMAGE_QUALITY,
+      })).data?.[0]?.b64_json;
 
-  // 2) add the 2 words as an edit pass on the scene
-  const finalB64 = await bananaImage([
-    { inlineData: { mimeType: 'image/png', data: sceneB64 } },
-    { text: concept.text_pass },
-  ]);
+  if (!b64) throw new Error('GPT Image returned no image (possible content refusal)');
 
-  // upload final to the public bucket
+  // crop center to 16:9
+  const cropped = await cropTo16x9(Buffer.from(b64, 'base64'));
+
   const path = `${runId}/${concept.id}.png`;
   const { error: upErr } = await supabase.storage
     .from(OUT_BUCKET)
-    .upload(path, Buffer.from(finalB64, 'base64'), { contentType: 'image/png', upsert: true });
+    .upload(path, cropped, { contentType: 'image/png', upsert: true });
   if (upErr) throw new Error(`Upload failed: ${upErr.message}`);
 
   const { data: pub } = supabase.storage.from(OUT_BUCKET).getPublicUrl(path);
@@ -259,23 +263,19 @@ async function renderConcept(runId, concept, refParts) {
   };
 }
 
-// ── Nano Banana Pro -> base64 PNG ────────────────────────────────────────────
-async function bananaImage(parts) {
-  const response = await genai.models.generateContent({
-    model: IMAGE_MODEL,
-    contents: [{ role: 'user', parts }],
-    config: { responseModalities: [Modality.TEXT, Modality.IMAGE] },
-    // To hard-enforce 16:9, add imageConfig (verify exact key against current
-    // Gemini docs before enabling — the prompt already requests "16:9"):
-    //   config: { responseModalities: [...], imageConfig: { aspectRatio: '16:9' } }
-  });
-  const out = response.candidates?.[0]?.content?.parts || [];
-  const img = out.find((p) => p.inlineData?.data);
-  if (!img) throw new Error('Nano Banana returned no image (possible safety block)');
-  return img.inlineData.data;
+// ── center-crop a buffer to 16:9, return a PNG buffer ────────────────────────
+async function cropTo16x9(buffer) {
+  const img = sharp(buffer);
+  const meta = await img.metadata();
+  const targetH = Math.round((meta.width * 9) / 16);
+  const top = Math.max(0, Math.round((meta.height - targetH) / 2));
+  return img
+    .extract({ left: 0, top, width: meta.width, height: Math.min(targetH, meta.height) })
+    .png()
+    .toBuffer();
 }
 
-// ── load 3-6 creator reference photos from private storage ───────────────────
+// ── load 3-6 creator reference photos from private storage as OpenAI files ───
 async function loadReferencePhotos(clientSlug) {
   const { data: files, error } = await supabase.storage.from(REF_BUCKET).list(clientSlug);
   if (error || !files?.length) return []; // no photos yet -> still renders, just no face lock
@@ -287,14 +287,14 @@ async function loadReferencePhotos(clientSlug) {
         .from(REF_BUCKET)
         .download(`${clientSlug}/${f.name}`);
       if (dErr) throw new Error(`Reference photo download failed: ${dErr.message}`);
-      const b64 = Buffer.from(await data.arrayBuffer()).toString('base64');
+      const buf = Buffer.from(await data.arrayBuffer());
       const lower = f.name.toLowerCase();
-      const mime = lower.endsWith('.png')
+      const type = lower.endsWith('.png')
         ? 'image/png'
         : lower.endsWith('.webp')
         ? 'image/webp'
         : 'image/jpeg';
-      return { inlineData: { mimeType: mime, data: b64 } };
+      return toFile(buf, f.name, { type });
     })
   );
 }
