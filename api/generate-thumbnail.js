@@ -124,6 +124,8 @@ THE 2-WORD OVERLAY (per concept):
   nonsense together (e.g. "ONE / TRICKS").
 - ADDS intrigue — never repeats/summarizes the title, never reuses a title word.
 - No creator name, no hashtags. Punctuation only if it adds tension.
+- Output the two words plain, separated by ONE space only — never put a slash,
+  pipe, dash, bullet, or any other separator character between them.
 - It implies, threatens, or teases. It does not explain.
 
 TEXT IS RENDERED SEPARATELY (by code, not by you):
@@ -328,7 +330,7 @@ async function compositeText(sceneBuffer, { words, zone, onDark, style }) {
   const ctx = canvas.getContext('2d');
   ctx.drawImage(img, 0, 0, W, H);
 
-  const tokens = String(words).trim().split(/\s+/).filter(Boolean);
+  const tokens = cleanWords(words).split(/\s+/).filter(Boolean);
   if (!tokens.length) return canvas.toBuffer('image/png');
   const line1 = tokens[0].toUpperCase();
   const line2 = tokens.slice(1).join(' ').toUpperCase(); // '' if a single word
@@ -498,6 +500,13 @@ async function loadReferencePhotos(clientSlug) {
 }
 
 // ── helpers ──────────────────────────────────────────────────────────────────
+function cleanWords(s) {
+  return String(s)
+    .replace(/[\/\\|]+/g, ' ')     // slashes / pipes -> space
+    .replace(/\s[-–—]\s/g, ' ')    // standalone dashes between words -> space
+    .replace(/\s+/g, ' ')
+    .trim();
+}
 function update(runId, patch) {
   return supabase.from('thumbnail_runs').update(patch).eq('id', runId);
 }
