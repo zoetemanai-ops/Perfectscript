@@ -5,6 +5,7 @@
   "dependencies": {
     "@anthropic-ai/sdk": "latest",
     "@google/genai": "latest",
+    "@napi-rs/canvas": "latest",
     "@supabase/supabase-js": "latest",
     "@vercel/functions": "latest"
   }
