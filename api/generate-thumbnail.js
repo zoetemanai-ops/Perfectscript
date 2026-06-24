@@ -77,6 +77,12 @@ NON-NEGOTIABLE PRINCIPLES:
 6. Curiosity gap. Image + 2-word overlay open a loop the TITLE closes. Tension,
    never a summary.
 7. Honor creator_visual_notes if provided.
+8. Creator framing (default). Frame the creator chest-up (head and shoulders),
+   large and dominant — the primary magnet — while still leaving room for the
+   visual metaphor. They look directly into the lens, locking eyes with the
+   viewer. Break eye contact ONLY when a concept is clearly stronger with an
+   averted gaze (e.g. looking toward the thing the metaphor depicts). Never
+   default to a small, passive, side-of-frame subject.
 
 ANTI-CLICHÉ (do this FIRST):
 - List the 4-6 most overused thumbnail images for THIS exact topic — the ones a
