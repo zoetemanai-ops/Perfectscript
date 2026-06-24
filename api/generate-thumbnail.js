@@ -369,8 +369,14 @@ async function compositeText(sceneBuffer, { words, zone, onDark, style }) {
   }
   const by2 = by1 + gap;
 
+  // for the gold style, pick line-1 color from the ACTUAL background brightness
+  // where it sits (white on dark, dark on light) — the "It's Not" look.
+  const line1Dark = style === 'gold-italic'
+    ? measureOnDark(ctx, line1, x, by1, size, align, W, H)
+    : onDark;
+
   // line 1 is always the plain outlined word
-  outlineText(ctx, line1, x, by1, size, onDark, align);
+  outlineText(ctx, line1, x, by1, size, line1Dark, align);
 
   if (!line2) return canvas.toBuffer('image/png');
 
@@ -399,6 +405,32 @@ function outlineText(ctx, text, x, by, size, onDark, align) {
   ctx.restore();
   ctx.fillStyle = onDark ? '#ffffff' : '#141414';
   ctx.fillText(text, x, by);
+}
+
+// sample the scene brightness where a line of text will sit -> true if dark (use white text)
+function measureOnDark(ctx, text, x, by, size, align, W, H) {
+  ctx.font = `${size}px ${FONT_NAME}`;
+  const tw = ctx.measureText(text).width;
+  let sx;
+  if (align === 'right') sx = x - tw;
+  else if (align === 'center') sx = x - tw / 2;
+  else sx = x;
+  const rx = Math.max(0, Math.floor(sx));
+  const ry = Math.max(0, Math.floor(by - size * 0.72));
+  const rw = Math.min(W - rx, Math.ceil(tw));
+  const rh = Math.min(H - ry, Math.ceil(size * 0.8));
+  if (rw < 2 || rh < 2) return true;
+  try {
+    const data = ctx.getImageData(rx, ry, rw, rh).data;
+    let sum = 0, n = 0;
+    for (let i = 0; i < data.length; i += 16) {
+      sum += 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+      n++;
+    }
+    return (sum / n / 255) < 0.58; // dark bg -> white text
+  } catch (e) {
+    return true;
+  }
 }
 
 function drawBar(ctx, text, x, by, size, align, color) {
