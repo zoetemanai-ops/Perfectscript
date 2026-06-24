@@ -4,7 +4,8 @@
   "type": "module",
   "dependencies": {
     "@anthropic-ai/sdk": "latest",
-    "@google/genai": "latest",
+    "openai": "latest",
+    "sharp": "latest",
     "@supabase/supabase-js": "latest",
     "@vercel/functions": "latest"
   }
