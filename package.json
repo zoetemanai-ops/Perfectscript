@@ -1,0 +1,11 @@
+{
+  "name": "perfectscript",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@anthropic-ai/sdk": "latest",
+    "@google/genai": "latest",
+    "@supabase/supabase-js": "latest",
+    "@vercel/functions": "latest"
+  }
+}
