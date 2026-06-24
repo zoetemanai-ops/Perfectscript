@@ -132,8 +132,11 @@ TEXT IS RENDERED SEPARATELY (by code, not by you):
 - The 2 words are drawn onto the image afterwards as a typographic layer.
 - So scene_prompt must contain NO text at all, and must keep one corner clean.
 - For each concept choose:
-  * text_zone   = the corner with the best empty negative space (away from the
-                  face and the metaphor's focal point).
+  * subject_side = the side the creator's face/body occupies, "left" or "right".
+  * text_zone   = a corner on the OPPOSITE horizontal side from subject_side, so
+                  the text never lands on the face. If the face is on the right,
+                  the text goes left, and vice versa. Pick top or bottom by where
+                  the emptiest space is.
   * text_on_dark = true if that corner is dark, false if it is light.
   * text_style  = one of:
       - "marker"      : default. Outlined word + a brush underline. Use for most
@@ -142,7 +145,8 @@ TEXT IS RENDERED SEPARATELY (by code, not by you):
                         urgent, alarm / "stop" concepts.
       - "gold-italic" : the second word slanted in gold. Use ONLY for the
                         insider / secret / "a legal move the rich use" angle.
-- Compose so the chosen text_zone stays clean, low-detail and even-toned.
+- In scene_prompt, place the creator on subject_side and explicitly keep the
+  opposite side (the text_zone side) clean, low-detail and even-toned.
 
 AVOID (AI-slop tells): cluttered scenes, multiple focal points, generic stock
 look, over-saturation, plastic skin, gibberish text, extra logos/watermarks,
@@ -161,6 +165,7 @@ OUTPUT — return ONLY valid JSON, no preamble:
       "composition": "<focal point, rule-of-thirds, fg/bg, which corner is the clean text_zone>",
       "color_and_lighting": "...",
       "overlay": {"words": "TWO WORDS", "rationale": "...", "score": 0},
+      "subject_side": "<left|right>",
       "text_zone": "<top-left|top-right|bottom-left|bottom-right|top-center|bottom-center>",
       "text_on_dark": true,
       "text_style": "<marker|block|gold-italic>",
@@ -268,7 +273,7 @@ async function renderConcept(runId, concept, refParts) {
 
   const finalBuffer = await compositeText(Buffer.from(sceneB64, 'base64'), {
     words: concept.overlay?.words || '',
-    zone: concept.text_zone || 'top-left',
+    zone: resolveZone(concept.text_zone, concept.subject_side),
     onDark: concept.text_on_dark !== false,
     style: concept.text_style || 'marker',
   });
@@ -424,7 +429,7 @@ function italicWord(ctx, text, x, by, size, align, color) {
   let ox = x;
   if (align === 'right') ox = x - tw;
   else if (align === 'center') ox = x - tw / 2;
-  ox -= size * 0.085; // compensate the italic slant so it lines up under line 1
+  ox -= size * 0.06; // compensate the italic slant so it lines up under line 1
   ctx.save();
   ctx.translate(ox, by);
   ctx.transform(1, 0, -0.22, 1, 0, 0);
@@ -500,6 +505,17 @@ async function loadReferencePhotos(clientSlug) {
 }
 
 // ── helpers ──────────────────────────────────────────────────────────────────
+// Force the text to the side opposite the creator's face. If the art director
+// put the text on the same horizontal side as the subject, flip it.
+function resolveZone(zone, subjectSide) {
+  const z = String(zone || 'top-left').toLowerCase();
+  const vert = z.startsWith('bottom') ? 'bottom' : 'top';
+  let horiz = z.endsWith('right') ? 'right' : z.endsWith('center') ? 'center' : 'left';
+  const side = String(subjectSide || '').toLowerCase();
+  if (side === 'left' && horiz === 'left') horiz = 'right';
+  else if (side === 'right' && horiz === 'right') horiz = 'left';
+  return `${vert}-${horiz}`;
+}
 function cleanWords(s) {
   return String(s)
     .replace(/[\/\\|]+/g, ' ')     // slashes / pipes -> space
