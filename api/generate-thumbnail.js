@@ -91,7 +91,10 @@ NON-NEGOTIABLE PRINCIPLES:
    visual metaphor. They look directly into the lens, locking eyes with the
    viewer. Break eye contact ONLY when a concept is clearly stronger with an
    averted gaze (e.g. looking toward the thing the metaphor depicts). Never
-   default to a small, passive, side-of-frame subject.
+   default to a small, passive, side-of-frame subject. Keep the face clearly
+   visible, well-lit and roughly front-facing or three-quarter — avoid extreme
+   profile, far-away, heavily shadowed, or partially hidden faces, which break
+   the likeness.
 
 TITLE + THUMBNAIL = ONE HOOK:
 On YouTube the viewer always sees the thumbnail and the title TOGETHER — they
@@ -394,15 +397,16 @@ function outlineText(ctx, text, x, by, size, onDark, align) {
 function drawBar(ctx, text, x, by, size, align, color) {
   ctx.font = `${size}px ${FONT_NAME}`;
   ctx.textBaseline = 'alphabetic';
-  const tw = ctx.measureText(text).width;
-  const padX = size * 0.14, padY = size * 0.06;
+  const m = ctx.measureText(text);
+  const tw = m.width, asc = m.actualBoundingBoxAscent, desc = m.actualBoundingBoxDescent;
+  const padX = size * 0.16, padY = size * 0.13;
   let barLeft, textX, textAlign;
   if (align === 'right') { barLeft = x - (tw + padX * 2); textX = x - padX; textAlign = 'right'; }
   else if (align === 'center') { barLeft = x - (tw / 2 + padX); textX = x; textAlign = 'center'; }
   else { barLeft = x; textX = x + padX; textAlign = 'left'; }
   ctx.save();
   ctx.shadowColor = 'rgba(0,0,0,0.4)'; ctx.shadowBlur = size * 0.10; ctx.shadowOffsetY = size * 0.03;
-  roundRect(ctx, barLeft, by - size * 0.74 - padY, tw + padX * 2, size * 0.80 + padY * 2, size * 0.07);
+  roundRect(ctx, barLeft, by - asc - padY, tw + padX * 2, asc + desc + padY * 2, size * 0.07);
   ctx.fillStyle = color; ctx.fill();
   ctx.restore();
   ctx.textAlign = textAlign;
@@ -440,15 +444,24 @@ function drawMarker(ctx, text, x, by, size, align, color) {
   else if (align === 'right') left = x - tw;
   else left = x - tw / 2;
   const x0 = left - size * 0.05, x1 = left + tw + size * 0.05;
-  const yc = by + size * 0.18, thick = size * 0.16, w = x1 - x0, tilt = w * 0.04, tip = thick * 0.12;
-  const yl = yc, yr = yc + tilt;
+  const yc = by + size * 0.18, thick = size * 0.16, w = x1 - x0, tilt = w * 0.035;
+  const n = 26, pts = [];
+  for (let i = 0; i <= n; i++) {
+    const t = i / n;
+    const cx = x0 + w * t;
+    const cy = yc + tilt * t + Math.sin(t * Math.PI * 1.25) * thick * 0.12;
+    let prof;
+    if (t < 0.07) prof = t / 0.07;                      // fine left tip
+    else if (t > 0.88) prof = Math.max((1 - t) / 0.12, 0) * 0.7; // wispy right flick
+    else prof = 1 - Math.abs(t - 0.42) * 0.22;          // slight mid bulge
+    pts.push([cx, cy, thick * 0.5 * Math.max(prof, 0.03)]);
+  }
   ctx.save();
-  ctx.shadowColor = 'rgba(0,0,0,0.35)'; ctx.shadowBlur = thick * 0.4; ctx.shadowOffsetY = thick * 0.18;
+  ctx.shadowColor = 'rgba(0,0,0,0.3)'; ctx.shadowBlur = thick * 0.35; ctx.shadowOffsetY = thick * 0.15;
   ctx.beginPath();
-  ctx.moveTo(x0, yl - tip);
-  ctx.bezierCurveTo(x0 + w * 0.28, yl - thick * 0.6, x0 + w * 0.62, yr - thick * 0.5, x1, yr - tip);
-  ctx.lineTo(x1, yr + tip);
-  ctx.bezierCurveTo(x0 + w * 0.62, yr + thick * 0.5, x0 + w * 0.28, yl + thick * 0.6, x0, yl + tip);
+  ctx.moveTo(pts[0][0], pts[0][1] - pts[0][2]);
+  for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1] - pts[i][2]);
+  for (let i = pts.length - 1; i >= 0; i--) ctx.lineTo(pts[i][0], pts[i][1] + pts[i][2]);
   ctx.closePath();
   ctx.fillStyle = color; ctx.fill();
   ctx.restore();
