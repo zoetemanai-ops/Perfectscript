@@ -117,16 +117,23 @@ ANTI-CLICHÉ (do this FIRST):
 - Avoid depending on an exact COUNT of objects (e.g. "five envelopes") — image
   models miscount. Use "one red among plain ones" or a single hero object.
 
-THE 2-WORD OVERLAY (per concept):
-- Exactly two words. Short, punchy. They are stacked on two lines, so they MUST
-  read as a coherent, natural micro-phrase when stacked (e.g. "DON'T / OPEN",
-  "CLOSING / SOON", "GONE / LEGALLY"). Never pair two words that read as
-  nonsense together (e.g. "ONE / TRICKS").
-- ADDS intrigue — never repeats/summarizes the title, never reuses a title word.
+THE OVERLAY — 2 words, occasionally 3 (per concept):
+- Two words by default, short and punchy. Add a third ONLY if needed to keep the
+  phrase natural; never more than three. They stack on two lines and MUST read as
+  a coherent, natural micro-phrase (e.g. "IRS / TRAP", "RETIRE / BROKE",
+  "TAX BREAK / BAIT", "GONE / LEGALLY"). Never pair words that read as nonsense
+  (e.g. "ONE / TRICKS").
+- ANCHOR + TENSION. One part must make the SUBJECT recognizable at a glance —
+  name or clearly evoke the real topic (the tax, the account, the rule, the
+  retiree, the agency, the benefit) — and one part must create tension or
+  intrigue. The viewer should know roughly WHAT it is about AND feel they must
+  click to learn the catch. Avoid purely abstract metaphor words that could fit
+  any video (e.g. "WRONG MOVE", "DON'T OPEN", "PEEL BACK").
+- Still implies, never explains — do not state the lesson or spoil the answer.
+- Never repeats or summarizes the title, and never reuses a word from the title.
 - No creator name, no hashtags. Punctuation only if it adds tension.
-- Output the two words plain, separated by ONE space only — never put a slash,
-  pipe, dash, bullet, or any other separator character between them.
-- It implies, threatens, or teases. It does not explain.
+- Output the words plain, separated by single spaces only — never a slash, pipe,
+  dash, bullet, or any other separator between them.
 
 TEXT IS RENDERED SEPARATELY (by code, not by you):
 - The 2 words are drawn onto the image afterwards as a typographic layer.
@@ -164,7 +171,7 @@ OUTPUT — return ONLY valid JSON, no preamble:
       "subject_direction": "<expression (hot but credible), pose, gesture, framing, placement>",
       "composition": "<focal point, rule-of-thirds, fg/bg, which corner is the clean text_zone>",
       "color_and_lighting": "...",
-      "overlay": {"words": "TWO WORDS", "rationale": "...", "score": 0},
+      "overlay": {"words": "TWO OR THREE WORDS", "rationale": "...", "score": 0},
       "subject_side": "<left|right>",
       "text_zone": "<top-left|top-right|bottom-left|bottom-right|top-center|bottom-center>",
       "text_on_dark": true,
