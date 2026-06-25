@@ -342,10 +342,9 @@ async function compositeText(sceneBuffer, { words, zone, onDark, style }) {
   const ctx = canvas.getContext('2d');
   ctx.drawImage(img, 0, 0, W, H);
 
-  const tokens = cleanWords(words).split(/\s+/).filter(Boolean);
+  const tokens = cleanWords(words).split(/\s+/).filter(Boolean).map((t) => t.toUpperCase());
   if (!tokens.length) return canvas.toBuffer('image/png');
-  const line1 = tokens[0].toUpperCase();
-  const line2 = tokens.slice(1).join(' ').toUpperCase(); // '' if a single word
+  const [line1, line2] = splitBalanced(ctx, tokens);
 
   const margin = Math.round(W * 0.05);
   let size = Math.round(H * 0.20);
@@ -522,6 +521,22 @@ function roundRect(ctx, x, y, w, h, r) {
   ctx.arcTo(x, y + h, x, y, r);
   ctx.arcTo(x, y, x + w, y, r);
   ctx.closePath();
+}
+
+// choose the line break that balances the two lines (minimizes the wider line so
+// the text renders as large as possible; tiebreak on the most even split)
+function splitBalanced(ctx, tokens) {
+  if (tokens.length <= 1) return [tokens[0] || '', ''];
+  ctx.font = `100px ${FONT_NAME}`;
+  let best = null;
+  for (let i = 1; i < tokens.length; i++) {
+    const a = tokens.slice(0, i).join(' ');
+    const b = tokens.slice(i).join(' ');
+    const wa = ctx.measureText(a).width, wb = ctx.measureText(b).width;
+    const score = Math.max(wa, wb) * 1000 + Math.abs(wa - wb);
+    if (!best || score < best.score) best = { a, b, score };
+  }
+  return [best.a, best.b];
 }
 
 // ── load 3-6 creator reference photos from private storage ───────────────────
