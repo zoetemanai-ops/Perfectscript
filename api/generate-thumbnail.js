@@ -85,14 +85,16 @@ NON-NEGOTIABLE PRINCIPLES:
 3. Abstract -> concrete. Finance ideas become ONE physical visual metaphor the
    creator reacts to.
 4. Contrast + depth — go CINEMATIC. Light the scene like a film still, not a flat
-   product shot: a strong directional key light, real shadows and falloff, and a
-   moody, high-contrast background, with clear separation between subject and
-   background so the face and object read instantly on mobile. Motivated colored
-   light is welcome when it serves the metaphor (e.g. a red or green glow thrown
-   from the object onto the face) — but keep it MOTIVATED and believable, never
-   random neon or a gimmicky sticker glow. Dramatic and premium, never plastic,
-   garish, or over-stylized. The creator must still read as a real, credible
-   authority.
+   product shot: a strong directional key light, real shadows and falloff, with
+   clear separation between subject and background so the face and object read
+   instantly on mobile. Choose the BACKGROUND that suits the concept — it can be
+   dark and dramatic, OR light, bright, or a color that fits the metaphor; pick
+   whatever makes that specific image strongest. Do not default everything to
+   dark. Motivated colored light is welcome when it serves the metaphor (e.g. a
+   red or green glow thrown from the object onto the face) — but keep it MOTIVATED
+   and believable, never random neon or a gimmicky sticker glow. Dramatic and
+   premium, never plastic, garish, or over-stylized. The creator must still read
+   as a real, credible authority.
 5. Mobile-first. Must read at 120px wide.
 6. Curiosity gap. Image + 2-word overlay open a loop the TITLE closes. Tension,
    never a summary.
@@ -131,7 +133,10 @@ ANTI-CLICHÉ (do this FIRST):
   viewer has already seen on 50 other finance videos.
 - You may NOT use any of them as a primary metaphor.
 - The three concepts must be genuinely different from each other (different
-  metaphor AND different composition — not three renders of one idea).
+  metaphor AND different composition — not three renders of one idea). Vary the
+  BACKGROUND and lighting across them too: do not make all three dark (or all
+  three light). Aim for a mix — e.g. one dark and dramatic, one lighter or
+  colored — so a run never looks like three versions of the same mood.
 - Fresh with ONE surprising twist, but graspable in 0.3 seconds. Take a
   recognizable object or situation and give it one unexpected turn — not the 50th
   generic "person frowning at a chart", but also NOT an abstract, cryptic puzzle
@@ -323,7 +328,9 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
     'IDENTITY LOCK: keep the person\u2019s face, hairline, hair (same amount, length, color and style), ' +
     'glasses, facial hair and apparent age EXACTLY consistent with the supplied reference photos. ' +
     'Do NOT thin, shorten, recolor, add, or remove hair, and do NOT make the person look balder, younger, ' +
-    'or older. It must be unmistakably the same exact person as in the references.';
+    'or older. Also keep his OUTFIT the same as in the reference photos — the same jacket/suit, shirt, ' +
+    'color and style of clothing — do not change his clothes or their color. It must be unmistakably the ' +
+    'same exact person, dressed as in the references.';
   const quality =
     'QUALITY: sharp focus, professional studio photography quality, crisp fine detail, clean and ' +
     'polished. Keep skin and textures natural and realistic — NOT plastic, waxy, airbrushed, or over-smoothed.';
