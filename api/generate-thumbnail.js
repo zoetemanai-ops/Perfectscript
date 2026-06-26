@@ -1,4 +1,3 @@
-
 // api/generate-thumbnail.js
 // ─────────────────────────────────────────────────────────────────────────────
 // Perfect Thumbnail · Vercel Node serverless function (GPT Image 2 + text layer)
@@ -143,12 +142,16 @@ ANTI-CLICHÉ (do this FIRST):
   generic "person frowning at a chart", but also NOT an abstract, cryptic puzzle
   or an obscure visual riddle the viewer has to decode. If a normal finance
   viewer wouldn't get it almost instantly, simplify it.
-- The SETTING must reinforce the metaphor or fall away — never add random "drama".
-  A hero object may sit in a logical, recognizable context (held in the creator's
-  hands, on a desk, etc.), but do NOT surround it with props the viewer cannot
-  place (cracked rock or tree stumps, drifting fog, floating embers/particles,
-  glowing cracks, swirling debris). When in doubt, keep the background clean and
-  let the hero object + the face carry it. One hero object, calm surroundings.
+- The SETTING reinforces the metaphor or falls away — never add random "drama".
+  Choose per concept what makes the image strongest: sometimes a fitting,
+  atmospheric environment (an office, a study with a bookshelf and a warm lamp, a
+  relevant location) that adds depth and a premium, cinematic feel; sometimes a
+  clean, simple background when a single hero object already carries it. Do NOT
+  default everything to an empty studio void — vary it, and prefer real context
+  when it deepens the story. Whatever the setting, keep it softly blurred and
+  SUBORDINATE so the face and hero object stay sharp and dominant in front. Avoid
+  props the viewer cannot place (cracked rock or tree stumps, drifting fog,
+  floating embers/particles, glowing cracks, swirling debris).
 - Avoid depending on an exact COUNT of objects (e.g. "five envelopes") — image
   models miscount. Use "one red among plain ones" or a single hero object.
 
@@ -362,20 +365,17 @@ function buildTextDirective(concept) {
   const words = String(concept.overlay?.words || '').replace(/[\/|]+/g, ' ').replace(/\s+/g, ' ').trim().toUpperCase();
   if (!words) return 'Render no text anywhere in the image.';
   const zone = (concept.text_zone || 'top-left').replace(/-/g, ' ');
-  const style = concept.text_style || 'marker';
-  // color follows the concept's MEANING (set by the art director): red = warning, gold = insider/money
+  // swoosh color follows the concept's MEANING (set by the art director): red = warning, gold = insider/money
   const accent = String(concept.accent || '').toLowerCase() === 'red'
     ? 'bright red (#E11D2A)'
     : 'gold (#F4C430)';
-  const underline = style === 'marker';   // thin underline only on the default style (occasional)
   return [
-    'TEXT OVERLAY — render this caption baked directly into the image:',
-    `Render the exact caption "${words}" in the ${zone} area, all uppercase, arranged across one or two lines — break the words wherever it reads best and forms a balanced, punchy block — in a HEAVY, bold, condensed sans-serif (Anton / Archivo Black style): thick even strokes, with slightly open, relaxed letter spacing (a little breathing room between letters, not cramped). Give every letter a bold solid BLACK outline and a subtle soft drop shadow beneath it, so the text pops off the image with depth and weight.`,
-    'Color: render EVERY word in clean pure white — no colored words.',
-    underline
-      ? `Beneath the final word, add a single hand-drawn CURVED underline — a smooth swoosh with a gentle downward arc, clearly not perfectly straight — in ${accent}. A clean colored stroke, NOT a thick brush smear and NOT a solid bar.`
-      : 'No underline, no colored bars, no brush strokes — just clean white type.',
-    'Keep the caption COMPACT: it should occupy only about a quarter of the frame, sitting neatly in its corner with clear margins from every edge. Large enough to read instantly on mobile, but it must NOT dominate the image, span the full width, or crowd the edges. Crisp, perfectly legible, correctly spelled, with NO extra, missing, or misspelled words. Keep it fully clear of the person\u2019s face and body. This is the ONLY text anywhere in the image.',
+    'TEXT OVERLAY — render this caption baked into the image in a FIXED, consistent brand style (render it the SAME way every time):',
+    `Render the exact caption "${words}" in the ${zone} area, all uppercase, arranged across one or two lines — break the words wherever it reads best and forms a balanced, punchy block — in a HEAVY, bold, condensed sans-serif (Anton / Archivo Black style): thick even strokes, with slightly open, relaxed letter spacing.`,
+    'Render EVERY word in clean pure white — no colored words.',
+    'Outline each letter with a THIN, even black keyline of uniform thickness — a slim consistent stroke. Do NOT use a thick block outline, a filled box or rectangle behind the letters, or a heavy border. Add ONE small, soft drop shadow directly behind the text for depth — subtle, never a thick glow, halo, or box.',
+    `Beneath the final line, ALWAYS add a single CURVED underline — a smooth swoosh with a gentle downward arc, clearly not perfectly straight — in ${accent}. A clean thin colored stroke, NOT a thick brush smear and NOT a solid bar. This curved underline must ALWAYS be present.`,
+    'Keep the caption COMPACT: it should occupy only about a quarter of the frame, sitting neatly in its area with clear margins from every edge. Large enough to read instantly on mobile, but it must NOT dominate the image, span the full width, or crowd the edges. Crisp, perfectly legible, correctly spelled, with NO extra, missing, or misspelled words. Keep it fully clear of the person\u2019s face and body. This is the ONLY text anywhere in the image.',
   ].join(' ');
 }
 
