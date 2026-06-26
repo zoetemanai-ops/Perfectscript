@@ -277,16 +277,12 @@ async function runArtDirector(input) {
   return JSON.parse(stripFences(text));
 }
 
-// ── render one concept: 1 Banana call (scene) -> draw 2 words -> upload ──────
+// ── render one concept: 1 GPT call (scene + baked-in caption) -> upload ──────
 async function renderConcept(runId, concept, refFiles, creatorName) {
-  const sceneB64 = await gptImage(refFiles, concept.scene_prompt, creatorName);
-
-  const finalBuffer = await compositeText(Buffer.from(sceneB64, 'base64'), {
-    words: concept.overlay?.words || '',
-    zone: resolveZone(concept.text_zone, concept.subject_side),
-    onDark: concept.text_on_dark !== false,
-    style: concept.text_style || 'marker',
-  });
+  // GPT renders the caption itself: strip the scene's "no text" rule, then append a text directive
+  const scene = String(concept.scene_prompt || '').replace(/do not render any text[^.]*\.?/gi, '').trim();
+  const pngB64 = await gptImage(refFiles, `${scene}\n\n${buildTextDirective(concept)}`, creatorName);
+  const finalBuffer = Buffer.from(pngB64, 'base64');
 
   const path = `${runId}/${concept.id}.png`;
   const { error: upErr } = await supabase.storage
@@ -305,6 +301,28 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
     angle: concept.angle || '',
     score: null, // filled later by CleanCut
   };
+}
+
+// ── tell GPT to render the 2-word caption itself, in the chosen brand style ──
+function buildTextDirective(concept) {
+  const words = String(concept.overlay?.words || '').replace(/[\/|]+/g, ' ').replace(/\s+/g, ' ').trim().toUpperCase();
+  if (!words) return 'Render no text anywhere in the image.';
+  const zone = (concept.text_zone || 'top-left').replace(/-/g, ' ');
+  const style = concept.text_style || 'marker';
+  let styleDir;
+  if (style === 'block') {
+    styleDir = 'Style: the second line sits on a solid bright red (#E11D2A) rectangular block with pure white letters; the first line is pure white with a thin dark outline.';
+  } else if (style === 'gold-italic') {
+    styleDir = 'Style: the first line is pure white; the second line is in italic gold (#F4C430), with a thin dark outline so it stays legible.';
+  } else {
+    styleDir = 'Style: pure white letters with a thick dark outline, plus a single hand-painted tapered red brush-stroke underline beneath the final line.';
+  }
+  return [
+    'TEXT OVERLAY — render this caption baked directly into the image:',
+    `Render the exact caption "${words}" in the ${zone} area, stacked on two lines, all uppercase, in a heavy bold condensed sans-serif typeface (Oswald / Anton style).`,
+    styleDir,
+    'The caption must be very large, crisp, perfectly legible and correctly spelled, with NO extra, missing, or misspelled words. Keep it fully clear of the person\u2019s face and body. This is the ONLY text anywhere in the image.',
+  ].join(' ');
 }
 
 // ── GPT Image 2 -> base64 image (creator name kept OUT of the prompt) ─────────
