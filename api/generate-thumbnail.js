@@ -1,3 +1,4 @@
+
 // api/generate-thumbnail.js
 // ─────────────────────────────────────────────────────────────────────────────
 // Perfect Thumbnail · Vercel Node serverless function (GPT Image 2 + text layer)
@@ -369,11 +370,11 @@ function buildTextDirective(concept) {
   const underline = style === 'marker';   // thin underline only on the default style (occasional)
   return [
     'TEXT OVERLAY — render this caption baked directly into the image:',
-    `Render the exact caption "${words}" in the ${zone} area, all uppercase, arranged across one or two lines — break the words wherever it reads best and forms a balanced, punchy block — in a HEAVY, bold, condensed sans-serif (Anton / Archivo Black style): thick even strokes, tightly spaced. Give every letter a bold solid BLACK outline and a subtle soft drop shadow beneath it, so the text pops off the image with depth and weight.`,
-    `Color: render every word in clean pure white EXCEPT the final key word (or the final short key phrase, e.g. the last two words), which is in ${accent}.`,
+    `Render the exact caption "${words}" in the ${zone} area, all uppercase, arranged across one or two lines — break the words wherever it reads best and forms a balanced, punchy block — in a HEAVY, bold, condensed sans-serif (Anton / Archivo Black style): thick even strokes, with slightly open, relaxed letter spacing (a little breathing room between letters, not cramped). Give every letter a bold solid BLACK outline and a subtle soft drop shadow beneath it, so the text pops off the image with depth and weight.`,
+    'Color: render EVERY word in clean pure white — no colored words.',
     underline
-      ? `Add a single thin, clean, straight horizontal underline directly beneath that final word, in the SAME ${accent} color as that word — a crisp minimal line, NOT a brush stroke or a bar.`
-      : 'No underline, no colored bars, no brush strokes — just clean type.',
+      ? `Beneath the final word, add a single hand-drawn CURVED underline — a smooth swoosh with a gentle downward arc, clearly not perfectly straight — in ${accent}. A clean colored stroke, NOT a thick brush smear and NOT a solid bar.`
+      : 'No underline, no colored bars, no brush strokes — just clean white type.',
     'Keep the caption COMPACT: it should occupy only about a quarter of the frame, sitting neatly in its corner with clear margins from every edge. Large enough to read instantly on mobile, but it must NOT dominate the image, span the full width, or crowd the edges. Crisp, perfectly legible, correctly spelled, with NO extra, missing, or misspelled words. Keep it fully clear of the person\u2019s face and body. This is the ONLY text anywhere in the image.',
   ].join(' ');
 }
