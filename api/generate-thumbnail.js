@@ -1,4 +1,3 @@
-
 // api/generate-thumbnail.js
 // ─────────────────────────────────────────────────────────────────────────────
 // Perfect Thumbnail · Vercel Node serverless function (GPT Image 2 + text layer)
@@ -305,7 +304,12 @@ async function runArtDirector(input) {
 async function renderConcept(runId, concept, refFiles, creatorName) {
   // GPT renders the caption itself: strip the scene's "no text" rule, then append a text directive
   const scene = String(concept.scene_prompt || '').replace(/do not render any text[^.]*\.?/gi, '').trim();
-  const pngB64 = await gptImage(refFiles, `${scene}\n\n${buildTextDirective(concept)}`, creatorName);
+  const identity =
+    'IDENTITY LOCK: keep the person\u2019s face, hairline, hair (same amount, length, color and style), ' +
+    'glasses, facial hair and apparent age EXACTLY consistent with the supplied reference photos. ' +
+    'Do NOT thin, shorten, recolor, add, or remove hair, and do NOT make the person look balder, younger, ' +
+    'or older. It must be unmistakably the same exact person as in the references.';
+  const pngB64 = await gptImage(refFiles, `${scene}\n\n${identity}\n\n${buildTextDirective(concept)}`, creatorName);
   const finalBuffer = Buffer.from(pngB64, 'base64');
 
   const path = `${runId}/${concept.id}.png`;
