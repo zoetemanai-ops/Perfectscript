@@ -317,6 +317,7 @@ async function gptImage(refFiles, scenePrompt, creatorName) {
       prompt,
       size: IMAGE_SIZE,
       quality: IMAGE_QUALITY,
+      output_format: 'png',
     });
   } catch (e) {
     // surface the real reason (moderation_blocked, param error, etc.)
@@ -343,15 +344,13 @@ async function gptImage(refFiles, scenePrompt, creatorName) {
 
   const buf = Buffer.from(b64, 'base64');
   const magic = buf.slice(0, 8).toString('hex');
+  // canvas in this build reliably decodes PNG and JPEG; webp/others fall through to the SVG error
   const isImg =
     buf.slice(0, 4).toString('hex') === '89504e47' ||      // png
-    buf.slice(0, 3).toString('hex') === 'ffd8ff' ||         // jpeg
-    buf.slice(0, 4).toString('ascii') === 'RIFF' ||         // webp
-    buf.slice(0, 3).toString('ascii') === 'GIF';            // gif
+    buf.slice(0, 3).toString('hex') === 'ffd8ff';           // jpeg
   console.log('[gptImage] bytes:', buf.length, '| magic:', magic, '| isImg:', isImg);
   if (!isImg) {
-    const snippet = buf.slice(0, 120).toString('utf8').replace(/\s+/g, ' ');
-    throw new Error(`GPT Image: response is NOT an image (magic=${magic}). content="${snippet}"`);
+    throw new Error(`GPT Image: not PNG/JPEG (magic=${magic}, ${buf.length} bytes) — canvas can't decode it.`);
   }
   return b64;
 }
