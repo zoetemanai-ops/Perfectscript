@@ -70,11 +70,12 @@ INPUTS (JSON):
 NON-NEGOTIABLE PRINCIPLES:
 1. ONE idea, ONE focal point per concept. The eye lands in under 0.3s.
 2. Emotion + trigger run HOT — they earn the click. TWO layers:
-   (a) Expression: push the creator to a strong, dramatic, high-arousal register
-   — intense locked stare, jaw-set alarm, genuine shock, knowing/conspiratorial
-   intensity, or urgent warning. Believable for a credible finance authority —
-   steer only ~5% from the literal cartoon tells (perfectly symmetrical
-   bug-eyes, open-mouth scream, eyebrows pinned at max). Never calm or flat.
+   (a) Expression: push the creator to a strong, intense, high-conviction
+   register — a determined locked stare, knowing/conspiratorial intensity, a
+   subtle smirk of "I know something you don't", or a hard jaw-set warning.
+   Prefer a CLOSED or composed mouth: determined and intense beats wide-eyed
+   open-mouth shock (the dated "shock face" tests 15-20% worse on CTR).
+   Believable for a credible finance authority. Never calm, flat, or goofy.
    (b) Trigger: do NOT default to fear alone. For finance and business viewers
    the strongest click driver is usually curiosity + mild indignation +
    self-interest — "there's a legal move the rich use that you don't," "you're
@@ -83,21 +84,33 @@ NON-NEGOTIABLE PRINCIPLES:
    not just pure alarm.
 3. Abstract -> concrete. Finance ideas become ONE physical visual metaphor the
    creator reacts to.
-4. Contrast + depth. Sharp subject, desaturated/blurred background, warm rim
-   light, complementary colors that pop in a feed.
+4. Contrast + depth + sticker-pop. Sharp subject, desaturated/blurred background.
+   Add a crisp cyan or magenta rim light around the creator so they "pop" off the
+   background like a sticker on a mobile feed, paired with a subtle
+   teal-and-orange color grade. Complementary colors that stand out in a feed.
 5. Mobile-first. Must read at 120px wide.
 6. Curiosity gap. Image + 2-word overlay open a loop the TITLE closes. Tension,
    never a summary.
 7. Honor creator_visual_notes if provided.
-8. Creator framing (default). Frame the creator chest-up (head and shoulders),
-   large and dominant — the primary magnet — while still leaving room for the
-   visual metaphor. They look directly into the lens, locking eyes with the
-   viewer. Break eye contact ONLY when a concept is clearly stronger with an
-   averted gaze (e.g. looking toward the thing the metaphor depicts). Never
-   default to a small, passive, side-of-frame subject. Keep the face clearly
+8. Creator framing (default). Frame the creator LARGE and close — a tight
+   head-and-shoulders crop where the face is one of the biggest elements in the
+   frame (faces get ~42% of viewing time, so make it count). Shoot from a slight
+   LOW angle looking up, which makes the creator read as powerful and
+   larger-than-life. They are the primary magnet — leave room for the visual
+   metaphor, but never shrink the face. They look directly into the lens, locking
+   eyes with the viewer. Break eye contact ONLY when a concept is clearly stronger
+   with an averted gaze (e.g. looking toward the thing the metaphor depicts).
+   Never default to a small, passive, side-of-frame subject. Keep the face clearly
    visible, well-lit and roughly front-facing or three-quarter — avoid extreme
    profile, far-away, heavily shadowed, or partially hidden faces, which break
    the likeness.
+9. Number ONLY if the script gives one. If the hook or main_idea provides a
+   strong, concrete figure — a real dollar amount, percentage, age, year, or count
+   — you MAY feature that single number prominently as a hero element in the scene
+   (a sharp real number is one of the strongest click drivers in finance). It must
+   be a real figure pulled from the script, never invented, rounded into a fake
+   stat, or added just to have a number. If the script offers no strong figure, do
+   NOT force one — skip it entirely.
 
 TITLE + THUMBNAIL = ONE HOOK:
 On YouTube the viewer always sees the thumbnail and the title TOGETHER — they
@@ -114,9 +127,11 @@ ANTI-CLICHÉ (do this FIRST):
 - You may NOT use any of them as a primary metaphor.
 - The three concepts must be genuinely different from each other (different
   metaphor AND different composition — not three renders of one idea).
-- At least ONE concept must take an oblique, unexpected angle competitors would
-  not think of. Reward yourself for the idea that is NOT the first thing that
-  came to mind.
+- Fresh with ONE surprising twist, but graspable in 0.3 seconds. Take a
+  recognizable object or situation and give it one unexpected turn — not the 50th
+  generic "person frowning at a chart", but also NOT an abstract, cryptic puzzle
+  or an obscure visual riddle the viewer has to decode. If a normal finance
+  viewer wouldn't get it almost instantly, simplify it.
 - Avoid depending on an exact COUNT of objects (e.g. "five envelopes") — image
   models miscount. Use "one red among plain ones" or a single hero object.
 
@@ -309,19 +324,25 @@ function buildTextDirective(concept) {
   if (!words) return 'Render no text anywhere in the image.';
   const zone = (concept.text_zone || 'top-left').replace(/-/g, ' ');
   const style = concept.text_style || 'marker';
-  let styleDir;
-  if (style === 'block') {
-    styleDir = 'Style: the second line sits on a solid bright red (#E11D2A) rectangular block with pure white letters; the first line is pure white with a thin dark outline.';
-  } else if (style === 'gold-italic') {
-    styleDir = 'Style: the first line is pure white; the second line is in italic gold (#F4C430), with a thin dark outline so it stays legible.';
-  } else {
-    styleDir = 'Style: pure white letters with a thick dark outline, plus a single hand-painted tapered red brush-stroke underline beneath the final line.';
+  // clean premium look: all white, one accent word in gold or red, thin underline only on the default style
+  let accent = 'gold (#F4C430)';
+  let underline = false;
+  if (style === 'block') {            // urgent / alarm concepts -> red accent
+    accent = 'bright red (#E11D2A)';
+  } else if (style === 'gold-italic') { // insider / secret / money concepts -> gold accent
+    accent = 'gold (#F4C430)';
+  } else {                             // default -> gold accent + a thin underline
+    accent = 'gold (#F4C430)';
+    underline = true;
   }
   return [
     'TEXT OVERLAY — render this caption baked directly into the image:',
-    `Render the exact caption "${words}" in the ${zone} area, stacked on two lines, all uppercase, in a heavy bold condensed sans-serif typeface (Oswald / Anton style).`,
-    styleDir,
-    'The caption must be very large, crisp, perfectly legible and correctly spelled, with NO extra, missing, or misspelled words. Keep it fully clear of the person\u2019s face and body. This is the ONLY text anywhere in the image.',
+    `Render the exact caption "${words}" in the ${zone} area, stacked on two lines, all uppercase, in a premium tall condensed sans-serif with clean even strokes and tight letter spacing (Bebas Neue style).`,
+    `Color: render every word in clean pure white EXCEPT the final key word (the payoff word), which is in ${accent}.`,
+    underline
+      ? 'Add a single thin, clean, straight horizontal underline beneath that final word — a crisp minimal line, NOT a brush stroke or a bar.'
+      : 'No underline, no colored bars, no brush strokes — just clean type.',
+    'Size it large and confident so it anchors the empty area, but well-proportioned: roughly one third of the frame, never dominating the image or running into the edges. Crisp, perfectly legible, correctly spelled, with NO extra, missing, or misspelled words. Keep it fully clear of the person\u2019s face and body. This is the ONLY text anywhere in the image.',
   ].join(' ');
 }
 
