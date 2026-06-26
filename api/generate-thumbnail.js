@@ -1,11 +1,11 @@
 // api/generate-thumbnail.js
 // ─────────────────────────────────────────────────────────────────────────────
-// Perfect Thumbnail · Vercel Node serverless function (Nano Banana Pro + text layer)
+// Perfect Thumbnail · Vercel Node serverless function (GPT Image 2 + text layer)
 //
 // Trigger:  POST { script_run_id }
-//   Background (waitUntil): Claude art director -> 3 concepts -> Nano Banana Pro
-//   renders the SCENE (no text, 1 call/concept) -> we draw the 2 words as a
-//   typographic layer (Oswald, 3 styles) -> upload -> row complete.
+//   Background (waitUntil): Claude art director -> 3 concepts -> GPT Image 2
+//   renders the SCENE (no text, 1 call/concept, creator NEVER named) -> we draw
+//   the 2 words as a typographic layer (Oswald, 3 styles) -> upload -> complete.
 //
 // Text styles (art director picks one per concept):
 //   marker      — sharp outlined word + tapered brush underline (default)
@@ -13,14 +13,14 @@
 //   gold-italic — second word slanted in gold (for insider / "secret" concepts)
 //
 // ── Prerequisites ────────────────────────────────────────────────────────────
-//   npm i @anthropic-ai/sdk @google/genai @napi-rs/canvas @supabase/supabase-js @vercel/functions
-//   Env: ANTHROPIC_API_KEY, GEMINI_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
+//   npm i @anthropic-ai/sdk openai @napi-rs/canvas @supabase/supabase-js @vercel/functions
+//   Env: ANTHROPIC_API_KEY, OPENAI_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
 //   Buckets: creator-photos (PRIVATE, <client_slug>/*.jpg), thumbnails (PUBLIC)
 //   maxDuration 300 needs Vercel Pro.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import Anthropic from '@anthropic-ai/sdk';
-import { GoogleGenAI, Modality } from '@google/genai';
+import OpenAI, { toFile } from 'openai';
 import { createCanvas, loadImage, GlobalFonts } from '@napi-rs/canvas';
 import { createClient } from '@supabase/supabase-js';
 import { waitUntil } from '@vercel/functions';
@@ -29,7 +29,7 @@ export const config = { maxDuration: 300 };
 
 // ── clients ──────────────────────────────────────────────────────────────────
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-const genai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -37,7 +37,9 @@ const supabase = createClient(
 
 // ── config ───────────────────────────────────────────────────────────────────
 const ART_DIRECTOR_MODEL = 'claude-opus-4-8';
-const IMAGE_MODEL = 'gemini-3-pro-image-preview';
+const IMAGE_MODEL = 'gpt-image-2';
+const IMAGE_SIZE = '1536x864';   // 16:9 (both divisible by 16)
+const IMAGE_QUALITY = 'high';    // if the edits endpoint rejects this, remove the quality line in gptImage()
 const REF_BUCKET = 'creator-photos';
 const OUT_BUCKET = 'thumbnails';
 
@@ -247,8 +249,8 @@ async function generate(runId, script) {
     const concepts = (brief.concepts || []).filter((c) => c?.scene_prompt).slice(0, 3);
     if (!concepts.length) throw new Error('Art director returned no usable concepts');
 
-    const refParts = await loadReferencePhotos(script.client_slug);
-    const images = await Promise.all(concepts.map((c) => renderConcept(runId, c, refParts)));
+    const refFiles = await loadReferencePhotos(script.client_slug);
+    const images = await Promise.all(concepts.map((c) => renderConcept(runId, c, refFiles, creatorName)));
 
     await update(runId, {
       status: 'complete',
@@ -275,8 +277,8 @@ async function runArtDirector(input) {
 }
 
 // ── render one concept: 1 Banana call (scene) -> draw 2 words -> upload ──────
-async function renderConcept(runId, concept, refParts) {
-  const sceneB64 = await bananaImage([...refParts, { text: concept.scene_prompt }]);
+async function renderConcept(runId, concept, refFiles, creatorName) {
+  const sceneB64 = await gptImage(refFiles, concept.scene_prompt, creatorName);
 
   const finalBuffer = await compositeText(Buffer.from(sceneB64, 'base64'), {
     words: concept.overlay?.words || '',
@@ -304,18 +306,33 @@ async function renderConcept(runId, concept, refParts) {
   };
 }
 
-// ── Nano Banana Pro -> base64 image ──────────────────────────────────────────
-async function bananaImage(parts) {
-  const response = await genai.models.generateContent({
+// ── GPT Image 2 -> base64 image (creator name kept OUT of the prompt) ─────────
+async function gptImage(refFiles, scenePrompt, creatorName) {
+  const prompt = sanitizePrompt(scenePrompt, creatorName);
+  const res = await openai.images.edit({
     model: IMAGE_MODEL,
-    contents: [{ role: 'user', parts }],
-    config: { responseModalities: [Modality.TEXT, Modality.IMAGE] },
+    image: refFiles,
+    prompt,
+    size: IMAGE_SIZE,
+    quality: IMAGE_QUALITY,
   });
-  const out = response.candidates?.[0]?.content?.parts || [];
-  const img = out.find((p) => p.inlineData?.data);
-  if (!img) throw new Error('Nano Banana returned no image (possible safety block)');
-  return img.inlineData.data;
+  const b64 = res.data?.[0]?.b64_json;
+  if (!b64) throw new Error('GPT Image returned no image (possible safety block)');
+  return b64;
 }
+
+// Strip the creator's name (full name and first/last parts) from the scene prompt
+// so the request never names a public figure — GPT relies on the reference photos.
+function sanitizePrompt(scenePrompt, creatorName) {
+  let p = String(scenePrompt || '');
+  const parts = String(creatorName || '').trim().split(/\s+/).filter((s) => s.length > 2);
+  const variants = [creatorName, ...parts].filter((s) => s && s.length > 2);
+  for (const v of variants) {
+    p = p.replace(new RegExp(`\\b${escapeRegExp(v)}\\b`, 'gi'), 'the person in the reference photo');
+  }
+  return p;
+}
+function escapeRegExp(s) { return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 
 // ── TEXT LAYER ───────────────────────────────────────────────────────────────
 let _fontReady = false;
@@ -543,17 +560,17 @@ function splitBalanced(ctx, tokens) {
 async function loadReferencePhotos(clientSlug) {
   const { data: files, error } = await supabase.storage.from(REF_BUCKET).list(clientSlug);
   if (error || !files?.length) return [];
-  const usable = files.filter((f) => /\.(jpe?g|png|webp)$/i.test(f.name)).slice(0, 6);
+  const usable = files.filter((f) => /\.(jpe?g|png|webp)$/i.test(f.name)).slice(0, 4);
   return Promise.all(
     usable.map(async (f) => {
       const { data, error: dErr } = await supabase.storage
         .from(REF_BUCKET)
         .download(`${clientSlug}/${f.name}`);
       if (dErr) throw new Error(`Reference photo download failed: ${dErr.message}`);
-      const b64 = Buffer.from(await data.arrayBuffer()).toString('base64');
+      const buf = Buffer.from(await data.arrayBuffer());
       const lower = f.name.toLowerCase();
       const mime = lower.endsWith('.png') ? 'image/png' : lower.endsWith('.webp') ? 'image/webp' : 'image/jpeg';
-      return { inlineData: { mimeType: mime, data: b64 } };
+      return toFile(buf, f.name, { type: mime });
     })
   );
 }
