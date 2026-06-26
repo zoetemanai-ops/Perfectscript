@@ -309,15 +309,35 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
 // ── GPT Image 2 -> base64 image (creator name kept OUT of the prompt) ─────────
 async function gptImage(refFiles, scenePrompt, creatorName) {
   const prompt = sanitizePrompt(scenePrompt, creatorName);
-  const res = await openai.images.edit({
-    model: IMAGE_MODEL,
-    image: refFiles,
-    prompt,
-    size: IMAGE_SIZE,
-    quality: IMAGE_QUALITY,
-  });
-  const b64 = res.data?.[0]?.b64_json;
-  if (!b64) throw new Error('GPT Image returned no image (possible safety block)');
+  let res;
+  try {
+    res = await openai.images.edit({
+      model: IMAGE_MODEL,
+      image: refFiles,
+      prompt,
+      size: IMAGE_SIZE,
+      quality: IMAGE_QUALITY,
+    });
+  } catch (e) {
+    // surface the real reason (moderation_blocked, param error, etc.)
+    const code = e?.code || e?.error?.code || e?.status;
+    const msg = e?.error?.message || e?.message || String(e);
+    throw new Error(`GPT Image request failed [${code}]: ${msg}`);
+  }
+
+  const item = res?.data?.[0] || {};
+  // log the shape so we can see exactly what came back
+  console.log('[gptImage] keys:', Object.keys(item), '| has b64:', !!item.b64_json, '| has url:', !!item.url);
+
+  let b64 = item.b64_json;
+  // some responses return a URL instead of base64 — fetch it and convert
+  if (!b64 && item.url) {
+    const r = await fetch(item.url);
+    b64 = Buffer.from(await r.arrayBuffer()).toString('base64');
+  }
+  if (!b64 || b64.length < 100) {
+    throw new Error(`GPT Image returned no usable image. data[0]=${JSON.stringify(item).slice(0, 300)}`);
+  }
   return b64;
 }
 
