@@ -21,6 +21,7 @@
 
 import Anthropic from '@anthropic-ai/sdk';
 import OpenAI, { toFile } from 'openai';
+import { Transformer } from '@napi-rs/image';
 import { createCanvas, loadImage, GlobalFonts } from '@napi-rs/canvas';
 import { createClient } from '@supabase/supabase-js';
 import { waitUntil } from '@vercel/functions';
@@ -342,17 +343,20 @@ async function gptImage(refFiles, scenePrompt, creatorName) {
   // strip a data-URI prefix if the API included one (otherwise it decodes to garbage)
   b64 = String(b64).replace(/^data:image\/\w+;base64,/, '');
 
-  const buf = Buffer.from(b64, 'base64');
-  const magic = buf.slice(0, 8).toString('hex');
-  // canvas in this build reliably decodes PNG and JPEG; webp/others fall through to the SVG error
-  const isImg =
-    buf.slice(0, 4).toString('hex') === '89504e47' ||      // png
-    buf.slice(0, 3).toString('hex') === 'ffd8ff';           // jpeg
-  console.log('[gptImage] bytes:', buf.length, '| magic:', magic, '| isImg:', isImg);
-  if (!isImg) {
-    throw new Error(`GPT Image: not PNG/JPEG (magic=${magic}, ${buf.length} bytes) — canvas can't decode it.`);
+  // Normalize whatever GPT returned (webp / odd PNG / etc.) into a clean PNG
+  // that @napi-rs/canvas can definitely decode. If it isn't an image at all,
+  // the decode throws and we get a clear reason instead of "Invalid SVG".
+  const raw = Buffer.from(b64, 'base64');
+  const magic = raw.slice(0, 8).toString('hex');
+  console.log('[gptImage] in:', raw.length, 'bytes, magic:', magic);
+  let pngBuf;
+  try {
+    pngBuf = await new Transformer(raw).png();
+  } catch (e) {
+    const head = raw.slice(0, 120).toString('utf8').replace(/\s+/g, ' ');
+    throw new Error(`GPT Image: could not decode response (magic=${magic}, ${raw.length} bytes): ${e?.message || e} | head="${head}"`);
   }
-  return b64;
+  return pngBuf.toString('base64');
 }
 
 // Strip the creator's name (full name and first/last parts) from the scene prompt
