@@ -326,8 +326,7 @@ async function gptImage(refFiles, scenePrompt, creatorName) {
   }
 
   const item = res?.data?.[0] || {};
-  // log the shape so we can see exactly what came back
-  console.log('[gptImage] keys:', Object.keys(item), '| has b64:', !!item.b64_json, '| has url:', !!item.url);
+  console.log('[gptImage] keys:', Object.keys(item), '| b64?', !!item.b64_json, '| url?', !!item.url);
 
   let b64 = item.b64_json;
   // some responses return a URL instead of base64 — fetch it and convert
@@ -335,8 +334,18 @@ async function gptImage(refFiles, scenePrompt, creatorName) {
     const r = await fetch(item.url);
     b64 = Buffer.from(await r.arrayBuffer()).toString('base64');
   }
-  if (!b64 || b64.length < 100) {
-    throw new Error(`GPT Image returned no usable image. data[0]=${JSON.stringify(item).slice(0, 300)}`);
+  if (!b64) {
+    throw new Error(`GPT Image: no image field. data[0]=${JSON.stringify(item).slice(0, 300)}`);
+  }
+
+  // strip a data-URI prefix if the API included one (otherwise it decodes to garbage)
+  b64 = String(b64).replace(/^data:image\/\w+;base64,/, '');
+
+  const buf = Buffer.from(b64, 'base64');
+  // valid raster magic bytes: png=89504e47, jpeg=ffd8ff, webp=52494646("RIFF"), gif=474946
+  console.log('[gptImage] bytes:', buf.length, '| magic:', buf.slice(0, 8).toString('hex'), '| head:', b64.slice(0, 30));
+  if (buf.length < 100) {
+    throw new Error(`GPT Image: payload too small (${buf.length} bytes). head=${b64.slice(0, 120)}`);
   }
   return b64;
 }
