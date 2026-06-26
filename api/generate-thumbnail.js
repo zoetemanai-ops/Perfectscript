@@ -94,9 +94,9 @@ NON-NEGOTIABLE PRINCIPLES:
    never a summary.
 7. Honor creator_visual_notes if provided.
 8. Creator framing (default). Frame the creator LARGE and close — a tight
-   head-and-shoulders crop where the face is one of the biggest elements in the
-   frame (faces get ~42% of viewing time, so make it count). Shoot from a slight
-   LOW angle looking up, which makes the creator read as powerful and
+   head-and-shoulders crop where the face is the single biggest element in the
+   frame, filling a generous share of the height (faces get ~42% of viewing time,
+   so make it count). Shoot from a slight LOW angle looking up, which makes the creator read as powerful and
    larger-than-life. They are the primary magnet — leave room for the visual
    metaphor, but never shrink the face. They look directly into the lens, locking
    eyes with the viewer. Break eye contact ONLY when a concept is clearly stronger
@@ -142,27 +142,32 @@ ANTI-CLICHÉ (do this FIRST):
 - Avoid depending on an exact COUNT of objects (e.g. "five envelopes") — image
   models miscount. Use "one red among plain ones" or a single hero object.
 
-THE OVERLAY — 2 words, occasionally 3 (per concept):
-- Two words by default, short and punchy. Add a third ONLY if needed to keep the
-  phrase natural; never more than three. They stack on two lines and MUST read as
-  a coherent, natural micro-phrase (e.g. "IRS / TRAP", "RETIRE / BROKE",
-  "TAX BREAK / BAIT", "GONE / LEGALLY"). Never pair words that read as nonsense
-  (e.g. "ONE / TRICKS").
-- ANCHOR + TENSION. One part must make the SUBJECT recognizable at a glance —
-  name or clearly evoke the real topic (the tax, the account, the rule, the
-  retiree, the agency, the benefit) — and one part must create tension or
-  intrigue. The viewer should know roughly WHAT it is about AND feel they must
-  click to learn the catch. Avoid purely abstract metaphor words that could fit
-  any video (e.g. "WRONG MOVE", "DON'T OPEN", "PEEL BACK").
+THE OVERLAY — a short, emotionally charged phrase, 2 to 5 words (per concept):
+- Keep it punchy, but it may now run a little longer than before (2 to 5 words)
+  when that makes it land harder — e.g. "IT'S NOT WORTH IT", "THIS WILL COST YOU",
+  "STOP DOING THIS", "YOU'RE LOSING MONEY". Stack it on two lines and it MUST read
+  as one natural, coherent phrase — never random or nonsense words.
+- EMOTION over label. Do NOT just name the topic ("MARRIAGE TRAP", "JOINT RETURN")
+  — make the viewer FEEL something. Choose the emotional register that best fits
+  THIS concept, and vary it across the three:
+    * warning / urgency  — "BEFORE IT'S TOO LATE", "DON'T DO THIS"
+    * personal verdict   — "IT'S NOT WORTH IT", "YOU'RE WRONG ABOUT THIS"
+    * reveal / curiosity — "WHAT THEY HIDE", "THE REAL COST"
+    * loss / stakes      — "YOU'RE LOSING MONEY", "IT COSTS YOU MORE"
+  Pick whichever hits hardest for the concept.
+- Anchor when natural. If you can tie the phrase to the real topic (the tax, the
+  IRS, the account, the retiree) without killing the emotion, do so — but a pure
+  emotional hook is fine when the image and the title already make the subject
+  clear. Either way the viewer must feel they have to click.
 - Still implies, never explains — do not state the lesson or spoil the answer.
 - Never repeats or summarizes the title, and never reuses a word from the title.
 - No creator name, no hashtags. Punctuation only if it adds tension.
 - Output the words plain, separated by single spaces only — never a slash, pipe,
   dash, bullet, or any other separator between them.
 
-TEXT IS RENDERED SEPARATELY (by code, not by you):
-- The 2 words are drawn onto the image afterwards as a typographic layer.
-- So scene_prompt must contain NO text at all, and must keep one corner clean.
+TEXT IS RENDERED SEPARATELY (added to the image after the scene):
+- The caption is added to the image separately, so scene_prompt must contain NO
+  text at all, and must keep one corner clean for it.
 - For each concept choose:
   * subject_side = the side the creator's face/body occupies, "left" or "right".
   * text_zone   = a corner on the OPPOSITE horizontal side from subject_side, so
@@ -196,7 +201,7 @@ OUTPUT — return ONLY valid JSON, no preamble:
       "subject_direction": "<expression (hot but credible), pose, gesture, framing, placement>",
       "composition": "<focal point, rule-of-thirds, fg/bg, which corner is the clean text_zone>",
       "color_and_lighting": "...",
-      "overlay": {"words": "TWO OR THREE WORDS", "rationale": "...", "score": 0},
+      "overlay": {"words": "2 TO 5 WORDS — a short emotional phrase", "rationale": "...", "score": 0},
       "subject_side": "<left|right>",
       "text_zone": "<top-left|top-right|bottom-left|bottom-right|top-center|bottom-center>",
       "text_on_dark": true,
@@ -345,9 +350,9 @@ function buildTextDirective(concept) {
   return [
     'TEXT OVERLAY — render this caption baked directly into the image:',
     `Render the exact caption "${words}" in the ${zone} area, stacked on two lines, all uppercase, in a premium tall condensed sans-serif with clean even strokes and tight letter spacing (Bebas Neue style).`,
-    `Color: render every word in clean pure white EXCEPT the final key word (the payoff word), which is in ${accent}.`,
+    `Color: render every word in clean pure white EXCEPT the final key word (or the final short key phrase, e.g. the last two words), which is in ${accent}.`,
     underline
-      ? 'Add a single thin, clean, straight horizontal underline beneath that final word — a crisp minimal line, NOT a brush stroke or a bar.'
+      ? `Add a single thin, clean, straight horizontal underline directly beneath that final word, in the SAME ${accent} color as that word — a crisp minimal line, NOT a brush stroke or a bar.`
       : 'No underline, no colored bars, no brush strokes — just clean type.',
     'Keep the caption COMPACT: it should occupy only about a quarter of the frame, sitting neatly in its corner with clear margins from every edge. Large enough to read instantly on mobile, but it must NOT dominate the image, span the full width, or crowd the edges. Crisp, perfectly legible, correctly spelled, with NO extra, missing, or misspelled words. Keep it fully clear of the person\u2019s face and body. This is the ONLY text anywhere in the image.',
   ].join(' ');
