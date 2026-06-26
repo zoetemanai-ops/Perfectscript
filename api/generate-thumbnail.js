@@ -1,3 +1,4 @@
+
 // api/generate-thumbnail.js
 // ─────────────────────────────────────────────────────────────────────────────
 // Perfect Thumbnail · Vercel Node serverless function (GPT Image 2 + text layer)
@@ -84,10 +85,11 @@ NON-NEGOTIABLE PRINCIPLES:
    not just pure alarm.
 3. Abstract -> concrete. Finance ideas become ONE physical visual metaphor the
    creator reacts to.
-4. Contrast + depth + sticker-pop. Sharp subject, desaturated/blurred background.
-   Add a crisp cyan or magenta rim light around the creator so they "pop" off the
-   background like a sticker on a mobile feed, paired with a subtle
-   teal-and-orange color grade. Complementary colors that stand out in a feed.
+4. Contrast + depth. Sharp, well-lit subject cleanly separated from a
+   desaturated/blurred background so the face and object read instantly on mobile.
+   Natural, credible lighting — no neon rim lights, no heavy color grades, no
+   glow. Clean, high-contrast, premium. Complementary colors that stand out in a
+   feed without looking gimmicky.
 5. Mobile-first. Must read at 120px wide.
 6. Curiosity gap. Image + 2-word overlay open a loop the TITLE closes. Tension,
    never a summary.
@@ -132,6 +134,12 @@ ANTI-CLICHÉ (do this FIRST):
   generic "person frowning at a chart", but also NOT an abstract, cryptic puzzle
   or an obscure visual riddle the viewer has to decode. If a normal finance
   viewer wouldn't get it almost instantly, simplify it.
+- The SETTING must reinforce the metaphor or fall away — never add random "drama".
+  A hero object may sit in a logical, recognizable context (held in the creator's
+  hands, on a desk, etc.), but do NOT surround it with props the viewer cannot
+  place (cracked rock or tree stumps, drifting fog, floating embers/particles,
+  glowing cracks, swirling debris). When in doubt, keep the background clean and
+  let the hero object + the face carry it. One hero object, calm surroundings.
 - Avoid depending on an exact COUNT of objects (e.g. "five envelopes") — image
   models miscount. Use "one red among plain ones" or a single hero object.
 
@@ -163,13 +171,13 @@ TEXT IS RENDERED SEPARATELY (by code, not by you):
                   the text goes left, and vice versa. Pick top or bottom by where
                   the emptiest space is.
   * text_on_dark = true if that corner is dark, false if it is light.
-  * text_style  = one of:
-      - "marker"      : default. Outlined word + a brush underline. Use for most
-                        concepts.
-      - "block"       : the second word on a solid accent bar. Use for HARD,
-                        urgent, alarm / "stop" concepts.
-      - "gold-italic" : the second word slanted in gold. Use ONLY for the
-                        insider / secret / "a legal move the rich use" angle.
+  * text_style  = "marker" (default), "block", or "gold-italic". This now only
+                  decides whether a thin underline appears (marker = yes). Use
+                  "marker" for most concepts.
+  * accent     = the color of the SINGLE highlighted payoff word, chosen by the
+                  concept's MEANING (not by style):
+      - "red"  : warning, danger, loss, mistake, "stop" / "watch out" concepts.
+      - "gold" : insider, secret, money, opportunity, "a legal move the rich use".
 - In scene_prompt, place the creator on subject_side and explicitly keep the
   opposite side (the text_zone side) clean, low-detail and even-toned.
 
@@ -194,6 +202,7 @@ OUTPUT — return ONLY valid JSON, no preamble:
       "text_zone": "<top-left|top-right|bottom-left|bottom-right|top-center|bottom-center>",
       "text_on_dark": true,
       "text_style": "<marker|block|gold-italic>",
+      "accent": "<red|gold>",
       "freshness_score": 0,
       "click_score": 0,
       "scene_prompt": "<ONE paragraph, ABSOLUTELY NO TEXT, for Nano Banana Pro: 16:9 photorealistic thumbnail; describe the creator WITH an explicit instruction to keep face and identity exactly consistent with the supplied reference images, same person; the metaphor; the hot-but-credible emotion; framing chest-up with eye contact by default; composition; lighting. Keep the chosen text_zone corner clean, low-detail and even-toned so a text overlay reads on top. End with 'Do not render any text, letters, numbers, words, logos, or watermarks anywhere in the image. One clear focal point, readable as a small mobile thumbnail.'>"
@@ -324,17 +333,11 @@ function buildTextDirective(concept) {
   if (!words) return 'Render no text anywhere in the image.';
   const zone = (concept.text_zone || 'top-left').replace(/-/g, ' ');
   const style = concept.text_style || 'marker';
-  // clean premium look: all white, one accent word in gold or red, thin underline only on the default style
-  let accent = 'gold (#F4C430)';
-  let underline = false;
-  if (style === 'block') {            // urgent / alarm concepts -> red accent
-    accent = 'bright red (#E11D2A)';
-  } else if (style === 'gold-italic') { // insider / secret / money concepts -> gold accent
-    accent = 'gold (#F4C430)';
-  } else {                             // default -> gold accent + a thin underline
-    accent = 'gold (#F4C430)';
-    underline = true;
-  }
+  // color follows the concept's MEANING (set by the art director): red = warning, gold = insider/money
+  const accent = String(concept.accent || '').toLowerCase() === 'red'
+    ? 'bright red (#E11D2A)'
+    : 'gold (#F4C430)';
+  const underline = style === 'marker';   // thin underline only on the default style (occasional)
   return [
     'TEXT OVERLAY — render this caption baked directly into the image:',
     `Render the exact caption "${words}" in the ${zone} area, stacked on two lines, all uppercase, in a premium tall condensed sans-serif with clean even strokes and tight letter spacing (Bebas Neue style).`,
@@ -342,7 +345,7 @@ function buildTextDirective(concept) {
     underline
       ? 'Add a single thin, clean, straight horizontal underline beneath that final word — a crisp minimal line, NOT a brush stroke or a bar.'
       : 'No underline, no colored bars, no brush strokes — just clean type.',
-    'Size it large and confident so it anchors the empty area, but well-proportioned: roughly one third of the frame, never dominating the image or running into the edges. Crisp, perfectly legible, correctly spelled, with NO extra, missing, or misspelled words. Keep it fully clear of the person\u2019s face and body. This is the ONLY text anywhere in the image.',
+    'Keep the caption COMPACT: it should occupy only about a quarter of the frame, sitting neatly in its corner with clear margins from every edge. Large enough to read instantly on mobile, but it must NOT dominate the image, span the full width, or crowd the edges. Crisp, perfectly legible, correctly spelled, with NO extra, missing, or misspelled words. Keep it fully clear of the person\u2019s face and body. This is the ONLY text anywhere in the image.',
   ].join(' ');
 }
 
