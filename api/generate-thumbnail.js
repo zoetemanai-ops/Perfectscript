@@ -342,10 +342,16 @@ async function gptImage(refFiles, scenePrompt, creatorName) {
   b64 = String(b64).replace(/^data:image\/\w+;base64,/, '');
 
   const buf = Buffer.from(b64, 'base64');
-  // valid raster magic bytes: png=89504e47, jpeg=ffd8ff, webp=52494646("RIFF"), gif=474946
-  console.log('[gptImage] bytes:', buf.length, '| magic:', buf.slice(0, 8).toString('hex'), '| head:', b64.slice(0, 30));
-  if (buf.length < 100) {
-    throw new Error(`GPT Image: payload too small (${buf.length} bytes). head=${b64.slice(0, 120)}`);
+  const magic = buf.slice(0, 8).toString('hex');
+  const isImg =
+    buf.slice(0, 4).toString('hex') === '89504e47' ||      // png
+    buf.slice(0, 3).toString('hex') === 'ffd8ff' ||         // jpeg
+    buf.slice(0, 4).toString('ascii') === 'RIFF' ||         // webp
+    buf.slice(0, 3).toString('ascii') === 'GIF';            // gif
+  console.log('[gptImage] bytes:', buf.length, '| magic:', magic, '| isImg:', isImg);
+  if (!isImg) {
+    const snippet = buf.slice(0, 120).toString('utf8').replace(/\s+/g, ' ');
+    throw new Error(`GPT Image: response is NOT an image (magic=${magic}). content="${snippet}"`);
   }
   return b64;
 }
