@@ -87,14 +87,16 @@ NON-NEGOTIABLE PRINCIPLES:
 4. Contrast + depth — go CINEMATIC. Light the scene like a film still, not a flat
    product shot: a strong directional key light, real shadows and falloff, with
    clear separation between subject and background so the face and object read
-   instantly on mobile. Choose the BACKGROUND that suits the concept — it can be
-   dark and dramatic, OR light, bright, or a color that fits the metaphor; pick
-   whatever makes that specific image strongest. Do not default everything to
-   dark. Motivated colored light is welcome when it serves the metaphor (e.g. a
-   red or green glow thrown from the object onto the face) — but keep it MOTIVATED
-   and believable, never random neon or a gimmicky sticker glow. Dramatic and
-   premium, never plastic, garish, or over-stylized. The creator must still read
-   as a real, credible authority.
+   instantly on mobile. PREFER rich, deep, dark and moody backgrounds — that is
+   the default look — but NEVER a flat, pure-black, lifeless void: give the
+   background depth with a subtle gradient, soft pools of light, gentle texture or
+   atmosphere. A lighter or colored background is fine when a concept is clearly
+   stronger that way, but dark-and-cinematic is the default. Motivated colored
+   light is welcome when it serves the metaphor (e.g. a red or green glow thrown
+   from the object onto the face) — but keep it MOTIVATED and believable, never
+   random neon or a gimmicky sticker glow. Dramatic and premium, never plastic,
+   garish, or over-stylized. The creator must still read as a real, credible
+   authority.
 5. Mobile-first. Must read at 120px wide.
 6. Curiosity gap. Image + 2-word overlay open a loop the TITLE closes. Tension,
    never a summary.
@@ -134,9 +136,9 @@ ANTI-CLICHÉ (do this FIRST):
 - You may NOT use any of them as a primary metaphor.
 - The three concepts must be genuinely different from each other (different
   metaphor AND different composition — not three renders of one idea). Vary the
-  BACKGROUND and lighting across them too: do not make all three dark (or all
-  three light). Aim for a mix — e.g. one dark and dramatic, one lighter or
-  colored — so a run never looks like three versions of the same mood.
+  setting, framing and light direction across them so a run never looks like three
+  versions of one image — even though they can share the same rich, dark,
+  cinematic tone.
 - Fresh with ONE surprising twist, but graspable in 0.3 seconds. Take a
   recognizable object or situation and give it one unexpected turn — not the 50th
   generic "person frowning at a chart", but also NOT an abstract, cryptic puzzle
@@ -365,10 +367,8 @@ function buildTextDirective(concept) {
   const words = String(concept.overlay?.words || '').replace(/[\/|]+/g, ' ').replace(/\s+/g, ' ').trim().toUpperCase();
   if (!words) return 'Render no text anywhere in the image.';
   const zone = (concept.text_zone || 'top-left').replace(/-/g, ' ');
-  // swoosh color follows the concept's MEANING (set by the art director): red = warning, gold = insider/money
-  const accent = String(concept.accent || '').toLowerCase() === 'red'
-    ? 'bright red (#E11D2A)'
-    : 'gold (#F4C430)';
+  // underline swoosh is ALWAYS red, regardless of concept meaning
+  const accent = 'bright red (#E11D2A)';
   return [
     'TEXT OVERLAY — render this caption baked into the image in a FIXED, consistent brand style (render it the SAME way every time):',
     `Render the exact caption "${words}" in the ${zone} area, all uppercase, arranged across one or two lines — break the words wherever it reads best and forms a balanced, punchy block — in a HEAVY, bold, condensed sans-serif (Anton / Archivo Black style): thick even strokes, with slightly open, relaxed letter spacing.`,
