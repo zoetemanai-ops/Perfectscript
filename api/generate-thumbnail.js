@@ -84,11 +84,15 @@ NON-NEGOTIABLE PRINCIPLES:
    not just pure alarm.
 3. Abstract -> concrete. Finance ideas become ONE physical visual metaphor the
    creator reacts to.
-4. Contrast + depth. Sharp, well-lit subject cleanly separated from a
-   desaturated/blurred background so the face and object read instantly on mobile.
-   Natural, credible lighting — no neon rim lights, no heavy color grades, no
-   glow. Clean, high-contrast, premium. Complementary colors that stand out in a
-   feed without looking gimmicky.
+4. Contrast + depth — go CINEMATIC. Light the scene like a film still, not a flat
+   product shot: a strong directional key light, real shadows and falloff, and a
+   moody, high-contrast background, with clear separation between subject and
+   background so the face and object read instantly on mobile. Motivated colored
+   light is welcome when it serves the metaphor (e.g. a red or green glow thrown
+   from the object onto the face) — but keep it MOTIVATED and believable, never
+   random neon or a gimmicky sticker glow. Dramatic and premium, never plastic,
+   garish, or over-stylized. The creator must still read as a real, credible
+   authority.
 5. Mobile-first. Must read at 120px wide.
 6. Curiosity gap. Image + 2-word overlay open a loop the TITLE closes. Tension,
    never a summary.
@@ -142,11 +146,12 @@ ANTI-CLICHÉ (do this FIRST):
 - Avoid depending on an exact COUNT of objects (e.g. "five envelopes") — image
   models miscount. Use "one red among plain ones" or a single hero object.
 
-THE OVERLAY — a short, emotionally charged phrase, 2 to 5 words (per concept):
-- Keep it punchy, but it may now run a little longer than before (2 to 5 words)
+THE OVERLAY — a short, emotionally charged phrase, 2 to 4 words (per concept):
+- Keep it punchy, but it may run a little longer than a bare label (2 to 4 words)
   when that makes it land harder — e.g. "IT'S NOT WORTH IT", "THIS WILL COST YOU",
-  "STOP DOING THIS", "YOU'RE LOSING MONEY". Stack it on two lines and it MUST read
-  as one natural, coherent phrase — never random or nonsense words.
+  "STOP DOING THIS", "YOU'RE LOSING MONEY". Lay it out across one or two lines —
+  however reads best — and it MUST read as one natural, coherent phrase, never
+  random or nonsense words.
 - EMOTION over label. Do NOT just name the topic ("MARRIAGE TRAP", "JOINT RETURN")
   — make the viewer FEEL something. Choose the emotional register that best fits
   THIS concept, and vary it across the three:
@@ -155,6 +160,10 @@ THE OVERLAY — a short, emotionally charged phrase, 2 to 5 words (per concept):
     * reveal / curiosity — "WHAT THEY HIDE", "THE REAL COST"
     * loss / stakes      — "YOU'RE LOSING MONEY", "IT COSTS YOU MORE"
   Pick whichever hits hardest for the concept.
+- High-stakes, not loud. The phrase should feel CONSEQUENTIAL — imply a real,
+  significant stake (money lost, a costly mistake, something genuinely at risk),
+  never a mild observation. Raise the STAKES, not the volume: keep it credible and
+  adult, never cartoonish, screaming, or over-hyped.
 - Anchor when natural. If you can tie the phrase to the real topic (the tax, the
   IRS, the account, the retiree) without killing the emotion, do so — but a pure
   emotional hook is fine when the image and the title already make the subject
@@ -170,10 +179,11 @@ TEXT IS RENDERED SEPARATELY (added to the image after the scene):
   text at all, and must keep one corner clean for it.
 - For each concept choose:
   * subject_side = the side the creator's face/body occupies, "left" or "right".
-  * text_zone   = a corner on the OPPOSITE horizontal side from subject_side, so
-                  the text never lands on the face. If the face is on the right,
-                  the text goes left, and vice versa. Pick top or bottom by where
-                  the emptiest space is.
+  * text_zone   = where the caption goes. Choose the placement that makes the BEST
+                  composition and sits in the cleanest empty space — any corner, a
+                  side, or the top/bottom center. It does NOT have to be a corner.
+                  The ONE hard rule: it must never overlap or crowd the face. Put it
+                  in the area away from the creator where there is room to breathe.
   * text_on_dark = true if that corner is dark, false if it is light.
   * text_style  = "marker" (default), "block", or "gold-italic". This now only
                   decides whether a thin underline appears (marker = yes). Use
@@ -201,7 +211,7 @@ OUTPUT — return ONLY valid JSON, no preamble:
       "subject_direction": "<expression (hot but credible), pose, gesture, framing, placement>",
       "composition": "<focal point, rule-of-thirds, fg/bg, which corner is the clean text_zone>",
       "color_and_lighting": "...",
-      "overlay": {"words": "2 TO 5 WORDS — a short emotional phrase", "rationale": "...", "score": 0},
+      "overlay": {"words": "2 TO 4 WORDS — a short emotional phrase", "rationale": "...", "score": 0},
       "subject_side": "<left|right>",
       "text_zone": "<top-left|top-right|bottom-left|bottom-right|top-center|bottom-center>",
       "text_on_dark": true,
@@ -314,7 +324,10 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
     'glasses, facial hair and apparent age EXACTLY consistent with the supplied reference photos. ' +
     'Do NOT thin, shorten, recolor, add, or remove hair, and do NOT make the person look balder, younger, ' +
     'or older. It must be unmistakably the same exact person as in the references.';
-  const pngB64 = await gptImage(refFiles, `${scene}\n\n${identity}\n\n${buildTextDirective(concept)}`, creatorName);
+  const quality =
+    'QUALITY: sharp focus, professional studio photography quality, crisp fine detail, clean and ' +
+    'polished. Keep skin and textures natural and realistic — NOT plastic, waxy, airbrushed, or over-smoothed.';
+  const pngB64 = await gptImage(refFiles, `${scene}\n\n${identity}\n\n${quality}\n\n${buildTextDirective(concept)}`, creatorName);
   const finalBuffer = Buffer.from(pngB64, 'base64');
 
   const path = `${runId}/${concept.id}.png`;
@@ -349,7 +362,7 @@ function buildTextDirective(concept) {
   const underline = style === 'marker';   // thin underline only on the default style (occasional)
   return [
     'TEXT OVERLAY — render this caption baked directly into the image:',
-    `Render the exact caption "${words}" in the ${zone} area, stacked on two lines, all uppercase, in a premium tall condensed sans-serif with clean even strokes and tight letter spacing (Bebas Neue style).`,
+    `Render the exact caption "${words}" in the ${zone} area, all uppercase, arranged across one or two lines — break the words wherever it reads best and forms a balanced, punchy block — in a HEAVY, bold, condensed sans-serif (Anton / Archivo Black style): thick even strokes, tightly spaced. Give every letter a bold solid BLACK outline and a subtle soft drop shadow beneath it, so the text pops off the image with depth and weight.`,
     `Color: render every word in clean pure white EXCEPT the final key word (or the final short key phrase, e.g. the last two words), which is in ${accent}.`,
     underline
       ? `Add a single thin, clean, straight horizontal underline directly beneath that final word, in the SAME ${accent} color as that word — a crisp minimal line, NOT a brush stroke or a bar.`
