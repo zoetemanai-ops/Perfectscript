@@ -87,16 +87,18 @@ NON-NEGOTIABLE PRINCIPLES:
 4. Contrast + depth — go CINEMATIC. Light the scene like a film still, not a flat
    product shot: a strong directional key light, real shadows and falloff, with
    clear separation between subject and background so the face and object read
-   instantly on mobile. PREFER rich, deep, dark and moody backgrounds — that is
-   the default look — but NEVER a flat, pure-black, lifeless void: give the
-   background depth with a subtle gradient, soft pools of light, gentle texture or
-   atmosphere. A lighter or colored background is fine when a concept is clearly
-   stronger that way, but dark-and-cinematic is the default. Motivated colored
-   light is welcome when it serves the metaphor (e.g. a red or green glow thrown
-   from the object onto the face) — but keep it MOTIVATED and believable, never
-   random neon or a gimmicky sticker glow. Dramatic and premium, never plastic,
-   garish, or over-stylized. The creator must still read as a real, credible
-   authority.
+   instantly on mobile. Backgrounds should be DARK but not too dark — a rich,
+   moody MEDIUM-DARK (deep charcoal, dark navy, warm brown-black), NOT near-black
+   and NOT a flat pure-black void. The darkness must stay clearly readable, with
+   visible depth: a noticeable gradient, soft pools of light, a lit area or lamp,
+   gentle texture or atmosphere — you should always be able to see detail and
+   shape in the background, never a solid black wall. A lighter or colored
+   background is fine when a concept is clearly stronger that way, but moody
+   medium-dark is the default. Motivated colored light is welcome when it serves
+   the metaphor (e.g. a red or green glow thrown from the object onto the face) —
+   but keep it MOTIVATED and believable, never random neon or a gimmicky sticker
+   glow. Dramatic and premium, never plastic, garish, or over-stylized. The
+   creator must still read as a real, credible authority.
 5. Mobile-first. Must read at 120px wide.
 6. Curiosity gap. Image + 2-word overlay open a loop the TITLE closes. Tension,
    never a summary.
