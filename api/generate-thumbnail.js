@@ -178,18 +178,36 @@ executions.
    single dominant element and each half must be instantly readable and clearly
    subordinate, never two competing focal points. Distinguish the two halves by real,
    believable means (different setting, props, or natural light level), not by
-   drenching one side in golden glow. Both worlds concrete and graspable in 0.3s. No
-   text in the scene; leave space for the caption.
+   drenching one side in golden glow. The divide may be a hard edge OR a cleaner
+   organic transition down the middle (an almost liquid seam where the two worlds
+   meet) — but if you use a transition it must stay crisp, deliberate and instantly
+   readable at 0.3s, never a vague smear, fog, floating particles, or murky AI
+   sludge. Both worlds concrete and graspable in 0.3s. No text in the scene; leave
+   space for the caption.
 
 3) REACTION-TO-OBJECT
-   Creator framed large with a strong, intense reaction to ONE real, striking
-   physical hero object that carries the stakes — placed beside them or held near
-   the chest, lit as part of the same scene. The object is specific, tactile and
-   topic-true, with real materials, weight and a real contact shadow. The power is
-   the COMBINATION of the creator's hot expression and that single object. One
-   object, one face, one reaction — no clutter. Do NOT use a sheet of paper or a
-   document as the hero object here; pick something with real physical presence. No
-   text in the scene; leave clean negative space for the caption.
+   Creator framed large with a strong, intense reaction to ONE real object that
+   carries the stakes — placed beside them or held near the chest, lit as part of
+   the same scene with real materials, weight and a real contact shadow. CRITICAL
+   BALANCE — it must be surprising AND completely real, never AI gimmickry:
+   - The OBJECT itself is ordinary, everyday and instantly recognizable: something
+     that genuinely exists and a viewer knows on sight (an IRS envelope, a real
+     cheque, cash, a bank card, a key, a padlock, a passport, a phone screen). Do
+     NOT invent a novelty object, a fantasy gadget, or an engraved/branded plaque or
+     sign — those read as AI slop.
+   - The object must MEAN something, not just NAME the topic. It has to play a real
+     role in the story and carry the stakes through what it is and what happens to
+     it (a shredded cheque = money gone). A prop that merely has the subject written
+     on it (a plaque or label reading the topic) is banned — that is a caption, not a
+     metaphor.
+   - The SURPRISE comes from what is HAPPENING to that ordinary object, or its
+     state: it is being shredded, torn in half, burning at one edge, locked, cut
+     with scissors, cracked, stamped — a real moment that opens a curiosity loop and
+     makes the stakes felt. Real object, unexpected situation.
+   The power is the COMBINATION of the creator's hot expression and that single
+   object mid-moment. One object, one face, one reaction — no clutter. Do NOT use a
+   plain sheet of paper or a document as the hero object. No text in the scene; leave
+   clean negative space for the caption.
 
 4) ON-LOCATION
    Take the creator OUT of the studio into a meaningful real-world PLACE tied to the
@@ -234,13 +252,15 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
   void, and it must not be the same dark or golden look every time — vary the
   brightness and mood across the three. A cleaner background is fine when a single
   hero object carries the shot, but lean toward the richer, fuller scene.
-- REAL, INTERESTING props. Whatever object carries the metaphor must look like a
+- REAL, RECOGNIZABLE props. Whatever object carries the metaphor must look like a
   genuine physical thing photographed in the room: real materials with real texture,
   weight, edge wear and a natural contact shadow — never a generic, plasticky or
-  crude AI object, and never a flat, boring default (a plain blank sheet, a generic
-  paper stack). Make the prop SPECIFIC and a little unexpected: a real, detailed,
-  characterful object the eye wants to look at, with believable small details that
-  sell it as photographed, not generated.
+  crude AI object, never an invented novelty object or engraved/branded plaque, and
+  never a flat, boring default (a plain blank sheet, a generic paper stack). Use an
+  ordinary, instantly recognizable real object; if you want surprise, put it in an
+  unexpected SITUATION or state (being shredded, torn, burning, locked) rather than
+  inventing a weird object. Believable small details should sell it as photographed,
+  not generated.
 - Keep the environment SUBORDINATE: softly lit / gently blurred so the face and
   hero object stay sharp and dominant in front. Avoid props the viewer cannot
   place (cracked rock or tree stumps, drifting fog, floating embers/particles,
@@ -254,9 +274,19 @@ THE OVERLAY — a short, emotionally charged phrase, 2 to 4 words (per concept):
   "STOP DOING THIS", "YOU'RE LOSING MONEY". Lay it out across one or two lines —
   however reads best — and it MUST read as one natural, coherent phrase, never
   random or nonsense words.
-- EMOTION over label. Do NOT just name the topic ("MARRIAGE TRAP", "JOINT RETURN")
-  — make the viewer FEEL something. Choose the emotional register that best fits
-  THIS concept, and vary it across the three:
+- EMOTION over label, but always CRYSTAL CLEAR. Do NOT just name the topic
+  ("MARRIAGE TRAP", "JOINT RETURN") and do NOT write a flat, informational
+  description of the situation ("YOU CAN STILL CLAIM", "RETIREE TAX BREAK") — those
+  state a fact instead of landing a punch. Make the viewer FEEL something with a
+  direct, personal line that hits a nerve or a desire: "IT'S YOUR MONEY", "THEY
+  STEAL FROM YOU", "YOU'RE LOSING MONEY", "DON'T LET THEM", "IT'S STILL YOURS". It
+  must stay plain and instantly readable — emotional, NOT vague, cryptic, or clever
+  for its own sake. EMOTION TEST before you finalize: would this make a stranger
+  feel something (anger, fear of loss, "wait, that's mine")? If it merely tells them
+  what the video is about, rewrite it until it stings. Speak to the viewer directly
+  ("you / your / they") whenever it fits. Choose the register that best fits THIS
+  concept, and vary it across the three:
+    * possession / theft  — "IT'S YOUR MONEY", "THEY STEAL FROM YOU"
     * warning / urgency  — "BEFORE IT'S TOO LATE", "DON'T DO THIS"
     * personal verdict   — "IT'S NOT WORTH IT", "YOU'RE WRONG ABOUT THIS"
     * reveal / curiosity — "WHAT THEY HIDE", "THE REAL COST"
