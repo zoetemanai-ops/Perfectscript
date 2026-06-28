@@ -1,19 +1,15 @@
 // api/generate-thumbnail.js
 // ─────────────────────────────────────────────────────────────────────────────
-// Perfect Thumbnail · Vercel Node serverless function (GPT Image 2 + text layer)
+// Perfect Thumbnail · Vercel Node serverless function (GPT Image 2)
 //
 // Trigger:  POST { script_run_id }
 //   Background (waitUntil): Claude art director -> 3 concepts -> GPT Image 2
-//   renders the SCENE (no text, 1 call/concept, creator NEVER named) -> we draw
-//   the 2 words as a typographic layer (Oswald, 3 styles) -> upload -> complete.
-//
-// Text styles (art director picks one per concept):
-//   marker      — sharp outlined word + tapered brush underline (default)
-//   block       — second word on an accent bar (for hard / alarm concepts)
-//   gold-italic — second word slanted in gold (for insider / "secret" concepts)
+//   renders each concept in ONE call (scene + baked-in caption, creator NEVER
+//   named) -> upload -> complete. The caption is rendered by the image model
+//   itself via buildTextDirective; there is no separate canvas text layer.
 //
 // ── Prerequisites ────────────────────────────────────────────────────────────
-//   npm i @anthropic-ai/sdk openai @napi-rs/canvas @supabase/supabase-js @vercel/functions
+//   npm i @anthropic-ai/sdk openai @napi-rs/image @supabase/supabase-js @vercel/functions
 //   Env: ANTHROPIC_API_KEY, OPENAI_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
 //   Buckets: creator-photos (PRIVATE, <client_slug>/*.jpg), thumbnails (PUBLIC)
 //   maxDuration 300 needs Vercel Pro.
@@ -22,7 +18,6 @@
 import Anthropic from '@anthropic-ai/sdk';
 import OpenAI, { toFile } from 'openai';
 import { Transformer } from '@napi-rs/image';
-import { createCanvas, loadImage, GlobalFonts } from '@napi-rs/canvas';
 import { createClient } from '@supabase/supabase-js';
 import { waitUntil } from '@vercel/functions';
 
@@ -43,15 +38,6 @@ const IMAGE_SIZE = '1536x864';   // 16:9 (both divisible by 16)
 const IMAGE_QUALITY = 'high';    // if the edits endpoint rejects this, remove the quality line in gptImage()
 const REF_BUCKET = 'creator-photos';
 const OUT_BUCKET = 'thumbnails';
-
-// text layer — Oswald 700 (static woff2 via @fontsource on a CDN)
-const FONT_URLS = [
-  'https://cdn.jsdelivr.net/npm/@fontsource/oswald/files/oswald-latin-700-normal.woff2',
-  'https://unpkg.com/@fontsource/oswald/files/oswald-latin-700-normal.woff2',
-];
-const FONT_NAME = 'Oswald700';
-const ACCENT_HEX = '#E11D2A';   // red — used by marker underline + block bar
-const GOLD_HEX = '#F4C430';     // gold — used by gold-italic style
 
 const ART_DIRECTOR_SYSTEM = `SYSTEM — "Perfect Thumbnail · Art Director v2"
 
@@ -422,7 +408,7 @@ async function gptImage(refFiles, scenePrompt, creatorName) {
   b64 = String(b64).replace(/^data:image\/\w+;base64,/, '');
 
   // Normalize whatever GPT returned (webp / odd PNG / etc.) into a clean PNG
-  // that @napi-rs/canvas can definitely decode. If it isn't an image at all,
+  // that @napi-rs/image can definitely decode. If it isn't an image at all,
   // the decode throws and we get a clear reason instead of "Invalid SVG".
   const raw = Buffer.from(b64, 'base64');
   const magic = raw.slice(0, 8).toString('hex');
@@ -450,228 +436,6 @@ function sanitizePrompt(scenePrompt, creatorName) {
 }
 function escapeRegExp(s) { return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 
-// ── TEXT LAYER ───────────────────────────────────────────────────────────────
-let _fontReady = false;
-async function ensureFont() {
-  if (_fontReady) return;
-  let lastErr;
-  for (const url of FONT_URLS) {
-    try {
-      const res = await fetch(url);
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      GlobalFonts.register(Buffer.from(await res.arrayBuffer()), FONT_NAME);
-      _fontReady = true;
-      return;
-    } catch (e) { lastErr = e; }
-  }
-  throw new Error('Font fetch failed: ' + (lastErr?.message || 'all CDNs'));
-}
-
-async function compositeText(sceneBuffer, { words, zone, onDark, style }) {
-  await ensureFont();
-  const img = await loadImage(sceneBuffer);
-  const W = img.width, H = img.height;
-  const canvas = createCanvas(W, H);
-  const ctx = canvas.getContext('2d');
-  ctx.drawImage(img, 0, 0, W, H);
-
-  const tokens = cleanWords(words).split(/\s+/).filter(Boolean).map((t) => t.toUpperCase());
-  if (!tokens.length) return canvas.toBuffer('image/png');
-  const [line1, line2] = splitBalanced(ctx, tokens);
-
-  const margin = Math.round(W * 0.05);
-  let size = Math.round(H * 0.20);
-  const widest = () => {
-    ctx.font = `${size}px ${FONT_NAME}`;
-    return Math.max(ctx.measureText(line1).width, line2 ? ctx.measureText(line2).width : 0);
-  };
-  while (widest() > W * 0.52 && size > 28) size -= 2;
-  ctx.font = `${size}px ${FONT_NAME}`;
-
-  const gap = size * 1.02;
-  const nLines = line2 ? 2 : 1;
-  const isBottom = zone.startsWith('bottom');
-  const isRight = zone.endsWith('right');
-  const isCenter = zone.endsWith('center');
-
-  let align, x;
-  if (isCenter) { align = 'center'; x = Math.round(W / 2); }
-  else if (isRight) { align = 'right'; x = W - margin; }
-  else { align = 'left'; x = margin; }
-
-  let by1;
-  if (isBottom) {
-    const by2 = H - margin - size * 0.20;
-    by1 = by2 - (nLines - 1) * gap;
-  } else {
-    by1 = margin + size * 0.78;
-  }
-  const by2 = by1 + gap;
-
-  // for the gold style, pick line-1 color from the ACTUAL background brightness
-  // where it sits (white on dark, dark on light) — the "It's Not" look.
-  const line1Dark = style === 'gold-italic'
-    ? measureOnDark(ctx, line1, x, by1, size, align, W, H)
-    : onDark;
-
-  // line 1 is always the plain outlined word
-  outlineText(ctx, line1, x, by1, size, line1Dark, align);
-
-  if (!line2) return canvas.toBuffer('image/png');
-
-  if (style === 'block') {
-    drawBar(ctx, line2, x, by2, size, align, ACCENT_HEX);
-  } else if (style === 'gold-italic') {
-    italicWord(ctx, line2, x, by2, size, align, GOLD_HEX);
-  } else {
-    // marker (default)
-    outlineText(ctx, line2, x, by2, size, onDark, align);
-    drawMarker(ctx, line2, x, by2, size, align, ACCENT_HEX);
-  }
-  return canvas.toBuffer('image/png');
-}
-
-function outlineText(ctx, text, x, by, size, onDark, align) {
-  ctx.font = `${size}px ${FONT_NAME}`;
-  ctx.textAlign = align;
-  ctx.textBaseline = 'alphabetic';
-  ctx.save();
-  ctx.lineJoin = 'round'; ctx.miterLimit = 2;
-  ctx.lineWidth = size * 0.085;
-  ctx.strokeStyle = onDark ? '#0a0a0a' : '#ffffff';
-  ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = size * 0.10; ctx.shadowOffsetY = size * 0.045;
-  ctx.strokeText(text, x, by);
-  ctx.restore();
-  ctx.fillStyle = onDark ? '#ffffff' : '#141414';
-  ctx.fillText(text, x, by);
-}
-
-// sample the scene brightness where a line of text will sit -> true if dark (use white text)
-function measureOnDark(ctx, text, x, by, size, align, W, H) {
-  ctx.font = `${size}px ${FONT_NAME}`;
-  const tw = ctx.measureText(text).width;
-  let sx;
-  if (align === 'right') sx = x - tw;
-  else if (align === 'center') sx = x - tw / 2;
-  else sx = x;
-  const rx = Math.max(0, Math.floor(sx));
-  const ry = Math.max(0, Math.floor(by - size * 0.72));
-  const rw = Math.min(W - rx, Math.ceil(tw));
-  const rh = Math.min(H - ry, Math.ceil(size * 0.8));
-  if (rw < 2 || rh < 2) return true;
-  try {
-    const data = ctx.getImageData(rx, ry, rw, rh).data;
-    let sum = 0, n = 0;
-    for (let i = 0; i < data.length; i += 16) {
-      sum += 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
-      n++;
-    }
-    return (sum / n / 255) < 0.58; // dark bg -> white text
-  } catch (e) {
-    return true;
-  }
-}
-
-function drawBar(ctx, text, x, by, size, align, color) {
-  ctx.font = `${size}px ${FONT_NAME}`;
-  ctx.textBaseline = 'alphabetic';
-  const m = ctx.measureText(text);
-  const tw = m.width, asc = m.actualBoundingBoxAscent, desc = m.actualBoundingBoxDescent;
-  const padX = size * 0.16, padY = size * 0.13;
-  let barLeft, textX, textAlign;
-  if (align === 'right') { barLeft = x - (tw + padX * 2); textX = x - padX; textAlign = 'right'; }
-  else if (align === 'center') { barLeft = x - (tw / 2 + padX); textX = x; textAlign = 'center'; }
-  else { barLeft = x; textX = x + padX; textAlign = 'left'; }
-  ctx.save();
-  ctx.shadowColor = 'rgba(0,0,0,0.4)'; ctx.shadowBlur = size * 0.10; ctx.shadowOffsetY = size * 0.03;
-  roundRect(ctx, barLeft, by - asc - padY, tw + padX * 2, asc + desc + padY * 2, size * 0.07);
-  ctx.fillStyle = color; ctx.fill();
-  ctx.restore();
-  ctx.textAlign = textAlign;
-  ctx.fillStyle = '#ffffff';
-  ctx.fillText(text, textX, by);
-}
-
-function italicWord(ctx, text, x, by, size, align, color) {
-  ctx.font = `${size}px ${FONT_NAME}`;
-  ctx.textBaseline = 'alphabetic';
-  ctx.textAlign = 'left';
-  const tw = ctx.measureText(text).width;
-  let ox = x;
-  if (align === 'right') ox = x - tw;
-  else if (align === 'center') ox = x - tw / 2;
-  ox -= size * 0.06; // compensate the italic slant so it lines up under line 1
-  ctx.save();
-  ctx.translate(ox, by);
-  ctx.transform(1, 0, -0.22, 1, 0, 0);
-  ctx.lineJoin = 'round'; ctx.miterLimit = 2; ctx.lineWidth = size * 0.085;
-  ctx.strokeStyle = '#3a2c00';
-  ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = size * 0.10; ctx.shadowOffsetY = size * 0.045;
-  ctx.strokeText(text, 0, 0);
-  ctx.shadowColor = 'transparent';
-  ctx.fillStyle = color; ctx.fillText(text, 0, 0);
-  ctx.restore();
-}
-
-function drawMarker(ctx, text, x, by, size, align, color) {
-  ctx.font = `${size}px ${FONT_NAME}`;
-  ctx.textAlign = align;
-  const tw = ctx.measureText(text).width;
-  let left;
-  if (align === 'left') left = x;
-  else if (align === 'right') left = x - tw;
-  else left = x - tw / 2;
-  const x0 = left - size * 0.05, x1 = left + tw + size * 0.05;
-  const yc = by + size * 0.18, thick = size * 0.16, w = x1 - x0, tilt = w * 0.035;
-  const n = 26, pts = [];
-  for (let i = 0; i <= n; i++) {
-    const t = i / n;
-    const cx = x0 + w * t;
-    const cy = yc + tilt * t + Math.sin(t * Math.PI * 1.25) * thick * 0.12;
-    let prof;
-    if (t < 0.07) prof = t / 0.07;                      // fine left tip
-    else if (t > 0.88) prof = Math.max((1 - t) / 0.12, 0) * 0.7; // wispy right flick
-    else prof = 1 - Math.abs(t - 0.42) * 0.22;          // slight mid bulge
-    pts.push([cx, cy, thick * 0.5 * Math.max(prof, 0.03)]);
-  }
-  ctx.save();
-  ctx.shadowColor = 'rgba(0,0,0,0.3)'; ctx.shadowBlur = thick * 0.35; ctx.shadowOffsetY = thick * 0.15;
-  ctx.beginPath();
-  ctx.moveTo(pts[0][0], pts[0][1] - pts[0][2]);
-  for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1] - pts[i][2]);
-  for (let i = pts.length - 1; i >= 0; i--) ctx.lineTo(pts[i][0], pts[i][1] + pts[i][2]);
-  ctx.closePath();
-  ctx.fillStyle = color; ctx.fill();
-  ctx.restore();
-}
-
-function roundRect(ctx, x, y, w, h, r) {
-  r = Math.min(r, w / 2, h / 2);
-  ctx.beginPath();
-  ctx.moveTo(x + r, y);
-  ctx.arcTo(x + w, y, x + w, y + h, r);
-  ctx.arcTo(x + w, y + h, x, y + h, r);
-  ctx.arcTo(x, y + h, x, y, r);
-  ctx.arcTo(x, y, x + w, y, r);
-  ctx.closePath();
-}
-
-// choose the line break that balances the two lines (minimizes the wider line so
-// the text renders as large as possible; tiebreak on the most even split)
-function splitBalanced(ctx, tokens) {
-  if (tokens.length <= 1) return [tokens[0] || '', ''];
-  ctx.font = `100px ${FONT_NAME}`;
-  let best = null;
-  for (let i = 1; i < tokens.length; i++) {
-    const a = tokens.slice(0, i).join(' ');
-    const b = tokens.slice(i).join(' ');
-    const wa = ctx.measureText(a).width, wb = ctx.measureText(b).width;
-    const score = Math.max(wa, wb) * 1000 + Math.abs(wa - wb);
-    if (!best || score < best.score) best = { a, b, score };
-  }
-  return [best.a, best.b];
-}
-
 // ── load 3-6 creator reference photos from private storage ───────────────────
 async function loadReferencePhotos(clientSlug) {
   const { data: files, error } = await supabase.storage.from(REF_BUCKET).list(clientSlug);
@@ -692,24 +456,6 @@ async function loadReferencePhotos(clientSlug) {
 }
 
 // ── helpers ──────────────────────────────────────────────────────────────────
-// Force the text to the side opposite the creator's face. If the art director
-// put the text on the same horizontal side as the subject, flip it.
-function resolveZone(zone, subjectSide) {
-  const z = String(zone || 'top-left').toLowerCase();
-  const vert = z.startsWith('bottom') ? 'bottom' : 'top';
-  let horiz = z.endsWith('right') ? 'right' : z.endsWith('center') ? 'center' : 'left';
-  const side = String(subjectSide || '').toLowerCase();
-  if (side === 'left' && horiz === 'left') horiz = 'right';
-  else if (side === 'right' && horiz === 'right') horiz = 'left';
-  return `${vert}-${horiz}`;
-}
-function cleanWords(s) {
-  return String(s)
-    .replace(/[\/\\|]+/g, ' ')     // slashes / pipes -> space
-    .replace(/\s[-–—]\s/g, ' ')    // standalone dashes between words -> space
-    .replace(/\s+/g, ' ')
-    .trim();
-}
 function update(runId, patch) {
   return supabase.from('thumbnail_runs').update(patch).eq('id', runId);
 }
