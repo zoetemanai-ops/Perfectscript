@@ -9,14 +9,14 @@
 //   itself via buildTextDirective; there is no separate canvas text layer.
 //
 // ── Prerequisites ────────────────────────────────────────────────────────────
-//   npm i @anthropic-ai/sdk @google/genai @napi-rs/image @supabase/supabase-js @vercel/functions
-//   Env: ANTHROPIC_API_KEY, GEMINI_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
+//   npm i @anthropic-ai/sdk openai @napi-rs/image @supabase/supabase-js @vercel/functions
+//   Env: ANTHROPIC_API_KEY, OPENAI_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
 //   Buckets: creator-photos (PRIVATE, <client_slug>/*.jpg), thumbnails (PUBLIC)
 //   maxDuration 300 needs Vercel Pro.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import Anthropic from '@anthropic-ai/sdk';
-import { GoogleGenAI } from '@google/genai';
+import OpenAI, { toFile } from 'openai';
 import { Transformer } from '@napi-rs/image';
 import { createClient } from '@supabase/supabase-js';
 import { waitUntil } from '@vercel/functions';
@@ -25,7 +25,7 @@ export const config = { maxDuration: 300 };
 
 // ── clients ──────────────────────────────────────────────────────────────────
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-const genai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -33,11 +33,9 @@ const supabase = createClient(
 
 // ── config ───────────────────────────────────────────────────────────────────
 const ART_DIRECTOR_MODEL = 'claude-opus-4-8';
-// Nano Banana Pro. If this model id is rejected, set env NANO_BANANA_MODEL to
-// 'gemini-3-pro-image-preview' (the preview alias) without redeploying code.
-const IMAGE_MODEL = process.env.NANO_BANANA_MODEL || 'gemini-3-pro-image';
-const IMAGE_ASPECT = '16:9';
-const IMAGE_RESOLUTION = '2K';   // 1K | 2K | 4K (Gemini 3 image resolutions)
+const IMAGE_MODEL = 'gpt-image-2';
+const IMAGE_SIZE = '1536x864';   // 16:9 (both divisible by 16)
+const IMAGE_QUALITY = 'high';    // if the edits endpoint rejects this, remove the quality line in gptImage()
 const REF_BUCKET = 'creator-photos';
 const OUT_BUCKET = 'thumbnails';
 
@@ -495,7 +493,7 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
     'NOT a heavily stylized, over-graded or CGI look (the scene lighting itself is set by the scene description); ' +
     'it must read as captured, not generated: avoid a flawless, over-clean, perfectly symmetrical studio look. ' +
     'The photographic grain and softness apply to the scene only; the caption stays crisp and clean.';
-  const pngB64 = await renderImage(refFiles, `${scene}\n\n${identity}\n\n${quality}\n\n${buildTextDirective(concept)}`, creatorName);
+  const pngB64 = await gptImage(refFiles, `${scene}\n\n${identity}\n\n${quality}\n\n${buildTextDirective(concept)}`, creatorName);
   const finalBuffer = Buffer.from(pngB64, 'base64');
 
   const path = `${runId}/${concept.id}.png`;
@@ -534,55 +532,53 @@ function buildTextDirective(concept) {
 }
 
 // ── GPT Image 2 -> base64 image (creator name kept OUT of the prompt) ─────────
-async function renderImage(refFiles, scenePrompt, creatorName) {
+async function gptImage(refFiles, scenePrompt, creatorName) {
   const prompt = sanitizePrompt(scenePrompt, creatorName);
-
-  // contents = the text prompt followed by the creator reference images (inline base64).
-  const contents = [
-    { text: prompt },
-    ...refFiles.map((f) => ({ inlineData: { mimeType: f.mimeType, data: f.data } })),
-  ];
-
   let res;
   try {
-    res = await genai.models.generateContent({
+    res = await openai.images.edit({
       model: IMAGE_MODEL,
-      contents,
-      config: {
-        responseModalities: ['IMAGE'],
-        imageConfig: { aspectRatio: IMAGE_ASPECT, imageSize: IMAGE_RESOLUTION },
-      },
+      image: refFiles,
+      prompt,
+      size: IMAGE_SIZE,
+      quality: IMAGE_QUALITY,
+      output_format: 'png',
     });
   } catch (e) {
-    // surface the real reason (safety block, param error, quota, etc.)
-    const code = e?.status || e?.code || 'error';
-    const msg = e?.message || String(e);
-    throw new Error(`Nano Banana request failed [${code}]: ${msg}`);
+    // surface the real reason (moderation_blocked, param error, etc.)
+    const code = e?.code || e?.error?.code || e?.status;
+    const msg = e?.error?.message || e?.message || String(e);
+    throw new Error(`GPT Image request failed [${code}]: ${msg}`);
   }
 
-  // Gemini 3 image models emit interim "thought" images; the real output is the
-  // last non-thought inline image part. Pick that, falling back to any image part.
-  const parts = res?.candidates?.[0]?.content?.parts || [];
-  const finalImages = parts.filter((p) => p?.inlineData?.data && !p.thought);
-  const anyImages = parts.filter((p) => p?.inlineData?.data);
-  const imgPart = finalImages[finalImages.length - 1] || anyImages[anyImages.length - 1];
+  const item = res?.data?.[0] || {};
+  console.log('[gptImage] keys:', Object.keys(item), '| b64?', !!item.b64_json, '| url?', !!item.url);
 
-  if (!imgPart) {
-    const reason = res?.promptFeedback?.blockReason
-      || res?.candidates?.[0]?.finishReason
-      || 'no image returned';
-    const txt = parts.find((p) => p?.text)?.text;
-    throw new Error(`Nano Banana: ${reason}${txt ? ` — ${txt.slice(0, 200)}` : ''}`);
+  let b64 = item.b64_json;
+  // some responses return a URL instead of base64 — fetch it and convert
+  if (!b64 && item.url) {
+    const r = await fetch(item.url);
+    b64 = Buffer.from(await r.arrayBuffer()).toString('base64');
+  }
+  if (!b64) {
+    throw new Error(`GPT Image: no image field. data[0]=${JSON.stringify(item).slice(0, 300)}`);
   }
 
-  // Normalize whatever came back into a clean PNG that @napi-rs/image can decode.
-  const b64 = String(imgPart.inlineData.data).replace(/^data:image\/\w+;base64,/, '');
+  // strip a data-URI prefix if the API included one (otherwise it decodes to garbage)
+  b64 = String(b64).replace(/^data:image\/\w+;base64,/, '');
+
+  // Normalize whatever GPT returned (webp / odd PNG / etc.) into a clean PNG
+  // that @napi-rs/image can definitely decode. If it isn't an image at all,
+  // the decode throws and we get a clear reason instead of "Invalid SVG".
   const raw = Buffer.from(b64, 'base64');
+  const magic = raw.slice(0, 8).toString('hex');
+  console.log('[gptImage] in:', raw.length, 'bytes, magic:', magic);
   let pngBuf;
   try {
     pngBuf = await new Transformer(raw).png();
   } catch (e) {
-    throw new Error(`Nano Banana: could not decode response (${raw.length} bytes): ${e?.message || e}`);
+    const head = raw.slice(0, 120).toString('utf8').replace(/\s+/g, ' ');
+    throw new Error(`GPT Image: could not decode response (magic=${magic}, ${raw.length} bytes): ${e?.message || e} | head="${head}"`);
   }
   return pngBuf.toString('base64');
 }
@@ -613,8 +609,8 @@ async function loadReferencePhotos(clientSlug) {
       if (dErr) throw new Error(`Reference photo download failed: ${dErr.message}`);
       const buf = Buffer.from(await data.arrayBuffer());
       const lower = f.name.toLowerCase();
-      const mimeType = lower.endsWith('.png') ? 'image/png' : lower.endsWith('.webp') ? 'image/webp' : 'image/jpeg';
-      return { mimeType, data: buf.toString('base64') };
+      const mime = lower.endsWith('.png') ? 'image/png' : lower.endsWith('.webp') ? 'image/webp' : 'image/jpeg';
+      return toFile(buf, f.name, { type: mime });
     })
   );
 }
