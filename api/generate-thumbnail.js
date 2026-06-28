@@ -80,32 +80,32 @@ NON-NEGOTIABLE PRINCIPLES:
    vault, a plain door, a blank envelope) FAILS this even when it looks great: if
    the object would fit fifty unrelated finance videos, it is too abstract. Tie the
    metaphor to the ACTUAL mechanism in the script (the specific tax, the account,
-   the deadline, the retiree), then give THAT one fresh twist. Hero-number and
-   held-document carry the subject through a real figure or a short label instead of
-   a metaphor, and that is fine.
-4. Contrast + depth — go CINEMATIC. Light the scene like a film still, not a flat
-   product shot: a strong directional key light, real shadows and falloff, with
-   clear separation between subject and background so the face and object read
-   instantly on mobile. Backgrounds should be DARK but not too dark — a rich,
-   moody MEDIUM-DARK (deep charcoal, dark navy, warm brown-black), NOT near-black
-   and NOT a flat pure-black void. The darkness must stay clearly readable, with
-   visible depth: a noticeable gradient, soft pools of light, a lit area or lamp,
-   gentle texture or atmosphere — you should always be able to see detail and
-   shape in the background, never a solid black wall. A lighter or colored
-   background is fine when a concept is clearly stronger that way, but moody
-   medium-dark is the default. Motivated colored light is welcome when it serves
-   the metaphor (e.g. a red or green glow thrown from the object onto the face) —
-   but keep it MOTIVATED and believable, never random neon or a gimmicky sticker
-   glow. Dramatic and premium, never plastic, garish, or over-stylized. The
-   creator must still read as a real, credible authority. It must look like a real
-   PHOTOGRAPH, not an AI render: describe it as captured on a real camera, with a
-   natural, slightly imperfect, candid feel rather than a flawless, perfectly
-   centered, over-clean studio shot. Let the composition breathe and feel shot, not
-   generated.
+   the deadline, the retiree), then give THAT one fresh twist. Held-document carries
+   the subject through a short real label on a prop instead of a metaphor, and that
+   is fine.
+4. Natural, realistic light and real depth — it must look like a genuine
+   PHOTOGRAPH, not a stylized or graded render. Light the creator cleanly and
+   believably so the face reads instantly on mobile, with real separation between
+   subject and background. The background brightness and mood are FREE and should
+   VARY across the three concepts: bright, neutral, or darker, whichever genuinely
+   fits — there is no single default, so do not make every thumbnail dark, and do
+   not wash every thumbnail in the same warm golden grade. Warm, dark or colored
+   light is welcome when something real in the scene motivates it (an actual lamp,
+   a window, a screen) or when a concept is clearly stronger that way; just don't
+   apply it on autopilot to all three. "Premium" here means clean, sharp and real,
+   NOT over-graded or plastic. The creator must read as a real, credible authority
+   captured on a real camera.
 5. Mobile-first. Must read at 120px wide.
 6. Curiosity gap. Image + 2-word overlay open a loop the TITLE closes. Tension,
    never a summary.
-7. Honor creator_visual_notes if provided.
+7. creator_visual_notes = the creator's REAL set. If creator_visual_notes is
+   provided, it describes the creator's actual recording office/studio (backdrop,
+   furniture, shelves, books, plants, lighting). Whenever a concept is set in the
+   creator's own office or studio, reproduce THAT set as closely as possible so the
+   thumbnail matches their real channel look. For concepts deliberately set
+   elsewhere (a different location the metaphor needs), you do not have to use it,
+   but still respect any brand colors or styling it mentions. If it is empty, design
+   the environment freely.
 8. Creator framing (default). Frame the creator LARGE and close — a tight
    head-and-shoulders crop where the face is the single biggest element in the
    frame, filling a generous share of the height (faces get ~42% of viewing time,
@@ -114,20 +114,20 @@ NON-NEGOTIABLE PRINCIPLES:
    metaphor, but never shrink the face. They look directly into the lens, locking
    eyes with the viewer. Break eye contact ONLY when a concept is clearly stronger
    with an averted gaze (e.g. looking toward the thing the metaphor depicts).
-   Never default to a small, passive, side-of-frame subject. (Opposites-split and
-   hero-number may place the creator off-center beside the split or the figure, but
-   the face must still be LARGE and dominant, never shrunk.) Keep the face clearly
+   Never default to a small, passive, side-of-frame subject. (Opposites-split may
+   place the creator off-center beside the split, but the face must still be LARGE
+   and dominant, never shrunk.) Keep the face clearly
    visible, well-lit and roughly front-facing or three-quarter — avoid extreme
    profile, far-away, heavily shadowed, or partially hidden faces, which break
    the likeness.
-9. Number when the script gives one. If the video_title, hook or main_idea
-   provides a strong, concrete figure — a real dollar amount, percentage, age,
-   year, or count (such as "2026") — you SHOULD by default feature that single
-   figure prominently as a hero element rendered INSIDE the scene of at least one
-   concept (a sharp real number is one of the strongest click drivers in finance).
-   It lives in the scene art, NOT in the overlay caption. It must be a real figure
-   pulled from the script, never invented, rounded into a fake stat, or added just
-   to have a number. Only skip it if the script genuinely offers no strong figure.
+9. Real numbers only, and never as a giant standalone graphic. If the video_title,
+   hook or main_idea gives a strong concrete figure (a real dollar amount,
+   percentage, age, year, or count such as "2026"), it MAY appear naturally as part
+   of the scene — for example printed on the held document, a screen, or a sign —
+   when it strengthens the concept. It must be a real figure pulled from the script,
+   never invented, rounded into a fake stat, or added just to have a number. Do NOT
+   build a thumbnail around one enormous floating 3D number; keep any figure small,
+   real, and physically part of the scene. If there is no strong figure, skip it.
 
 TITLE + THUMBNAIL = ONE HOOK:
 On YouTube the viewer always sees the thumbnail and the title TOGETHER — they
@@ -138,57 +138,47 @@ do they form an unanswered question that demands the click. Use the title as an
 active partner — complete it, contradict it, or raise the stakes on it — never
 merely avoid repeating its words.
 
-STYLE LIBRARY — STEP 1, pick 3 DIFFERENT archetypes per run:
-This factory has FOUR thumbnail archetypes. They are EQUALS: none is the "house
-style" and none is a default. For each video, choose the THREE archetypes that fit
-THIS script best, design one concept in each, and NEVER use the same archetype
-twice in a run. Match archetype to content, not to habit.
+STYLE LIBRARY — STEP 1, design one concept in EACH of the THREE archetypes:
+This factory has THREE thumbnail archetypes. They are EQUALS: none is the "house
+style" and none is a default. Every run uses all three, ONE concept per archetype,
+so a run always shows three genuinely different formats.
 
 OVERRIDE RULE: each archetype's recipe below sets its own composition, background
 and text handling. Where a recipe conflicts with a general principle or with the
 ANTI-CLICHÉ scene preference, the ARCHETYPE wins for that concept. Everything else
 always applies to every archetype: hot-but-credible emotion, the creator's face
 large and identity-locked, topic-legibility in under 0.3s, mobile readability at
-120px, title+thumbnail = one hook, and no tired executions.
+120px, title+thumbnail = one hook, natural realistic photography, and no tired
+executions.
 
-1) PREMIUM-CINEMATIC (the current cinematic look)
-   ONE topic-true physical metaphor the creator reacts to, inside a moody,
-   medium-dark environment with real depth (study / office / room), a strong
-   directional key light and clear subject/background separation. Creator chest-up,
-   slight low angle, eye contact. No text inside the scene; leave clean, even-toned
-   negative space for the caption that is added on top.
+1) METAPHOR-PORTRAIT
+   ONE topic-true physical metaphor the creator reacts to, inside a believable
+   real environment with natural depth (study / office / room / desk). Light it
+   like a clean, well-lit real photograph with real subject/background separation.
+   Creator chest-up, eye contact. No text inside the scene; leave clean, even-toned
+   negative space for the caption.
 
 2) OPPOSITES-SPLIT
    The background splits into TWO contrasting, topic-true worlds that show the
-   stakes (e.g. a bleak / struggling side vs a prosperous side, before vs after,
-   what you lose vs what you keep). Creator centered or slightly to one side,
-   reacting to the divide. This archetype BENDS "one focal point": the split is
-   deliberate, but the creator's face must stay the single dominant element and each
-   half must be instantly readable and clearly subordinate, never two competing
-   focal points. Light the two halves differently (cold / grey vs warm / rich) to
-   sell the contrast. Both worlds concrete and graspable in 0.3s. No text in the
-   scene; leave space for the caption.
+   stakes (e.g. a struggling side vs a prosperous side, before vs after, what you
+   lose vs what you keep). Creator centered or slightly to one side, reacting to the
+   divide. This archetype BENDS "one focal point": the split is deliberate, but the
+   creator's face must stay the single dominant element and each half must be
+   instantly readable and clearly subordinate, never two competing focal points.
+   Distinguish the two halves by real, believable means (different setting, props,
+   or natural light level), not by drenching one side in golden glow. Both worlds
+   concrete and graspable in 0.3s. No text in the scene; leave space for the caption.
 
 3) HELD-DOCUMENT (exposé look)
    The creator holds a real prop toward the lens — a form, letter, folder, card or
    sign — and reacts with conviction. The prop carries ONE very short label naming
    the real mechanism from the script: 1 to 3 characters or words MAX (e.g.
-   "BOX 3", "1031", "IRS", "$0"). That label is the ONLY legible in-scene text. Any
-   body text on the prop must be small, blurred, unreadable filler, never legible
-   sentences (the image model garbles long text). Keep the face large and the label
-   crisp and correctly spelled.
+   "BOX 3", "1031", "IRS", "2026", "$0"). That label is the ONLY legible in-scene
+   text. Any body text on the prop must be small, blurred, unreadable filler, never
+   legible sentences (the image model garbles long text). Keep the face large and
+   the label crisp and correctly spelled.
 
-4) HERO-NUMBER
-   ONE large, real, concrete figure or year pulled straight from the script
-   dominates one side of the frame as a bold graphic hero element, with the creator
-   beside it reacting. Use the real figure only (e.g. "2026", "37%", "$0"), never
-   invented or rounded. Keep it SHORT (a year, a percentage, a single dollar
-   figure). The number is the only in-scene text. Pairs with principle 9.
-
-In each concept's "angle", say WHY that archetype fits THIS script. A concrete year
-or dollar figure favors hero-number; a recognizable named provision favors
-held-document; a clear winners-vs-losers or before-after stake favors
-opposites-split; a single dramatic metaphor favors premium-cinematic.
+In each concept's "angle", say how that archetype is made to fit THIS script.
 
 ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
 - List the 4-6 most overused thumbnail EXECUTIONS for THIS exact topic — the tired
@@ -212,15 +202,15 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
   generic "person frowning at a chart", but also NOT an abstract, cryptic puzzle
   or an obscure visual riddle the viewer has to decode. If a normal finance
   viewer wouldn't get it almost instantly, simplify it.
-- FAVOR a complete, atmospheric SCENE over a person-plus-object on a bare
-  backdrop (this is the premium-cinematic baseline; opposites-split, held-document
-  and hero-number set their own backgrounds per the STYLE LIBRARY). Place the
-  creator inside a believable environment with real depth — at
-  a desk or table, in a study, office, or room — with foreground, midground and a
-  background that has lamps, shelves, furniture or texture. This can absolutely be
-  DARK and moody (dark with depth and warm pools of light is ideal), it just must
-  not be a flat, empty void. A cleaner background is still fine when a single hero
-  object clearly carries the shot, but lean toward the richer, fuller scene.
+- FAVOR a complete, believable SCENE over a person-plus-object on a bare backdrop
+  (this is the metaphor-portrait baseline; opposites-split and held-document set
+  their own backgrounds per the STYLE LIBRARY). Place the creator inside a real
+  environment with depth — at a desk or table, in a study, office, or room — with
+  foreground, midground and a background that has lamps, shelves, furniture or
+  texture. Light it naturally and cleanly; it must not be a flat, empty void, and
+  it must not be the same dark or golden look every time — vary the brightness and
+  mood across the three. A cleaner background is fine when a single hero object
+  carries the shot, but lean toward the richer, fuller scene.
 - PREMIUM hero objects. Whatever prop carries the metaphor should look refined,
   detailed and high-quality (like a finely sculpted porcelain cake-topper) — never
   a cheap, plasticky, or crude AI object.
@@ -264,15 +254,16 @@ TEXT IN THE IMAGE:
   brand style (you do NOT choose its font or color). Your job is composition: in
   scene_prompt, leave one area of clean, even-toned, low-detail negative space,
   away from the face, where that caption can sit and read clearly.
-- Most archetypes carry NO other text. The ONLY exceptions are the two text-bearing
-  archetypes: held-document (one short label on the prop) and hero-number (one large
-  figure). For those, describe that single short element in scene_prompt and keep it
-  short and correctly spelled, never full sentences or paragraphs of legible text.
+- The other two archetypes carry NO text in the scene. The ONLY exception is
+  held-document: one short label on the prop (and, if the script gives one, a small
+  real figure printed on that same prop). Describe that single short element in
+  scene_prompt and keep it short and correctly spelled, never full sentences or
+  paragraphs of legible text.
 
 AVOID (AI-slop tells): cluttered scenes, multiple competing focal points, generic
 stock look, over-saturation, plastic skin, gibberish or misspelled text, extra
-logos/watermarks, and any legible text beyond the caption plus (for held-document /
-hero-number only) the one short in-scene element.
+logos/watermarks, and any legible text beyond the caption plus (for held-document
+only) the one short label/figure on the prop.
 
 OUTPUT — return ONLY valid JSON, no preamble:
 {
@@ -281,7 +272,7 @@ OUTPUT — return ONLY valid JSON, no preamble:
   "concepts": [
     {
       "id": "A",
-      "archetype": "<premium-cinematic|opposites-split|held-document|hero-number>",
+      "archetype": "<metaphor-portrait|opposites-split|held-document>",
       "angle": "<the distinct direction in a phrase, and why this archetype fits>",
       "visual_metaphor": "...",
       "subject_direction": "<expression (hot but credible), pose, gesture, framing, placement>",
@@ -290,7 +281,7 @@ OUTPUT — return ONLY valid JSON, no preamble:
       "overlay": {"words": "2 TO 4 WORDS — a short emotional phrase", "rationale": "...", "score": 0},
       "freshness_score": 0,
       "click_score": 0,
-      "scene_prompt": "<ONE paragraph for the image model: 16:9 photorealistic thumbnail; describe the creator WITH an explicit instruction to keep face and identity exactly consistent with the supplied reference images, same person; the archetype scene and/or metaphor; the hot-but-credible emotion; framing chest-up with eye contact by default; composition; lighting. Leave clean, even-toned, low-detail negative space away from the face for the caption that gets added on top. ONLY for held-document: describe ONE short label on the prop (1-3 words). ONLY for hero-number: describe ONE large real figure from the script. End with 'One clear focal point, readable as a small mobile thumbnail.'>"
+      "scene_prompt": "<ONE paragraph for the image model: 16:9 photorealistic thumbnail that looks like a real photo, not a render; describe the creator WITH an explicit instruction to keep face and identity exactly consistent with the supplied reference images, same person; the archetype scene and/or metaphor; the hot-but-credible emotion; framing chest-up with eye contact by default; composition; natural realistic lighting (varied brightness/mood across the three concepts, not the same dark or golden look every time). Leave clean, even-toned, low-detail negative space away from the face for the caption that gets added on top. ONLY for held-document: describe ONE short label on the prop (1-3 words), plus a small real figure on it if the script gives one. End with 'One clear focal point, readable as a small mobile thumbnail.'>"
     },
     { "id": "B" },
     { "id": "C" }
@@ -404,8 +395,9 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
     'Add the subtle imperfections of a real photograph: fine, natural film grain / sensor noise throughout, real skin texture ' +
     'with visible pores, fine lines and slight unevenness (NEVER plastic, waxy, airbrushed, over-smoothed or glossy CGI skin), ' +
     'a faint hint of chromatic aberration at the edges, and natural, slightly uneven directional lighting with real falloff and ' +
-    'soft, believable catchlights in the eyes (not glassy or over-bright). Keep it premium and cinematic like a polished film still, ' +
-    'but it must read as captured, not generated: avoid a flawless, over-clean, perfectly symmetrical studio look. ' +
+    'soft, believable catchlights in the eyes (not glassy or over-bright). Keep it clean, sharp and natural like a real editorial portrait photograph, ' +
+    'NOT a heavily stylized, over-graded or CGI look (the scene lighting itself is set by the scene description); ' +
+    'it must read as captured, not generated: avoid a flawless, over-clean, perfectly symmetrical studio look. ' +
     'The photographic grain and softness apply to the scene only; the caption stays crisp and clean.';
   const pngB64 = await gptImage(refFiles, `${scene}\n\n${identity}\n\n${quality}\n\n${buildTextDirective(concept)}`, creatorName);
   const finalBuffer = Buffer.from(pngB64, 'base64');
@@ -441,7 +433,7 @@ function buildTextDirective(concept) {
     'Render EVERY word in clean pure white — no colored words.',
     'Give each letter a VERY THIN, subtle black outline — almost just a soft crisp edge, not a heavy keyline. Do NOT use a thick block outline, a filled box or rectangle behind the letters, or a heavy border. Add ONE small, soft drop shadow directly behind the text for depth — subtle, never a thick glow, halo, or box.',
     `Beneath the final line, ALWAYS add a single red underline — ALMOST straight, with only a very slight, subtle curve — in ${accent}. It must be of EVEN, UNIFORM thickness from end to end: do NOT taper it (not thick in the middle and thin at the tips). A clean, smooth, even stroke, NOT a thick brush smear and NOT a solid bar. This underline must ALWAYS be present.`,
-    'Keep the caption COMPACT: it should occupy only about a quarter of the frame, sitting neatly in its area with clear margins from every edge. Large enough to read instantly on mobile, but it must NOT dominate the image, span the full width, or crowd the edges. Crisp, perfectly legible, correctly spelled, with NO extra, missing, or misspelled words. Keep it fully clear of the person\u2019s face and body. Apart from this caption, the ONLY other text permitted is a SINGLE short in-scene element if the scene description explicitly calls for one — either one large hero number or year (e.g. "2026", "37%") OR one short label on a prop (e.g. "BOX 3", 1 to 3 words). Render that one element cleanly, legibly and correctly spelled where the scene places it; do NOT add full sentences, paragraphs, or any other text. No other text, letters, words, logos, or watermarks anywhere.',
+    'Keep the caption COMPACT: it should occupy only about a quarter of the frame, sitting neatly in its area with clear margins from every edge. Large enough to read instantly on mobile, but it must NOT dominate the image, span the full width, or crowd the edges. Crisp, perfectly legible, correctly spelled, with NO extra, missing, or misspelled words. Keep it fully clear of the person\u2019s face and body. Apart from this caption, the ONLY other text permitted is a SINGLE short label on a prop if the scene description explicitly calls for one (e.g. "BOX 3", "IRS", "2026", 1 to 3 words/characters) — render it cleanly, legibly and correctly spelled where the scene places it; do NOT add full sentences, paragraphs, large floating numbers, or any other text. No other text, letters, words, logos, or watermarks anywhere.',
   ].join(' ');
 }
 
