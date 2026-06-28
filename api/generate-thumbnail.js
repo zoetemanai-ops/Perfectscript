@@ -171,12 +171,18 @@ executions.
 
 3) HELD-DOCUMENT (exposé look)
    The creator holds a real prop toward the lens — a form, letter, folder, card or
-   sign — and reacts with conviction. The prop carries ONE very short label naming
-   the real mechanism from the script: 1 to 3 characters or words MAX (e.g.
-   "BOX 3", "1031", "IRS", "2026", "$0"). That label is the ONLY legible in-scene
-   text. Any body text on the prop must be small, blurred, unreadable filler, never
-   legible sentences (the image model garbles long text). Keep the face large and
-   the label crisp and correctly spelled.
+   sign — and reacts with conviction. The prop carries ONE very short label, printed
+   like a real letterhead or header on the document at NATURAL document scale (not as
+   huge hero text): 1 to 3 words MAX naming the real mechanism from the script (e.g.
+   "TAX DEDUCTION NOTICE", "IRS NOTICE", "BOX 3"). That label is the ONLY legible
+   in-scene text. Do NOT print a large year or big number on the paper; if a year or
+   figure appears at all it must be small, inside the letterhead or a date field,
+   never large hero text. Any other body text on the prop must be small, blurred,
+   unreadable filler, never legible sentences (the image model garbles long text).
+   Keep the face large and the label crisp and correctly spelled. The paper must look
+   REAL: genuinely gripped by the fingers with a slight bend or curl, a soft shadow
+   where the hand holds it and where it falls against the body, visible paper texture
+   and a subtle sheen under the room light — never a flat, pasted-on white rectangle.
 
 In each concept's "angle", say how that archetype is made to fit THIS script.
 
@@ -211,9 +217,13 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
   it must not be the same dark or golden look every time — vary the brightness and
   mood across the three. A cleaner background is fine when a single hero object
   carries the shot, but lean toward the richer, fuller scene.
-- PREMIUM hero objects. Whatever prop carries the metaphor should look refined,
-  detailed and high-quality (like a finely sculpted porcelain cake-topper) — never
-  a cheap, plasticky, or crude AI object.
+- REAL, INTERESTING props. Whatever object carries the metaphor must look like a
+  genuine physical thing photographed in the room: real materials with real texture,
+  weight, edge wear and a natural contact shadow — never a generic, plasticky or
+  crude AI object, and never a flat, boring default (a plain blank sheet, a generic
+  paper stack). Make the prop SPECIFIC and a little unexpected: a real, detailed,
+  characterful object the eye wants to look at, with believable small details that
+  sell it as photographed, not generated.
 - Keep the environment SUBORDINATE: softly lit / gently blurred so the face and
   hero object stay sharp and dominant in front. Avoid props the viewer cannot
   place (cracked rock or tree stumps, drifting fog, floating embers/particles,
@@ -395,7 +405,13 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
     'Add the subtle imperfections of a real photograph: fine, natural film grain / sensor noise throughout, real skin texture ' +
     'with visible pores, fine lines and slight unevenness (NEVER plastic, waxy, airbrushed, over-smoothed or glossy CGI skin), ' +
     'a faint hint of chromatic aberration at the edges, and natural, slightly uneven directional lighting with real falloff and ' +
-    'soft, believable catchlights in the eyes (not glassy or over-bright). Keep it clean, sharp and natural like a real editorial portrait photograph, ' +
+    'soft, believable catchlights in the eyes (not glassy or over-bright). ' +
+    'ONE REAL CAPTURE, as if a real photographer came to the creator\u2019s actual office and shot this in one frame: the person, the background ' +
+    'and every prop were photographed together in the same room, lit by the SAME light from the same direction, sharing one consistent white ' +
+    'balance, exposure and color grade — so nothing looks cut out, pasted, stickered, or composited. Every object and the person cast a real, soft ' +
+    'CONTACT SHADOW where they meet a surface, hand or wall; foreground, subject and background sit in the same believable space and atmosphere, ' +
+    'with no too-clean cut-out edges and no element that looks floated on top. ' +
+    'Keep it clean, sharp and natural like a real editorial portrait photograph, ' +
     'NOT a heavily stylized, over-graded or CGI look (the scene lighting itself is set by the scene description); ' +
     'it must read as captured, not generated: avoid a flawless, over-clean, perfectly symmetrical studio look. ' +
     'The photographic grain and softness apply to the scene only; the caption stays crisp and clean.';
@@ -433,7 +449,7 @@ function buildTextDirective(concept) {
     'Render EVERY word in clean pure white — no colored words.',
     'Give each letter a VERY THIN, subtle black outline — almost just a soft crisp edge, not a heavy keyline. Do NOT use a thick block outline, a filled box or rectangle behind the letters, or a heavy border. Add ONE small, soft drop shadow directly behind the text for depth — subtle, never a thick glow, halo, or box.',
     `Beneath the final line, ALWAYS add a single red underline — ALMOST straight, with only a very slight, subtle curve — in ${accent}. It must be of EVEN, UNIFORM thickness from end to end: do NOT taper it (not thick in the middle and thin at the tips). A clean, smooth, even stroke, NOT a thick brush smear and NOT a solid bar. This underline must ALWAYS be present.`,
-    'Keep the caption COMPACT: it should occupy only about a quarter of the frame, sitting neatly in its area with clear margins from every edge. Large enough to read instantly on mobile, but it must NOT dominate the image, span the full width, or crowd the edges. Crisp, perfectly legible, correctly spelled, with NO extra, missing, or misspelled words. Keep it fully clear of the person\u2019s face and body. Apart from this caption, the ONLY other text permitted is a SINGLE short label on a prop if the scene description explicitly calls for one (e.g. "BOX 3", "IRS", "2026", 1 to 3 words/characters) — render it cleanly, legibly and correctly spelled where the scene places it; do NOT add full sentences, paragraphs, large floating numbers, or any other text. No other text, letters, words, logos, or watermarks anywhere.',
+    'Keep the caption COMPACT: it should occupy only about a quarter of the frame, sitting neatly in its area with clear margins from every edge. Large enough to read instantly on mobile, but it must NOT dominate the image, span the full width, or crowd the edges. Crisp, perfectly legible, correctly spelled, with NO extra, missing, or misspelled words. Keep it fully clear of the person\u2019s face and body. Apart from this caption, the ONLY other text permitted is a SINGLE short label on a prop if the scene description explicitly calls for one (e.g. "TAX DEDUCTION NOTICE", "IRS NOTICE", "BOX 3", 1 to 3 words) — render it at a natural, modest size like real printed text on the document, NOT as large hero text, and never a big standalone year or number. Render it cleanly, legibly and correctly spelled where the scene places it; do NOT add full sentences, paragraphs, large floating numbers, or any other text. No other text, letters, words, logos, or watermarks anywhere.',
   ].join(' ');
 }
 
