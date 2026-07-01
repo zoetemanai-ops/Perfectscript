@@ -274,9 +274,15 @@ executions.
    - MONEY: holding a wallet upside down, emptied, nothing left; counting a
      thick stack of cash onto the desk; sliding or sweeping a stack of cash off
      the desk, out of reach; cutting a bank card in half with scissors.
-   - KEYS & LOCKS: dropping a set of house keys onto the desk as if handing
-     them over; clicking a padlock shut; holding keys just out of the lens's
-     reach.
+   - KEYS & LOCKS (use with care — see the handover rule below): clicking a
+     padlock shut; house keys held out TOWARD THE LENS as a forced handover.
+   HANDOVER RULE: there is never a second person in frame, so any act of giving,
+   taking or losing must be directed AT THE LENS — the viewer is the other party.
+   Never stage a handover between the creator's own two hands (dangling keys over
+   his own palm reads as giving them to himself — nonsense). And the stake must be
+   SELF-EVIDENT from the object alone: cash and a wallet are money on sight, but
+   bare keys could be anything — a key act only works when the frame makes clear
+   WHAT the keys unlock, otherwise pick a money act instead.
    - PAPER (use sparingly, see PAPER QUOTA below): feeding a document into a
      RUNNING paper shredder with strips already falling; letting a fistful of
      shredded strips rain down onto the desk; pressing a red rubber stamp down
