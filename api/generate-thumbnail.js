@@ -170,7 +170,10 @@ executions.
    Make the two sides DIRECTLY comparable: the SAME kind of thing in opposite states
    (one cheque full vs shredded, one door open vs slammed shut, a desk thriving vs
    stripped bare), placed side by side so the eye reads one against the other at a
-   glance — not two unrelated props sharing a room.
+   glance — not two unrelated props sharing a room. Give each side ONE clear subject
+   in its two states (the same house intact vs seized), never a pile-up of extra
+   symbols on one side — a villa AND a safe AND gold is two cues too many; one clean
+   subject reads faster.
    Go HARD on the contrast — this should hit, not whisper: a grim, harsh,
    high-stakes side versus a prosperous, winning side (e.g. a run-down derelict
    house vs a luxury villa, an empty/foreclosed space vs a thriving one, a pile of
@@ -189,7 +192,11 @@ executions.
    left/right halves — never pushed off to one side. It may be a hard edge OR a
    softer organic transition (an almost liquid seam where the two worlds meet); soft
    is fine, but it must stay CENTERED and instantly readable at 0.3s, never a vague
-   smear, fog, floating particles, or murky AI sludge. Both worlds concrete and graspable in 0.3s.
+   smear, fog, floating particles, or murky AI sludge. Both worlds concrete and
+   graspable in 0.3s. BOTH halves must be equally photographic: the grim side is a
+   REAL photograph of decay — same texture, grain, camera and light logic as the
+   winning side — never a darker, vaguer illustration or an "AI drawing" (a common
+   split failure where the good side looks shot and the bad side looks sketched).
 
 3) REACTION-TO-OBJECT
    Creator framed large with a strong, intense reaction to ONE real object that
@@ -303,7 +310,11 @@ THE OVERLAY — a short, emotionally charged phrase, 2 to 4 words (per concept):
     * personal verdict   — "IT'S NOT WORTH IT", "YOU'RE WRONG ABOUT THIS"
     * reveal / curiosity — "WHAT THEY HIDE", "THE REAL COST"
     * loss / stakes      — "YOU'RE LOSING MONEY", "IT COSTS YOU MORE"
-  Pick whichever hits hardest for the concept.
+  Pick whichever hits hardest for the concept — and when the concept allows,
+  favor the shape that lands hardest of all: a stake for someone the viewer cares
+  about, a loss that is still coming, or the puncturing of a false sense of safety.
+  Keep varying the register across the three; this is the bar to reach, not a mould
+  for all three.
 - High-stakes, not loud. The phrase should feel CONSEQUENTIAL — imply a real,
   significant stake (money lost, a costly mistake, something genuinely at risk),
   never a mild observation. Raise the STAKES, not the volume: keep it credible and
