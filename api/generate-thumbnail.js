@@ -179,15 +179,17 @@ executions.
    depicted suffering person. Never show an identifiable human as a victim, in
    distress, poverty, or pain; the only person in the frame is the creator, framed
    as the authority pointing at the divide, never as the one being harmed. Creator
-   centered or slightly to one side, reacting to the divide. This archetype BENDS
+   positioned so the central divide stays fully visible — straddling it or just to
+   one side — reacting to it, face still dominant. This archetype BENDS
    "one focal point": the split is deliberate, but the creator's face must stay the
    single dominant element and each half must be instantly readable and clearly
    subordinate, never two competing focal points. Distinguish the two halves by real,
-   believable means (different setting, props, or natural light level). The divide may be a
-   hard edge OR a cleaner organic transition down the middle (an almost liquid seam where the two worlds
-   meet) — but if you use a transition it must stay crisp, deliberate and instantly
-   readable at 0.3s, never a vague smear, fog, floating particles, or murky AI
-   sludge. Both worlds concrete and graspable in 0.3s.
+   believable means (different setting, props, or natural light level). The divide
+   sits on the vertical CENTER line of the frame, splitting it into two roughly equal
+   left/right halves — never pushed off to one side. It may be a hard edge OR a
+   softer organic transition (an almost liquid seam where the two worlds meet); soft
+   is fine, but it must stay CENTERED and instantly readable at 0.3s, never a vague
+   smear, fog, floating particles, or murky AI sludge. Both worlds concrete and graspable in 0.3s.
 
 3) REACTION-TO-OBJECT
    Creator framed large with a strong, intense reaction to ONE real object that
