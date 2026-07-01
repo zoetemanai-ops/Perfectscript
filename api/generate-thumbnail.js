@@ -138,14 +138,14 @@ do they form an unanswered question that demands the click. Use the title as an
 active partner — complete it, contradict it, or raise the stakes on it — never
 merely avoid repeating its words.
 
-STYLE LIBRARY — STEP 1, score all FOUR, then pick the 3 that fit best:
-This factory has a POOL of FOUR thumbnail archetypes. They are EQUALS: none is the
-"house style" and none is a default. For THIS script, first judge how well EACH of
-the four fits the content, then design ONE concept in each of the THREE that fit
-best. The three chosen MUST be different archetypes. Do NOT lazily fall back on the
-same favorites every time — metaphor-portrait is NOT automatically picked. As
-scripts differ, the chosen mix should genuinely differ from video to video; let fit
-decide, not order or habit.
+STYLE LIBRARY — the pool is FOUR archetypes; TWO are mandatory every run:
+This factory has FOUR thumbnail archetypes. Every run MUST include exactly these
+two, each as its own concept: opposites-split and reaction-to-object. The THIRD
+concept is your FREE pick — score metaphor-portrait and on-location for THIS
+script and build a concept in whichever fits best. Result: 3 concepts across three
+different archetypes (the two mandatory ones + your best free pick). Mandatory does
+NOT mean generic: make each archetype genuinely earn its place for THIS specific
+script, never a bolted-on template.
 
 OVERRIDE RULE: each archetype's recipe below sets its own composition, background
 and text handling. Where a recipe conflicts with a general principle or with the
@@ -167,6 +167,10 @@ executions.
    split, not just a grim world beside a winning one — the same subject (a person,
    business, deal or asset) ending opposite ways because of ONE decision the viewer
    can't yet see, so the image itself asks "what did one do that the other didn't?"
+   Make the two sides DIRECTLY comparable: the SAME kind of thing in opposite states
+   (one cheque full vs shredded, one door open vs slammed shut, a desk thriving vs
+   stripped bare), placed side by side so the eye reads one against the other at a
+   glance — not two unrelated props sharing a room.
    Go HARD on the contrast — this should hit, not whisper: a grim, harsh,
    high-stakes side versus a prosperous, winning side (e.g. a run-down derelict
    house vs a luxury villa, an empty/foreclosed space vs a thriving one, a pile of
@@ -193,8 +197,18 @@ executions.
    CORE LENS — the REVERSAL: the strongest version flips the object's meaning —
    something that normally signals threat, cost or bad news, caught doing the
    OPPOSITE (paying out, opening, protecting, working FOR the viewer). "Wait, that's
-   backwards" is the hook; the destructive beat below is the fallback when the
-   script offers no natural reversal.
+   backwards" is the hook. Stage it as a visible MOMENT, not a static pose: the
+   object mid-action — being pulled from the envelope, tipping, spilling, caught as
+   it falls, snatched — at the instant its meaning flips, with the creator reacting.
+   A calmly held or neatly displayed object kills the tension; capture the verb, not
+   the noun. "Ordinary and recognizable" describes the OBJECT, never the SCENE: you
+   have wide latitude to stage something dramatic and unexpected, and the ONLY hard
+   limit is realism — every element must be a real thing you could photograph. Real
+   objects may collide dramatically but must NOT turn surreal: never give the object
+   a face, teeth, or a life of its own, and never let it melt (e.g. a tax envelope
+   drawn as a monster). Surprise through the situation, not an impossible object.
+   The destructive beat below is the fallback when the script offers no natural
+   reversal.
    - The OBJECT itself is ordinary, everyday and instantly recognizable: something
      that genuinely exists and a viewer knows on sight (an IRS envelope, a real
      cheque, cash, a bank card, a key, a padlock, a passport, a phone screen). Do
@@ -297,7 +311,12 @@ THE OVERLAY — a short, emotionally charged phrase, 2 to 4 words (per concept):
   emotional hook is fine when the image and the title already make the subject
   clear. Either way the viewer must feel they have to click.
 - Still implies, never explains — do not state the lesson or spoil the answer.
-- Never repeats or summarizes the title, and never reuses a word from the title.
+- Never repeats or summarizes the title, and never reuses a word from it — and go
+  further: the overlay must pull a DIFFERENT axis than the title already gives, not a
+  reworded version of its promise. Add a WHEN ("before you earn"), a CONSEQUENCE
+  ("one filing decides"), a THREAT or LOSS ("you're losing money"), or a WHO/WHOSE
+  — something the title leaves unsaid. If the title already states the payoff, open
+  a NEW loop; do not restate it in punchier words.
 - No creator name, no hashtags. Punctuation only if it adds tension.
 - Output the words plain, separated by single spaces only — never a slash, pipe,
   dash, bullet, or any other separator between them.
@@ -329,7 +348,7 @@ OUTPUT — return ONLY valid JSON, no preamble:
     "reaction-to-object": "<0-10 + why>",
     "on-location": "<0-10 + why>"
   },
-  "archetypes_chosen": ["<the 3 highest-fit, different archetypes>"],
+  "archetypes_chosen": ["opposites-split", "reaction-to-object", "<free pick: metaphor-portrait OR on-location, whichever scores higher>"],
   "concepts": [
     {
       "id": "A",
@@ -351,8 +370,9 @@ OUTPUT — return ONLY valid JSON, no preamble:
   "why_recommended": "<one line>"
 }
 
-Pick archetypes_chosen by fit score, not by order or habit; the three must be
-different. Be decisive — no hedging. The recommended concept maximizes click_score
+archetypes_chosen is fixed: opposites-split and reaction-to-object are always two of
+the three; pick the third by fit score (the higher of metaphor-portrait vs
+on-location). Be decisive — no hedging. The recommended concept maximizes click_score
 while keeping freshness_score >= 7.`;
 
 // ── handler ──────────────────────────────────────────────────────────────────
