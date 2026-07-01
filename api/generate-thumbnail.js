@@ -394,6 +394,9 @@ THE OVERLAY — a short, emotionally charged phrase, 2 to 3 words MAX (per conce
   what the video is about, rewrite it until it stings. Speak to the viewer directly
   ("you / your / they") whenever it fits. Choose the register that best fits THIS
   concept, and vary it across the three:
+    * heirs / legacy      — "YOUR KIDS LOSE", "THEY START OVER", "THEY GET
+      NOTHING" — the loss lands on someone the viewer loves, not on the viewer
+      alone.
     * possession / theft  — "IT'S YOUR MONEY", "THEY ROB YOU"
     * warning / urgency  — "ALMOST TOO LATE", "DON'T DO THIS"
     * personal verdict   — "NOT WORTH IT", "YOU'RE DEAD WRONG"
@@ -426,12 +429,10 @@ THE OVERLAY — a short, emotionally charged phrase, 2 to 3 words MAX (per conce
 - HIGHLIGHT (per concept): pick exactly ONE word from the overlay that carries the
   stake or the emotion (BROKE, STEAL, LOSING, YOUR, TRAP) — never an article,
   preposition, or the bare topic noun — and set highlight_style:
-    * "none"  — all white (safe default when the image itself is already loud)
-    * "color" — that one word in the brand red, the rest white
+    * "none"  — all white (the default)
     * "block" — that one word in a solid red block with white text (news-banner
-      punch; the strongest — use it when one word IS the whole message, not by
-      default)
-  Vary the highlight styles across the three concepts; at most ONE "block" per run.
+      punch; use it when one word IS the whole message, not by default)
+  At most TWO "block" concepts per run — never all three.
 
 TEXT IN THE IMAGE:
 - The caption IS rendered by the image model in a FIXED brand style — you do NOT
@@ -502,7 +503,7 @@ OUTPUT — return ONLY valid JSON, no preamble:
       "subject_direction": "<expression (hot but credible), pose, gesture, framing, placement>",
       "composition": "<focal point, rule-of-thirds, fg/bg, and where the calm caption area sits>",
       "color_and_lighting": "...",
-      "overlay": {"words": "2 TO 3 WORDS MAX — a short emotional phrase", "highlight_word": "<exactly ONE word from words that carries the stake/emotion — or null>", "highlight_style": "<none|color|block>", "rationale": "...", "score": "<0-10 overlay_punch, >=7 after self-audit>"},
+      "overlay": {"words": "2 TO 3 WORDS MAX — a short emotional phrase", "highlight_word": "<exactly ONE word from words that carries the stake/emotion — or null>", "highlight_style": "<none|block>", "rationale": "...", "score": "<0-10 overlay_punch, >=7 after self-audit>"},
       "expression_match": "<0-10, >=7 after self-audit>",
       "freshness_score": 0,
       "click_score": 0,
@@ -705,15 +706,13 @@ function buildTextDirective(concept) {
   let highlight = String(concept.overlay?.highlight_word || '').trim().toUpperCase();
   if (highlight && !words.split(' ').includes(highlight)) highlight = '';
   let style = String(concept.overlay?.highlight_style || 'none').toLowerCase();
-  if (!highlight || !['color', 'block'].includes(style)) style = 'none';
+  if (!highlight || style !== 'block') style = 'none';
   const zone = ZONE_HINTS[concept.caption_zone] ? concept.caption_zone : 'top-banner';
 
   const highlightRule =
     style === 'block'
       ? `Render every word in clean pure white EXCEPT "${highlight}": place that ONE word on a solid bright red (#E11D2A) rectangular block with clean straight edges and even padding, the word itself in white on the block — like a hard news banner. No other boxes, no other colors.`
-      : style === 'color'
-        ? `Render every word in clean pure white EXCEPT "${highlight}": render that ONE word in bright red (#E11D2A). No other colors.`
-        : 'Render EVERY word in clean pure white — no colored words.';
+      : 'Render EVERY word in clean pure white — no colored words, no colored letters anywhere in the caption.';
 
   return [
     'TEXT OVERLAY — render this caption baked into the image in a FIXED, consistent brand style (render it the SAME way every time):',
@@ -721,7 +720,7 @@ function buildTextDirective(concept) {
     `PLACEMENT: put the caption ${ZONE_HINTS[zone]}, in the calm area the scene keeps clear there. It must NEVER overlap, touch, or crowd the creator's face or the hero object, and it never sits in the bottom-right corner (YouTube's duration badge covers that).`,
     highlightRule,
     'NO outline or keyline around the letters, NO box or rectangle behind the full caption, no glow, no halo, no underline.',
-    'FINISH — the caption must look professionally set INTO the photograph, never like a sticker floating on top: keep the text facing the camera perfectly flat (no perspective warp, no bending, no 3D), but let it share the photograph\u2019s finish — the same fine grain, the same white balance (a clean white that sits naturally in this scene\u2019s light), and ONE soft, natural drop shadow that grounds it. Finish it the way a professional thumbnail designer would: the white may pick up a FAINT tint of the scene\u2019s ambient light, the background directly behind the caption may be gently and locally deepened for contrast (a subtle designer\u2019s gradient, never a visible box or band), and where the creator\u2019s shoulder, arm or hair naturally reaches the caption area, the person may slightly OVERLAP and cut in front of the caption\u2019s nearest edge, so the text visibly sits INSIDE the scene\u2019s depth between background and subject — the FACE itself always stays fully clear of the text. Sharp and fully legible, never glowing, never plastic-clean against a grainy image.',
+    'FINISH — the caption must look professionally set INTO the photograph, never like a sticker floating on top: keep the text facing the camera perfectly flat (no perspective warp, no bending, no 3D), but let it fully share the photograph\u2019s finish — the SAME film grain and sensor noise running visibly through the letterforms at the same intensity as the scene, the same white balance and exposure (a white that clearly belongs to this scene\u2019s light, never a sterile digital #FFFFFF), the letter edges rendered with the same optical softness as the rest of the photo (never razor-sharp vector edges against a soft image), and ONE soft, natural drop shadow that grounds it. Finish it the way a professional thumbnail designer would: the white picks up a subtle tint of the scene\u2019s ambient light, the background directly behind the caption may be gently and locally deepened for contrast (a subtle designer\u2019s gradient, never a visible box or band), and where the creator\u2019s shoulder, arm or hair naturally reaches the caption area, the person may slightly OVERLAP and cut in front of the caption\u2019s nearest edge, so the text visibly sits INSIDE the scene\u2019s depth between background and subject — the FACE itself always stays fully clear of the text. It must remain bold, high-contrast and instantly legible at a small mobile size — integrated, never faded, washed out, or blended INTO transparency.',
     'Size the caption LARGE and consistent: it fills its area confidently — roughly a third of the frame, and as a top banner it runs nearly full-width with a HUGE cap height (each line roughly a sixth of the frame height), hugging the top of the frame with only a small margin — big enough to punch and read instantly on a small mobile thumbnail. When a red highlight block sits on the top line of a top banner, the block may extend to and bleed off the top edge of the frame, like a news banner cropped by the frame. Keep this scale the SAME across all three concepts: never let one come out noticeably smaller or more timid than the others.',
     'Crisp, perfectly legible, correctly spelled, with NO extra, missing, or misspelled words. Apart from this caption, the ONLY other text permitted is what the scene description explicitly calls for: a single tiny incidental real-world label on a real object (1 to 3 words, small and natural, never hero-sized) or one short marked figure on a document. No other text, letters, words, logos, or watermarks anywhere.',
   ].join(' ');
