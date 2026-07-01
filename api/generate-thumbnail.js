@@ -163,7 +163,11 @@ executions.
 
 2) OPPOSITES-SPLIT
    The background splits into TWO contrasting, topic-true worlds that show the
-   stakes. Go HARD on the contrast — this should hit, not whisper: a grim, harsh,
+   stakes. CORE LENS — the GAP: the two sides are the SAME starting point that
+   split, not just a grim world beside a winning one — the same subject (a person,
+   business, deal or asset) ending opposite ways because of ONE decision the viewer
+   can't yet see, so the image itself asks "what did one do that the other didn't?"
+   Go HARD on the contrast — this should hit, not whisper: a grim, harsh,
    high-stakes side versus a prosperous, winning side (e.g. a run-down derelict
    house vs a luxury villa, an empty/foreclosed space vs a thriving one, a pile of
    red "FINAL NOTICE" letters vs a full ledger, dark storm light vs warm success).
@@ -175,9 +179,8 @@ executions.
    "one focal point": the split is deliberate, but the creator's face must stay the
    single dominant element and each half must be instantly readable and clearly
    subordinate, never two competing focal points. Distinguish the two halves by real,
-   believable means (different setting, props, or natural light level). The divide
-   may be a hard edge OR a cleaner
-   organic transition down the middle (an almost liquid seam where the two worlds
+   believable means (different setting, props, or natural light level). The divide may be a
+   hard edge OR a cleaner organic transition down the middle (an almost liquid seam where the two worlds
    meet) — but if you use a transition it must stay crisp, deliberate and instantly
    readable at 0.3s, never a vague smear, fog, floating particles, or murky AI
    sludge. Both worlds concrete and graspable in 0.3s.
@@ -187,6 +190,11 @@ executions.
    carries the stakes — placed beside them or held near the chest, lit as part of
    the same scene with real materials, weight and a real contact shadow. CRITICAL
    BALANCE — it must be surprising AND completely real, never AI gimmickry:
+   CORE LENS — the REVERSAL: the strongest version flips the object's meaning —
+   something that normally signals threat, cost or bad news, caught doing the
+   OPPOSITE (paying out, opening, protecting, working FOR the viewer). "Wait, that's
+   backwards" is the hook; the destructive beat below is the fallback when the
+   script offers no natural reversal.
    - The OBJECT itself is ordinary, everyday and instantly recognizable: something
      that genuinely exists and a viewer knows on sight (an IRS envelope, a real
      cheque, cash, a bank card, a key, a padlock, a passport, a phone screen). Do
