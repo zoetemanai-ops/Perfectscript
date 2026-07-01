@@ -9,9 +9,7 @@
 //   a fixed brand style: heavy news-headline grotesque (Franklin Gothic style),
 //   white + soft shadow, no outline, optional single highlight word in red or on
 //   a red block. The art director picks the caption_zone; bottom-right is never
-//   used (YouTube's duration badge). Before rendering, a cheap overlay
-//   gatekeeper (Haiku) enforces the caption rules (2-3 words, no title words,
-//   nerve over mechanic) that the art director tends to self-pass.
+//   used (YouTube's duration badge).
 //
 // ── Prerequisites ────────────────────────────────────────────────────────────
 //   npm i @anthropic-ai/sdk openai @napi-rs/image @supabase/supabase-js @vercel/functions
@@ -38,7 +36,6 @@ const supabase = createClient(
 
 // ── config ───────────────────────────────────────────────────────────────────
 const ART_DIRECTOR_MODEL = 'claude-opus-4-8';
-const OVERLAY_LINT_MODEL = 'claude-haiku-4-5-20251001';
 const IMAGE_MODEL = 'gpt-image-2';
 const IMAGE_SIZE = '1536x864';   // 16:9 (both divisible by 16)
 const IMAGE_QUALITY = 'high';    // if the edits endpoint rejects this, remove the quality line in gptImage()
@@ -197,7 +194,11 @@ executions.
    retirement-account or brokerage screen — with EXACTLY ONE detail marked: a
    hand-drawn red circle or a marker highlight around one real figure (a dollar
    amount, percentage, age or year) pulled from the script. "Look what's sitting
-   HERE" is the hook: the marked figure opens the loop the title closes. Rules:
+   HERE" is the hook: the marked figure opens the loop the title closes. Vary
+   the carrier across scripts: a real SCREEN (a brokerage/account page, a
+   laptop or tablet he turns toward the lens, the figure highlighted on-screen)
+   is a full-value alternative to paper — do not reach for a paper letter every
+   run. Rules:
    - The marked figure is the ONLY legible text on the document (2-10 characters,
      e.g. "$48,000", "37%"), and it is rendered LARGE because the document itself
      prints it large — a bold total line, a headline figure, or a stamped amount,
@@ -269,14 +270,31 @@ executions.
    real materials, weight and real contact shadows.
    CORE LENS — THE ACT, not the object: the tension comes from what the creator
    is DOING at this exact moment, something a photographer could genuinely catch
-   on a real shoot: feeding a document into a RUNNING paper shredder, caught
-   mid-shred with strips already falling; tearing a cheque or contract in half
-   with both hands; crumpling a page into his fist; yanking open an overflowing
-   drawer stuffed with papers; holding a page up to the lens like damning
-   evidence; a flat hand slammed down on a stack. The object itself stays
-   completely NORMAL (a document with a short readable 1-3 word header, a
-   cheque, cash, an official envelope, a phone screen) — the ACT is what makes
-   it dramatic. A cold viewer must parse ACT + OBJECT in a single glance; if it
+   on a real shoot. The act menu spans far MORE than paper — vary it:
+   - MONEY: holding a wallet upside down, emptied, nothing left; counting a
+     thick stack of cash onto the desk; sliding or sweeping a stack of cash off
+     the desk, out of reach; cutting a bank card in half with scissors.
+   - KEYS & LOCKS: dropping a set of house keys onto the desk as if handing
+     them over; clicking a padlock shut; holding keys just out of the lens's
+     reach.
+   - PAPER (use sparingly, see PAPER QUOTA below): feeding a document into a
+     RUNNING paper shredder with strips already falling; letting a fistful of
+     shredded strips rain down onto the desk; pressing a red rubber stamp down
+     onto the front page, caught mid-press; crumpling a page into his fist;
+     yanking open an overflowing drawer stuffed with papers; holding a page up
+     to the lens like damning evidence — and only as the LAST resort, tearing a
+     contract in half. Tearing is the single most overused paper act: reach for
+     any of the others first, and never make it the automatic pick.
+   Pick the act that fits THIS script — do NOT default to tearing a document;
+   tearing is one option, not the house style. The object itself stays
+   completely NORMAL (cash, a wallet, keys, a padlock, a bank card, a phone, a
+   document with a short readable 1-3 word header) — the ACT is what makes it
+   dramatic.
+   PAPER QUOTA — HARD RULE: at most ONE of the three concepts in a run may use
+   paper or a document as its hero object. Evidence-closeup already uses a
+   document, so whenever evidence-closeup is in the run, this concept MUST
+   build on a NON-PAPER object and a non-paper act (money, wallet, card, keys,
+   padlock, phone). A cold viewer must parse ACT + OBJECT in a single glance; if it
    needs a second look to understand what is physically happening, it is too
    clever — simplify. The object must MEAN something, not just NAME the topic:
    what he is DOING to it IS the story (shredding the trust document = the
@@ -553,8 +571,6 @@ async function generate(runId, script) {
       main_idea: script.main_idea || '',
     });
 
-    await lintOverlays(brief, script.video_title || '');
-
     const concepts = (brief.concepts || []).filter((c) => c?.scene_prompt).slice(0, 3);
     if (!concepts.length) throw new Error('Art director returned no usable concepts');
 
@@ -593,53 +609,6 @@ async function generate(runId, script) {
     console.error('[generate-thumbnail]', err);
     await update(runId, { status: 'error', error: String(err?.message || err) });
   }
-}
-
-// ── overlay gatekeeper: enforce the caption rules the art director self-passes ─
-async function lintOverlays(brief, videoTitle) {
-  const items = (brief.concepts || []).map((c) => ({
-    id: c.id,
-    words: c.overlay?.words || '',
-    highlight_word: c.overlay?.highlight_word || null,
-    highlight_style: c.overlay?.highlight_style || 'none',
-  }));
-  if (!items.length) return brief;
-
-  const sys = `You fix YouTube thumbnail captions for finance creators. For each caption, enforce ALL rules below; return a caption unchanged only if it passes every rule, otherwise rewrite it.
-1. HARD CAP: 2 to 3 words (contractions like IT'S / WON'T / YOU'RE count as one word). Never 4 or more.
-2. Never reuse ANY word that appears in the video title.
-3. The caption must hit a nerve: a stake for someone the viewer cares about, a loss still coming, or a false sense of safety punctured. Speak to the viewer (you / your / they) when it fits.
-4. BANNED FAMILY: captions that name the video's mechanic or describe its premise instead of hitting a nerve — e.g. "ONE GAP TAKES IT", "ONE FLAW DECIDES", "ONE FLAW COST THEM", "THE HOLE THEY MISSED". Any caption built around gap / flaw / loophole / mistake / mechanic language gets rewritten to its CONSEQUENCE (e.g. "IT'S ALREADY GONE", "THEY LOSE EVERYTHING", "YOU'RE NOT SAFE").
-5. Keep the three captions in distinct emotional registers (theft / warning / verdict / reveal / loss) — never two captions on the same register.
-6. highlight_word must be exactly ONE word from that caption (the stake or emotion word, never an article) or null. Keep highlight_style as given unless the word had to change.
-Return ONLY valid JSON, uppercase words, no preamble:
-{"overlays":[{"id":"A","words":"...","highlight_word":"...","highlight_style":"none|color|block"}]}`;
-
-  try {
-    const msg = await anthropic.messages.create({
-      model: OVERLAY_LINT_MODEL,
-      max_tokens: 500,
-      system: sys,
-      messages: [{ role: 'user', content: JSON.stringify({ video_title: videoTitle, captions: items }) }],
-    });
-    const text = msg.content.map((b) => (b.type === 'text' ? b.text : '')).join('').trim();
-    const fixed = JSON.parse(stripFences(text));
-    for (const fix of fixed.overlays || []) {
-      const c = (brief.concepts || []).find((x) => x.id === fix.id);
-      if (!c || !fix.words) continue;
-      c.overlay = c.overlay || {};
-      if (fix.words !== c.overlay.words) {
-        console.log(`[lintOverlays] ${fix.id}: "${c.overlay.words}" -> "${fix.words}"`);
-      }
-      c.overlay.words = fix.words;
-      c.overlay.highlight_word = fix.highlight_word || null;
-      c.overlay.highlight_style = fix.highlight_style || c.overlay.highlight_style || 'none';
-    }
-  } catch (e) {
-    // fail open: a lint failure must never kill the run
-    console.error('[lintOverlays] failed, keeping original overlays:', e?.message || e);
-  }
-  return brief;
 }
 
 // ── art director ─────────────────────────────────────────────────────────────
