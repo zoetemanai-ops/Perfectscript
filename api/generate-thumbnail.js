@@ -65,6 +65,9 @@ NON-NEGOTIABLE PRINCIPLES:
    Prefer a CLOSED or composed mouth: determined and intense beats wide-eyed
    open-mouth shock (the dated "shock face" tests 15-20% worse on CTR).
    Believable for a credible finance authority. Never calm, flat, or goofy.
+   Match the expression to THIS concept's register: a loss, threat or warning concept
+   needs a serious, hard or grave face — NO smile or pleased look; a subtle smirk
+   fits ONLY the insider-edge register, never a loss or seizure scene.
    (b) Trigger: do NOT default to fear alone. For finance and business viewers
    the strongest click driver is usually curiosity + mild indignation +
    self-interest — "there's a legal move the rich use that you don't," "you're
@@ -159,7 +162,11 @@ executions.
    ONE topic-true physical metaphor the creator reacts to, inside a believable
    real environment with natural depth (study / office / room / desk). Light it
    like a clean, well-lit real photograph with real subject/background separation.
-   Creator chest-up, eye contact.
+   Creator chest-up, eye contact. The metaphor object must be TOPIC-TRUE — tied to
+   THIS subject (the actual document, deed, account or asset), never a generic
+   fragility or security stand-in (a blank glass pane, a shield, a cracking orb). If
+   the idea is "fragile" or "cracking", crack the REAL thing (the trust, the deed),
+   not a random prop.
 
 2) OPPOSITES-SPLIT
    The background splits into TWO contrasting, topic-true worlds that show the
@@ -355,6 +362,19 @@ stock look, over-saturation, plastic skin, gibberish or misspelled text, extra
 logos/watermarks, and any legible text beyond the caption plus, at most, one tiny
 incidental real-world label on a prop.
 
+STEP 3 — SELF-AUDIT & FIX (do this silently, before writing the JSON):
+For EACH concept, score two axes 0-10 and FIX any that fall short before output:
+- overlay_punch (= overlay.score): does the caption clear the OVERLAY rules above
+  — hitting at least one lever, not just describing the image or naming the
+  mechanic? Captions like "THEY GET THROUGH" or "NOTHING BEHIND IT" describe what is
+  shown and score LOW; rewrite until it hits a nerve.
+- expression_match: does the creator's expression fit THIS concept's register (no
+  smile or pleased look on a loss / threat / seizure concept)? If not, correct it in
+  BOTH subject_direction and scene_prompt.
+Any concept below 7 on either axis MUST be rewritten, not shipped as-is. Do not lower
+the bar to pass — raise the concept. Keep the pinned archetypes: rewrite the
+concept, never swap it.
+
 OUTPUT — return ONLY valid JSON, no preamble:
 {
   "topic_read": "<one line: what actually makes this clickable>",
@@ -375,7 +395,8 @@ OUTPUT — return ONLY valid JSON, no preamble:
       "subject_direction": "<expression (hot but credible), pose, gesture, framing, placement>",
       "composition": "<focal point, rule-of-thirds, fg/bg, and where the clean negative space for the caption sits>",
       "color_and_lighting": "...",
-      "overlay": {"words": "2 TO 4 WORDS — a short emotional phrase", "rationale": "...", "score": 0},
+      "overlay": {"words": "2 TO 4 WORDS — a short emotional phrase", "rationale": "...", "score": "<0-10 overlay_punch, >=7 after self-audit>"},
+      "expression_match": "<0-10, >=7 after self-audit>",
       "freshness_score": 0,
       "click_score": 0,
       "scene_prompt": "<ONE paragraph for the image model: 16:9 photorealistic thumbnail that looks like a real photo, not a render; describe the creator WITH an explicit instruction to keep face and identity exactly consistent with the supplied reference images, same person; the archetype scene and/or metaphor; the hot-but-credible emotion; framing chest-up with eye contact by default; composition; natural realistic lighting. Leave clean, even-toned, low-detail negative space away from the face for the caption that gets added on top. If a real prop in the scene naturally carries a tiny header/sign, you may describe it (1-3 words, small and incidental, never hero-sized). End with 'One clear focal point, readable as a small mobile thumbnail.'>"
@@ -390,7 +411,9 @@ OUTPUT — return ONLY valid JSON, no preamble:
 archetypes_chosen is fixed: opposites-split and reaction-to-object are always two of
 the three; pick the third by fit score (the higher of metaphor-portrait vs
 on-location). Be decisive — no hedging. The recommended concept maximizes click_score
-while keeping freshness_score >= 7.`;
+while keeping freshness_score >= 7. Every concept you emit must ALREADY pass the
+STEP 3 self-audit at 7+ on both overlay_punch and expression_match — rewrite
+before output, never ship a sub-7 concept.`;
 
 // ── handler ──────────────────────────────────────────────────────────────────
 export default async function handler(req, res) {
