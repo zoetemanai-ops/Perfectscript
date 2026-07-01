@@ -227,7 +227,10 @@ executions.
      role in the story and carry the stakes through what it is and what happens to
      it (a shredded cheque = money gone). A prop that merely has the subject written
      on it (a plaque or label reading the topic) is banned — that is a caption, not a
-     metaphor.
+     metaphor. And never translate an abstract word LITERALLY: a "gap", "flaw" or
+     "hole" in a plan is NOT a literal hole cut in a document — show its real-world
+     CONSEQUENCE (a summons coming through, a creditor reaching in), not the word
+     made solid.
    - The SURPRISE comes from what is HAPPENING to that ordinary object, or its
      state: it is being shredded, torn in half, burning at one edge, locked, cut
      with scissors, cracked, stamped — a real moment that opens a curiosity loop and
@@ -310,11 +313,12 @@ THE OVERLAY — a short, emotionally charged phrase, 2 to 4 words (per concept):
     * personal verdict   — "IT'S NOT WORTH IT", "YOU'RE WRONG ABOUT THIS"
     * reveal / curiosity — "WHAT THEY HIDE", "THE REAL COST"
     * loss / stakes      — "YOU'RE LOSING MONEY", "IT COSTS YOU MORE"
-  Pick whichever hits hardest for the concept — and when the concept allows,
-  favor the shape that lands hardest of all: a stake for someone the viewer cares
-  about, a loss that is still coming, or the puncturing of a false sense of safety.
-  Keep varying the register across the three; this is the bar to reach, not a mould
-  for all three.
+  Pick whichever hits hardest for the concept. This is a REQUIREMENT, not a
+  preference: every overlay MUST land on at least one of three — a stake for
+  someone the viewer cares about, a loss that is still coming, or a false sense of
+  safety punctured. Naming the concept or the angle does NOT count: "ONE GAP
+  DECIDES", "THE HOLE THEY MISSED", "ONE FLAW DECIDES" describe the video instead of
+  hitting a nerve, so they FAIL this rule. Still vary the register across the three.
 - High-stakes, not loud. The phrase should feel CONSEQUENTIAL — imply a real,
   significant stake (money lost, a costly mistake, something genuinely at risk),
   never a mild observation. Raise the STAKES, not the volume: keep it credible and
