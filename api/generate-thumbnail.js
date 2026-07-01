@@ -4,12 +4,17 @@
 //
 // Trigger:  POST { script_run_id }
 //   Background (waitUntil): Claude art director -> 3 concepts -> GPT Image 2
-//   renders each concept in ONE call (scene + baked-in caption, creator NEVER
-//   named) -> upload -> complete. The caption is rendered by the image model
-//   itself via buildTextDirective; there is no separate canvas text layer.
+//   renders each scene TEXT-FREE (creator NEVER named) -> the 2-4 word caption is
+//   composited afterwards in the exact brand font via @napi-rs/canvas (pixel-
+//   perfect typography, zero misspellings, optional highlight word in red or in a
+//   red block) -> upload -> complete. The art director picks a caption_zone; a
+//   detail-score check relocates the caption if the render put the face or hero
+//   object there. bottom-right is never used (YouTube's duration badge).
 //
 // ── Prerequisites ────────────────────────────────────────────────────────────
-//   npm i @anthropic-ai/sdk openai @napi-rs/image @supabase/supabase-js @vercel/functions
+//   npm i @anthropic-ai/sdk openai @napi-rs/image @napi-rs/canvas @supabase/supabase-js @vercel/functions
+//   Font: api/fonts/LibreFranklin-Black.ttf (referenced via new URL(), so
+//   Vercel's file tracer bundles it automatically with the function).
 //   Env: ANTHROPIC_API_KEY, OPENAI_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
 //   Buckets: creator-photos (PRIVATE, <client_slug>/*.jpg), thumbnails (PUBLIC)
 //   maxDuration 300 needs Vercel Pro.
@@ -18,6 +23,8 @@
 import Anthropic from '@anthropic-ai/sdk';
 import OpenAI, { toFile } from 'openai';
 import { Transformer } from '@napi-rs/image';
+import { createCanvas, loadImage, GlobalFonts } from '@napi-rs/canvas';
+import { fileURLToPath } from 'node:url';
 import { createClient } from '@supabase/supabase-js';
 import { waitUntil } from '@vercel/functions';
 
@@ -39,7 +46,7 @@ const IMAGE_QUALITY = 'high';    // if the edits endpoint rejects this, remove t
 const REF_BUCKET = 'creator-photos';
 const OUT_BUCKET = 'thumbnails';
 
-const ART_DIRECTOR_SYSTEM = `SYSTEM — "Perfect Thumbnail · Art Director v2"
+const ART_DIRECTOR_SYSTEM = `SYSTEM — "Perfect Thumbnail · Art Director v3"
 
 You are the art director for a YouTube thumbnail factory serving top finance
 and business creators. You read a video script and output THREE genuinely
@@ -85,8 +92,8 @@ NON-NEGOTIABLE PRINCIPLES:
    metaphor to the ACTUAL mechanism in the script (the specific tax, the account,
    the deadline, the retiree), then give THAT one fresh twist. Opposites-split,
    reaction-to-object and on-location can carry the subject through contrasting
-   worlds, a real object, or a real place instead of a single metaphor, and that is
-   fine.
+   worlds, a real object, or a real place instead of a single metaphor, and
+   evidence-closeup carries it through a real marked document; all of that is fine.
 4. Natural, realistic light and real depth — it must look like a genuine
    PHOTOGRAPH, not a stylized or graded render. Light the creator cleanly and
    believably so the face reads instantly on mobile, with real separation between
@@ -144,7 +151,7 @@ merely avoid repeating its words.
 STYLE LIBRARY — the pool is FOUR archetypes; TWO are mandatory every run:
 This factory has FOUR thumbnail archetypes. Every run MUST include exactly these
 two, each as its own concept: opposites-split and reaction-to-object. The THIRD
-concept is your FREE pick — score metaphor-portrait and on-location for THIS
+concept is your FREE pick — score evidence-closeup and on-location for THIS
 script and build a concept in whichever fits best. Result: 3 concepts across three
 different archetypes (the two mandatory ones + your best free pick). Mandatory does
 NOT mean generic: make each archetype genuinely earn its place for THIS specific
@@ -158,15 +165,26 @@ large and identity-locked, topic-legibility in under 0.3s, mobile readability at
 120px, title+thumbnail = one hook, natural realistic photography, and no tired
 executions.
 
-1) METAPHOR-PORTRAIT
-   ONE topic-true physical metaphor the creator reacts to, inside a believable
-   real environment with natural depth (study / office / room / desk). Light it
-   like a clean, well-lit real photograph with real subject/background separation.
-   Creator chest-up, eye contact. The metaphor object must be TOPIC-TRUE — tied to
-   THIS subject (the actual document, deed, account or asset), never a generic
-   fragility or security stand-in (a blank glass pane, a shield, a cracking orb). If
-   the idea is "fragile" or "cracking", crack the REAL thing (the trust, the deed),
-   not a random prop.
+1) EVIDENCE CLOSE-UP
+   Creator large beside ONE real, instantly recognizable document or screen that
+   carries the PROOF — a tax bill, bank statement, official letter, contract, a
+   retirement-account or brokerage screen — with EXACTLY ONE detail marked: a
+   hand-drawn red circle or a marker highlight around one real figure (a dollar
+   amount, percentage, age or year) pulled from the script. "Look what's sitting
+   HERE" is the hook: the marked figure opens the loop the title closes. Rules:
+   - The marked figure is the ONLY legible text on the document (2-10 characters,
+     e.g. "$48,000", "37%"), rendered large, crisp and correctly spelled inside
+     the mark; ALL other print on the page stays soft-focus, blurred and
+     illegible — never readable sentences or paragraphs.
+   - The figure must be REAL, pulled from video_title / hook / main_idea
+     (Principle 9 applies in full); if the script offers no strong concrete
+     figure, this archetype does not fit — score it low.
+   - The document reads as what it is through LAYOUT and physical cues (official
+     letterhead shape, a table grid, an envelope it came from, a screen UI), not
+     through readable words.
+   - The creator reacts to the marked detail — pointing at it, holding the page,
+     or locking eyes with the viewer while presenting it; face stays dominant per
+     Principle 8, the document angled toward the lens so the mark reads at 120px.
 
 2) OPPOSITES-SPLIT
    The background splits into TWO contrasting, topic-true worlds that show the
@@ -279,8 +297,7 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
   or an obscure visual riddle the viewer has to decode. If a normal finance
   viewer wouldn't get it almost instantly, simplify it.
 - FAVOR a complete, believable SCENE over a person-plus-object on a bare backdrop
-  (this is the metaphor-portrait baseline; opposites-split, reaction-to-object and
-  on-location set their own backgrounds per the STYLE LIBRARY). Place the creator
+  (each archetype sets its own background per the STYLE LIBRARY). Place the creator
   inside a real environment with depth — at a desk or table, in a study, office, or
   room — with foreground, midground and a background that has lamps, shelves,
   furniture or texture. Light it naturally and cleanly; it must not be a flat, empty
@@ -300,9 +317,9 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
 THE OVERLAY — a short, emotionally charged phrase, 2 to 4 words (per concept):
 - Keep it punchy, but it may run a little longer than a bare label (2 to 4 words)
   when that makes it land harder — e.g. "IT'S NOT WORTH IT", "THIS WILL COST YOU",
-  "STOP DOING THIS", "YOU'RE LOSING MONEY". Lay it out across one or two lines —
-  however reads best — and it MUST read as one natural, coherent phrase, never
-  random or nonsense words.
+  "STOP DOING THIS", "YOU'RE LOSING MONEY". Line-breaking, size and typography are
+  handled automatically after render — you only choose the WORDS, and they MUST
+  read as one natural, coherent phrase, never random or nonsense words.
 - EMOTION over label, but always CRYSTAL CLEAR. Do NOT just name the topic
   ("MARRIAGE TRAP", "JOINT RETURN") and do NOT write a flat, informational
   description of the situation ("YOU CAN STILL CLAIM", "RETIREE TAX BREAK") — those
@@ -344,23 +361,43 @@ THE OVERLAY — a short, emotionally charged phrase, 2 to 4 words (per concept):
 - No creator name, no hashtags. Punctuation only if it adds tension.
 - Output the words plain, separated by single spaces only — never a slash, pipe,
   dash, bullet, or any other separator between them.
+- HIGHLIGHT (per concept): pick exactly ONE word from the overlay that carries the
+  stake or the emotion (BROKE, STEAL, LOSING, YOUR, TRAP) — never an article,
+  preposition, or the bare topic noun — and set highlight_style:
+    * "none"  — all white (safe default when the image itself is already loud)
+    * "color" — that one word in the brand red, the rest white
+    * "block" — that one word in a solid red block with white text (news-banner
+      punch; the strongest — use it when one word IS the whole message, not by
+      default)
+  Vary the highlight styles across the three concepts; at most ONE "block" per run.
 
 TEXT IN THE IMAGE:
-- The 2-4 word caption is rendered onto the image by the image model in a FIXED
-  brand style (you do NOT choose its font or color). Your job is composition: in
-  scene_prompt, leave one area of clean, even-toned, low-detail negative space,
-  away from the face, where that caption can sit and read clearly.
-- By default NO text appears in the scene itself — only the caption. The single
-  exception is small, incidental text that naturally lives on a real object (e.g. a
-  short header or sign on a prop in reaction-to-object or on-location). Keep any such
-  text tiny, real-looking and incidental (1 to 3 words), never hero-sized, and
-  never full sentences or paragraphs (the image
-  model garbles long text).
+- The caption is NOT rendered by the image model. It is composited afterwards in a
+  fixed brand font, inside the caption_zone you choose per concept. Your job is
+  composition: pick the caption_zone (top-banner, top-left, top-right, mid-left,
+  mid-right, or bottom-left — NEVER bottom-right, YouTube's duration badge covers
+  it) on the OPPOSITE side of, or clearly above, wherever the face and the hero
+  object sit, and make scene_prompt keep that zone CALM — free of the face, the
+  hero object, clutter and busy detail — so large white text reads instantly. It
+  does NOT have to be flat, empty or even-toned: contrast may come from color or
+  depth (a cool backlight glow, a dark but softly lit wall, gentle bokeh), and the
+  scene's natural light and atmosphere should keep running through it. The caption
+  block is LARGE (roughly a third of the frame, full-width for top-banner), so the
+  calm area must be generous — the caption must NEVER touch or cover the creator's
+  face or the hero object.
+- top-banner = a clean horizontal band across the entire top of the frame, like a
+  news banner. When you choose it, frame the creator with clear HEADROOM: head and
+  hair stay fully below the top ~30% of the frame.
+- NO text appears in the scene itself. The only exceptions: (a) small, incidental
+  text that naturally lives on a real object (a short header or sign on a prop,
+  1 to 3 words, tiny and real-looking, never hero-sized, never sentences — the
+  image model garbles long text), and (b) the single large marked figure in an
+  evidence-closeup concept.
 
 AVOID (AI-slop tells): cluttered scenes, multiple competing focal points, generic
 stock look, over-saturation, plastic skin, gibberish or misspelled text, extra
-logos/watermarks, and any legible text beyond the caption plus, at most, one tiny
-incidental real-world label on a prop.
+logos/watermarks, and any legible text beyond, at most, one tiny incidental
+real-world label on a prop (or the single marked figure in evidence-closeup).
 
 STEP 3 — SELF-AUDIT & FIX (do this silently, before writing the JSON):
 For EACH concept, score two axes 0-10 and FIX any that fall short before output:
@@ -380,26 +417,27 @@ OUTPUT — return ONLY valid JSON, no preamble:
   "topic_read": "<one line: what actually makes this clickable>",
   "cliches_banned": ["<overused execution>", "<overused execution>"],
   "archetype_fit": {
-    "metaphor-portrait": "<0-10 how well this fits THIS script + one-line why>",
+    "evidence-closeup": "<0-10 how well this fits THIS script + one-line why>",
     "opposites-split": "<0-10 + why>",
     "reaction-to-object": "<0-10 + why>",
     "on-location": "<0-10 + why>"
   },
-  "archetypes_chosen": ["opposites-split", "reaction-to-object", "<free pick: metaphor-portrait OR on-location, whichever scores higher>"],
+  "archetypes_chosen": ["opposites-split", "reaction-to-object", "<free pick: evidence-closeup OR on-location, whichever scores higher>"],
   "concepts": [
     {
       "id": "A",
-      "archetype": "<metaphor-portrait|opposites-split|reaction-to-object|on-location>",
+      "archetype": "<evidence-closeup|opposites-split|reaction-to-object|on-location>",
+      "caption_zone": "<top-banner|top-left|top-right|mid-left|mid-right|bottom-left — where the composited caption sits; never where the face or hero object is, never bottom-right>",
       "angle": "<the distinct direction in a phrase, and why this archetype fits>",
       "visual_metaphor": "...",
       "subject_direction": "<expression (hot but credible), pose, gesture, framing, placement>",
-      "composition": "<focal point, rule-of-thirds, fg/bg, and where the clean negative space for the caption sits>",
+      "composition": "<focal point, rule-of-thirds, fg/bg, and where the calm caption area sits>",
       "color_and_lighting": "...",
-      "overlay": {"words": "2 TO 4 WORDS — a short emotional phrase", "rationale": "...", "score": "<0-10 overlay_punch, >=7 after self-audit>"},
+      "overlay": {"words": "2 TO 4 WORDS — a short emotional phrase", "highlight_word": "<exactly ONE word from words that carries the stake/emotion — or null>", "highlight_style": "<none|color|block>", "rationale": "...", "score": "<0-10 overlay_punch, >=7 after self-audit>"},
       "expression_match": "<0-10, >=7 after self-audit>",
       "freshness_score": 0,
       "click_score": 0,
-      "scene_prompt": "<ONE paragraph for the image model: 16:9 photorealistic thumbnail that looks like a real photo, not a render; describe the creator WITH an explicit instruction to keep face and identity exactly consistent with the supplied reference images, same person; the archetype scene and/or metaphor; the hot-but-credible emotion; framing chest-up with eye contact by default; composition; natural realistic lighting. Leave clean, even-toned, low-detail negative space away from the face for the caption that gets added on top. If a real prop in the scene naturally carries a tiny header/sign, you may describe it (1-3 words, small and incidental, never hero-sized). End with 'One clear focal point, readable as a small mobile thumbnail.'>"
+      "scene_prompt": "<ONE paragraph for the image model: 16:9 photorealistic thumbnail that looks like a real photo, not a render; describe the creator WITH an explicit instruction to keep face and identity exactly consistent with the supplied reference images, same person; the archetype scene and/or metaphor; the hot-but-credible emotion; framing chest-up with eye contact by default; composition; natural realistic lighting. Keep the chosen caption_zone a generous, CALM area away from the face and hero object — no clutter or busy detail, but it keeps the scene's natural light, color and depth (a backlight glow or softly lit background is welcome there, it need not be flat or empty); the caption is composited there afterwards, so do NOT describe any caption or overlay text. If a real prop in the scene naturally carries a tiny header/sign, you may describe it (1-3 words, small and incidental, never hero-sized). End with 'One clear focal point, readable as a small mobile thumbnail.'>"
     },
     { "id": "B" },
     { "id": "C" }
@@ -409,7 +447,7 @@ OUTPUT — return ONLY valid JSON, no preamble:
 }
 
 archetypes_chosen is fixed: opposites-split and reaction-to-object are always two of
-the three; pick the third by fit score (the higher of metaphor-portrait vs
+the three; pick the third by fit score (the higher of evidence-closeup vs
 on-location). Be decisive — no hedging. The recommended concept maximizes click_score
 while keeping freshness_score >= 7. Every concept you emit must ALREADY pass the
 STEP 3 self-audit at 7+ on both overlay_punch and expression_match — rewrite
@@ -521,10 +559,9 @@ async function runArtDirector(input) {
   return JSON.parse(stripFences(text));
 }
 
-// ── render one concept: 1 GPT call (scene + baked-in caption) -> upload ──────
+// ── render one concept: text-free GPT render -> caption composited -> upload ─
 async function renderConcept(runId, concept, refFiles, creatorName) {
-  // GPT renders the caption itself: strip the scene's "no text" rule, then append a text directive
-  const scene = String(concept.scene_prompt || '').replace(/do not render any text[^.]*\.?/gi, '').trim();
+  const scene = String(concept.scene_prompt || '').trim();
   const identity =
     'IDENTITY LOCK: keep the person\u2019s face, hairline, hair (same amount, length, color and style), ' +
     'glasses, facial hair and apparent age EXACTLY consistent with the supplied reference photos. ' +
@@ -547,10 +584,10 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
     'with no too-clean cut-out edges and no element that looks floated on top. ' +
     'Keep it clean, sharp and natural like a real editorial portrait photograph, ' +
     'NOT a heavily stylized, over-graded or CGI look (the scene lighting itself is set by the scene description); ' +
-    'it must read as captured, not generated: avoid a flawless, over-clean, perfectly symmetrical studio look. ' +
-    'The photographic grain and softness apply to the scene only; the caption stays crisp and clean.';
-  const pngB64 = await gptImage(refFiles, `${scene}\n\n${identity}\n\n${quality}\n\n${buildTextDirective(concept)}`, creatorName);
-  const finalBuffer = Buffer.from(pngB64, 'base64');
+    'it must read as captured, not generated: avoid a flawless, over-clean, perfectly symmetrical studio look.';
+  const pngB64 = await gptImage(refFiles, `${scene}\n\n${identity}\n\n${quality}\n\n${buildNoTextDirective(concept)}`, creatorName);
+  const sceneBuffer = Buffer.from(pngB64, 'base64');
+  const finalBuffer = await composeCaption(sceneBuffer, concept);
 
   const path = `${runId}/${concept.id}.png`;
   const { error: upErr } = await supabase.storage
@@ -564,25 +601,192 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
     concept_id: concept.id,
     url: pub.publicUrl,
     overlay_words: concept.overlay?.words || '',
+    highlight_word: concept.overlay?.highlight_word || null,
+    highlight_style: concept.overlay?.highlight_style || 'none',
+    caption_zone: concept.caption_zone || null,
     archetype: concept.archetype || '',
     angle: concept.angle || '',
   };
 }
 
-// ── tell GPT to render the 2-4 word caption itself, in the chosen brand style ──
-function buildTextDirective(concept) {
-  const words = String(concept.overlay?.words || '').replace(/[\/|]+/g, ' ').replace(/\s+/g, ' ').trim().toUpperCase();
-  if (!words) return 'Render no text anywhere in the image.';
-  // underline swoosh is ALWAYS red, regardless of concept meaning
-  const accent = 'bright red (#E11D2A)';
+// ── caption compositor (canvas text layer) ───────────────────────────────────
+const CAPTION_FONT_PATH = fileURLToPath(new URL('./fonts/LibreFranklin-Black.ttf', import.meta.url));
+const CAPTION_FONT_FAMILY = 'PT Caption';
+const CAPTION_ACCENT = '#E11D2A';       // highlight color / block color
+const CAPTION_BLOCK_ROTATION_DEG = 0;   // slight tilt (1-2) for younger brands; 0 = authority
+
+let fontRegistered = false;
+function ensureCaptionFont() {
+  if (!fontRegistered) {
+    GlobalFonts.registerFromPath(CAPTION_FONT_PATH, CAPTION_FONT_FAMILY);
+    fontRegistered = true;
+  }
+}
+
+// bottom-right is intentionally absent: YouTube's duration badge covers it.
+const CAPTION_ZONES = {
+  'top-banner':  { x: 0.06, y: 0.050, w: 0.88, align: 'center', maxFont: 0.200, minFont: 0.110 },
+  'top-left':    { x: 0.05, y: 0.060, w: 0.55, align: 'left',   maxFont: 0.170, minFont: 0.095 },
+  'top-right':   { x: 0.40, y: 0.060, w: 0.55, align: 'right',  maxFont: 0.170, minFont: 0.095 },
+  'mid-left':    { x: 0.05, y: 0.340, w: 0.46, align: 'left',   maxFont: 0.160, minFont: 0.090 },
+  'mid-right':   { x: 0.49, y: 0.340, w: 0.46, align: 'right',  maxFont: 0.160, minFont: 0.090 },
+  'bottom-left': { x: 0.05, y: 0.600, w: 0.52, align: 'left',   maxFont: 0.160, minFont: 0.090 },
+};
+
+// Detail score of a zone on the actual rendered image (std dev of luminance).
+// High detail = face / hero object / busy texture -> the caption must not go there.
+function zoneDetailScore(ctx, zone, W, H) {
+  const x = Math.round(zone.x * W);
+  const y = Math.round(zone.y * H);
+  const w = Math.round(zone.w * W);
+  const h = Math.round(Math.min(0.30 * H, H - zone.y * H));
+  const data = ctx.getImageData(x, y, w, h).data;
+  let sum = 0, sumSq = 0, n = 0;
+  for (let i = 0; i < data.length; i += 16) { // sample every 4th pixel
+    const lum = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+    sum += lum; sumSq += lum * lum; n++;
+  }
+  const mean = sum / n;
+  return Math.sqrt(Math.max(0, sumSq / n - mean * mean));
+}
+
+// Pick the safest zone: the art director's choice unless the render put detail
+// (face, object) there and another allowed zone is clearly cleaner.
+function pickZone(ctx, requested, W, H) {
+  const req = CAPTION_ZONES[requested] ? requested : 'top-banner';
+  const scored = Object.entries(CAPTION_ZONES).map(([name, z]) => ({
+    name,
+    score: zoneDetailScore(ctx, z, W, H) - (name === req ? 20 : 0), // preference bonus
+  }));
+  scored.sort((a, b) => a.score - b.score);
+  return scored[0].name;
+}
+
+// Best split of 2-4 words into 1 or 2 lines = the one that yields the largest font.
+// A top-banner is always ONE line (the news-banner look); it never grows a second
+// line downward into face territory.
+function bestLayout(ctx, words, zoneWidthPx, maxFontPx, singleLine) {
+  const widthAt100 = (line) => {
+    ctx.font = `100px "${CAPTION_FONT_FAMILY}"`;
+    return ctx.measureText(line).width;
+  };
+  const candidates = [[words.join(' ')]];
+  if (!singleLine) {
+    for (let i = 1; i < words.length; i++) {
+      candidates.push([words.slice(0, i).join(' '), words.slice(i).join(' ')]);
+    }
+  }
+  let best = null;
+  for (const lines of candidates) {
+    const widest = Math.max(...lines.map(widthAt100));
+    const font = Math.min(maxFontPx, (zoneWidthPx / widest) * 100);
+    if (!best || font > best.font + 0.5) best = { lines, font };
+  }
+  return best;
+}
+
+// Draw one line word-by-word so a single word can be recolored or boxed.
+function drawCaptionLine(ctx, lineWords, xStart, baselineY, fontSize, style, highlightWord) {
+  ctx.font = `${fontSize}px "${CAPTION_FONT_FAMILY}"`;
+  const spaceW = ctx.measureText('\u00A0').width;
+  let x = xStart;
+  for (const word of lineWords) {
+    const m = ctx.measureText(word);
+    const isHl = highlightWord && word === highlightWord;
+
+    if (isHl && style === 'block') {
+      const padX = fontSize * 0.16;
+      const padY = fontSize * 0.10;
+      const asc = m.actualBoundingBoxAscent;
+      const desc = m.actualBoundingBoxDescent;
+      ctx.save();
+      if (CAPTION_BLOCK_ROTATION_DEG) {
+        const cx = x + m.width / 2, cy = baselineY - asc / 2;
+        ctx.translate(cx, cy);
+        ctx.rotate((CAPTION_BLOCK_ROTATION_DEG * Math.PI) / 180);
+        ctx.translate(-cx, -cy);
+      }
+      ctx.shadowColor = 'rgba(0,0,0,0.45)';
+      ctx.shadowBlur = fontSize * 0.08;
+      ctx.shadowOffsetY = fontSize * 0.04;
+      ctx.fillStyle = CAPTION_ACCENT;
+      ctx.fillRect(x - padX, baselineY - asc - padY, m.width + padX * 2, asc + desc + padY * 2);
+      ctx.shadowColor = 'transparent';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillText(word, x, baselineY);
+      ctx.restore();
+    } else {
+      ctx.save();
+      ctx.shadowColor = 'rgba(0,0,0,0.55)';
+      ctx.shadowBlur = fontSize * 0.10;
+      ctx.shadowOffsetY = fontSize * 0.05;
+      ctx.fillStyle = isHl && style === 'color' ? CAPTION_ACCENT : '#FFFFFF';
+      ctx.fillText(word, x, baselineY);
+      ctx.restore();
+    }
+    x += m.width + spaceW;
+  }
+}
+
+// Main entry: base PNG buffer + concept -> PNG buffer with the caption composited.
+async function composeCaption(baseBuffer, concept) {
+  ensureCaptionFont();
+
+  const words = String(concept.overlay?.words || '')
+    .replace(/[\/|]+/g, ' ').replace(/\s+/g, ' ').trim().toUpperCase()
+    .split(' ').filter(Boolean).slice(0, 4);
+  if (!words.length) return baseBuffer;
+
+  let highlightWord = String(concept.overlay?.highlight_word || '').trim().toUpperCase() || null;
+  if (highlightWord && !words.includes(highlightWord)) highlightWord = null;
+  let style = String(concept.overlay?.highlight_style || 'none').toLowerCase();
+  if (!['none', 'color', 'block'].includes(style) || !highlightWord) style = 'none';
+
+  const img = await loadImage(baseBuffer);
+  const W = img.width, H = img.height;
+  const canvas = createCanvas(W, H);
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(img, 0, 0);
+
+  const zoneName = pickZone(ctx, concept.caption_zone, W, H);
+  if (concept.caption_zone && zoneName !== concept.caption_zone) {
+    console.log(`[composeCaption] zone '${concept.caption_zone}' too busy -> relocated to '${zoneName}'`);
+  }
+  const zone = CAPTION_ZONES[zoneName];
+  const zoneWidthPx = zone.w * W;
+
+  const layout = bestLayout(ctx, words, zoneWidthPx, zone.maxFont * H, zoneName === 'top-banner');
+  const fontSize = layout.font; // never force it larger: that would overflow the zone
+  ctx.font = `${fontSize}px "${CAPTION_FONT_FAMILY}"`;
+  ctx.textBaseline = 'alphabetic';
+
+  const lineGap = fontSize * 0.18;
+  let cursorY = zone.y * H;
+
+  for (const line of layout.lines) {
+    const lineWords = line.split(' ');
+    const m = ctx.measureText(line);
+    const asc = m.actualBoundingBoxAscent;
+    let xStart = zone.x * W;
+    if (zone.align === 'center') xStart = zone.x * W + (zoneWidthPx - m.width) / 2;
+    if (zone.align === 'right') xStart = zone.x * W + (zoneWidthPx - m.width);
+    drawCaptionLine(ctx, lineWords, xStart, cursorY + asc, fontSize, style, highlightWord);
+    cursorY += asc + m.actualBoundingBoxDescent + lineGap;
+  }
+
+  return canvas.encode('png');
+}
+
+// ── keep the render text-free: the caption is composited afterwards ──────────
+function buildNoTextDirective(concept) {
+  const zone = CAPTION_ZONES[concept.caption_zone] ? concept.caption_zone : 'top-banner';
+  const zoneHint = zone === 'top-banner'
+    ? 'a clean horizontal band across the entire top of the frame (clear headroom: head and hair stay fully below the top 30% of the frame)'
+    : `the ${zone.replace('-', ' ')} area of the frame`;
   return [
-    'TEXT OVERLAY — render this caption baked into the image in a FIXED, consistent brand style (render it the SAME way every time):',
-    `Render the exact caption "${words}" all uppercase, arranged across one or two lines — break the words wherever it reads best and forms a balanced, punchy block — in an ULTRA-HEAVY, extra-bold, wide condensed sans-serif (Anton / Archivo Black style): very thick, fat strokes and broad heavy letterforms that fill the space, with normal comfortable letter spacing (not cramped, not stretched).`,
-    'PLACEMENT: position the caption yourself in whichever area of THIS image has the cleanest, largest empty space (e.g. an open dark area or negative space) — wherever it looks best and is most readable. It must never overlap or crowd the face or the hero object; put it where there is room to breathe.',
-    'Render EVERY word in clean pure white — no colored words.',
-    'Give each letter a VERY THIN, subtle black outline — almost just a soft crisp edge, not a heavy keyline. Do NOT use a thick block outline, a filled box or rectangle behind the letters, or a heavy border. Add ONE small, soft drop shadow directly behind the text for depth — subtle, never a thick glow, halo, or box.',
-    `Beneath the final line, ALWAYS add a single red underline — ALMOST straight, with only a very slight, subtle curve — in ${accent}. It must be of EVEN, UNIFORM thickness from end to end: do NOT taper it (not thick in the middle and thin at the tips). A clean, smooth, even stroke, NOT a thick brush smear and NOT a solid bar. This underline must ALWAYS be present.`,
-    'Size the caption consistently: it should occupy roughly a quarter to a third of the frame, filling its area confidently with clear margins from every edge, at about the bold size of a strong two-line hero caption. The KEY rule: keep this scale the SAME across all three concepts — never let one come out noticeably smaller or more timid than the others. Big enough to punch and read instantly on a small mobile thumbnail, but it should NOT span the full width, cover the face, or crowd the edges. Crisp, perfectly legible, correctly spelled, with NO extra, missing, or misspelled words. Keep it fully clear of the person\u2019s face and body. Apart from this caption, the ONLY other text permitted is a SINGLE tiny incidental label that naturally lives on a real object in the scene if the scene description explicitly calls for one (e.g. a short sign or header, 1 to 3 words) — render it at a small, natural, real-world size, NOT as large hero text, and never a big standalone year or number. Render it cleanly and correctly spelled where the scene places it; do NOT add full sentences, paragraphs, large floating numbers, or any other text. No other text, letters, words, logos, or watermarks anywhere.',
+    'NO CAPTION TEXT: render NO caption, headline, overlay text, subtitles, logos, or watermarks anywhere in the image.',
+    `Keep ${zoneHint} as a generous, CALM area: the face, the hero object, and any clutter or busy detail stay fully out of it, because a large caption is composited there afterwards — but let the scene's natural light, color and depth continue through it (a backlight glow or a dark, softly lit background is fine; it must not become a flat, empty, toneless patch).`,
+    'The ONLY text permitted is text the scene description above explicitly calls for: a single tiny incidental real-world label on a prop (1 to 3 words, small and natural, never hero-sized) or one single short marked figure on a document. Render such text correctly spelled at its natural size, and render absolutely no other letters, words, or numbers anywhere.',
   ].join(' ');
 }
 
