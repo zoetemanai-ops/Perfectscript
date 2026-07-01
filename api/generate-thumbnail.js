@@ -9,7 +9,9 @@
 //   a fixed brand style: heavy news-headline grotesque (Franklin Gothic style),
 //   white + soft shadow, no outline, optional single highlight word in red or on
 //   a red block. The art director picks the caption_zone; bottom-right is never
-//   used (YouTube's duration badge).
+//   used (YouTube's duration badge). Before rendering, a cheap overlay
+//   gatekeeper (Haiku) enforces the caption rules (2-3 words, no title words,
+//   nerve over mechanic) that the art director tends to self-pass.
 //
 // ── Prerequisites ────────────────────────────────────────────────────────────
 //   npm i @anthropic-ai/sdk openai @napi-rs/image @supabase/supabase-js @vercel/functions
@@ -36,6 +38,7 @@ const supabase = createClient(
 
 // ── config ───────────────────────────────────────────────────────────────────
 const ART_DIRECTOR_MODEL = 'claude-opus-4-8';
+const OVERLAY_LINT_MODEL = 'claude-haiku-4-5-20251001';
 const IMAGE_MODEL = 'gpt-image-2';
 const IMAGE_SIZE = '1536x864';   // 16:9 (both divisible by 16)
 const IMAGE_QUALITY = 'high';    // if the edits endpoint rejects this, remove the quality line in gptImage()
@@ -196,9 +199,14 @@ executions.
    amount, percentage, age or year) pulled from the script. "Look what's sitting
    HERE" is the hook: the marked figure opens the loop the title closes. Rules:
    - The marked figure is the ONLY legible text on the document (2-10 characters,
-     e.g. "$48,000", "37%"), rendered large, crisp and correctly spelled inside
-     the mark; ALL other print on the page stays soft-focus, blurred and
-     illegible — never readable sentences or paragraphs.
+     e.g. "$48,000", "37%"), and it is rendered LARGE because the document itself
+     prints it large — a bold total line, a headline figure, or a stamped amount,
+     the kind of number real paperwork prints big — filling a generous share of
+     the page width so it reads instantly at 120px, crisp and correctly spelled,
+     with the red marker circle hand-drawn around it. Never tiny body-text size,
+     and never an artificially floating oversized number. ALL other print on the
+     page stays soft-focus, blurred and illegible — never readable sentences or
+     paragraphs.
    - The figure must be REAL, pulled from video_title / hook / main_idea
      (Principle 9 applies in full); if the script offers no strong concrete
      figure, this archetype does not fit — swap it per the STYLE LIBRARY rule.
@@ -245,7 +253,10 @@ executions.
    left/right halves — never pushed off to one side. It may be a hard edge OR a
    softer organic transition (an almost liquid seam where the two worlds meet); soft
    is fine, but it must stay CENTERED and instantly readable at 0.3s, never a vague
-   smear, fog, floating particles, or murky AI sludge. Both worlds concrete and
+   smear, fog, floating particles, or murky AI sludge — and NEVER a glowing seam,
+   light strip, or neon line between the worlds: the divide is made by the two
+   worlds' own light, materials and decay (or a natural architectural edge), never
+   by an inserted glow. Both worlds concrete and
    graspable in 0.3s. BOTH halves must be equally photographic: the grim side is a
    REAL photograph of decay — same texture, grain, camera and light logic as the
    winning side — never a darker, vaguer illustration or an "AI drawing" (a common
@@ -423,8 +434,12 @@ TEXT IN THE IMAGE:
 
 AVOID (AI-slop tells): cluttered scenes, multiple competing focal points, generic
 stock look, over-saturation, plastic skin, gibberish or misspelled text, extra
-logos/watermarks, and any legible text beyond, at most, one tiny incidental
-real-world label on a prop (or the single marked figure in evidence-closeup).
+logos/watermarks, any legible text beyond, at most, one tiny incidental
+real-world label on a prop (or the single marked figure in evidence-closeup), and
+INVENTED SET DECOR: desk or background props not described in creator_visual_notes
+must be ordinary, nameless, everyday items (a plain mug, books, a plant, a lamp) —
+never invented branded objects, made-up logos, trophies, or sculptural "premium"
+decor pieces.
 
 STEP 3 — SELF-AUDIT & FIX (do this silently, before writing the JSON):
 For EACH concept, score two axes 0-10 and FIX any that fall short before output:
@@ -538,6 +553,8 @@ async function generate(runId, script) {
       main_idea: script.main_idea || '',
     });
 
+    await lintOverlays(brief, script.video_title || '');
+
     const concepts = (brief.concepts || []).filter((c) => c?.scene_prompt).slice(0, 3);
     if (!concepts.length) throw new Error('Art director returned no usable concepts');
 
@@ -576,6 +593,53 @@ async function generate(runId, script) {
     console.error('[generate-thumbnail]', err);
     await update(runId, { status: 'error', error: String(err?.message || err) });
   }
+}
+
+// ── overlay gatekeeper: enforce the caption rules the art director self-passes ─
+async function lintOverlays(brief, videoTitle) {
+  const items = (brief.concepts || []).map((c) => ({
+    id: c.id,
+    words: c.overlay?.words || '',
+    highlight_word: c.overlay?.highlight_word || null,
+    highlight_style: c.overlay?.highlight_style || 'none',
+  }));
+  if (!items.length) return brief;
+
+  const sys = `You fix YouTube thumbnail captions for finance creators. For each caption, enforce ALL rules below; return a caption unchanged only if it passes every rule, otherwise rewrite it.
+1. HARD CAP: 2 to 3 words (contractions like IT'S / WON'T / YOU'RE count as one word). Never 4 or more.
+2. Never reuse ANY word that appears in the video title.
+3. The caption must hit a nerve: a stake for someone the viewer cares about, a loss still coming, or a false sense of safety punctured. Speak to the viewer (you / your / they) when it fits.
+4. BANNED FAMILY: captions that name the video's mechanic or describe its premise instead of hitting a nerve — e.g. "ONE GAP TAKES IT", "ONE FLAW DECIDES", "ONE FLAW COST THEM", "THE HOLE THEY MISSED". Any caption built around gap / flaw / loophole / mistake / mechanic language gets rewritten to its CONSEQUENCE (e.g. "IT'S ALREADY GONE", "THEY LOSE EVERYTHING", "YOU'RE NOT SAFE").
+5. Keep the three captions in distinct emotional registers (theft / warning / verdict / reveal / loss) — never two captions on the same register.
+6. highlight_word must be exactly ONE word from that caption (the stake or emotion word, never an article) or null. Keep highlight_style as given unless the word had to change.
+Return ONLY valid JSON, uppercase words, no preamble:
+{"overlays":[{"id":"A","words":"...","highlight_word":"...","highlight_style":"none|color|block"}]}`;
+
+  try {
+    const msg = await anthropic.messages.create({
+      model: OVERLAY_LINT_MODEL,
+      max_tokens: 500,
+      system: sys,
+      messages: [{ role: 'user', content: JSON.stringify({ video_title: videoTitle, captions: items }) }],
+    });
+    const text = msg.content.map((b) => (b.type === 'text' ? b.text : '')).join('').trim();
+    const fixed = JSON.parse(stripFences(text));
+    for (const fix of fixed.overlays || []) {
+      const c = (brief.concepts || []).find((x) => x.id === fix.id);
+      if (!c || !fix.words) continue;
+      c.overlay = c.overlay || {};
+      if (fix.words !== c.overlay.words) {
+        console.log(`[lintOverlays] ${fix.id}: "${c.overlay.words}" -> "${fix.words}"`);
+      }
+      c.overlay.words = fix.words;
+      c.overlay.highlight_word = fix.highlight_word || null;
+      c.overlay.highlight_style = fix.highlight_style || c.overlay.highlight_style || 'none';
+    }
+  } catch (e) {
+    // fail open: a lint failure must never kill the run
+    console.error('[lintOverlays] failed, keeping original overlays:', e?.message || e);
+  }
+  return brief;
 }
 
 // ── art director ─────────────────────────────────────────────────────────────
@@ -619,6 +683,9 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
     'Keep it clean, sharp and natural like a real editorial portrait photograph, ' +
     'NOT a heavily stylized, over-graded or CGI look (the scene lighting itself is set by the scene description); ' +
     'it must read as captured, not generated: avoid a flawless, over-clean, perfectly symmetrical studio look. ' +
+    'ANY paper or document in the scene — held, torn, shredded, or lying on the desk — reads as natural, real paper in the scene\u2019s existing light: ' +
+    'soft off-white or lightly warm-toned, a touch DARKER than the person\u2019s face, with subtle fiber texture, natural bends and soft shadows in the sheet, ' +
+    'and rough, fibrous edges where it is torn — never blinding pure white, never blown out, never stiff and perfectly flat. The face stays the brightest element in the frame. ' +
     'The caption text stays sharp and fully legible, but shares the photograph\u2019s grain and white balance so it reads as part of the image, never as a pasted sticker.';
   const pngB64 = await gptImage(refFiles, `${scene}\n\n${identity}\n\n${quality}\n\n${buildTextDirective(concept)}`, creatorName);
   const finalBuffer = Buffer.from(pngB64, 'base64');
@@ -676,7 +743,7 @@ function buildTextDirective(concept) {
     `PLACEMENT: put the caption ${ZONE_HINTS[zone]}, in the calm area the scene keeps clear there. It must NEVER overlap, touch, or crowd the creator's face or the hero object, and it never sits in the bottom-right corner (YouTube's duration badge covers that).`,
     highlightRule,
     'NO outline or keyline around the letters, NO box or rectangle behind the full caption, no glow, no halo, no underline.',
-    'FINISH — the caption must look professionally set INTO the photograph, never like a sticker floating on top: keep the text facing the camera perfectly flat (no perspective warp, no bending, no 3D), but let it share the photograph\u2019s finish — the same fine grain, the same white balance (a clean white that sits naturally in this scene\u2019s light), and ONE soft, natural drop shadow that grounds it. Sharp and fully legible, never glowing, never plastic-clean against a grainy image.',
+    'FINISH — the caption must look professionally set INTO the photograph, never like a sticker floating on top: keep the text facing the camera perfectly flat (no perspective warp, no bending, no 3D), but let it share the photograph\u2019s finish — the same fine grain, the same white balance (a clean white that sits naturally in this scene\u2019s light), and ONE soft, natural drop shadow that grounds it. Finish it the way a professional thumbnail designer would: the white may pick up a FAINT tint of the scene\u2019s ambient light, the background directly behind the caption may be gently and locally deepened for contrast (a subtle designer\u2019s gradient, never a visible box or band), and where the creator\u2019s shoulder, arm or hair naturally reaches the caption area, the person may slightly OVERLAP and cut in front of the caption\u2019s nearest edge, so the text visibly sits INSIDE the scene\u2019s depth between background and subject — the FACE itself always stays fully clear of the text. Sharp and fully legible, never glowing, never plastic-clean against a grainy image.',
     'Size the caption LARGE and consistent: it fills its area confidently — roughly a third of the frame, and as a top banner it runs nearly full-width with a HUGE cap height (each line roughly a sixth of the frame height), hugging the top of the frame with only a small margin — big enough to punch and read instantly on a small mobile thumbnail. When a red highlight block sits on the top line of a top banner, the block may extend to and bleed off the top edge of the frame, like a news banner cropped by the frame. Keep this scale the SAME across all three concepts: never let one come out noticeably smaller or more timid than the others.',
     'Crisp, perfectly legible, correctly spelled, with NO extra, missing, or misspelled words. Apart from this caption, the ONLY other text permitted is what the scene description explicitly calls for: a single tiny incidental real-world label on a real object (1 to 3 words, small and natural, never hero-sized) or one short marked figure on a document. No other text, letters, words, logos, or watermarks anywhere.',
   ].join(' ');
