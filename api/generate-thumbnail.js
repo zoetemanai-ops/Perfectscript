@@ -646,10 +646,13 @@ Return ONLY valid JSON, uppercase words, no preamble:
 async function runArtDirector(input) {
   const msg = await anthropic.messages.create({
     model: ART_DIRECTOR_MODEL,
-    max_tokens: 4000,
+    max_tokens: 12000,
     system: ART_DIRECTOR_SYSTEM,
     messages: [{ role: 'user', content: JSON.stringify(input, null, 2) }],
   });
+  if (msg.stop_reason === 'max_tokens') {
+    throw new Error('Art director response hit max_tokens and was truncated — raise max_tokens.');
+  }
   const text = msg.content.map((b) => (b.type === 'text' ? b.text : '')).join('').trim();
   return JSON.parse(stripFences(text));
 }
