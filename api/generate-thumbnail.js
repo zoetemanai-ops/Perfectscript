@@ -205,6 +205,11 @@ executions.
    - The document reads as what it is through LAYOUT and physical cues (official
      letterhead shape, a table grid, an envelope it came from, a screen UI), not
      through readable words.
+   - The paper reads as natural paper in the scene's existing light — soft
+     off-white, a touch DARKER than the creator's face, never blinding bright
+     white or blown out. The face stays the brightest element in the frame; the
+     document sits in the light the way a real photographer exposing for the
+     face would render it.
    - The creator reacts to the marked detail — pointing at it, holding the page,
      or locking eyes with the viewer while presenting it; face stays dominant per
      Principle 8, the document angled toward the lens so the mark reads at 120px.
@@ -333,29 +338,32 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
 - Avoid depending on an exact COUNT of objects (e.g. "five envelopes") — image
   models miscount. Use "one red among plain ones" or a single hero object.
 
-THE OVERLAY — a short, emotionally charged phrase, 2 to 4 words (per concept):
-- Keep it punchy, but it may run a little longer than a bare label (2 to 4 words)
-  when that makes it land harder — e.g. "IT'S NOT WORTH IT", "THIS WILL COST YOU",
-  "STOP DOING THIS", "YOU'RE LOSING MONEY". Line-breaking, size and typography are
-  handled automatically after render — you only choose the WORDS, and they MUST
-  read as one natural, coherent phrase, never random or nonsense words.
+THE OVERLAY — a short, emotionally charged phrase, 2 to 3 words MAX (per concept):
+- HARD CAP: 2 to 3 words, never 4. Shorter renders BIGGER and reads faster on a
+  small mobile thumbnail. Contractions (IT'S, WON'T, YOU'RE, DON'T) count as one
+  word and buy you an extra beat — use them: "IT WON'T HOLD", "YOU'RE LOSING
+  MONEY", "THEY ROB YOU", "NOT WORTH IT". If your best line needs a fourth word,
+  cut or compress until it doesn't — the 3-word version is almost always harder.
+  Line-breaking, size and typography are handled automatically after render — you
+  only choose the WORDS, and they MUST read as one natural, coherent phrase,
+  never random or nonsense words.
 - EMOTION over label, but always CRYSTAL CLEAR. Do NOT just name the topic
   ("MARRIAGE TRAP", "JOINT RETURN") and do NOT write a flat, informational
   description of the situation ("YOU CAN STILL CLAIM", "RETIREE TAX BREAK") — those
   state a fact instead of landing a punch. Make the viewer FEEL something with a
   direct, personal line that hits a nerve or a desire: "IT'S YOUR MONEY", "THEY
-  STEAL FROM YOU", "YOU'RE LOSING MONEY", "DON'T LET THEM", "IT'S STILL YOURS". It
+  ROB YOU", "YOU'RE LOSING MONEY", "DON'T LET THEM", "IT'S STILL YOURS". It
   must stay plain and instantly readable — emotional, NOT vague, cryptic, or clever
   for its own sake. EMOTION TEST before you finalize: would this make a stranger
   feel something (anger, fear of loss, "wait, that's mine")? If it merely tells them
   what the video is about, rewrite it until it stings. Speak to the viewer directly
   ("you / your / they") whenever it fits. Choose the register that best fits THIS
   concept, and vary it across the three:
-    * possession / theft  — "IT'S YOUR MONEY", "THEY STEAL FROM YOU"
-    * warning / urgency  — "BEFORE IT'S TOO LATE", "DON'T DO THIS"
-    * personal verdict   — "IT'S NOT WORTH IT", "YOU'RE WRONG ABOUT THIS"
+    * possession / theft  — "IT'S YOUR MONEY", "THEY ROB YOU"
+    * warning / urgency  — "ALMOST TOO LATE", "DON'T DO THIS"
+    * personal verdict   — "NOT WORTH IT", "YOU'RE DEAD WRONG"
     * reveal / curiosity — "WHAT THEY HIDE", "THE REAL COST"
-    * loss / stakes      — "YOU'RE LOSING MONEY", "IT COSTS YOU MORE"
+    * loss / stakes      — "YOU'RE LOSING MONEY", "IT COSTS MORE"
   Pick whichever hits hardest for the concept. This is a REQUIREMENT, not a
   preference: every overlay MUST land on at least one of three — a stake for
   someone the viewer cares about, a loss that is still coming, or a false sense of
@@ -455,7 +463,7 @@ OUTPUT — return ONLY valid JSON, no preamble:
       "subject_direction": "<expression (hot but credible), pose, gesture, framing, placement>",
       "composition": "<focal point, rule-of-thirds, fg/bg, and where the calm caption area sits>",
       "color_and_lighting": "...",
-      "overlay": {"words": "2 TO 4 WORDS — a short emotional phrase", "highlight_word": "<exactly ONE word from words that carries the stake/emotion — or null>", "highlight_style": "<none|color|block>", "rationale": "...", "score": "<0-10 overlay_punch, >=7 after self-audit>"},
+      "overlay": {"words": "2 TO 3 WORDS MAX — a short emotional phrase", "highlight_word": "<exactly ONE word from words that carries the stake/emotion — or null>", "highlight_style": "<none|color|block>", "rationale": "...", "score": "<0-10 overlay_punch, >=7 after self-audit>"},
       "expression_match": "<0-10, >=7 after self-audit>",
       "freshness_score": 0,
       "click_score": 0,
@@ -591,7 +599,10 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
     'Do NOT thin, shorten, recolor, add, or remove hair, and do NOT make the person look balder, younger, ' +
     'or older. Also keep his OUTFIT the same as in the reference photos — the same jacket/suit, shirt, ' +
     'color and style of clothing — do not change his clothes or their color. It must be unmistakably the ' +
-    'same exact person, dressed as in the references.';
+    'same exact person, dressed as in the references. IDENTITY means face, hair and clothing — NOT the ' +
+    'expression: take the facial EXPRESSION exclusively from the scene description above, never from the ' +
+    'reference photos. If the references show him smiling or pleasant, do NOT carry that smile over; on a ' +
+    'loss, threat or warning concept his face must be serious, hard and grave exactly as the scene describes.';
   const quality =
     'PHOTOGRAPHIC REALISM (this must look like a real photo taken on a real camera, NOT a CGI render or an AI image): ' +
     'shot on a full-frame camera with an 85mm lens at a wide aperture (~f1.8), giving a genuinely SHALLOW depth of field — ' +
@@ -608,7 +619,7 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
     'Keep it clean, sharp and natural like a real editorial portrait photograph, ' +
     'NOT a heavily stylized, over-graded or CGI look (the scene lighting itself is set by the scene description); ' +
     'it must read as captured, not generated: avoid a flawless, over-clean, perfectly symmetrical studio look. ' +
-    'The photographic grain and softness apply to the scene only; the caption text stays crisp, flat and clean.';
+    'The caption text stays sharp and fully legible, but shares the photograph\u2019s grain and white balance so it reads as part of the image, never as a pasted sticker.';
   const pngB64 = await gptImage(refFiles, `${scene}\n\n${identity}\n\n${quality}\n\n${buildTextDirective(concept)}`, creatorName);
   const finalBuffer = Buffer.from(pngB64, 'base64');
 
@@ -661,11 +672,12 @@ function buildTextDirective(concept) {
 
   return [
     'TEXT OVERLAY — render this caption baked into the image in a FIXED, consistent brand style (render it the SAME way every time):',
-    `Render the exact caption "${words}" all uppercase, arranged across one or two lines — break the words wherever it reads best and forms a balanced, punchy block — in a HEAVY, extra-bold sans-serif with NORMAL-WIDTH letterforms, in the style of a hard news headline (Libre Franklin Black / Helvetica Black): thick, confident strokes and clean, simple letter shapes with generous, even letter spacing. The letters must NEVER touch, overlap, merge, or squeeze together, and the type is never condensed, compressed, narrowed, or stretched — every single letter fully formed, correctly shaped, clearly separated from its neighbors, like professionally typeset graphic text.`,
+    `Render the exact caption "${words}" all uppercase, arranged across one or two lines — break the words wherever it reads best and forms a balanced, punchy block — in a HEAVY, extra-bold sans-serif with NORMAL-WIDTH letterforms, in the style of a hard news headline (Libre Franklin Black / Helvetica Black): thick, confident strokes and clean, simple letter shapes with even letter spacing. The letters must NEVER touch, overlap, merge, or squeeze together, and the type is never condensed, compressed, narrowed, or stretched — every single letter fully formed, correctly shaped, clearly separated from its neighbors.`,
     `PLACEMENT: put the caption ${ZONE_HINTS[zone]}, in the calm area the scene keeps clear there. It must NEVER overlap, touch, or crowd the creator's face or the hero object, and it never sits in the bottom-right corner (YouTube's duration badge covers that).`,
     highlightRule,
-    'NO outline or keyline around the letters, NO box or rectangle behind the full caption, no glow, no halo, no underline. Add ONE small, soft drop shadow directly behind the text for depth and readability — subtle, never thick.',
-    'Size the caption LARGE and consistent: it fills its area confidently — roughly a third of the frame, and as a top banner it may run nearly full-width — big enough to punch and read instantly on a small mobile thumbnail, with clear margins from every edge. Keep this scale the SAME across all three concepts: never let one come out noticeably smaller or more timid than the others.',
+    'NO outline or keyline around the letters, NO box or rectangle behind the full caption, no glow, no halo, no underline.',
+    'FINISH — the caption must look professionally set INTO the photograph, never like a sticker floating on top: keep the text facing the camera perfectly flat (no perspective warp, no bending, no 3D), but let it share the photograph\u2019s finish — the same fine grain, the same white balance (a clean white that sits naturally in this scene\u2019s light), and ONE soft, natural drop shadow that grounds it. Sharp and fully legible, never glowing, never plastic-clean against a grainy image.',
+    'Size the caption LARGE and consistent: it fills its area confidently — roughly a third of the frame, and as a top banner it runs nearly full-width with a HUGE cap height (each line roughly a sixth of the frame height), hugging the top of the frame with only a small margin — big enough to punch and read instantly on a small mobile thumbnail. When a red highlight block sits on the top line of a top banner, the block may extend to and bleed off the top edge of the frame, like a news banner cropped by the frame. Keep this scale the SAME across all three concepts: never let one come out noticeably smaller or more timid than the others.',
     'Crisp, perfectly legible, correctly spelled, with NO extra, missing, or misspelled words. Apart from this caption, the ONLY other text permitted is what the scene description explicitly calls for: a single tiny incidental real-world label on a real object (1 to 3 words, small and natural, never hero-sized) or one short marked figure on a document. No other text, letters, words, logos, or watermarks anywhere.',
   ].join(' ');
 }
