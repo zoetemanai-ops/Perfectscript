@@ -3,10 +3,11 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@anthropic-ai/sdk": "latest",
-    "@napi-rs/image": "latest",
-    "openai": "latest",
-    "@supabase/supabase-js": "latest",
-    "@vercel/functions": "latest"
+    "@anthropic-ai/sdk": "0.109.0",
+    "@napi-rs/canvas": "1.0.2",
+    "@napi-rs/image": "1.14.0",
+    "@supabase/supabase-js": "2.110.0",
+    "@vercel/functions": "3.7.5",
+    "openai": "6.45.0"
   }
 }
