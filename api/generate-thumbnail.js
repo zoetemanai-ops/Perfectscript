@@ -25,6 +25,7 @@ import OpenAI, { toFile } from 'openai';
 import { Transformer } from '@napi-rs/image';
 import { createCanvas, loadImage, GlobalFonts } from '@napi-rs/canvas';
 import { fileURLToPath } from 'node:url';
+import { existsSync } from 'node:fs';
 import { createClient } from '@supabase/supabase-js';
 import { waitUntil } from '@vercel/functions';
 
@@ -148,14 +149,17 @@ do they form an unanswered question that demands the click. Use the title as an
 active partner — complete it, contradict it, or raise the stakes on it — never
 merely avoid repeating its words.
 
-STYLE LIBRARY — the pool is FOUR archetypes; TWO are mandatory every run:
-This factory has FOUR thumbnail archetypes. Every run MUST include exactly these
-two, each as its own concept: opposites-split and reaction-to-object. The THIRD
-concept is your FREE pick — score evidence-closeup and on-location for THIS
-script and build a concept in whichever fits best. Result: 3 concepts across three
-different archetypes (the two mandatory ones + your best free pick). Mandatory does
-NOT mean generic: make each archetype genuinely earn its place for THIS specific
-script, never a bolted-on template.
+STYLE LIBRARY — the pool is FOUR archetypes; every run = 2 OFFICE + 1 BREAKER:
+This factory has FOUR thumbnail archetypes in two groups. OFFICE archetypes are
+staged in the creator's real studio set (creator_visual_notes): reaction-to-object
+and evidence-closeup. BREAKER archetypes leave the studio: opposites-split and
+on-location. Every run MUST include BOTH office archetypes, each as its own
+concept, plus ONE breaker — score opposites-split and on-location for THIS script
+and build whichever fits best. EXCEPTION: if the script offers no strong real
+figure for evidence-closeup, swap it for the OTHER breaker that run (the run then
+becomes reaction-to-object + both breakers). Result: 3 concepts across three
+different archetypes. Mandatory does NOT mean generic: make each archetype
+genuinely earn its place for THIS specific script, never a bolted-on template.
 
 OVERRIDE RULE: each archetype's recipe below sets its own composition, background
 and text handling. Where a recipe conflicts with a general principle or with the
@@ -165,8 +169,10 @@ large and identity-locked, topic-legibility in under 0.3s, mobile readability at
 120px, title+thumbnail = one hook, natural realistic photography, and no tired
 executions.
 
-1) EVIDENCE CLOSE-UP
-   Creator large beside ONE real, instantly recognizable document or screen that
+1) EVIDENCE CLOSE-UP (office)
+   Staged in the creator's own studio set (creator_visual_notes) — at his desk or
+   chair, his real backdrop behind him. Creator large beside ONE real, instantly
+   recognizable document or screen that
    carries the PROOF — a tax bill, bank statement, official letter, contract, a
    retirement-account or brokerage screen — with EXACTLY ONE detail marked: a
    hand-drawn red circle or a marker highlight around one real figure (a dollar
@@ -178,7 +184,7 @@ executions.
      illegible — never readable sentences or paragraphs.
    - The figure must be REAL, pulled from video_title / hook / main_idea
      (Principle 9 applies in full); if the script offers no strong concrete
-     figure, this archetype does not fit — score it low.
+     figure, this archetype does not fit — swap it per the STYLE LIBRARY rule.
    - The document reads as what it is through LAYOUT and physical cues (official
      letterhead shape, a table grid, an envelope it came from, a screen UI), not
      through readable words.
@@ -223,46 +229,32 @@ executions.
    winning side — never a darker, vaguer illustration or an "AI drawing" (a common
    split failure where the good side looks shot and the bad side looks sketched).
 
-3) REACTION-TO-OBJECT
-   Creator framed large with a strong, intense reaction to ONE real object that
-   carries the stakes — placed beside them or held near the chest, lit as part of
-   the same scene with real materials, weight and a real contact shadow. CRITICAL
-   BALANCE — it must be surprising AND completely real, never AI gimmickry:
-   CORE LENS — the REVERSAL: the strongest version flips the object's meaning —
-   something that normally signals threat, cost or bad news, caught doing the
-   OPPOSITE (paying out, opening, protecting, working FOR the viewer). "Wait, that's
-   backwards" is the hook. Stage it as a visible MOMENT, not a static pose: the
-   object mid-action — being pulled from the envelope, tipping, spilling, caught as
-   it falls, snatched — at the instant its meaning flips, with the creator reacting.
-   A calmly held or neatly displayed object kills the tension; capture the verb, not
-   the noun. "Ordinary and recognizable" describes the OBJECT, never the SCENE: you
-   have wide latitude to stage something dramatic and unexpected, and the ONLY hard
-   limit is realism — every element must be a real thing you could photograph. Real
-   objects may collide dramatically but must NOT turn surreal: never give the object
-   a face, teeth, or a life of its own, and never let it melt (e.g. a tax envelope
-   drawn as a monster). Surprise through the situation, not an impossible object.
-   The destructive beat below is the fallback when the script offers no natural
-   reversal.
-   - The OBJECT itself is ordinary, everyday and instantly recognizable: something
-     that genuinely exists and a viewer knows on sight (an IRS envelope, a real
-     cheque, cash, a bank card, a key, a padlock, a passport, a phone screen). Do
-     NOT invent a novelty object, a fantasy gadget, or an engraved/branded plaque or
-     sign — those read as AI slop.
-   - The object must MEAN something, not just NAME the topic. It has to play a real
-     role in the story and carry the stakes through what it is and what happens to
-     it (a shredded cheque = money gone). A prop that merely has the subject written
-     on it (a plaque or label reading the topic) is banned — that is a caption, not a
-     metaphor. And never translate an abstract word LITERALLY: a "gap", "flaw" or
-     "hole" in a plan is NOT a literal hole cut in a document — show its real-world
-     CONSEQUENCE (a summons coming through, a creditor reaching in), not the word
-     made solid.
-   - The SURPRISE comes from what is HAPPENING to that ordinary object, or its
-     state: it is being shredded, torn in half, burning at one edge, locked, cut
-     with scissors, cracked, stamped — a real moment that opens a curiosity loop and
-     makes the stakes felt. Real object, unexpected situation.
+3) REACTION-TO-OBJECT (office)
+   Creator framed large in his OWN studio set (creator_visual_notes), with a
+   strong, intense reaction to ONE real object that carries the stakes — placed
+   beside him or held near the chest, lit as part of the same scene with real
+   materials, weight and a real contact shadow.
+   CORE LENS — ONE OBJECT, ONE STATE: the object is ordinary, everyday and
+   instantly recognizable (an official envelope, a real cheque, cash, a bank card,
+   a key, a padlock, a passport, a phone screen), shown in ONE dramatic but
+   immediately readable state: torn in half, shredded, burning at one edge,
+   wrapped in chains, stamped, being crushed in a fist. A cold viewer must parse
+   OBJECT + STATE in a single glance; if the setup needs a second look to
+   understand what is physically happening, it is too clever — simplify. The
+   object must MEAN something, not just NAME the topic: it carries the stakes
+   through what it is and what happened to it (a shredded cheque = money gone). A
+   prop that merely has the subject written on it is a caption, not a metaphor.
+   HARD BANS (these read as AI gimmicks and kill instant clarity):
+   - NO object-through-object or object-inside-object constructions: nothing
+     emerging through a hole in something else, nothing breaking out of a
+     document, no layered multi-prop interactions. ONE prop only.
+   - Never a literal hole, gap or crack cut into a document to illustrate an
+     abstract "flaw" — show a real state, not the word made solid.
+   - Never give the object a face, teeth, or a life of its own; never invent a
+     novelty object, a fantasy gadget, or an engraved/branded plaque; no plain
+     sheet of paper or blank stack as the hero object.
    The power is the COMBINATION of the creator's hot expression and that single
-   object mid-moment. One object, one face, one reaction — no clutter. Do NOT use a
-   plain sheet of paper or a document as the hero object.
+   object in its single state. One object, one face, one reaction — no clutter.
 
 4) ON-LOCATION
    Take the creator OUT of the studio into a meaningful real-world PLACE tied to the
@@ -270,7 +262,10 @@ executions.
    construction site, in front of a mansion, a government/IRS-style building, a
    trading floor. The location carries the context and breaks the studio look.
    Photograph it as a real environment with depth and the natural light of that
-   place; the creator stays large and dominant in the foreground, reacting. This
+   place; the creator stays large and dominant in the foreground, reacting. The
+   creator carries NOTHING — no binder, folder, papers or props; hands empty,
+   reacting naturally (pointing at the place, arms crossed, a hard warning
+   gesture). The LOCATION is the metaphor; a carried prop only muddies it. This
    archetype does NOT use the creator's studio set, so ignore creator_visual_notes
    for this one.
 
@@ -422,7 +417,7 @@ OUTPUT — return ONLY valid JSON, no preamble:
     "reaction-to-object": "<0-10 + why>",
     "on-location": "<0-10 + why>"
   },
-  "archetypes_chosen": ["opposites-split", "reaction-to-object", "<free pick: evidence-closeup OR on-location, whichever scores higher>"],
+  "archetypes_chosen": ["reaction-to-object", "evidence-closeup", "<breaker: opposites-split OR on-location, whichever scores higher>"],
   "concepts": [
     {
       "id": "A",
@@ -446,9 +441,10 @@ OUTPUT — return ONLY valid JSON, no preamble:
   "why_recommended": "<one line>"
 }
 
-archetypes_chosen is fixed: opposites-split and reaction-to-object are always two of
-the three; pick the third by fit score (the higher of evidence-closeup vs
-on-location). Be decisive — no hedging. The recommended concept maximizes click_score
+archetypes_chosen is fixed: reaction-to-object and evidence-closeup (both staged
+in the creator's real studio set) are always two of the three; pick the breaker by
+fit score (the higher of opposites-split vs on-location). Only if evidence-closeup
+has no real figure to mark: swap it for the other breaker. Be decisive — no hedging. The recommended concept maximizes click_score
 while keeping freshness_score >= 7. Every concept you emit must ALREADY pass the
 STEP 3 self-audit at 7+ on both overlay_punch and expression_match — rewrite
 before output, never ship a sub-7 concept.`;
@@ -617,10 +613,13 @@ const CAPTION_BLOCK_ROTATION_DEG = 0;   // slight tilt (1-2) for younger brands;
 
 let fontRegistered = false;
 function ensureCaptionFont() {
-  if (!fontRegistered) {
-    GlobalFonts.registerFromPath(CAPTION_FONT_PATH, CAPTION_FONT_FAMILY);
-    fontRegistered = true;
+  if (fontRegistered) return;
+  if (!existsSync(CAPTION_FONT_PATH)) {
+    throw new Error(`Caption font file missing at ${CAPTION_FONT_PATH} — commit api/fonts/LibreFranklin-Black.ttf and make sure Vercel bundles it (vercel.json includeFiles).`);
   }
+  const ok = GlobalFonts.registerFromPath(CAPTION_FONT_PATH, CAPTION_FONT_FAMILY);
+  if (!ok) throw new Error(`Caption font failed to register from ${CAPTION_FONT_PATH}.`);
+  fontRegistered = true;
 }
 
 // bottom-right is intentionally absent: YouTube's duration badge covers it.
@@ -757,6 +756,10 @@ async function composeCaption(baseBuffer, concept) {
 
   const layout = bestLayout(ctx, words, zoneWidthPx, zone.maxFont * H, zoneName === 'top-banner');
   const fontSize = layout.font; // never force it larger: that would overflow the zone
+  ctx.font = `${fontSize}px "${CAPTION_FONT_FAMILY}"`;
+  if (!Number.isFinite(fontSize) || ctx.measureText(words.join(' ')).width < 1) {
+    throw new Error('Caption measured at zero width — font not usable, refusing to ship a caption-less thumbnail.');
+  }
   ctx.font = `${fontSize}px "${CAPTION_FONT_FAMILY}"`;
   ctx.textBaseline = 'alphabetic';
 
