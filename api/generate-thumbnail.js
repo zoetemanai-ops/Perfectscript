@@ -89,15 +89,14 @@ NON-NEGOTIABLE PRINCIPLES:
    believably so the face reads instantly on mobile, with real separation between
    subject and background. The background brightness and mood are FREE and should
    VARY across the three concepts: bright, neutral, or darker, whichever genuinely
-   fits — there is no single default, so do not make every thumbnail dark, and do
-   not wash every thumbnail in the same warm golden grade. Warm, dark or colored
-   light is welcome when something real in the scene motivates it (an actual lamp,
-   a window, a screen) or when a concept is clearly stronger that way; just don't
-   apply it on autopilot to all three. "Premium" here means clean, sharp and real,
+   fits — there is no single default, so do not apply the same look on autopilot
+   to all three. Warm, dark or colored light is welcome when something real in the
+   scene motivates it (an actual lamp, a window, a screen) or when a concept is
+   clearly stronger that way. "Premium" here means clean, sharp and real,
    NOT over-graded or plastic. The creator must read as a real, credible authority
    captured on a real camera.
 5. Mobile-first. Must read at 120px wide.
-6. Curiosity gap. Image + 2-word overlay open a loop the TITLE closes. Tension,
+6. Curiosity gap. Image + 2-4 word overlay open a loop the TITLE closes. Tension,
    never a summary.
 7. creator_visual_notes = the creator's REAL set. If creator_visual_notes is
    provided, it describes the creator's actual recording office/studio (backdrop,
@@ -160,8 +159,7 @@ executions.
    ONE topic-true physical metaphor the creator reacts to, inside a believable
    real environment with natural depth (study / office / room / desk). Light it
    like a clean, well-lit real photograph with real subject/background separation.
-   Creator chest-up, eye contact. No text inside the scene; leave clean, even-toned
-   negative space for the caption.
+   Creator chest-up, eye contact.
 
 2) OPPOSITES-SPLIT
    The background splits into TWO contrasting, topic-true worlds that show the
@@ -177,13 +175,12 @@ executions.
    "one focal point": the split is deliberate, but the creator's face must stay the
    single dominant element and each half must be instantly readable and clearly
    subordinate, never two competing focal points. Distinguish the two halves by real,
-   believable means (different setting, props, or natural light level), not by
-   drenching one side in golden glow. The divide may be a hard edge OR a cleaner
+   believable means (different setting, props, or natural light level). The divide
+   may be a hard edge OR a cleaner
    organic transition down the middle (an almost liquid seam where the two worlds
    meet) — but if you use a transition it must stay crisp, deliberate and instantly
    readable at 0.3s, never a vague smear, fog, floating particles, or murky AI
-   sludge. Both worlds concrete and graspable in 0.3s. No text in the scene; leave
-   space for the caption.
+   sludge. Both worlds concrete and graspable in 0.3s.
 
 3) REACTION-TO-OBJECT
    Creator framed large with a strong, intense reaction to ONE real object that
@@ -206,8 +203,7 @@ executions.
      makes the stakes felt. Real object, unexpected situation.
    The power is the COMBINATION of the creator's hot expression and that single
    object mid-moment. One object, one face, one reaction — no clutter. Do NOT use a
-   plain sheet of paper or a document as the hero object. No text in the scene; leave
-   clean negative space for the caption.
+   plain sheet of paper or a document as the hero object.
 
 4) ON-LOCATION
    Take the creator OUT of the studio into a meaningful real-world PLACE tied to the
@@ -217,7 +213,7 @@ executions.
    Photograph it as a real environment with depth and the natural light of that
    place; the creator stays large and dominant in the foreground, reacting. This
    archetype does NOT use the creator's studio set, so ignore creator_visual_notes
-   for this one. No text in the scene; leave space for the caption.
+   for this one.
 
 In each concept's "angle", say how that archetype is made to fit THIS script.
 
@@ -225,12 +221,10 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
 - List the 4-6 most overused thumbnail EXECUTIONS for THIS exact topic — the tired
   literal renders a viewer has already seen on 50 other finance videos (e.g. a
   plain calculator on a desk, a generic 1040 form, a piggy bank, stacked coins).
-- You may NOT reuse those tired executions as-is. But do NOT flee the topic
-  entirely: a tax video SHOULD still read as being about tax, a retirement video
-  about retirement. The goal is a topic-TRUE object given ONE fresh, unexpected
-  turn — never a premium but unrelated object (vault, door, blank envelope) that
-  only escapes the cliché list by saying nothing about the subject. Reinvent the
-  topic, do not abandon it.
+- You may NOT reuse those tired executions as-is — but do NOT overcorrect by
+  fleeing into a "premium" but subject-blind object (a generic vault, plain door,
+  blank envelope). Give a topic-TRUE object ONE fresh, unexpected turn: reinvent
+  the topic, do not abandon it.
 - The three concepts must be genuinely different from each other. HARD RULE: they
   MUST use three DIFFERENT archetypes (see STYLE LIBRARY) and must also differ in
   background and composition, so a run never looks like three versions of one
@@ -249,18 +243,12 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
   inside a real environment with depth — at a desk or table, in a study, office, or
   room — with foreground, midground and a background that has lamps, shelves,
   furniture or texture. Light it naturally and cleanly; it must not be a flat, empty
-  void, and it must not be the same dark or golden look every time — vary the
-  brightness and mood across the three. A cleaner background is fine when a single
+  void. A cleaner background is fine when a single
   hero object carries the shot, but lean toward the richer, fuller scene.
-- REAL, RECOGNIZABLE props. Whatever object carries the metaphor must look like a
-  genuine physical thing photographed in the room: real materials with real texture,
-  weight, edge wear and a natural contact shadow — never a generic, plasticky or
-  crude AI object, never an invented novelty object or engraved/branded plaque, and
-  never a flat, boring default (a plain blank sheet, a generic paper stack). Use an
-  ordinary, instantly recognizable real object; if you want surprise, put it in an
-  unexpected SITUATION or state (being shredded, torn, burning, locked) rather than
-  inventing a weird object. Believable small details should sell it as photographed,
-  not generated.
+- REAL, RECOGNIZABLE props. Any object carrying the metaphor must be an ordinary,
+  instantly recognizable real thing, photographed with real materials and a natural
+  contact shadow — never a plasticky AI object, an invented novelty, an
+  engraved/branded plaque, or a flat default (a blank sheet, a plain paper stack).
 - Keep the environment SUBORDINATE: softly lit / gently blurred so the face and
   hero object stay sharp and dominant in front. Avoid props the viewer cannot
   place (cracked rock or tree stumps, drifting fog, floating embers/particles,
@@ -314,8 +302,8 @@ TEXT IN THE IMAGE:
 - By default NO text appears in the scene itself — only the caption. The single
   exception is small, incidental text that naturally lives on a real object (e.g. a
   short header or sign on a prop in reaction-to-object or on-location). Keep any such
-  text tiny, real-looking and incidental (1 to 3 words), never hero-sized, never a
-  big standalone year or number, and never full sentences or paragraphs (the image
+  text tiny, real-looking and incidental (1 to 3 words), never hero-sized, and
+  never full sentences or paragraphs (the image
   model garbles long text).
 
 AVOID (AI-slop tells): cluttered scenes, multiple competing focal points, generic
@@ -346,7 +334,7 @@ OUTPUT — return ONLY valid JSON, no preamble:
       "overlay": {"words": "2 TO 4 WORDS — a short emotional phrase", "rationale": "...", "score": 0},
       "freshness_score": 0,
       "click_score": 0,
-      "scene_prompt": "<ONE paragraph for the image model: 16:9 photorealistic thumbnail that looks like a real photo, not a render; describe the creator WITH an explicit instruction to keep face and identity exactly consistent with the supplied reference images, same person; the archetype scene and/or metaphor; the hot-but-credible emotion; framing chest-up with eye contact by default; composition; natural realistic lighting (varied brightness/mood across the three concepts, not the same dark or golden look every time). Leave clean, even-toned, low-detail negative space away from the face for the caption that gets added on top. If a real prop in the scene naturally carries a tiny header/sign, you may describe it (1-3 words, small and incidental, never hero-sized). End with 'One clear focal point, readable as a small mobile thumbnail.'>"
+      "scene_prompt": "<ONE paragraph for the image model: 16:9 photorealistic thumbnail that looks like a real photo, not a render; describe the creator WITH an explicit instruction to keep face and identity exactly consistent with the supplied reference images, same person; the archetype scene and/or metaphor; the hot-but-credible emotion; framing chest-up with eye contact by default; composition; natural realistic lighting. Leave clean, even-toned, low-detail negative space away from the face for the caption that gets added on top. If a real prop in the scene naturally carries a tiny header/sign, you may describe it (1-3 words, small and incidental, never hero-sized). End with 'One clear focal point, readable as a small mobile thumbnail.'>"
     },
     { "id": "B" },
     { "id": "C" }
@@ -510,11 +498,10 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
     overlay_words: concept.overlay?.words || '',
     archetype: concept.archetype || '',
     angle: concept.angle || '',
-    score: null, // filled later by CleanCut
   };
 }
 
-// ── tell GPT to render the 2-word caption itself, in the chosen brand style ──
+// ── tell GPT to render the 2-4 word caption itself, in the chosen brand style ──
 function buildTextDirective(concept) {
   const words = String(concept.overlay?.words || '').replace(/[\/|]+/g, ' ').replace(/\s+/g, ' ').trim().toUpperCase();
   if (!words) return 'Render no text anywhere in the image.';
