@@ -1,3 +1,4 @@
+
 // api/generate-thumbnail.js
 // ─────────────────────────────────────────────────────────────────────────────
 // Perfect Thumbnail · Vercel Node serverless function (GPT Image 2)
@@ -388,50 +389,48 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
    openly DESIGNED GRAPHIC instead of a photograph — the sanctioned exception
    to Principle 11: it must look deliberately designed by a top thumbnail
    designer, never like a faked photo and never like messy AI compositing.
-   - CREATOR: fully photorealistic (identity from the references), center or
-     slightly off-center. SANCTIONED SIZE EXCEPTION: in this archetype he may
-     take LESS of the frame than the usual dominance rule — framed from
-     mid-chest, moderately sized — because the options must render at HEAD
-     SCALE around him; his face stays the sharpest element. He is VISIBLY SEATED,
-     sunk into the format's FIXED seat — a dark charcoal, softly upholstered
-     lounge chair, its curved back and armrests clearly entering the frame
-     around his shoulders and at the bottom corners, cropped by the bottom
-     edge. Matte fabric, a shade darker than the backdrop, neutral so it never
-     competes with the option colors — subordinate and softly lit, but
-     unmistakably THERE, so he reads as settled into something real, never a
-     floating torso. Same chair for every creator, like the backdrop.
-     EXPRESSION — a light FROWN: brows drawn together, a critical, faintly
-     annoyed deadpan — the face of a man who has judged all of these and is
-     not impressed. TWO gaze modes, pick what fits: (a) locked straight into
-     the camera, or (b) frowning AT the options themselves — eyes cut sideways
-     and slightly up toward one of the objects floating beside his head, as if
-     critically inspecting the things hovering around him ("what is this stuff
-     even doing here"). Mode (b) routes the viewer's eye along his gaze into
-     the lineup. Understated, never theatrical, never mild-pleasant. His hands
-     stay DOWN and empty (resting, mostly out of frame) — he holds NOTHING:
-     holding or elevating any option would reveal the verdict.
+   - CREATOR — NUMERIC FRAMING, NON-NEGOTIABLE (this archetype OVERRIDES the
+     usual face-dominance sizing): the TOP of his head sits roughly 35-40%
+     DOWN from the top edge of the frame, so the entire band above his head
+     stays open backdrop for the options. He occupies roughly the middle 40%
+     of the frame's width and only the lower ~60% of its height — noticeably
+     SMALLER than in every other archetype; the options are the giants here.
+     His face stays the sharpest element. He is VISIBLY SEATED,
+     sunk low into the format's FIXED seat — a dark charcoal fabric SOFA, its
+     back and armrests clearly entering the frame around his shoulders and in
+     the bottom corners, cropped by the bottom edge, exactly like a subject
+     slouched into a couch. Matte fabric, a shade darker than the backdrop,
+     neutral so it never competes with the tile colors — subordinate and
+     softly lit, but unmistakably THERE, never a floating torso. Same sofa for
+     every creator, like the backdrop.
+     EXPRESSION — FIXED for this format: face fully FRONTAL toward the
+     camera, head straight and level, with a light FROWN (brows drawn
+     together, critical, faintly annoyed) and his EYES rolled slightly UPWARD
+     toward the tile floating directly above his head — the classic "glancing
+     up at the thing hovering over me" look. Head never tilts back and never
+     turns: only the eyes travel up. Understated, never theatrical, never
+     mild-pleasant. His hands stay DOWN and empty (resting, mostly out of
+     frame) — he holds NOTHING: holding or elevating any option would reveal
+     the verdict.
    - EQUAL TREATMENT (this keeps the ranking unresolved): all options get the
      SAME visual weight — same lighting logic, none held, none elevated, none
      dimmed, none tipped, none numbered. The tension comes from the lineup
      itself plus his unimpressed frown: a verdict clearly exists in his head,
      and the only way to learn the order is to click.
-   - BACKDROP — FIXED for every creator: a seamless studio gradient in a
-     bright, cool STEEL BLUE (a light, slightly desaturated azure — the classic
-     lineup-thumbnail blue), identical across all creators so the format is
-     instantly recognizable. BRIGHTEST directly behind his head and
-     shoulders (a soft halo that separates him). The ENTIRE backdrop reads
-     BRIGHT and airy, like a professionally lit studio cyc wall — the hue
-     clearly visible at a light-to-mid tone across the whole frame, with only
-     the gentlest falloff toward the corners, which NEVER crush to black or
-     deep shadow. As a tiny feed tile the thumbnail must read as a bright,
-     colorful image. The light reads as ONE soft, hazy BLOOM from above —
-     brightest in the upper center behind and above his head, dissolving
-     smoothly outward — with NO light rays or beams. The backdrop SURFACE
-     itself, however, carries a fine material texture: minuscule, barely
-     visible thin striations running through the blue, like a hand-painted
-     photography-studio canvas backdrop — subtle brush-stroke streaks that
-     make it read as a real painted material instead of a smooth digital
-     gradient. No room, no set, no scenery, no horizon.
+   - BACKDROP — FIXED for every creator: a seamless studio backdrop in a
+     DUSTY, grey-leaning STEEL BLUE — muted and slightly desaturated, never a
+     saturated royal blue — identical across all creators so the format is
+     instantly recognizable. The light reads as ONE soft, hazy BLOOM:
+     brightest in the upper center directly behind and above his head, with a
+     PRONOUNCED but smooth falloff — the corners and edges a clearly DEEPER,
+     moodier blue (never black), so the frame has real atmosphere instead of
+     an evenly lit flat wall. NO light rays or beams. The backdrop SURFACE
+     carries a fine but CLEARLY VISIBLE streaked texture: thin striations and
+     brush-stroke streaks running through the blue, like a hand-painted
+     photography-studio canvas backdrop — the texture must be plainly present
+     in the final image; a perfectly smooth, flat digital gradient is WRONG.
+     Still readable as a colorful blue image at tiny feed size. No room, no
+     set, no scenery, no horizon.
    - THE OPTIONS: EXACTLY the options the script ranks — one floating 3D
      object per ranked option, mapped 1:1, never a substitute, filler or extra
      object (if the script ranks five things, five objects appear; a viewer
@@ -439,9 +438,12 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      at the SCALE OF HIS HEAD — big, dominant tiles and objects that fill the
      upper half of the frame like the app icons in top-tier lineup thumbnails,
      never small scattered trinkets in the margins. Arranged as a tight CROWN
-     arc hugging his head and shoulders — small, even gaps, orderly and
-     deliberate, every object FULLY inside the frame (never cropped by an
-     edge), each rotated in 3D space with PRONOUNCED perspective — a side face
+     arc OVER and around his head: one or two objects sit DIRECTLY ABOVE his
+     head in the open top band, and the rest step down symmetrically beside
+     his temples and shoulders — small, even gaps, orderly and deliberate,
+     filling the top band of the frame. NEVER two vertical side columns with
+     an empty top: if nothing sits above the head, the composition is wrong.
+     Every object FULLY inside the frame (never cropped by an edge), each rotated in 3D space with PRONOUNCED perspective — a side face
      of every tile or object clearly visible, thick extrusion (roughly a sixth
      of its width), rounded corners with bevel highlights — and glossy top
      surfaces carrying soft environment reflections (a faint sheen of light
@@ -451,39 +453,38 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      light as the creator. DEPTH LAYERING: one or two objects sit partially
      BEHIND his shoulders, his body cutting in front of them, so the
      composition reads in real layers — backdrop, objects, person — with the
-     face never covered by anything. Give every option its
-     OWN distinct color and
-     material identity (gold reads gold, cash reads green-white, a 401k tile
-     graphite, a Roth tile warm scarlet, an index-fund tile white with a small
-     clean chart-line) so the lineup parses as different options at a glance — never
-     a cluster of same-colored objects, and NEVER an object in the same hue as
-     the steel-blue backdrop (a blue tile vanishes into it — make an index or
-     chart tile white, green or graphite instead). TILE PALETTE (tuned to the
-     fixed steel-blue backdrop): pick tile colors from clean white/silver,
-     graphite/near-black, warm scarlet red, amber/orange, and emerald green —
-     warm hues sing against the blue, so when a tile is red make it a WARM
-     scarlet, never a deep cold crimson (it clashes against the blue instead
-     of popping). Natural objects keep their real material (gold reads gold,
-     cash green-white). Physical options get a real miniature object (a
-     gold bar, a bitcoin coin, a banded stack of cash, a model house); abstract
-     options (401k, ETF, annuity) get a clean rounded-square 3D tile with ONE
-     short embossed label of 2-5 characters ("401K", "ETF") — maximum TWO
-     labeled tiles per composition, and these labels are the only text allowed
-     on the objects. NEVER a real brand logo or trademark.
+     face never covered by anything. ONE UNIFORM TILE SYSTEM —
+     every option, physical or abstract, becomes the SAME kind of tile: a
+     thick, glossy, rounded-square 3D app-icon tile (squircle), all tiles the
+     same size and thickness, each with its own slight tilt — exactly the tile
+     language of top-tier lineup thumbnails. Each tile's FACE carries its
+     option's identity: either ONE simple bold icon graphic (a bitcoin ₿
+     symbol, a gold-bar glyph, a clean rising chart-line) or ONE short
+     embossed label of 2-5 characters ("401K", "ROTH") — one element per
+     tile, never both, never sentences; these are the only text/graphics
+     allowed on the tiles. NEVER a real brand logo or trademark. TILE PALETTE
+     (tuned to the fixed steel-blue backdrop): each tile its own color from
+     clean white/silver, graphite/near-black, warm scarlet red, amber/orange,
+     gold, and emerald green — warm red means a WARM scarlet, never a deep
+     cold crimson, and NEVER a tile in the backdrop's own blue (it vanishes).
+     The lineup must parse as different options at a glance, never a cluster
+     of same-colored tiles.
    - SPACE: consistent object sizing (small natural variation from the 3D
      perspective is fine, never a deliberate hero size); nothing ever overlaps
      or touches the face.
    - SCENE_PROMPT TRANSCRIPTION — the image model only ever sees your
      scene_prompt, never this recipe. For this archetype your scene_prompt MUST
-     explicitly spell out, in words: the bright steel-blue backdrop with the
-     soft bloom above his head, its fine painted-canvas striation texture (and
-     explicitly: no light rays or beams), the VISIBLY seated pose — chair or
-     charcoal lounge chair entering the frame — with empty hands, the light
-     frown and its gaze direction (into the camera, or cut toward one floating
-     option),
+     explicitly spell out, in words: the dusty steel-blue backdrop with the
+     bright bloom behind his head and clearly deeper corners, its plainly
+     visible painted-canvas streak texture (and explicitly: no light rays or
+     beams), the VISIBLY seated pose — chair or
+     charcoal sofa entering the frame — with empty hands, the frontal face
+     with the light frown and the eyes rolled slightly up toward the tile
+     directly above his head,
      every option object WITH its color and 3D treatment, the crown
-     arrangement at head scale, the depth layering, and the equal treatment of
-     all options. Anything you leave out of scene_prompt will not render —
+     arrangement at head scale WITH the numeric framing (top of head 35-40%
+     down, options filling the open top band, one or two directly above the
+     head), the depth layering, and the equal treatment of all options. Anything you leave out of scene_prompt will not render —
      transcribe the recipe, do not summarize it.
    - CAPTION — NONE, ever: for this archetype the overlay words are ALWAYS an
      empty string. The title names the game; the lineup and his frown are the
