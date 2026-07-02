@@ -389,17 +389,42 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
    to Principle 11: it must look deliberately designed by a top thumbnail
    designer, never like a faked photo and never like messy AI compositing.
    - CREATOR: fully photorealistic (identity from the references), chest-up,
-     large, center or slightly off-center, sizing up his options with a
-     judging, deciding expression; he MAY hold the winning option in one hand.
+     large, center or slightly off-center. EXPRESSION: actively WEIGHING the
+     options — a skeptical raised brow, a hard deliberating stare, or eyes cut
+     sideways toward one option — never mild, pleasant or neutral; the face
+     must ask "which one wins?". GAZE: either locked hard into the camera
+     ("you won't believe this order") or locked onto the single most
+     controversial option so the viewer's eye follows his — never a vague
+     middle-distance look. He MAY hold the winning option in one hand.
+   - THE TENSION DEVICE (this is what makes a ranking thumbnail click): the
+     ranking must be VISIBLE but UNRESOLVED. Exactly ONE option is visibly
+     WINNING (held in his hand, or subtly elevated and catching the most
+     light) and exactly ONE option is visibly LOSING — tipped over, slipping
+     out of the arc, or slightly dimmed and desaturated. Never more than one
+     of each, never rank the middle, and never number or order anything: the
+     viewer must see that a verdict EXISTS without learning it. Five equal
+     floating objects is an inventory, not a thumbnail.
    - BACKDROP: a seamless studio gradient in ONE saturated hue pulled from the
      creator's brand or set palette, BRIGHTEST directly behind his head and
-     shoulders (a soft halo that separates him) and falling into a soft dark
-     vignette toward the corners. No room, no set, no scenery, no horizon.
-   - THE OPTIONS: one floating 3D object per option, 3 to 5 total, arranged in
-     a clean ARC around his head and shoulders — generous, even spacing, each
+     shoulders (a soft halo that separates him) with a SHALLOW, soft vignette
+     toward the corners — the corners keep a clearly visible, rich version of
+     the hue and NEVER crush to black. The hue lives in the MIDTONES: as a tiny
+     feed tile the thumbnail must read as a colorful image, never a dark one.
+     No room, no set, no scenery, no horizon.
+   - THE OPTIONS: EXACTLY the options the script ranks — one floating 3D
+     object per ranked option, mapped 1:1, never a substitute, filler or extra
+     object (if the script ranks five things, five objects appear; a viewer
+     must be able to match every object to a ranked option). Arranged in a
+     clean ARC around his head and shoulders — generous, even spacing, each
      with its own slight tilt, real thickness and bevels, subtle specular
-     highlights, soft shadows cast onto the backdrop, and ALL lit by the same
-     key light as the creator. Physical options get a real miniature object (a
+     highlights, soft shadows cast onto the backdrop plus a faint soft glow
+     seating each object in the space (nothing floats like a pasted sticker),
+     and ALL lit by the same key light as the creator. Give every option its
+     OWN distinct color and
+     material identity (gold reads gold, cash reads green-white, a 401k tile
+     deep navy, a Roth tile deep red, an index-fund tile with a small clean
+     chart-line) so the lineup parses as different options at a glance — never
+     a cluster of same-colored objects. Physical options get a real miniature object (a
      gold bar, a bitcoin coin, a banded stack of cash, a model house); abstract
      options (401k, ETF, annuity) get a clean rounded-square 3D tile with ONE
      short embossed label of 2-5 characters ("401K", "ETF") — maximum TWO
@@ -408,6 +433,11 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
    - HIERARCHY & SPACE: two object sizes only, the hero option slightly
      larger; nothing ever overlaps or touches the face, and the chosen
      caption_zone stays completely free of objects.
+   - CAPTION: for this archetype the overlay is OPTIONAL — when the lineup
+     itself is the hook (a pure ranking video whose title already names the
+     options), set the overlay words to an empty string and let the objects,
+     the expression and the title do all the work; when a caption does earn
+     its place, keep it to 2 words.
 
 THE OVERLAY — a short, emotionally charged phrase, 2 to 3 words MAX (per concept):
 - HARD CAP: 2 to 3 words, never 4. Shorter renders BIGGER and reads faster on a
@@ -540,7 +570,7 @@ OUTPUT — return ONLY valid JSON, no preamble:
       "subject_direction": "<expression (hot but credible), pose, gesture, framing, placement>",
       "composition": "<focal point, rule-of-thirds, fg/bg, and where the calm caption area sits>",
       "color_and_lighting": "...",
-      "overlay": {"words": "2 TO 3 WORDS MAX — a short emotional phrase", "highlight_word": "<exactly ONE word from words that carries the stake/emotion — or null>", "highlight_style": "<none|block>", "rationale": "...", "score": "<0-10 overlay_punch, >=7 after self-audit>"},
+      "overlay": {"words": "2 TO 3 WORDS MAX — a short emotional phrase (ranked-lineup only: may be an empty string when the lineup itself is the hook)", "highlight_word": "<exactly ONE word from words that carries the stake/emotion — or null>", "highlight_style": "<none|block>", "rationale": "...", "score": "<0-10 overlay_punch, >=7 after self-audit>"},
       "expression_match": "<0-10, >=7 after self-audit>",
       "freshness_score": 0,
       "click_score": 0,
@@ -687,7 +717,7 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
   const isLineup = (concept.archetype || '') === 'ranked-lineup';
   const quality = isLineup
     ? 'DESIGNED GRAPHIC MODE: this thumbnail is a clean, professionally DESIGNED graphic composition, not a photograph of a real scene. ' +
-      'The creator himself stays fully PHOTOREALISTIC — real skin texture with visible pores, real hair, natural light on the face, exactly the person in the reference photos — composited large like a premium poster subject. ' +
+      'The creator himself stays fully PHOTOREALISTIC — real skin texture with visible pores, real hair, natural light on the face, exactly the person in the reference photos — composited large like a premium poster subject, with a subtle RIM LIGHT in the backdrop hue tracing his shoulders and hair so he sits IN the colored space instead of cut against it. ' +
       'Everything around him is intentional graphic design: a seamless studio-backdrop gradient in one saturated hue, brightest directly behind his head and shoulders and falling into a soft vignette toward the corners, ' +
       'and floating 3D objects with real thickness, consistent key lighting and soft shadows cast onto the backdrop. ' +
       'Clean, balanced, deliberate — it must read as the work of a top thumbnail designer, never as a faked photograph and never as messy AI compositing.'
