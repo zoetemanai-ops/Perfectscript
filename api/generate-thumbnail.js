@@ -155,7 +155,9 @@ NON-NEGOTIABLE PRINCIPLES:
    in chains, burning, frozen, levitating or glowing props, impossible object
    combinations, symbolic still-lifes nobody would build. Drama comes from the
    creator's ACTION and expression, real places, and real consequences — things
-   a camera could actually catch.
+   a camera could actually catch. The ONE sanctioned exception is the
+   ranked-lineup archetype, which is an openly DESIGNED graphic rather than a
+   photograph and follows its own rules in the STYLE LIBRARY.
 
 TITLE + THUMBNAIL = ONE HOOK:
 On YouTube the viewer always sees the thumbnail and the title TOGETHER — they
@@ -169,9 +171,10 @@ merely avoid repeating its words.
 STYLE LIBRARY — the pool is FOUR archetypes; every run = 2 OFFICE + 1 BREAKER:
 This factory has FOUR thumbnail archetypes in two groups. OFFICE archetypes are
 staged in the creator's real studio set (creator_visual_notes): reaction-to-object
-and evidence-closeup. BREAKER archetypes leave the studio: opposites-split and
-on-location. Every run MUST include BOTH office archetypes, each as its own
-concept, plus ONE breaker — score opposites-split and on-location for THIS script
+and evidence-closeup. BREAKER archetypes leave the studio: opposites-split,
+on-location, and — ONLY when the script ranks or compares 3 to 5 concrete
+options — ranked-lineup. Every run MUST include BOTH office archetypes, each as
+its own concept, plus ONE breaker — score the eligible breakers for THIS script
 and build whichever fits best. EXCEPTION: if the script offers no strong real
 figure for evidence-closeup, swap it for the OTHER breaker that run (the run then
 becomes reaction-to-object + both breakers). Result: 3 concepts across three
@@ -209,8 +212,13 @@ executions.
      page stays soft-focus, blurred and illegible — never readable sentences or
      paragraphs.
    - The figure must be REAL, pulled from video_title / hook / main_idea
-     (Principle 9 applies in full); if the script offers no strong concrete
-     figure, this archetype does not fit — swap it per the STYLE LIBRARY rule.
+     (Principle 9 applies in full) — AND it must belong to the video's CORE
+     CLAIM: the number the viewer clicks to understand. NEVER use the creator's
+     biographical credentials that merely introduce him in the hook (his old
+     salary, years of experience, assets under management, book titles or
+     stats): a circled figure promises the video is ABOUT that number. If the
+     only concrete figures available are bio credentials, this archetype does
+     not fit — swap it per the STYLE LIBRARY rule.
    - The document reads as what it is through LAYOUT and physical cues (official
      letterhead shape, a table grid, an envelope it came from, a screen UI), not
      through readable words.
@@ -373,6 +381,34 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
 - Avoid depending on an exact COUNT of objects (e.g. "five envelopes") — image
   models miscount. Use "one red among plain ones" or a single hero object.
 
+5) RANKED LINEUP (breaker — ONLY for ranking / comparison scripts)
+   Eligible ONLY when the script ranks or compares 3 to 5 concrete options
+   (assets, accounts, strategies); for any other script this archetype is
+   ineligible and its fit score is 0. This is the ONE archetype that is an
+   openly DESIGNED GRAPHIC instead of a photograph — the sanctioned exception
+   to Principle 11: it must look deliberately designed by a top thumbnail
+   designer, never like a faked photo and never like messy AI compositing.
+   - CREATOR: fully photorealistic (identity from the references), chest-up,
+     large, center or slightly off-center, sizing up his options with a
+     judging, deciding expression; he MAY hold the winning option in one hand.
+   - BACKDROP: a seamless studio gradient in ONE saturated hue pulled from the
+     creator's brand or set palette, BRIGHTEST directly behind his head and
+     shoulders (a soft halo that separates him) and falling into a soft dark
+     vignette toward the corners. No room, no set, no scenery, no horizon.
+   - THE OPTIONS: one floating 3D object per option, 3 to 5 total, arranged in
+     a clean ARC around his head and shoulders — generous, even spacing, each
+     with its own slight tilt, real thickness and bevels, subtle specular
+     highlights, soft shadows cast onto the backdrop, and ALL lit by the same
+     key light as the creator. Physical options get a real miniature object (a
+     gold bar, a bitcoin coin, a banded stack of cash, a model house); abstract
+     options (401k, ETF, annuity) get a clean rounded-square 3D tile with ONE
+     short embossed label of 2-5 characters ("401K", "ETF") — maximum TWO
+     labeled tiles per composition, and these labels are the only text allowed
+     on the objects. NEVER a real brand logo or trademark.
+   - HIERARCHY & SPACE: two object sizes only, the hero option slightly
+     larger; nothing ever overlaps or touches the face, and the chosen
+     caption_zone stays completely free of objects.
+
 THE OVERLAY — a short, emotionally charged phrase, 2 to 3 words MAX (per concept):
 - HARD CAP: 2 to 3 words, never 4. Shorter renders BIGGER and reads faster on a
   small mobile thumbnail. Contractions (IT'S, WON'T, YOU'RE, DON'T) count as one
@@ -488,15 +524,16 @@ OUTPUT — return ONLY valid JSON, no preamble:
   "cliches_banned": ["<overused execution>", "<overused execution>"],
   "archetype_fit": {
     "evidence-closeup": "<0-10 how well this fits THIS script + one-line why>",
+    "ranked-lineup": "<0-10, ONLY eligible when the script ranks/compares 3-5 concrete options, otherwise 0 + one-line why>",
     "opposites-split": "<0-10 + why>",
     "reaction-to-object": "<0-10 + why>",
     "on-location": "<0-10 + why>"
   },
-  "archetypes_chosen": ["reaction-to-object", "evidence-closeup", "<breaker: opposites-split OR on-location, whichever scores higher>"],
+  "archetypes_chosen": ["reaction-to-object", "evidence-closeup", "<breaker: the eligible breaker (opposites-split / on-location / ranked-lineup) with the highest fit score>"],
   "concepts": [
     {
       "id": "A",
-      "archetype": "<evidence-closeup|opposites-split|reaction-to-object|on-location>",
+      "archetype": "<evidence-closeup|opposites-split|reaction-to-object|on-location|ranked-lineup>",
       "caption_zone": "<top-banner|top-left|top-right|mid-left|mid-right|bottom-left — where the composited caption sits; never where the face or hero object is, never bottom-right>",
       "angle": "<the distinct direction in a phrase, and why this archetype fits>",
       "visual_metaphor": "...",
@@ -518,7 +555,8 @@ OUTPUT — return ONLY valid JSON, no preamble:
 
 archetypes_chosen is fixed: reaction-to-object and evidence-closeup (both staged
 in the creator's real studio set) are always two of the three; pick the breaker by
-fit score (the higher of opposites-split vs on-location). Only if evidence-closeup
+fit score (the highest-scoring eligible breaker: opposites-split, on-location,
+or — for ranking scripts only — ranked-lineup). Only if evidence-closeup
 has no real figure to mark: swap it for the other breaker. Be decisive — no hedging. The recommended concept maximizes click_score
 while keeping freshness_score >= 7. Every concept you emit must ALREADY pass the
 STEP 3 self-audit at 7+ on both overlay_punch and expression_match — rewrite
@@ -646,8 +684,14 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
     'expression: take the facial EXPRESSION exclusively from the scene description above, never from the ' +
     'reference photos. If the references show him smiling or pleasant, do NOT carry that smile over; on a ' +
     'loss, threat or warning concept his face must be serious, hard and grave exactly as the scene describes.';
-  const quality =
-    'PHOTOGRAPHIC REALISM (this must look like a real photo taken on a real camera, NOT a CGI render or an AI image): ' +
+  const isLineup = (concept.archetype || '') === 'ranked-lineup';
+  const quality = isLineup
+    ? 'DESIGNED GRAPHIC MODE: this thumbnail is a clean, professionally DESIGNED graphic composition, not a photograph of a real scene. ' +
+      'The creator himself stays fully PHOTOREALISTIC — real skin texture with visible pores, real hair, natural light on the face, exactly the person in the reference photos — composited large like a premium poster subject. ' +
+      'Everything around him is intentional graphic design: a seamless studio-backdrop gradient in one saturated hue, brightest directly behind his head and shoulders and falling into a soft vignette toward the corners, ' +
+      'and floating 3D objects with real thickness, consistent key lighting and soft shadows cast onto the backdrop. ' +
+      'Clean, balanced, deliberate — it must read as the work of a top thumbnail designer, never as a faked photograph and never as messy AI compositing.'
+    : 'PHOTOGRAPHIC REALISM (this must look like a real photo taken on a real camera, NOT a CGI render or an AI image): ' +
     'shot on a full-frame camera with an 85mm lens at a wide aperture (~f1.8), giving a genuinely SHALLOW depth of field — ' +
     'only the face is tack-sharp while the background falls into soft, natural bokeh (do NOT keep the whole frame equally sharp). ' +
     'Add the subtle imperfections of a real photograph: fine, natural film grain / sensor noise throughout, real skin texture ' +
@@ -708,6 +752,7 @@ function buildTextDirective(concept) {
   let style = String(concept.overlay?.highlight_style || 'none').toLowerCase();
   if (!highlight || style !== 'block') style = 'none';
   const zone = ZONE_HINTS[concept.caption_zone] ? concept.caption_zone : 'top-banner';
+  const isLineup = (concept.archetype || '') === 'ranked-lineup';
 
   const highlightRule =
     style === 'block'
@@ -720,7 +765,9 @@ function buildTextDirective(concept) {
     `PLACEMENT: put the caption ${ZONE_HINTS[zone]}, in the calm area the scene keeps clear there. It must NEVER overlap, touch, or crowd the creator's face or the hero object, and it never sits in the bottom-right corner (YouTube's duration badge covers that).`,
     highlightRule,
     'NO outline or keyline around the letters, NO box or rectangle behind the full caption, no glow, no halo, no underline.',
-    'FINISH — the caption must look professionally set INTO the photograph, never like a sticker floating on top: keep the text facing the camera perfectly flat (no perspective warp, no bending, no 3D), but let it fully share the photograph\u2019s finish — the SAME film grain and sensor noise running visibly through the letterforms at the same intensity as the scene, the same white balance and exposure (a white that clearly belongs to this scene\u2019s light, never a sterile digital #FFFFFF), the letter edges rendered with the same optical softness as the rest of the photo (never razor-sharp vector edges against a soft image), and ONE soft, natural drop shadow that grounds it. Finish it the way a professional thumbnail designer would: the white picks up a subtle tint of the scene\u2019s ambient light, the background directly behind the caption may be gently and locally deepened for contrast (a subtle designer\u2019s gradient, never a visible box or band), and where the creator\u2019s shoulder, arm or hair naturally reaches the caption area, the person may slightly OVERLAP and cut in front of the caption\u2019s nearest edge, so the text visibly sits INSIDE the scene\u2019s depth between background and subject — the FACE itself always stays fully clear of the text. It must remain bold, high-contrast and instantly legible at a small mobile size — integrated, never faded, washed out, or blended INTO transparency.',
+    isLineup
+      ? 'FINISH — this caption is part of a designed graphic composition: render it as clean, crisp, perfectly flat graphic text in the same design language as the rest of the composition, evenly lit, with ONE soft drop shadow cast onto the backdrop. No photo grain, no perspective warp, no bending, never faded or washed out.'
+      : 'FINISH — the caption must look professionally set INTO the photograph, never like a sticker floating on top: keep the text facing the camera perfectly flat (no perspective warp, no bending, no 3D), but let it fully share the photograph\u2019s finish — the SAME film grain and sensor noise running visibly through the letterforms at the same intensity as the scene, the same white balance and exposure (a white that clearly belongs to this scene\u2019s light, never a sterile digital #FFFFFF), the letter edges rendered with the same optical softness as the rest of the photo (never razor-sharp vector edges against a soft image), and ONE soft, natural drop shadow that grounds it. Finish it the way a professional thumbnail designer would: the white picks up a subtle tint of the scene\u2019s ambient light, the background directly behind the caption may be gently and locally deepened for contrast (a subtle designer\u2019s gradient, never a visible box or band), and where the creator\u2019s shoulder, arm or hair naturally reaches the caption area, the person may slightly OVERLAP and cut in front of the caption\u2019s nearest edge, so the text visibly sits INSIDE the scene\u2019s depth between background and subject — the FACE itself always stays fully clear of the text. It must remain bold, high-contrast and instantly legible at a small mobile size — integrated, never faded, washed out, or blended INTO transparency.',
     'Size the caption LARGE and consistent: it fills its area confidently — roughly a third of the frame, and as a top banner it runs nearly full-width with a HUGE cap height (each line roughly a sixth of the frame height), hugging the top of the frame with only a small margin — big enough to punch and read instantly on a small mobile thumbnail. When a red highlight block sits on the top line of a top banner, the block may extend to and bleed off the top edge of the frame, like a news banner cropped by the frame. Keep this scale the SAME across all three concepts: never let one come out noticeably smaller or more timid than the others.',
     'Crisp, perfectly legible, correctly spelled, with NO extra, missing, or misspelled words. Apart from this caption, the ONLY other text permitted is what the scene description explicitly calls for: a single tiny incidental real-world label on a real object (1 to 3 words, small and natural, never hero-sized) or one short marked figure on a document. No other text, letters, words, logos, or watermarks anywhere.',
   ].join(' ');
