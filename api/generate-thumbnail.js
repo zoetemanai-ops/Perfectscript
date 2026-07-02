@@ -392,24 +392,29 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      slightly off-center. SANCTIONED SIZE EXCEPTION: in this archetype he may
      take LESS of the frame than the usual dominance rule — framed from
      mid-chest, moderately sized — because the options must render at HEAD
-     SCALE around him; his face stays the sharpest element. He is SEATED and
-     settled, anchored to the bottom edge of the frame, with a barely-visible
-     hint of a real chair or desk edge at the very bottom — mostly cropped,
-     dark and subtle — grounding the graphic in something real.
-     EXPRESSION — UNDERSTATED, never theatrical: the icons carry the energy,
-     the face carries the cool. Default: calm, deadpan, unimpressed, locked
-     straight into the camera — "I already know the order" energy.
-     Alternative: a subtle, quiet glance toward the single most controversial
-     option so the viewer's eye follows his. Never mild-pleasant, never an
-     exaggerated raised brow or theatrical side-eye. He MAY hold the winning option in one hand.
-   - THE TENSION DEVICE (this is what makes a ranking thumbnail click): the
-     ranking must be VISIBLE but UNRESOLVED. Exactly ONE option is visibly
-     WINNING (held in his hand, or subtly elevated and catching the most
-     light) and exactly ONE option is visibly LOSING — tipped over, slipping
-     out of the arc, or slightly dimmed and desaturated. Never more than one
-     of each, never rank the middle, and never number or order anything: the
-     viewer must see that a verdict EXISTS without learning it. Five equal
-     floating objects is an inventory, not a thumbnail.
+     SCALE around him; his face stays the sharpest element. He is VISIBLY SEATED,
+     sunk into the format's FIXED seat — a dark charcoal, softly upholstered
+     lounge chair, its curved back and armrests clearly entering the frame
+     around his shoulders and at the bottom corners, cropped by the bottom
+     edge. Matte fabric, a shade darker than the backdrop, neutral so it never
+     competes with the option colors — subordinate and softly lit, but
+     unmistakably THERE, so he reads as settled into something real, never a
+     floating torso. Same chair for every creator, like the backdrop.
+     EXPRESSION — a light FROWN: brows drawn together, a critical, faintly
+     annoyed deadpan — the face of a man who has judged all of these and is
+     not impressed. TWO gaze modes, pick what fits: (a) locked straight into
+     the camera, or (b) frowning AT the options themselves — eyes cut sideways
+     and slightly up toward one of the objects floating beside his head, as if
+     critically inspecting the things hovering around him ("what is this stuff
+     even doing here"). Mode (b) routes the viewer's eye along his gaze into
+     the lineup. Understated, never theatrical, never mild-pleasant. His hands
+     stay DOWN and empty (resting, mostly out of frame) — he holds NOTHING:
+     holding or elevating any option would reveal the verdict.
+   - EQUAL TREATMENT (this keeps the ranking unresolved): all options get the
+     SAME visual weight — same lighting logic, none held, none elevated, none
+     dimmed, none tipped, none numbered. The tension comes from the lineup
+     itself plus his unimpressed frown: a verdict clearly exists in his head,
+     and the only way to learn the order is to click.
    - BACKDROP — FIXED for every creator: a seamless studio gradient in a
      bright, cool STEEL BLUE (a light, slightly desaturated azure — the classic
      lineup-thumbnail blue), identical across all creators so the format is
@@ -419,10 +424,14 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      clearly visible at a light-to-mid tone across the whole frame, with only
      the gentlest falloff toward the corners, which NEVER crush to black or
      deep shadow. As a tiny feed tile the thumbnail must read as a bright,
-     colorful image. Run soft, subtle DIAGONAL LIGHT RAYS through the
-     backdrop — faint studio beams through light haze, barely visible streaks
-     of brighter blue that give the gradient atmosphere and texture — never
-     hard bands or visible stripes. No room, no set, no scenery, no horizon.
+     colorful image. The light reads as ONE soft, hazy BLOOM from above —
+     brightest in the upper center behind and above his head, dissolving
+     smoothly outward — with NO light rays or beams. The backdrop SURFACE
+     itself, however, carries a fine material texture: minuscule, barely
+     visible thin striations running through the blue, like a hand-painted
+     photography-studio canvas backdrop — subtle brush-stroke streaks that
+     make it read as a real painted material instead of a smooth digital
+     gradient. No room, no set, no scenery, no horizon.
    - THE OPTIONS: EXACTLY the options the script ranks — one floating 3D
      object per ranked option, mapped 1:1, never a substitute, filler or extra
      object (if the script ranks five things, five objects appear; a viewer
@@ -445,23 +454,41 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      face never covered by anything. Give every option its
      OWN distinct color and
      material identity (gold reads gold, cash reads green-white, a 401k tile
-     deep navy, a Roth tile deep red, an index-fund tile with a small clean
-     chart-line) so the lineup parses as different options at a glance — never
-     a cluster of same-colored objects. Physical options get a real miniature object (a
+     graphite, a Roth tile warm scarlet, an index-fund tile white with a small
+     clean chart-line) so the lineup parses as different options at a glance — never
+     a cluster of same-colored objects, and NEVER an object in the same hue as
+     the steel-blue backdrop (a blue tile vanishes into it — make an index or
+     chart tile white, green or graphite instead). TILE PALETTE (tuned to the
+     fixed steel-blue backdrop): pick tile colors from clean white/silver,
+     graphite/near-black, warm scarlet red, amber/orange, and emerald green —
+     warm hues sing against the blue, so when a tile is red make it a WARM
+     scarlet, never a deep cold crimson (it clashes against the blue instead
+     of popping). Natural objects keep their real material (gold reads gold,
+     cash green-white). Physical options get a real miniature object (a
      gold bar, a bitcoin coin, a banded stack of cash, a model house); abstract
      options (401k, ETF, annuity) get a clean rounded-square 3D tile with ONE
      short embossed label of 2-5 characters ("401K", "ETF") — maximum TWO
      labeled tiles per composition, and these labels are the only text allowed
      on the objects. NEVER a real brand logo or trademark.
-   - HIERARCHY & SPACE: two object sizes only, the hero option slightly
-     larger; nothing ever overlaps or touches the face, and the chosen
-     caption_zone stays completely free of objects.
-   - CAPTION — DEFAULT IS NONE: for this archetype the overlay words are an
-     empty string by default. A ranking video's title already names the game;
-     the objects, the tension device and his expression ARE the hook. Only add
-     a caption (2 words max) when it delivers a hook the title cannot — and
-     never a vague line like "IT PAYS NOTHING" whose referent is unclear
-     among several options.
+   - SPACE: consistent object sizing (small natural variation from the 3D
+     perspective is fine, never a deliberate hero size); nothing ever overlaps
+     or touches the face.
+   - SCENE_PROMPT TRANSCRIPTION — the image model only ever sees your
+     scene_prompt, never this recipe. For this archetype your scene_prompt MUST
+     explicitly spell out, in words: the bright steel-blue backdrop with the
+     soft bloom above his head, its fine painted-canvas striation texture (and
+     explicitly: no light rays or beams), the VISIBLY seated pose — chair or
+     charcoal lounge chair entering the frame — with empty hands, the light
+     frown and its gaze direction (into the camera, or cut toward one floating
+     option),
+     every option object WITH its color and 3D treatment, the crown
+     arrangement at head scale, the depth layering, and the equal treatment of
+     all options. Anything you leave out of scene_prompt will not render —
+     transcribe the recipe, do not summarize it.
+   - CAPTION — NONE, ever: for this archetype the overlay words are ALWAYS an
+     empty string. The title names the game; the lineup and his frown are the
+     hook. The pipeline enforces this and will not render a caption on a
+     ranked-lineup concept regardless of what you output.
 
 THE OVERLAY — a short, emotionally charged phrase, 2 to 3 words MAX (per concept):
 - HARD CAP: 2 to 3 words, never 4. Shorter renders BIGGER and reads faster on a
@@ -561,7 +588,10 @@ For EACH concept, score two axes 0-10 and FIX any that fall short before output:
 - overlay_punch (= overlay.score): does the caption clear the OVERLAY rules above
   — hitting at least one lever, not just describing the image or naming the
   mechanic? Captions like "THEY GET THROUGH" or "NOTHING BEHIND IT" describe what is
-  shown and score LOW; rewrite until it hits a nerve.
+  shown and score LOW; rewrite until it hits a nerve. EXCEPTION: an EMPTY overlay
+  on a ranked-lineup concept is the intended, correct answer for a pure ranking
+  video — score it 10 and move on; NEVER invent a caption just to satisfy this
+  gate.
 - expression_match: does the creator's expression fit THIS concept's register (no
   smile or pleased look on a loss / threat / seizure concept)? If not, correct it in
   BOTH subject_direction and scene_prompt.
@@ -798,6 +828,10 @@ const ZONE_HINTS = {
 };
 
 function buildTextDirective(concept) {
+  // ranked-lineup NEVER carries a caption — enforced here, not left to the art director
+  if ((concept.archetype || '') === 'ranked-lineup') {
+    return 'Render absolutely NO text, letters, words, captions, or numbers anywhere in the image, except the short embossed labels the scene description explicitly places on the option tiles.';
+  }
   const words = String(concept.overlay?.words || '').replace(/[\/|]+/g, ' ').replace(/\s+/g, ' ').trim().toUpperCase();
   if (!words) return 'Render no text anywhere in the image.';
 
