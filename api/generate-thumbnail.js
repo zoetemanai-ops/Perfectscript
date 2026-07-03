@@ -410,7 +410,14 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      sweep and is strongest at the OUTER ends (roughly 30-40 degrees,
      counter-clockwise on the left wing, clockwise on the right), easing
      tile by tile toward the center — the innermost tiles stand nearly
-     upright. Tiles at HEAD SCALE, soft shadows onto the backdrop. COLOR
+     upright. Tiles at HEAD SCALE. SHADOWS — EVERY tile, all
+     eight without exception: each tile floats just off the wall and casts
+     ONE soft, close drop shadow onto the backdrop — the SAME direction
+     (straight down, slightly offset), the SAME softness and the SAME
+     distance for all eight, one shared light source. The hero board casts
+     the same soft shadow onto his shirt and torso. A tile without its cast
+     shadow reads as a pasted sticker — if even one tile lacks its shadow,
+     the lighting is wrong. COLOR
      RHYTHM: distribute the tile colors deliberately across both wings —
      warm and cool alternating, never two neighbors from the same color
      family, fillers included (a green cash tile never sits beside a green
@@ -421,14 +428,20 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
    - THE HERO: he HOLDS one oversized hero tile with BOTH hands, front and
      center directly below his face — a near-SQUARE board, roughly 30% of
      the frame's width (about two-thirds of his shoulder width, clearly
-     narrower than his torso), facing the lens dead-on, its BOTTOM EDGE
-     running OFF the bottom of the frame (cropped by it, like a sign resting
-     against him). His hands grip its upper sides naturally at chest height,
-     fingers visibly wrapping the edges, elbows relaxed — holding a board,
-     never presenting a small plaque up in the air. Its face graphic is
-     clean pure WHITE with a subtle diagonal light reflection sweeping
-     across the glyph — a soft sheen like light catching lacquered
-     lettering, never flat matte and never a hard glare. It is the champion
+     narrower than his torso), built EXACTLY like the fan tiles scaled up:
+     the same FLAT-SLAB construction with clearly visible 3D THICKNESS
+     (roughly 10% of its width), its side faces showing and shaded a step
+     darker, crisp bevelled edges, satin finish — NEVER a flat printed
+     sheet, card or paper without depth. It faces the lens dead-on, its
+     BOTTOM EDGE running OFF the bottom of the frame (cropped by it, like a
+     sign resting against him). His hands grip its upper sides naturally at
+     chest height, fingers visibly wrapping the edges, elbows relaxed —
+     holding a board, never presenting a small plaque up in the air. The
+     BOARD itself carries the option's saturated color (a bitcoin board is
+     rich orange); its face graphic is clean pure WHITE with a subtle
+     diagonal light reflection sweeping across the glyph — a soft sheen like
+     light catching lacquered lettering, never flat matte and never a hard
+     glare. NEVER invert this: never a white board with a colored glyph. It is the champion
      or the video's named subject, and the ONE held object sanctioned in
      this archetype. HERO ACCENT: the held board is the most SATURATED color
      in the frame and catches a touch more light than the fan tiles — a
@@ -477,9 +490,10 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      overlapping tiles each — rising from chest height at the frame edges to
      temple height, strongest tilt at the outer ends, the two innermost
      tiles behind his hair with the OPEN GAP directly above his head — every
-     tile WITH its color and face-graphic — count all EIGHT and name the
+     tile WITH its color and face-graphic — count all EIGHT, name the
      staircase heights (ranked options nearest his head, closed-list fillers
-     at the outer ends), the oversized hero tile — three fan-tiles big, bottom edge cropped by the
+     at the outer ends), and state that each of the eight casts its soft
+     drop shadow onto the backdrop, the oversized hero tile — three fan-tiles big, bottom edge cropped by the
      frame — gripped at its upper sides below his face, his framing (hair near the top edge,
      mid-chest up), his lighting treatment, and the firm frown locked into the camera. Anything you leave out of scene_prompt will not render —
      transcribe the recipe, do not summarize it.
