@@ -172,7 +172,7 @@ STYLE LIBRARY — the pool is FOUR archetypes; every run = 2 OFFICE + 1 BREAKER:
 This factory has FOUR thumbnail archetypes in two groups. OFFICE archetypes are
 staged in the creator's real studio set (creator_visual_notes): reaction-to-object
 and evidence-closeup. BREAKER archetypes leave the studio: opposites-split,
-on-location, and — ONLY when the script ranks or compares 3 to 5 concrete
+on-location, and — ONLY when the script ranks or compares 3 or more concrete
 options — ranked-lineup. Every run MUST include BOTH office archetypes, each as
 its own concept, plus ONE breaker — score the eligible breakers for THIS script
 and build whichever fits best. EXCEPTION: if the script offers no strong real
@@ -382,110 +382,89 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
   models miscount. Use "one red among plain ones" or a single hero object.
 
 5) RANKED LINEUP (breaker — ONLY for ranking / comparison scripts)
-   Eligible ONLY when the script ranks or compares 3 to 5 concrete options
-   (assets, accounts, strategies); for any other script this archetype is
-   ineligible and its fit score is 0. This is the ONE archetype that is an
+   Eligible ONLY when the script ranks or compares 3 or more concrete options
+   (assets, accounts, strategies, tools); for any other script this archetype
+   is ineligible and its fit score is 0. This is the ONE archetype that is an
    openly DESIGNED GRAPHIC instead of a photograph — the sanctioned exception
    to Principle 11: it must look deliberately designed by a top thumbnail
    designer, never like a faked photo and never like messy AI compositing.
-   - CREATOR — NUMERIC FRAMING, NON-NEGOTIABLE (this archetype OVERRIDES the
-     usual face-dominance sizing): the TOP of his head sits roughly 35-40%
-     DOWN from the top edge of the frame, so the entire band above his head
-     stays open backdrop for the options. He occupies roughly the middle 40%
-     of the frame's width and only the lower ~60% of its height — noticeably
-     SMALLER than in every other archetype; the options are the giants here.
-     His face stays the sharpest element. He is VISIBLY SEATED,
-     sunk low into the format's FIXED seat — a dark charcoal fabric SOFA, its
-     back and armrests clearly entering the frame around his shoulders and in
-     the bottom corners, cropped by the bottom edge, exactly like a subject
-     slouched into a couch. Matte fabric, a shade darker than the backdrop,
-     neutral so it never competes with the tile colors — subordinate and
-     softly lit, but unmistakably THERE, never a floating torso. Same sofa for
-     every creator, like the backdrop.
-     EXPRESSION — FIXED for this format: face fully FRONTAL toward the
-     camera, head straight and level, eyes locked directly INTO the lens, with
-     a light FROWN — brows subtly drawn together, critical, faintly
-     unimpressed deadpan; the face of a man who has judged all of these.
-     Understated, never theatrical, never mild-pleasant. His hands stay DOWN and empty (resting, mostly out of
-     frame) — he holds NOTHING: holding or elevating any option would reveal
-     the verdict.
-   - EQUAL TREATMENT (this keeps the ranking unresolved): all options get the
-     SAME visual weight — same lighting logic, none held, none elevated, none
-     dimmed, none tipped, none numbered. The tension comes from the lineup
-     itself plus his unimpressed frown: a verdict clearly exists in his head,
-     and the only way to learn the order is to click.
-   - BACKDROP — FIXED for every creator: a seamless studio backdrop in a
-     DUSTY, grey-leaning STEEL BLUE — muted and slightly desaturated, never a
-     saturated royal blue — identical across all creators so the format is
-     instantly recognizable. The light reads as ONE soft, hazy BLOOM:
-     brightest in the upper center directly behind and above his head, with a
-     PRONOUNCED but smooth falloff — the corners and edges a clearly DEEPER,
-     moodier blue (never black), so the frame has real atmosphere instead of
-     an evenly lit flat wall. NO light rays or beams. The backdrop SURFACE
-     carries a fine but CLEARLY VISIBLE streaked texture: thin striations and
-     brush-stroke streaks running through the blue, like a hand-painted
-     photography-studio canvas backdrop — the texture must be plainly present
-     in the final image; a perfectly smooth, flat digital gradient is WRONG.
-     Still readable as a colorful blue image at tiny feed size. No room, no
-     set, no scenery, no horizon.
-   - THE OPTIONS: EXACTLY the options the script ranks — one floating 3D
-     object per ranked option, mapped 1:1, never a substitute, filler or extra
-     object (if the script ranks five things, five objects appear; a viewer
-     must be able to match every object to a ranked option). Every object renders
-     at the SCALE OF HIS HEAD — big, dominant tiles and objects that fill the
-     upper half of the frame like the app icons in top-tier lineup thumbnails,
-     never small scattered trinkets in the margins. Arranged as a tight CROWN
-     arc OVER and around his head: one or two objects sit DIRECTLY ABOVE his
-     head in the open top band, and the rest step down symmetrically beside
-     his temples and shoulders — small, even gaps, orderly and deliberate,
-     filling the top band of the frame. NEVER two vertical side columns with
-     an empty top: if nothing sits above the head, the composition is wrong.
-     Every object FULLY inside the frame (never cropped by an edge), each rotated in 3D space with PRONOUNCED perspective — a side face
-     of every tile or object clearly visible, thick extrusion (roughly a sixth
-     of its width), rounded corners with bevel highlights — and glossy top
-     surfaces carrying soft environment reflections (a faint sheen of light
-     across the face of a tile, like polished physical icons), soft shadows
-     cast onto the backdrop plus a faint soft glow seating each object in the
-     space (nothing floats like a pasted sticker), and ALL lit by the same key
-     light as the creator. DEPTH LAYERING: one or two objects sit partially
-     BEHIND his shoulders, his body cutting in front of them, so the
-     composition reads in real layers — backdrop, objects, person — with the
-     face never covered by anything. ONE UNIFORM TILE SYSTEM —
-     every option, physical or abstract, becomes the SAME kind of tile: a
-     thick, glossy, rounded-square 3D app-icon tile (squircle), all tiles the
-     same size and thickness, each with its own slight tilt — exactly the tile
-     language of top-tier lineup thumbnails. Each tile's FACE carries its
-     option's identity: either ONE simple bold icon graphic (a bitcoin ₿
-     symbol, a gold-bar glyph, a clean rising chart-line) or ONE short
-     embossed label of 2-5 characters ("401K", "ROTH") — one element per
-     tile, never both, never sentences; these are the only text/graphics
-     allowed on the tiles. NEVER a real brand logo or trademark. TILE PALETTE
-     (tuned to the fixed steel-blue backdrop): each tile its own color from
-     clean white/silver, graphite/near-black, warm scarlet red, amber/orange,
-     gold, and emerald green — warm red means a WARM scarlet, never a deep
-     cold crimson, and NEVER a tile in the backdrop's own blue (it vanishes).
-     The lineup must parse as different options at a glance, never a cluster
-     of same-colored tiles.
-   - SPACE: consistent object sizing (small natural variation from the 3D
-     perspective is fine, never a deliberate hero size); nothing ever overlaps
-     or touches the face.
-   - SCENE_PROMPT TRANSCRIPTION — the image model only ever sees your
-     scene_prompt, never this recipe. For this archetype your scene_prompt MUST
-     explicitly spell out, in words: the dusty steel-blue backdrop with the
-     bright bloom behind his head and clearly deeper corners, its plainly
-     visible painted-canvas streak texture (and explicitly: no light rays or
-     beams), the VISIBLY seated pose — chair or
-     charcoal sofa entering the frame — with empty hands, the frontal face
-     with the light frown, eyes locked into the camera,
-     every option object WITH its color and 3D treatment, the crown
-     arrangement at head scale WITH the numeric framing (top of head 35-40%
-     down, options filling the open top band, one or two directly above the
-     head), the depth layering, and the equal treatment of all options. Anything you leave out of scene_prompt will not render —
-     transcribe the recipe, do not summarize it.
-   - CAPTION — NONE, ever: for this archetype the overlay words are ALWAYS an
-     empty string. The title names the game; the lineup and his frown are the
+   - BACKDROP — FIXED for every creator: a light, neutral GREY seamless studio
+     backdrop — bright, clean and airy, BRIGHTEST directly behind him and
+     softly vignetting toward the corners (never dark), with at most a subtle
+     real-material texture. He casts one soft, natural drop shadow onto the
+     backdrop — the deliberate cutout-poster look. No room, no set, no
+     scenery, no horizon.
+   - THE FAN (the format's signature): ALL the ranked options fan out in one
+     RAINBOW ARCH of tiles that runs from one side of the frame, up and OVER
+     his head, and down the other side — the arch's ends sweeping DOWN to
+     shoulder/chest height near the frame edges, not just a band along the
+     top. The tiles OVERLAP each other heavily, like a spread hand of cards,
+     each tilted along the arch's curve (counter-clockwise on the left,
+     clockwise on the right). COLOR RHYTHM: distribute the tile colors
+     deliberately around the arch — warm and cool alternating, never two
+     neighbors from the same color family — so the fan reads composed, not
+     accidental. The arch runs BEHIND HIM: his head and hair cut clearly IN
+     FRONT of the top-center tiles — depth order is backdrop, fan, person,
+     hero tile. Tiles at HEAD SCALE, soft shadows onto the backdrop. FOCUS
+     HIERARCHY: his face and the hero tile are tack-sharp; the tiles at the
+     arch's outer ends sit a BREATH softer — barely perceptible, every label
+     and icon still tack-readable, never visibly blurred.
+   - THE HERO: he HOLDS one oversized hero tile with BOTH hands at chest
+     level, front and center directly below his face — roughly two-and-a-half
+     times the size of a fan tile, facing the lens dead-on, fingers visibly
+     wrapping its edges. It is the champion or the video's named subject, and
+     the ONE held object sanctioned in this archetype. HERO ACCENT: the held
+     tile is the most SATURATED color in the frame and catches a touch more
+     light than the fan tiles — a quiet notch brighter, never a glow, halo or
+     spotlight effect.
+   - CREATOR: standing, centered, framed mid-chest up, face frontal and
+     level, the top of his hair reaching close to the top edge (roughly
+     5-10% down) — the fan passes behind it. SUBJECT TREATMENT: bright,
+     even, HIGH-KEY frontal beauty light — minimal shadow in the face, crisp
+     punchy clarity, one neutral white balance shared with the backdrop — he
+     belongs to the bright designed world around him, never a moody
+     directional editorial portrait dropped into it. Clean cutout edge plus
+     his one soft drop shadow on the backdrop. EXPRESSION — FIXED, exactly one
+     register: OVERWHELMED — brows raised high, eyes wide straight into the
+     lens, lips slightly parted, "there are SO many of these" (a sanctioned
+     exception to the closed-mouth default; never a full shock-face gape,
+     never confident, never smug).
+   - FAN FILL: the fan should read FULL — 7 to 9 tiles total. Every option
+     the script ranks MUST be present (minus the one in his hands if it is
+     one of them), placed in the most prominent positions nearest the
+     top-center of the arch. When the script ranks fewer options than that,
+     PAD the arch with plausible, instantly recognizable tiles from the same
+     asset world — a model-house real-estate tile, a silver-bar tile, a cash
+     tile, an oil-barrel tile, a piggy-bank-free savings tile — toward the
+     arch's outer ends. Fillers carry ICON graphics only, never labels
+     (labels stay reserved for the actually ranked options), and never
+     anything misleading or off-topic.
+   - Nothing ever overlaps or touches the FACE.
+   - CAPTION — NONE, ever: the overlay words are ALWAYS an empty string. The
+     title names the game; the fan, the hero tile and his expression are the
      hook. The pipeline enforces this and will not render a caption on a
      ranked-lineup concept regardless of what you output.
+   - SCENE_PROMPT TRANSCRIPTION — the image model only ever sees your
+     scene_prompt, never this recipe. Spell it out explicitly, in words: the
+     light grey backdrop with his soft drop shadow, the rainbow arch of
+     overlapping tiles sweeping down to shoulder height at both ends and
+     passing BEHIND his head and hair, every tile WITH its color and
+     face-graphic (ranked options AND fillers), the oversized hero tile held
+     with both hands below his face, his framing (hair near the top edge,
+     mid-chest up), his lighting treatment, and the overwhelmed expression. Anything you leave out of scene_prompt will not render —
+     transcribe the recipe, do not summarize it.
+
+   SHARED TILE SYSTEM: every option, physical or abstract, becomes the SAME
+   kind of tile — a thick, glossy, rounded-square 3D app-icon tile (squircle),
+   consistent size within the fan, pronounced 3D thickness, rounded bevels,
+   soft specular sheen. Each tile's FACE carries ONE identity: a simple bold
+   icon graphic (a bitcoin ₿ symbol, a gold-bar glyph, a clean rising
+   chart-line) OR one short embossed label of 2-5 characters ("401K",
+   "ROTH") — never both, never sentences; these are the only text/graphics
+   allowed anywhere. NEVER a real brand logo or trademark. Every tile its OWN
+   distinct saturated color (on the grey backdrop every color works) — the
+   lineup must parse as different options at a glance, never a cluster of
+   same-colored tiles.
 
 THE OVERLAY — a short, emotionally charged phrase, 2 to 3 words MAX (per concept):
 - HARD CAP: 2 to 3 words, never 4. Shorter renders BIGGER and reads faster on a
@@ -605,7 +584,7 @@ OUTPUT — return ONLY valid JSON, no preamble:
   "cliches_banned": ["<overused execution>", "<overused execution>"],
   "archetype_fit": {
     "evidence-closeup": "<0-10 how well this fits THIS script + one-line why>",
-    "ranked-lineup": "<0-10, ONLY eligible when the script ranks/compares 3-5 concrete options, otherwise 0 + one-line why>",
+    "ranked-lineup": "<0-10, ONLY eligible when the script ranks/compares 3+ concrete options, otherwise 0 + one-line why>",
     "opposites-split": "<0-10 + why>",
     "reaction-to-object": "<0-10 + why>",
     "on-location": "<0-10 + why>"
@@ -755,21 +734,23 @@ async function runArtDirector(input) {
 // ── render one concept: text-free GPT render -> caption composited -> upload ─
 async function renderConcept(runId, concept, refFiles, creatorName) {
   const scene = String(concept.scene_prompt || '').trim();
+  const outfitClause =
+    'Also keep his OUTFIT the same as in the reference photos — the same jacket/suit, shirt, ' +
+    'color and style of clothing — do not change his clothes or their color. ';
   const identity =
     'IDENTITY LOCK: keep the person\u2019s face, hairline, hair (same amount, length, color and style), ' +
     'glasses, facial hair and apparent age EXACTLY consistent with the supplied reference photos. ' +
     'Do NOT thin, shorten, recolor, add, or remove hair, and do NOT make the person look balder, younger, ' +
-    'or older. Also keep his OUTFIT the same as in the reference photos — the same jacket/suit, shirt, ' +
-    'color and style of clothing — do not change his clothes or their color. It must be unmistakably the ' +
-    'same exact person, dressed as in the references. IDENTITY means face, hair and clothing — NOT the ' +
+    'or older. ' + outfitClause + 'It must be unmistakably the ' +
+    'same exact person. IDENTITY means face and hair (clothing per the outfit instruction above) — NOT the ' +
     'expression: take the facial EXPRESSION exclusively from the scene description above, never from the ' +
     'reference photos. If the references show him smiling or pleasant, do NOT carry that smile over; on a ' +
     'loss, threat or warning concept his face must be serious, hard and grave exactly as the scene describes.';
   const isLineup = (concept.archetype || '') === 'ranked-lineup';
   const quality = isLineup
     ? 'DESIGNED GRAPHIC MODE: this thumbnail is a clean, professionally DESIGNED graphic composition, not a photograph of a real scene. ' +
-      'The creator himself stays fully PHOTOREALISTIC — real skin texture with visible pores, real hair, natural light on the face, exactly the person in the reference photos — composited large like a premium poster subject, with a subtle RIM LIGHT in the backdrop hue tracing his shoulders and hair, and his overall color grade HARMONIZED with the backdrop — a cool white balance that sits in the same color world, never a warm-orange subject pasted onto a cool background — so he sits IN the colored space instead of cut against it. ' +
-      'Everything around him is intentional graphic design: a seamless studio-backdrop gradient in one saturated hue, brightest directly behind his head and shoulders and falling into a soft vignette toward the corners, ' +
+      'The creator himself stays fully PHOTOREALISTIC — real skin texture with visible pores, real hair, bright even HIGH-KEY frontal light on the face with minimal shadow, exactly the person in the reference photos — composited large like a premium poster subject, with a subtle soft RIM LIGHT tracing his shoulders and hair and his color grade HARMONIZED with the bright grey backdrop — one shared, natural white balance across subject and backdrop — so he sits IN the space instead of cut against it. ' +
+      'Everything around him is intentional graphic design: a seamless studio-backdrop gradient exactly as the scene describes, brightest directly behind his head and shoulders and falling into a soft vignette toward the corners, ' +
       'and floating 3D objects with real thickness, consistent key lighting and soft shadows cast onto the backdrop. ' +
       'Clean, balanced, deliberate — it must read as the work of a top thumbnail designer, never as a faked photograph and never as messy AI compositing.'
     : 'PHOTOGRAPHIC REALISM (this must look like a real photo taken on a real camera, NOT a CGI render or an AI image): ' +
