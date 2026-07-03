@@ -395,9 +395,13 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      backdrop — the deliberate cutout-poster look. No room, no set, no
      scenery, no horizon.
    - THE FAN (the format's signature) — EXACTLY EIGHT tiles, in TWO WINGS of
-     FOUR: this is not one continuous arch. Each wing rises from roughly
-     chest height near its frame edge up to head height beside his temples —
-     a FLAT-topped sweep, never a perfect rainbow semicircle. Within each
+     FOUR: this is not one continuous arch. Each wing is a gentle descending
+     STAIRCASE: the innermost tile sits at TEMPLE height beside his head,
+     each next tile steps roughly HALF A TILE lower than the one before, and
+     the outermost tile lands around CHEST height near its frame edge — a
+     clearly DIAGONAL sweep. Two failure shapes, both WRONG: a straight
+     horizontal row with every tile at the same height, and a steep rainbow
+     semicircle arching over the head. Within each
      wing the tiles OVERLAP each other like a spread hand of cards. The TWO
      INNERMOST tiles (one per wing) flank his head at temple height, partly
      BEHIND his hair — and they DO NOT connect: directly above his head sits
@@ -447,13 +451,16 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      in doubt push it STRONGER, never softer. Ceiling, one rule only: no
      snarl, no bared teeth, no grimace — a hard judge, not a villain. The
      eyes NEVER leave the camera.
-   - FAN FILL — the fan is ALWAYS exactly EIGHT tiles (four per wing).
-     Every option the script ranks MUST be present (minus the one in his
-     hands if it is one of them), placed in the most prominent positions
-     nearest his head. When the script ranks fewer than eight, PAD to eight
-     with plausible, instantly recognizable tiles from the same asset
-     world — a model-house real-estate tile, a silver-bar tile, a cash tile,
-     an oil-barrel tile — toward the wings' outer ends. Fillers carry ICON graphics only, never labels
+   - FAN FILL — the fan is ALWAYS exactly EIGHT tiles (four per wing);
+     COUNT THEM. Fill order is strict: FIRST, every option the script ranks
+     gets its tile (minus the one in his hands if it is one of them), in the
+     most prominent positions nearest his head — a ranked option missing
+     from the frame is a FAILED concept. THEN pad the remaining slots toward
+     the wings' outer ends, exclusively from this CLOSED filler list and
+     nothing else: a model-house real-estate tile, a silver-bars tile, a
+     cash-stack tile, an oil-barrel tile. NEVER invent other fillers — no
+     piggy banks, no vaults, no safes, no generic person icons, no abstract
+     symbols. Fillers carry ICON graphics only, never labels
      (labels stay reserved for the actually ranked options), and never
      anything misleading or off-topic. DEDUPE — HARD RULE: no two tiles
      anywhere in the fan share the same icon family or meaning (never two
@@ -470,7 +477,9 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      overlapping tiles each — rising from chest height at the frame edges to
      temple height, strongest tilt at the outer ends, the two innermost
      tiles behind his hair with the OPEN GAP directly above his head — every
-     tile WITH its color and face-graphic (ranked options AND fillers), the oversized hero tile — three fan-tiles big, bottom edge cropped by the
+     tile WITH its color and face-graphic — count all EIGHT and name the
+     staircase heights (ranked options nearest his head, closed-list fillers
+     at the outer ends), the oversized hero tile — three fan-tiles big, bottom edge cropped by the
      frame — gripped at its upper sides below his face, his framing (hair near the top edge,
      mid-chest up), his lighting treatment, and the firm frown locked into the camera. Anything you leave out of scene_prompt will not render —
      transcribe the recipe, do not summarize it.
