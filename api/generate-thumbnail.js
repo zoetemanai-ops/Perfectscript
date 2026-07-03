@@ -394,33 +394,41 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      real-material texture. He casts one soft, natural drop shadow onto the
      backdrop — the deliberate cutout-poster look. No room, no set, no
      scenery, no horizon.
-   - THE FAN (the format's signature): ALL the ranked options fan out in one
-     RAINBOW ARCH of tiles that runs from one side of the frame, up and OVER
-     his head, and down the other side — the arch's ends sweeping DOWN to
-     shoulder/chest height near the frame edges, not just a band along the
-     top. The tiles OVERLAP each other heavily, like a spread hand of cards,
-     each tilted along the arch's curve (counter-clockwise on the left,
-     clockwise on the right). COLOR RHYTHM: distribute the tile colors
-     deliberately around the arch — warm and cool alternating, never two
-     neighbors from the same color family — so the fan reads composed, not
-     accidental. The arch runs BEHIND HIM: his head and hair cut clearly IN
-     FRONT of the top-center tiles — depth order is backdrop, fan, person,
-     hero tile. Tiles at HEAD SCALE, soft shadows onto the backdrop. FOCUS
-     HIERARCHY: his face and the hero tile are tack-sharp; the tiles at the
-     arch's outer ends sit a BREATH softer — barely perceptible, every label
-     and icon still tack-readable, never visibly blurred.
+   - THE FAN (the format's signature) — EXACTLY EIGHT tiles, in TWO WINGS of
+     FOUR: this is not one continuous arch. Each wing rises from roughly
+     chest height near its frame edge up to head height beside his temples —
+     a FLAT-topped sweep, never a perfect rainbow semicircle. Within each
+     wing the tiles OVERLAP each other like a spread hand of cards. The TWO
+     INNERMOST tiles (one per wing) flank his head at temple height, partly
+     BEHIND his hair — and they DO NOT connect: directly above his head sits
+     an OPEN GAP of backdrop that his head and hair themselves bridge. Depth
+     order is backdrop, wings, person, hero board. TILT follows each wing's
+     sweep and is strongest at the OUTER ends (roughly 30-40 degrees,
+     counter-clockwise on the left wing, clockwise on the right), easing
+     tile by tile toward the center — the innermost tiles stand nearly
+     upright. Tiles at HEAD SCALE, soft shadows onto the backdrop. COLOR
+     RHYTHM: distribute the tile colors deliberately across both wings —
+     warm and cool alternating, never two neighbors from the same color
+     family, fillers included (a green cash tile never sits beside a green
+     S&P tile) — so the fan reads composed, not accidental. FOCUS HIERARCHY:
+     his face and the hero board are tack-sharp; the tiles at the outer ends
+     sit a BREATH softer — barely perceptible, every label and icon still
+     tack-readable, never visibly blurred.
    - THE HERO: he HOLDS one oversized hero tile with BOTH hands, front and
-     center directly below his face — a big BOARD, roughly THREE times the
-     size of a fan tile, spanning most of the width of his torso, facing the
-     lens dead-on, and its BOTTOM EDGE runs OFF the bottom of the frame
-     (cropped by it, like a sign resting against him). His hands grip its
-     upper sides naturally at chest height, fingers visibly wrapping the
-     edges, elbows relaxed — holding a board, never presenting a small plaque
-     up in the air. It is the champion or the video's named subject, and
-     the ONE held object sanctioned in this archetype. HERO ACCENT: the held
-     tile is the most SATURATED color in the frame and catches a touch more
-     light than the fan tiles — a quiet notch brighter, never a glow, halo or
-     spotlight effect.
+     center directly below his face — a near-SQUARE board, roughly 30% of
+     the frame's width (about two-thirds of his shoulder width, clearly
+     narrower than his torso), facing the lens dead-on, its BOTTOM EDGE
+     running OFF the bottom of the frame (cropped by it, like a sign resting
+     against him). His hands grip its upper sides naturally at chest height,
+     fingers visibly wrapping the edges, elbows relaxed — holding a board,
+     never presenting a small plaque up in the air. Its face graphic is
+     clean pure WHITE with a subtle diagonal light reflection sweeping
+     across the glyph — a soft sheen like light catching lacquered
+     lettering, never flat matte and never a hard glare. It is the champion
+     or the video's named subject, and the ONE held object sanctioned in
+     this archetype. HERO ACCENT: the held board is the most SATURATED color
+     in the frame and catches a touch more light than the fan tiles — a
+     quiet notch brighter, never a glow, halo or spotlight effect.
    - CREATOR: standing, centered, framed mid-chest up, face frontal and
      level, the top of his hair reaching close to the top edge (roughly
      5-10% down) — the fan passes behind it. SUBJECT TREATMENT: bright,
@@ -428,21 +436,29 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      punchy clarity, one neutral white balance shared with the backdrop — he
      belongs to the bright designed world around him, never a moody
      directional editorial portrait dropped into it. Clean cutout edge plus
-     his one soft drop shadow on the backdrop. EXPRESSION — FIXED, exactly one
-     register: OVERWHELMED — brows raised high, eyes wide straight into the
-     lens, lips slightly parted, "there are SO many of these" (a sanctioned
-     exception to the closed-mouth default; never a full shock-face gape,
-     never confident, never smug).
-   - FAN FILL: the fan should read FULL — 7 to 9 tiles total. Every option
-     the script ranks MUST be present (minus the one in his hands if it is
-     one of them), placed in the most prominent positions nearest the
-     top-center of the arch. When the script ranks fewer options than that,
-     PAD the arch with plausible, instantly recognizable tiles from the same
-     asset world — a model-house real-estate tile, a silver-bar tile, a cash
-     tile, an oil-barrel tile, a piggy-bank-free savings tile — toward the
-     arch's outer ends. Fillers carry ICON graphics only, never labels
+     his one soft drop shadow on the backdrop. EXPRESSION — FIXED, one register
+     for every creator: a FIRM FROWN straight into the camera — brows visibly
+     KNOTTED and pulled down with a clear vertical crease between them, eyes
+     slightly narrowed into a hard, critical, unimpressed stare locked
+     directly INTO the lens, jaw set, mouth closed and pressed. INTENSITY: on
+     a scale from 0 (neutral face) to 10 (cartoon villain), land at a 7 —
+     unmistakably displeased in a single glance, even at tiny feed size. The
+     COMMON FAILURE here is rendering the frown too FLAT and neutral, so when
+     in doubt push it STRONGER, never softer. Ceiling, one rule only: no
+     snarl, no bared teeth, no grimace — a hard judge, not a villain. The
+     eyes NEVER leave the camera.
+   - FAN FILL — the fan is ALWAYS exactly EIGHT tiles (four per wing).
+     Every option the script ranks MUST be present (minus the one in his
+     hands if it is one of them), placed in the most prominent positions
+     nearest his head. When the script ranks fewer than eight, PAD to eight
+     with plausible, instantly recognizable tiles from the same asset
+     world — a model-house real-estate tile, a silver-bar tile, a cash tile,
+     an oil-barrel tile — toward the wings' outer ends. Fillers carry ICON graphics only, never labels
      (labels stay reserved for the actually ranked options), and never
-     anything misleading or off-topic.
+     anything misleading or off-topic. DEDUPE — HARD RULE: no two tiles
+     anywhere in the fan share the same icon family or meaning (never two
+     chart tiles, two house tiles, two metal tiles); every tile reads as a
+     DIFFERENT option, ranked and filler alike.
    - Nothing ever overlaps or touches the FACE.
    - CAPTION — NONE, ever: the overlay words are ALWAYS an empty string. The
      title names the game; the fan, the hero tile and his expression are the
@@ -450,12 +466,13 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      ranked-lineup concept regardless of what you output.
    - SCENE_PROMPT TRANSCRIPTION — the image model only ever sees your
      scene_prompt, never this recipe. Spell it out explicitly, in words: the
-     light grey backdrop with his soft drop shadow, the rainbow arch of
-     overlapping tiles sweeping down to shoulder height at both ends and
-     passing BEHIND his head and hair, every tile WITH its color and
-     face-graphic (ranked options AND fillers), the oversized hero tile — three fan-tiles big, bottom edge cropped by the
+     light grey backdrop with his soft drop shadow, the TWO wings of four
+     overlapping tiles each — rising from chest height at the frame edges to
+     temple height, strongest tilt at the outer ends, the two innermost
+     tiles behind his hair with the OPEN GAP directly above his head — every
+     tile WITH its color and face-graphic (ranked options AND fillers), the oversized hero tile — three fan-tiles big, bottom edge cropped by the
      frame — gripped at its upper sides below his face, his framing (hair near the top edge,
-     mid-chest up), his lighting treatment, and the overwhelmed expression. Anything you leave out of scene_prompt will not render —
+     mid-chest up), his lighting treatment, and the firm frown locked into the camera. Anything you leave out of scene_prompt will not render —
      transcribe the recipe, do not summarize it.
 
    SHARED TILE SYSTEM: every option, physical or abstract, becomes the SAME
