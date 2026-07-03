@@ -409,10 +409,14 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      HIERARCHY: his face and the hero tile are tack-sharp; the tiles at the
      arch's outer ends sit a BREATH softer — barely perceptible, every label
      and icon still tack-readable, never visibly blurred.
-   - THE HERO: he HOLDS one oversized hero tile with BOTH hands at chest
-     level, front and center directly below his face — roughly two-and-a-half
-     times the size of a fan tile, facing the lens dead-on, fingers visibly
-     wrapping its edges. It is the champion or the video's named subject, and
+   - THE HERO: he HOLDS one oversized hero tile with BOTH hands, front and
+     center directly below his face — a big BOARD, roughly THREE times the
+     size of a fan tile, spanning most of the width of his torso, facing the
+     lens dead-on, and its BOTTOM EDGE runs OFF the bottom of the frame
+     (cropped by it, like a sign resting against him). His hands grip its
+     upper sides naturally at chest height, fingers visibly wrapping the
+     edges, elbows relaxed — holding a board, never presenting a small plaque
+     up in the air. It is the champion or the video's named subject, and
      the ONE held object sanctioned in this archetype. HERO ACCENT: the held
      tile is the most SATURATED color in the frame and catches a touch more
      light than the fan tiles — a quiet notch brighter, never a glow, halo or
@@ -449,17 +453,23 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      light grey backdrop with his soft drop shadow, the rainbow arch of
      overlapping tiles sweeping down to shoulder height at both ends and
      passing BEHIND his head and hair, every tile WITH its color and
-     face-graphic (ranked options AND fillers), the oversized hero tile held
-     with both hands below his face, his framing (hair near the top edge,
+     face-graphic (ranked options AND fillers), the oversized hero tile — three fan-tiles big, bottom edge cropped by the
+     frame — gripped at its upper sides below his face, his framing (hair near the top edge,
      mid-chest up), his lighting treatment, and the overwhelmed expression. Anything you leave out of scene_prompt will not render —
      transcribe the recipe, do not summarize it.
 
    SHARED TILE SYSTEM: every option, physical or abstract, becomes the SAME
-   kind of tile — a thick, glossy, rounded-square 3D app-icon tile (squircle),
-   consistent size within the fan, pronounced 3D thickness, rounded bevels,
-   soft specular sheen. Each tile's FACE carries ONE identity: a simple bold
-   icon graphic (a bitcoin ₿ symbol, a gold-bar glyph, a clean rising
-   chart-line) OR one short embossed label of 2-5 characters ("401K",
+   kind of tile — a rounded-square 3D app-icon tile (squircle) built as a
+   FLAT SLAB: a completely FLAT face (never domed, inflated, puffy or
+   pillow-shaped), crisp bevelled edges with modest rounding, and a thickness
+   of roughly 10% of its width, the side faces visible and naturally shaded a
+   step darker. FINISH: SATIN — one soft, even sheen across the face, like
+   matte-lacquered plastic or brushed aluminium; NEVER high-gloss, candy,
+   jelly, glazed or wet-looking, and never a hard specular hotspot. Each
+   tile's FACE carries ONE identity, printed FLAT on the face or embossed
+   only a touch (never a chunky, puffy 3D relief): a simple bold icon graphic
+   (a bitcoin ₿ symbol, a gold-bar glyph, a clean rising
+   chart-line) OR one short label of 2-5 characters ("401K",
    "ROTH") — never both, never sentences; these are the only text/graphics
    allowed anywhere. NEVER a real brand logo or trademark. Every tile its OWN
    distinct saturated color (on the grey backdrop every color works) — the
