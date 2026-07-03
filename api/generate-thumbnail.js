@@ -382,164 +382,76 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
   models miscount. Use "one red among plain ones" or a single hero object.
 
 5) RANKED LINEUP (breaker — ONLY for ranking / comparison scripts)
-   Eligible ONLY when the script ranks or compares 3 or more concrete options
-   (assets, accounts, strategies, tools); for any other script this archetype
-   is ineligible and its fit score is 0. This is the ONE archetype that is an
-   openly DESIGNED GRAPHIC instead of a photograph — the sanctioned exception
-   to Principle 11: it must look deliberately designed by a top thumbnail
-   designer, never like a faked photo and never like messy AI compositing.
-   - BACKDROP — FIXED for every creator: a light, neutral GREY seamless studio
-     backdrop — bright, clean and airy, BRIGHTEST directly behind him and
-     softly vignetting toward the corners (never dark), with at most a subtle
-     real-material texture. He casts one soft, natural drop shadow onto the
-     backdrop — the deliberate cutout-poster look. No room, no set, no
-     scenery, no horizon.
-   - THE FAN (the format's signature) — EXACTLY EIGHT tiles, in TWO WINGS of
-     FOUR: COUNT them per wing — four LEFT of his head, four RIGHT of his
-     head, always symmetric; a 5-3 or any other split is WRONG.
-     TILE SIZE: each tile is as WIDE AS HIS HEAD or a touch wider (roughly
-     16% of the frame's width) — big, dominant tiles; small floating chips
-     at two-thirds of his head are WRONG.
-     OVERLAP — MANDATORY: within each wing every tile overlaps its neighbor
-     by roughly a THIRD, stacked like a dense spread hand of cards; loose
-     tiles floating apart with gaps of backdrop between them are WRONG.
-     WING SHAPE — a CASCADE, not an arc and not an even staircase: the
-     innermost tile of each wing sits at temple height beside his head
-     (center around 18% down the frame), the SECOND tile sits at nearly the
-     SAME height beside it — the top of each wing runs almost LEVEL — then
-     the drop STEEPENS: the third tile falls about half a tile lower, and
-     the fourth, outermost tile falls a full tile-plus lower, its center
-     landing around mid-frame (chest height). Flat top, steeply falling
-     ends. Two failure shapes remain WRONG: an evenly curved arc, and a
-     straight horizontal row.
-     COMPACTNESS: each wing HUGS the head — the innermost tile nearly
-     touching his hair (partly behind it), the four tiles packed into a
-     tight span, the outermost still keeping a clear margin from the frame
-     edge; wings stretched across the full frame width are WRONG. The two
-     wings DO NOT connect: directly above his head sits an OPEN GAP of
-     backdrop that his head and hair themselves bridge. Depth order is
-     backdrop, wings, person, hero board.
-     Tiles cast their shadows per the SHADOWS rule below. SHADOWS — EVERY
-     tile, all eight without exception: each tile floats just off the wall
-     and casts ONE soft, close drop shadow onto the backdrop — the SAME
-     direction (straight down, slightly offset), the SAME softness and the
-     SAME distance for all eight, one shared light source. The hero board
-     casts the same soft shadow onto his shirt and torso. A tile without its
-     cast shadow reads as a pasted sticker — if even one tile lacks its
-     shadow, the lighting is wrong. COLOR RHYTHM: distribute the tile colors
-     deliberately across both wings — warm and cool alternating, never two
-     neighbors from the same color family, fillers included (a green cash
-     tile never sits beside a green S&P tile) — so the fan reads composed,
-     not accidental. FOCUS HIERARCHY: his face and the hero board are
-     tack-sharp; the tiles at the outer ends sit a BREATH softer — barely
-     perceptible, every label and icon still tack-readable, never visibly
-     blurred. TILT follows each wing's cascade and is strongest at the OUTER
-     ends (roughly 30-40 degrees, counter-clockwise on the left wing,
-     clockwise on the right), easing tile by tile toward the center — the
-     innermost tiles stand nearly upright. This tilt is IN-PLANE rotation
-     only (like rotating a card flat against the wall): every face stays
-     flat-on to the camera, never turned away in 3D.
-   - THE HERO: he HOLDS one oversized hero tile with BOTH hands, front and
-     center directly below his face — a near-SQUARE board, roughly 30% of
-     the frame's width (about two-thirds of his shoulder width, clearly
-     narrower than his torso), built EXACTLY like the fan tiles scaled up:
-     the same FLAT-SLAB construction with clearly visible 3D THICKNESS
-     (roughly 10% of its width), its side faces showing and shaded a step
-     darker, crisp bevelled edges, satin finish — NEVER a flat printed
-     sheet, card or paper without depth. It faces the lens dead-on, its
-     BOTTOM EDGE running OFF the bottom of the frame (cropped by it, like a
-     sign resting against him). His hands grip its upper sides naturally at
-     chest height, fingers visibly wrapping the edges, elbows relaxed —
-     holding a board, never presenting a small plaque up in the air. The
-     BOARD itself carries the option's saturated color (a bitcoin board is
-     rich orange); its face graphic is clean pure WHITE with a subtle
-     diagonal light reflection sweeping across the glyph — a soft sheen like
-     light catching lacquered lettering, never flat matte and never a hard
-     glare. GLYPH PLACEMENT: because the board's bottom edge is cropped by
-     the frame, the graphic centers within the VISIBLE portion of the board
-     (the part inside the frame), its height roughly 55-60% of that visible
-     height, fully readable with even margins — never cropped by the frame,
-     never cropped by the board's edges, never oversized or off-center. NEVER invert
-     this: never a white board with a colored glyph. It is the champion
-     or the video's named subject, and the ONE held object sanctioned in
-     this archetype. HERO ACCENT: the held board is the most SATURATED color
-     in the frame and catches a touch more light than the fan tiles — a
-     quiet notch brighter, never a glow, halo or spotlight effect.
-   - CREATOR: standing, centered, framed mid-chest up, face frontal and
-     level, the top of his hair reaching close to the top edge (roughly
-     5-10% down) — the fan passes behind it. SUBJECT TREATMENT: bright,
-     even, HIGH-KEY frontal beauty light — minimal shadow in the face, crisp
-     punchy clarity, one neutral white balance shared with the backdrop — he
-     belongs to the bright designed world around him, never a moody
-     directional editorial portrait dropped into it. Clean cutout edge plus
-     his one soft drop shadow on the backdrop. EXPRESSION — FIXED, one register
-     for every creator: a FIRM FROWN straight into the camera — brows visibly
-     KNOTTED and pulled down with a clear vertical crease between them, eyes
-     slightly narrowed into a hard, critical, unimpressed stare locked
-     directly INTO the lens, jaw set, mouth closed and pressed. INTENSITY: on
-     a scale from 0 (neutral face) to 10 (cartoon villain), land at a 7 —
-     unmistakably displeased in a single glance, even at tiny feed size. The
-     COMMON FAILURE here is rendering the frown too FLAT and neutral, so when
-     in doubt push it STRONGER, never softer. Ceiling, one rule only: no
-     snarl, no bared teeth, no grimace — a hard judge, not a villain. The
-     eyes NEVER leave the camera.
-   - FAN FILL — the fan is ALWAYS exactly EIGHT tiles (four per wing);
-     COUNT THEM. Fill order is strict: FIRST, every option the script ranks
-     gets its tile (minus the one in his hands if it is one of them), in the
-     most prominent positions nearest his head — a ranked option missing
-     from the frame is a FAILED concept. THEN pad the remaining slots toward
-     the wings' outer ends, exclusively from this CLOSED filler list and
-     nothing else: a model-house real-estate tile, a silver-bars tile, a
-     cash-stack tile, an oil-barrel tile. NEVER invent other fillers — no
-     piggy banks, no vaults, no safes, no generic person icons, no abstract
-     symbols. Fillers carry ICON graphics only, never labels
-     (labels stay reserved for the actually ranked options), and never
-     anything misleading or off-topic. DEDUPE — HARD RULE: no two tiles
-     anywhere in the fan share the same icon family or meaning (never two
-     chart tiles, two house tiles, two metal tiles); every tile reads as a
-     DIFFERENT option, ranked and filler alike.
-   - Nothing ever overlaps or touches the FACE.
-   - CAPTION — NONE, ever: the overlay words are ALWAYS an empty string. The
-     title names the game; the fan, the hero tile and his expression are the
-     hook. The pipeline enforces this and will not render a caption on a
-     ranked-lineup concept regardless of what you output.
-   - SCENE_PROMPT TRANSCRIPTION — the image model only ever sees your
-     scene_prompt, never this recipe. Spell it out explicitly, in words: the
-     light grey backdrop with his soft drop shadow, the TWO wings of four
-     head-sized tiles each, overlapping by a third — the inner PAIR of each
-     wing nearly level at temple height hugging his head, the outer two
-     falling steeply to chest height, strongest tilt at the outer ends, the
-     OPEN GAP directly above his head — every
-     tile WITH its color and face-graphic — count all EIGHT, name the
-     staircase heights (ranked options nearest his head, closed-list fillers
-     at the outer ends), and state that each of the eight casts its soft
-     drop shadow onto the backdrop, the oversized hero tile — three fan-tiles big, bottom edge cropped by the
-     frame — gripped at its upper sides below his face, his framing (hair near the top edge,
-     mid-chest up), his lighting treatment, and the firm frown locked into the camera. Anything you leave out of scene_prompt will not render —
-     transcribe the recipe, do not summarize it.
+   Eligible ONLY when the script ranks or compares 3 or more concrete options;
+   otherwise fit score 0. This is the ONE archetype that is an openly DESIGNED
+   GRAPHIC instead of a photograph (the sanctioned exception to Principle 11),
+   and the ONE archetype where you do NOT write a free-form scene_prompt.
 
-   SHARED TILE SYSTEM: every option, physical or abstract, becomes the SAME
-   kind of tile — a rounded-square 3D app-icon tile (squircle) built as a
-   FLAT SLAB: a completely FLAT face (never domed, inflated, puffy or
-   pillow-shaped), crisp bevelled edges with modest rounding, and a thickness
-   of roughly 10% of its width. ORIENTATION: every tile's FACE stays
-   PARALLEL to the picture plane — flat-on to the camera, like cards lying
-   flat and photographed straight-on. All rotation is IN-PLANE only (turned
-   like a clock hand, clockwise or counter-clockwise); NEVER yaw or pitch a
-   tile away from the camera in 3D. The slab's thickness shows naturally as
-   a thin, slightly darker edge around the face — that thin edge is the ONLY
-   way a side ever appears, never by turning the tile. FINISH: SATIN — one soft, even sheen across the face, like
-   matte-lacquered plastic or brushed aluminium; NEVER high-gloss, candy,
-   jelly, glazed or wet-looking, and never a hard specular hotspot. Each
-   tile's FACE carries ONE identity, printed FLAT on the face or embossed
-   only a touch (never a chunky, puffy 3D relief): a simple bold icon graphic
-   (a bitcoin ₿ symbol, a gold-bar glyph, a clean rising
-   chart-line) OR one short label of 2-5 characters ("401K",
-   "ROTH") — never both, never sentences; these are the only text/graphics
-   allowed anywhere. NEVER a real brand logo or trademark. Every tile its OWN
-   distinct saturated color (on the grey backdrop every color works) — the
-   lineup must parse as different options at a glance, never a cluster of
-   same-colored tiles.
+   YOUR JOB (three decisions, then copy the template):
+   1. HERO — the champion or the video's named subject: pick its tile color
+      (rich and saturated; a bitcoin board is rich orange) and its face
+      graphic.
+   2. THE EIGHT TILES — assign slots L1-L4 and R1-R4 below. First place every
+      ranked option (minus the hero if it is one of them) in the slots
+      closest to his head (L1, R1, L2, R2...). Fill any remaining slots,
+      outward, exclusively from this closed list: model house, silver bars,
+      cash stack, oil barrel. Each of the eight shows a DIFFERENT option.
+   3. COLORS — every tile its own color, warm and cool alternating around
+      the wings, no two neighbors from the same family, no two tiles alike.
+      Ranked options may carry ONE short embossed label (2-5 characters,
+      e.g. "401K"); fillers carry a simple icon graphic only. No real brand
+      logos.
+   Then output, as this concept's scene_prompt, the following template
+   VERBATIM — same sentences, same numbers — with only the [BRACKETED] slots
+   filled in. Do not summarize it, do not reorder it, do not omit sentences.
+
+   ── SCENE_PROMPT TEMPLATE (copy verbatim, fill the brackets) ──
+   "A professionally designed YouTube thumbnail graphic, clean poster
+   compositing, on a light neutral grey seamless studio backdrop with a
+   subtle real-material texture, brightest directly behind the man's head
+   and softly vignetting toward the corners. The man stands centered, framed
+   from mid-chest up, the top of his hair about 6% below the top edge,
+   photorealistic, lit with bright even high-key frontal light, casting one
+   soft drop shadow on the backdrop. His expression: a firm frown, brows
+   visibly knotted with a vertical crease between them, eyes slightly
+   narrowed, locked straight into the camera, mouth closed and set —
+   intensity 7 out of 10, unmistakably displeased, no snarl.
+   With both hands he holds one large near-square 3D tile board at chest
+   height, directly below his face: about 30% of the frame's width, [HERO
+   COLOR], built as a flat slab with visible thickness (about a tenth of its
+   width), crisp bevelled edges, satin finish. Its bottom edge is cropped by
+   the bottom of the frame. On the visible part of its face, perfectly
+   centered, a clean pure white [HERO GRAPHIC] at about 55% of the visible
+   height, with a subtle diagonal sheen across it, fully readable, cropped
+   by nothing. His fingers wrap the board's upper sides, elbows relaxed.
+   Behind him float eight identical-sized 3D squircle tiles, each as wide as
+   his head, each a flat slab with visible thickness, crisp bevels and a
+   satin finish, every face perfectly parallel to the camera (rotated only
+   in the picture plane, like cards flat against a wall), and every tile
+   casting one identical soft drop shadow straight down onto the backdrop.
+   They form two wings of four that leave an open gap of bare backdrop
+   directly above his head, bridged by his head itself:
+   LEFT WING (each tile overlapping the previous by a third, rotated
+   counter-clockwise): tile L1, [COLOR + GRAPHIC], beside his left temple,
+   partly behind his hair, center 22% down the frame, rotated 5 degrees;
+   tile L2, [COLOR + GRAPHIC], center 26% down, rotated 12 degrees; tile
+   L3, [COLOR + GRAPHIC], center 38% down, rotated 22 degrees; tile L4,
+   [COLOR + GRAPHIC], center 52% down, rotated 32 degrees, keeping a clear
+   margin from the left frame edge.
+   RIGHT WING, mirrored (rotated clockwise): tile R1, [COLOR + GRAPHIC],
+   beside his right temple, partly behind his hair, center 22% down,
+   rotated 5 degrees; tile R2, [COLOR + GRAPHIC], center 26% down, rotated
+   12 degrees; tile R3, [COLOR + GRAPHIC], center 38% down, rotated 22
+   degrees; tile R4, [COLOR + GRAPHIC], center 52% down, rotated 32
+   degrees, keeping a clear margin from the right frame edge.
+   The man's face and the held board are tack-sharp; the outermost tiles
+   sit a breath softer, every graphic still fully readable. One shared
+   light source, one shared neutral white balance. Render no text anywhere
+   except the tile labels explicitly listed above."
+   ── END TEMPLATE ──
+
+   The pipeline renders this archetype without any caption (enforced in
+   code); leave overlay words as an empty string.
 
 THE OVERLAY — a short, emotionally charged phrase, 2 to 3 words MAX (per concept):
 - HARD CAP: 2 to 3 words, never 4. Shorter renders BIGGER and reads faster on a
