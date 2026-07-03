@@ -395,38 +395,50 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      backdrop — the deliberate cutout-poster look. No room, no set, no
      scenery, no horizon.
    - THE FAN (the format's signature) — EXACTLY EIGHT tiles, in TWO WINGS of
-     FOUR: this is not one continuous arch. Each wing is a gentle descending
-     STAIRCASE: the innermost tile sits at TEMPLE height beside his head,
-     each next tile steps roughly HALF A TILE lower than the one before, and
-     the outermost tile lands around CHEST height near its frame edge — a
-     clearly DIAGONAL sweep. Two failure shapes, both WRONG: a straight
-     horizontal row with every tile at the same height, and a steep rainbow
-     semicircle arching over the head. Within each
-     wing the tiles OVERLAP each other like a spread hand of cards. The TWO
-     INNERMOST tiles (one per wing) flank his head at temple height, partly
-     BEHIND his hair — and they DO NOT connect: directly above his head sits
-     an OPEN GAP of backdrop that his head and hair themselves bridge. Depth
-     order is backdrop, wings, person, hero board. TILT follows each wing's
-     sweep and is strongest at the OUTER ends (roughly 30-40 degrees,
-     counter-clockwise on the left wing, clockwise on the right), easing
-     tile by tile toward the center — the innermost tiles stand nearly
-     upright. This tilt is IN-PLANE rotation only (like rotating a card flat
-     against the wall): every face stays flat-on to the camera, never turned
-     away in 3D. Tiles at HEAD SCALE. SHADOWS — EVERY tile, all
-     eight without exception: each tile floats just off the wall and casts
-     ONE soft, close drop shadow onto the backdrop — the SAME direction
-     (straight down, slightly offset), the SAME softness and the SAME
-     distance for all eight, one shared light source. The hero board casts
-     the same soft shadow onto his shirt and torso. A tile without its cast
-     shadow reads as a pasted sticker — if even one tile lacks its shadow,
-     the lighting is wrong. COLOR
-     RHYTHM: distribute the tile colors deliberately across both wings —
-     warm and cool alternating, never two neighbors from the same color
-     family, fillers included (a green cash tile never sits beside a green
-     S&P tile) — so the fan reads composed, not accidental. FOCUS HIERARCHY:
-     his face and the hero board are tack-sharp; the tiles at the outer ends
-     sit a BREATH softer — barely perceptible, every label and icon still
-     tack-readable, never visibly blurred.
+     FOUR: COUNT them per wing — four LEFT of his head, four RIGHT of his
+     head, always symmetric; a 5-3 or any other split is WRONG.
+     TILE SIZE: each tile is as WIDE AS HIS HEAD or a touch wider (roughly
+     16% of the frame's width) — big, dominant tiles; small floating chips
+     at two-thirds of his head are WRONG.
+     OVERLAP — MANDATORY: within each wing every tile overlaps its neighbor
+     by roughly a THIRD, stacked like a dense spread hand of cards; loose
+     tiles floating apart with gaps of backdrop between them are WRONG.
+     WING SHAPE — a CASCADE, not an arc and not an even staircase: the
+     innermost tile of each wing sits at temple height beside his head
+     (center around 18% down the frame), the SECOND tile sits at nearly the
+     SAME height beside it — the top of each wing runs almost LEVEL — then
+     the drop STEEPENS: the third tile falls about half a tile lower, and
+     the fourth, outermost tile falls a full tile-plus lower, its center
+     landing around mid-frame (chest height). Flat top, steeply falling
+     ends. Two failure shapes remain WRONG: an evenly curved arc, and a
+     straight horizontal row.
+     COMPACTNESS: each wing HUGS the head — the innermost tile nearly
+     touching his hair (partly behind it), the four tiles packed into a
+     tight span, the outermost still keeping a clear margin from the frame
+     edge; wings stretched across the full frame width are WRONG. The two
+     wings DO NOT connect: directly above his head sits an OPEN GAP of
+     backdrop that his head and hair themselves bridge. Depth order is
+     backdrop, wings, person, hero board.
+     Tiles cast their shadows per the SHADOWS rule below. SHADOWS — EVERY
+     tile, all eight without exception: each tile floats just off the wall
+     and casts ONE soft, close drop shadow onto the backdrop — the SAME
+     direction (straight down, slightly offset), the SAME softness and the
+     SAME distance for all eight, one shared light source. The hero board
+     casts the same soft shadow onto his shirt and torso. A tile without its
+     cast shadow reads as a pasted sticker — if even one tile lacks its
+     shadow, the lighting is wrong. COLOR RHYTHM: distribute the tile colors
+     deliberately across both wings — warm and cool alternating, never two
+     neighbors from the same color family, fillers included (a green cash
+     tile never sits beside a green S&P tile) — so the fan reads composed,
+     not accidental. FOCUS HIERARCHY: his face and the hero board are
+     tack-sharp; the tiles at the outer ends sit a BREATH softer — barely
+     perceptible, every label and icon still tack-readable, never visibly
+     blurred. TILT follows each wing's cascade and is strongest at the OUTER
+     ends (roughly 30-40 degrees, counter-clockwise on the left wing,
+     clockwise on the right), easing tile by tile toward the center — the
+     innermost tiles stand nearly upright. This tilt is IN-PLANE rotation
+     only (like rotating a card flat against the wall): every face stays
+     flat-on to the camera, never turned away in 3D.
    - THE HERO: he HOLDS one oversized hero tile with BOTH hands, front and
      center directly below his face — a near-SQUARE board, roughly 30% of
      the frame's width (about two-thirds of his shoulder width, clearly
@@ -443,10 +455,11 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      rich orange); its face graphic is clean pure WHITE with a subtle
      diagonal light reflection sweeping across the glyph — a soft sheen like
      light catching lacquered lettering, never flat matte and never a hard
-     glare. GLYPH PLACEMENT: the graphic sits dead-CENTER on the board's
-     face, its height roughly 55-60% of the board's visible height, fully
-     inside the face with even margins on all sides — never oversized,
-     never off-center, never cropped by the board's edge. NEVER invert
+     glare. GLYPH PLACEMENT: because the board's bottom edge is cropped by
+     the frame, the graphic centers within the VISIBLE portion of the board
+     (the part inside the frame), its height roughly 55-60% of that visible
+     height, fully readable with even margins — never cropped by the frame,
+     never cropped by the board's edges, never oversized or off-center. NEVER invert
      this: never a white board with a colored glyph. It is the champion
      or the video's named subject, and the ONE held object sanctioned in
      this archetype. HERO ACCENT: the held board is the most SATURATED color
@@ -493,9 +506,10 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
    - SCENE_PROMPT TRANSCRIPTION — the image model only ever sees your
      scene_prompt, never this recipe. Spell it out explicitly, in words: the
      light grey backdrop with his soft drop shadow, the TWO wings of four
-     overlapping tiles each — rising from chest height at the frame edges to
-     temple height, strongest tilt at the outer ends, the two innermost
-     tiles behind his hair with the OPEN GAP directly above his head — every
+     head-sized tiles each, overlapping by a third — the inner PAIR of each
+     wing nearly level at temple height hugging his head, the outer two
+     falling steeply to chest height, strongest tilt at the outer ends, the
+     OPEN GAP directly above his head — every
      tile WITH its color and face-graphic — count all EIGHT, name the
      staircase heights (ranked options nearest his head, closed-list fillers
      at the outer ends), and state that each of the eight casts its soft
