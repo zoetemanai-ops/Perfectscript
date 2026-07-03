@@ -410,7 +410,9 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      sweep and is strongest at the OUTER ends (roughly 30-40 degrees,
      counter-clockwise on the left wing, clockwise on the right), easing
      tile by tile toward the center — the innermost tiles stand nearly
-     upright. Tiles at HEAD SCALE. SHADOWS — EVERY tile, all
+     upright. This tilt is IN-PLANE rotation only (like rotating a card flat
+     against the wall): every face stays flat-on to the camera, never turned
+     away in 3D. Tiles at HEAD SCALE. SHADOWS — EVERY tile, all
      eight without exception: each tile floats just off the wall and casts
      ONE soft, close drop shadow onto the backdrop — the SAME direction
      (straight down, slightly offset), the SAME softness and the SAME
@@ -441,7 +443,11 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      rich orange); its face graphic is clean pure WHITE with a subtle
      diagonal light reflection sweeping across the glyph — a soft sheen like
      light catching lacquered lettering, never flat matte and never a hard
-     glare. NEVER invert this: never a white board with a colored glyph. It is the champion
+     glare. GLYPH PLACEMENT: the graphic sits dead-CENTER on the board's
+     face, its height roughly 55-60% of the board's visible height, fully
+     inside the face with even margins on all sides — never oversized,
+     never off-center, never cropped by the board's edge. NEVER invert
+     this: never a white board with a colored glyph. It is the champion
      or the video's named subject, and the ONE held object sanctioned in
      this archetype. HERO ACCENT: the held board is the most SATURATED color
      in the frame and catches a touch more light than the fan tiles — a
@@ -502,8 +508,13 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
    kind of tile — a rounded-square 3D app-icon tile (squircle) built as a
    FLAT SLAB: a completely FLAT face (never domed, inflated, puffy or
    pillow-shaped), crisp bevelled edges with modest rounding, and a thickness
-   of roughly 10% of its width, the side faces visible and naturally shaded a
-   step darker. FINISH: SATIN — one soft, even sheen across the face, like
+   of roughly 10% of its width. ORIENTATION: every tile's FACE stays
+   PARALLEL to the picture plane — flat-on to the camera, like cards lying
+   flat and photographed straight-on. All rotation is IN-PLANE only (turned
+   like a clock hand, clockwise or counter-clockwise); NEVER yaw or pitch a
+   tile away from the camera in 3D. The slab's thickness shows naturally as
+   a thin, slightly darker edge around the face — that thin edge is the ONLY
+   way a side ever appears, never by turning the tile. FINISH: SATIN — one soft, even sheen across the face, like
    matte-lacquered plastic or brushed aluminium; NEVER high-gloss, candy,
    jelly, glazed or wet-looking, and never a hard specular hotspot. Each
    tile's FACE carries ONE identity, printed FLAT on the face or embossed
