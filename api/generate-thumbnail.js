@@ -1,4 +1,3 @@
-
 // api/generate-thumbnail.js
 // ─────────────────────────────────────────────────────────────────────────────
 // Perfect Thumbnail · Vercel Node serverless function (GPT Image 2)
@@ -404,12 +403,16 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      softly lit, but unmistakably THERE, never a floating torso. Same sofa for
      every creator, like the backdrop.
      EXPRESSION — FIXED for this format: face fully FRONTAL toward the
-     camera, head straight and level, with a light FROWN (brows drawn
-     together, critical, faintly annoyed) and his EYES rolled slightly UPWARD
-     toward the tile floating directly above his head — the classic "glancing
-     up at the thing hovering over me" look. Head never tilts back and never
-     turns: only the eyes travel up. Understated, never theatrical, never
-     mild-pleasant. His hands stay DOWN and empty (resting, mostly out of
+     camera, head straight and level, with a CLEAR, pronounced FROWN — brows
+     visibly drawn together and pulled DOWN, real tension between them,
+     forehead creased, critical and annoyed; a frown a viewer reads instantly
+     at feed size, not a hint of one — and his EYES rolled distinctly UPWARD
+     toward the tile floating directly above his head, whites visible below
+     the iris — the unmistakable "glancing up at the thing hovering over me"
+     look. Head never tilts back and never turns: only the eyes travel up.
+     BOTH must land together: eyes clearly UP and brow clearly FURROWED —
+     neither a neutral stare into the lens, nor a frown that looks at the
+     camera. Strong, but still credible — never cartoonish. His hands stay DOWN and empty (resting, mostly out of
      frame) — he holds NOTHING: holding or elevating any option would reveal
      the verdict.
    - EQUAL TREATMENT (this keeps the ranking unresolved): all options get the
