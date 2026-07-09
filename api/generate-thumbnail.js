@@ -516,9 +516,11 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
    it a touch brighter, as if the board glows faintly. Its bottom edge is
    cropped by the bottom of the frame. On the visible part of its face,
    perfectly centered, a clean pure white [BOARD GRAPHIC] at about 55% of
-   the visible height, softly LUMINOUS — as if gently backlit from within
-   the board, a subtle white glow lifting it off the tile face, clearly
-   the most radiant graphic in the frame yet never neon or bloomed —
+   the visible height, clearly GLOWING — softly backlit from within the
+   board with a visible warm-white luminous halo bleeding a few pixels past
+   the letterforms, unmistakably the brightest, most radiant graphic in the
+   frame, noticeably brighter than every wing-tile graphic, elegant rather
+   than neon —
    fully readable, cropped by nothing. His fingers
    wrap the board's upper sides, elbows relaxed.
    Behind him float eight 3D squircle tiles in two smooth arcing wings of
