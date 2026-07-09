@@ -439,14 +439,22 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
    and the ONE archetype where you do NOT write a free-form scene_prompt.
 
    YOUR JOB (four decisions, then copy the template):
-   1. HERO — the champion or the video's named subject: pick its tile color
-      (rich and saturated; a bitcoin board is rich orange) and its face
-      graphic.
+   1. THE HELD BOARD — the ANTAGONIST, never the winner: the creator holds the
+      mainstream/default option the script argues AGAINST — the thing the
+      audience probably owns (for a pro-bitcoin script that is the 401K or the
+      index fund, NOT bitcoin). Holding the villain keeps the ranking
+      unspoiled and pairs naturally with a displeased face: "THIS is what
+      you're holding." The script's actual champion appears only as one of the
+      eight wing tiles, never as the held board. Pick the board's tile color
+      (rich and saturated — a REAL color, never grey, black, charcoal or any
+      dark near-neutral: the board must clearly stand out against the
+      creator's clothing) and its face graphic.
    2. THE EIGHT TILES — assign slots L1-L4 and R1-R4 below. First place every
-      ranked option (minus the hero if it is one of them) in the slots
-      closest to his head (L1, R1, L2, R2...). Fill any remaining slots,
-      outward, exclusively from this closed list: model house, silver bars,
-      cash stack, oil barrel. Each of the eight shows a DIFFERENT option.
+      ranked option (minus the held antagonist) in the slots closest to his
+      head (L1, R1, L2, R2...), the script's champion in L1 or R1. Fill any
+      remaining slots, outward, exclusively from this closed list: model
+      house, silver bars, cash stack, oil barrel. Each of the eight shows a
+      DIFFERENT option.
    3. COLORS — every tile its own color, warm and cool alternating around
       the wings, no two neighbors from the same family, no two tiles alike.
       Ranked options may carry ONE short embossed label (2-5 characters,
@@ -463,7 +471,8 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
       vertical crease between them, eyes slightly narrowed, locked straight
       into the camera, mouth closed and set — intensity 7 out of 10,
       unmistakably displeased, no snarl" — use when the video crowns a
-      winner or condemns the losers.
+      winner or condemns the losers; this is the natural pairing with the
+      held antagonist board (displeased AT the thing in his hands).
    Then output, as this concept's scene_prompt, the following template
    VERBATIM — same sentences, same numbers — with only the [BRACKETED] slots
    filled in. Do not summarize it, do not reorder it, do not omit sentences.
@@ -482,29 +491,33 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
    him crisply from the background, casting one soft drop shadow on the
    backdrop. His expression: [EXPRESSION].
    With both hands he holds one large near-square 3D tile board at chest
-   height, directly below his face: about 30% of the frame's width, [HERO
+   height, directly below his face: about 30% of the frame's width, [BOARD
    COLOR], built as a flat slab with visible thickness (about a tenth of
-   its width), crisp bevelled edges, satin finish. The hero board is
+   its width), crisp bevelled edges, satin finish. The held board is
    softly SPOTLIT — the brightest object in the frame after his face, a
    gentle sheen sweeping across its face, and the backdrop directly behind
    it a touch brighter, as if the board glows faintly. Its bottom edge is
    cropped by the bottom of the frame. On the visible part of its face,
-   perfectly centered, a clean pure white [HERO GRAPHIC] at about 55% of
+   perfectly centered, a clean pure white [BOARD GRAPHIC] at about 55% of
    the visible height, fully readable, cropped by nothing. His fingers
    wrap the board's upper sides, elbows relaxed.
    Behind him float eight 3D squircle tiles in two smooth arcing wings of
    four that sweep around and behind his head, leaving a gap of bare
    backdrop directly above it. Each tile is a thick flat slab with crisp
-   bevels and a satin finish, and each is turned a few degrees in space,
-   angled slightly AWAY from his head, so its thick side edge is subtly
-   visible — dimensional objects hanging in the space, NOT flat stickers
-   pasted on the wall. The tiles shrink outward along each wing: the tile
+   bevels and a satin finish. The tile FACES stay nearly PARALLEL to the
+   camera — turned only a subtle few degrees in space, just enough that a
+   hint of the thick side edge shows — never strongly tilted, swung open or
+   angled like turning pages: dimensional objects hanging flat in the
+   space, NOT flat stickers pasted on the wall and NOT boards rotating
+   away. The tiles shrink outward along each wing: the tile
    nearest his head full size (as wide as his head), the next about 90% of
    that, the third about 80%, the outermost about 72% — reading as gentle
    depth. Each tile clearly OVERLAPS the previous one by about a third,
-   visibly in front of its outer neighbor, and every tile casts one soft
-   shadow onto the backdrop and a faint contact shadow onto the tile it
-   overlaps.
+   visibly in front of its outer neighbor. Every tile casts one CLEARLY
+   VISIBLE soft drop shadow onto the backdrop behind it, and where tiles
+   overlap, the front tile casts a visible soft contact shadow onto the
+   tile beneath it — the shadows are unmistakable, grounding every tile in
+   the space, never faint to the point of absent.
    LEFT WING (rotated counter-clockwise): tile L1, [COLOR + GRAPHIC],
    beside his left temple, partly behind his hair, center 22% down the
    frame, rotated 5 degrees; tile L2, [COLOR + GRAPHIC], center 26% down,
