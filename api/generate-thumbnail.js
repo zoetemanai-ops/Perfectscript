@@ -238,7 +238,15 @@ executions.
      face the brightest element (Principle 4), PLUS a clearly visible edge /
      separation light tracing his shoulders and arms (a real light placed behind
      and to the side of him), so dark clothing NEVER melts into a dark
-     background. The office may stay moody; the creator always pops out of it.
+     background. The office keeps its real character; the creator always pops
+     out of it.
+   - LIT, WORKING STUDIO: render the office as it looks during a real
+     recording — the room's lights ON, lit the way it appears in the creator's
+     actual videos. NEVER render the room darker than creator_visual_notes
+     describes, and never drift it toward dusk, twilight or a dim atmospheric
+     mood. Dark wood and warm lamps are welcome, but as a well-lit room with
+     dark materials — visible, alive and bright enough to read — not as a
+     darkened, shadowy space.
 
 2) TWEET-CARD (designed graphic)
    A designed composite built around a viral-tweet card — the second sanctioned
@@ -366,10 +374,13 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
    edges or the environment strip disappear.
    LIGHT & FINISH — actively counter the default dark, moody render; this must
    look hand-made by one of the best thumbnail designers in the world:
-   - The board is bright, clean WHITE, fully and evenly lit as if by soft
-     studio light — NEVER cream, yellowish, greyish, dim or falling into
+   - The board is bright, clean WHITE, fully and generously lit as if by soft
+     studio light — luminous, a touch brighter than a real office would have it
+     — NEVER cream, yellowish, greyish, dim or falling into
      shadow. The board and the creator's face are the two brightest surfaces
-     in the frame.
+     in the frame, and the creator, his pointing arm and the marker cast
+     soft but clearly visible shadows onto the board where they come near
+     it, grounding him against the white.
    - The whole scene reads bright, fresh and commercial: crisp daylight-like
      brightness with a neutral white balance. The environment strip may keep
      its own character, but the overall impression is LIGHT — never moody,
@@ -430,10 +441,12 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      set overlay words to an empty string and caption_zone to null. The board
      IS the text.
    - In scene_prompt, spell out the hook line and every item VERBATIM in
-     quotes, plus each item's doodle icon, so the image model renders the exact
-     words, crisp, correctly spelled, in hand-drawn marker style — and repeat
-     the bright, clean, evenly lit white board and the lively handwritten ink
-     in the scene_prompt itself.
+     quotes, plus each item's doodle icon, and repeat the bright, clean, evenly
+     lit white board — but say NOTHING about handwriting, lettering, font or
+     marker style in the scene_prompt: no "hand-drawn", no "marker writing", no
+     letter descriptions of any kind. The complete lettering style is dictated
+     by ONE fixed directive appended in code; a second description in the scene
+     would fight it and drag the model back to its default font.
 
 4) RANKED LINEUP (designed graphic — MANDATORY for ranking / comparison scripts)
    Eligible ONLY when the script ranks or compares 3 or more concrete options;
@@ -503,7 +516,10 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
    it a touch brighter, as if the board glows faintly. Its bottom edge is
    cropped by the bottom of the frame. On the visible part of its face,
    perfectly centered, a clean pure white [BOARD GRAPHIC] at about 55% of
-   the visible height, fully readable, cropped by nothing. His fingers
+   the visible height, softly LUMINOUS — as if gently backlit from within
+   the board, a subtle white glow lifting it off the tile face, clearly
+   the most radiant graphic in the frame yet never neon or bloomed —
+   fully readable, cropped by nothing. His fingers
    wrap the board's upper sides, elbows relaxed.
    Behind him float eight 3D squircle tiles in two smooth arcing wings of
    four that sweep around and behind his head, leaving a gap of bare
