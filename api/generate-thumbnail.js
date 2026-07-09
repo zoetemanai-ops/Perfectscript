@@ -58,9 +58,7 @@ INPUTS (JSON):
 
 NON-NEGOTIABLE PRINCIPLES:
 1. ONE idea, ONE dominant focal point per concept; the eye lands in under 0.3s,
-   and that focal point is the creator's face. (Opposites-split may use two
-   contrasting background worlds, but the face still dominates and the two halves
-   stay clearly subordinate, never competing focal points.)
+   and that focal point is the creator's face.
 2. Emotion + trigger run HOT — they earn the click. TWO layers:
    (a) Expression: push the creator to a strong, intense, high-conviction
    register — a determined locked stare, knowing/conspiratorial intensity, a
@@ -86,10 +84,8 @@ NON-NEGOTIABLE PRINCIPLES:
    vault, a plain door, a blank envelope) FAILS this even when it looks great: if
    the object would fit fifty unrelated finance videos, it is too abstract. Tie the
    metaphor to the ACTUAL mechanism in the script (the specific tax, the account,
-   the deadline, the retiree), then give THAT one fresh twist. Opposites-split,
-   reaction-to-object and on-location can carry the subject through contrasting
-   worlds, a real object, or a real place instead of a single metaphor, and
-   evidence-closeup carries it through a real marked document; all of that is fine.
+   the deadline, the retiree), then give THAT one fresh twist. Evidence-closeup
+   carries the subject through a real marked document or screen; that is fine.
 4. Natural, realistic light and real depth — it must look like a genuine
    PHOTOGRAPH, not a stylized or graded render. Light the creator cleanly and
    believably so the face reads instantly on mobile, with real separation between
@@ -124,9 +120,7 @@ NON-NEGOTIABLE PRINCIPLES:
    metaphor, but never shrink the face. They look directly into the lens, locking
    eyes with the viewer. Break eye contact ONLY when a concept is clearly stronger
    with an averted gaze (e.g. looking toward the thing the metaphor depicts).
-   Never default to a small, passive, side-of-frame subject. (Opposites-split may
-   place the creator off-center beside the split, but the face must still be LARGE
-   and dominant, never shrunk.) Keep the face clearly
+   Never default to a small, passive, side-of-frame subject. Keep the face clearly
    visible, well-lit and roughly front-facing or three-quarter — avoid extreme
    profile, far-away, heavily shadowed, or partially hidden faces, which break
    the likeness.
@@ -155,9 +149,10 @@ NON-NEGOTIABLE PRINCIPLES:
    in chains, burning, frozen, levitating or glowing props, impossible object
    combinations, symbolic still-lifes nobody would build. Drama comes from the
    creator's ACTION and expression, real places, and real consequences — things
-   a camera could actually catch. The ONE sanctioned exception is the
-   ranked-lineup archetype, which is an openly DESIGNED graphic rather than a
-   photograph and follows its own rules in the STYLE LIBRARY.
+   a camera could actually catch. The sanctioned exceptions are the
+   ranked-lineup and tweet-card archetypes, which are openly DESIGNED
+   graphics rather than photographs and follow their own rules in the STYLE
+   LIBRARY.
 
 TITLE + THUMBNAIL = ONE HOOK:
 On YouTube the viewer always sees the thumbnail and the title TOGETHER — they
@@ -168,18 +163,20 @@ do they form an unanswered question that demands the click. Use the title as an
 active partner — complete it, contradict it, or raise the stakes on it — never
 merely avoid repeating its words.
 
-STYLE LIBRARY — the pool is FOUR archetypes; every run = 2 OFFICE + 1 BREAKER:
-This factory has FOUR thumbnail archetypes in two groups. OFFICE archetypes are
-staged in the creator's real studio set (creator_visual_notes): reaction-to-object
-and evidence-closeup. BREAKER archetypes leave the studio: opposites-split,
-on-location, and — ONLY when the script ranks or compares 3 or more concrete
-options — ranked-lineup. Every run MUST include BOTH office archetypes, each as
-its own concept, plus ONE breaker — score the eligible breakers for THIS script
-and build whichever fits best. EXCEPTION: if the script offers no strong real
-figure for evidence-closeup, swap it for the OTHER breaker that run (the run then
-becomes reaction-to-object + both breakers). Result: 3 concepts across three
-different archetypes. Mandatory does NOT mean generic: make each archetype
-genuinely earn its place for THIS specific script, never a bolted-on template.
+STYLE LIBRARY — the pool is FOUR archetypes; every run = 3 concepts:
+This factory has FOUR thumbnail archetypes. EVIDENCE CLOSE-UP is a photograph
+staged in the creator's real studio set (creator_visual_notes). WHITEBOARD LIST
+is a photograph of the creator beside a hand-drawn whiteboard. TWEET-CARD is a
+designed graphic built around a viral-tweet card. RANKED-LINEUP is a designed
+graphic, eligible ONLY when the script ranks or compares 3 or more concrete
+options.
+DEFAULT RUN: one evidence-closeup + one tweet-card + one whiteboard-list.
+RANKING SCRIPTS — HARD RULE: whenever the script ranks or compares 3+ concrete
+options, ranked-lineup is MANDATORY: it ALWAYS replaces whiteboard-list (both
+carry list energy — never run both), so the run becomes evidence-closeup +
+tweet-card + ranked-lineup. Never skip an eligible ranked-lineup. Mandatory does
+NOT mean generic: make each concept genuinely earn its place for THIS specific
+script, never a bolted-on template.
 
 OVERRIDE RULE: each archetype's recipe below sets its own composition, background
 and text handling. Where a recipe conflicts with a general principle or with the
@@ -217,8 +214,11 @@ executions.
      biographical credentials that merely introduce him in the hook (his old
      salary, years of experience, assets under management, book titles or
      stats): a circled figure promises the video is ABOUT that number. If the
-     only concrete figures available are bio credentials, this archetype does
-     not fit — swap it per the STYLE LIBRARY rule.
+     only concrete figures available are bio credentials, dig deeper into the
+     full script for a core-claim figure; only if the script truly has none may
+     the marked detail be a short 1-3 word core-claim phrase (e.g. "DENIED",
+     "FINAL NOTICE") printed the way real paperwork prints it, instead of a
+     figure.
    - The document reads as what it is through LAYOUT and physical cues (official
      letterhead shape, a table grid, an envelope it came from, a screen UI), not
      through readable words.
@@ -231,115 +231,59 @@ executions.
      or locking eyes with the viewer while presenting it; face stays dominant per
      Principle 8, the document angled toward the lens so the mark reads at 120px.
 
-2) OPPOSITES-SPLIT
-   The background splits into TWO contrasting, topic-true worlds that show the
-   stakes. CORE LENS — the GAP: the two sides are the SAME starting point that
-   split, not just a grim world beside a winning one — the same subject (a person,
-   business, deal or asset) ending opposite ways because of ONE decision the viewer
-   can't yet see, so the image itself asks "what did one do that the other didn't?"
-   Make the two sides DIRECTLY comparable: the SAME kind of thing in opposite states
-   (one cheque full vs shredded, one door open vs slammed shut, a desk thriving vs
-   stripped bare), placed side by side so the eye reads one against the other at a
-   glance — not two unrelated props sharing a room. Give each side ONE clear subject
-   in its two states (the same house intact vs seized), never a pile-up of extra
-   symbols on one side — a villa AND a safe AND gold is two cues too many; one clean
-   subject reads faster.
-   Go HARD on the contrast — this should hit, not whisper: a grim, harsh,
-   high-stakes side versus a prosperous, winning side (e.g. a run-down derelict
-   house vs a luxury villa, an empty/foreclosed space vs a thriving one, a pile of
-   red "FINAL NOTICE" letters vs a full ledger, dark storm light vs warm success).
-   Carry the drama entirely through PLACES, OBJECTS, light and color — NOT through a
-   depicted suffering person. Never show an identifiable human as a victim, in
-   distress, poverty, or pain; the only person in the frame is the creator, framed
-   as the authority pointing at the divide, never as the one being harmed. Creator
-   positioned so the central divide stays fully visible — straddling it or just to
-   one side — reacting to it, face still dominant. This archetype BENDS
-   "one focal point": the split is deliberate, but the creator's face must stay the
-   single dominant element and each half must be instantly readable and clearly
-   subordinate, never two competing focal points. Distinguish the two halves by real,
-   believable means (different setting, props, or natural light level). The divide
-   sits on the vertical CENTER line of the frame, splitting it into two roughly equal
-   left/right halves — never pushed off to one side. It may be a hard edge OR a
-   softer organic transition (an almost liquid seam where the two worlds meet); soft
-   is fine, but it must stay CENTERED and instantly readable at 0.3s, never a vague
-   smear, fog, floating particles, or murky AI sludge — and NEVER a glowing seam,
-   light strip, or neon line between the worlds: the divide is made by the two
-   worlds' own light, materials and decay (or a natural architectural edge), never
-   by an inserted glow. Both worlds concrete and
-   graspable in 0.3s. BOTH halves must be equally photographic: the grim side is a
-   REAL photograph of decay — same texture, grain, camera and light logic as the
-   winning side — never a darker, vaguer illustration or an "AI drawing" (a common
-   split failure where the good side looks shot and the bad side looks sketched).
+2) TWEET-CARD (designed graphic)
+   A designed composite built around a viral-tweet card — the second sanctioned
+   exception to Principle 11 (with ranked-lineup): everything around the creator
+   is intentional graphic design, while the creator himself stays fully
+   photorealistic. Structure is FIXED; only the words, the background color and
+   the creator's expression vary:
+   - BACKGROUND: one single, completely FLAT, fully saturated solid color filling
+     the entire frame — no gradient, no texture, no scene, no props, no vignette.
+     Pick the color to match THIS concept's register: royal blue (the default /
+     authority), deep red (warning / loss), dark green (money / winning), or
+     vivid orange (urgency). Always rich and saturated, never pastel, muted or
+     grey — it must punch against the white card in the feed.
+   - THE CARD: one white card with strongly rounded corners, perfectly straight
+     (no tilt, no perspective), covering roughly the left 70% of the frame and
+     bleeding off the LEFT and BOTTOM edges, casting one subtle, soft, even drop
+     shadow onto the flat background so it lifts gently off it. On the card, top
+     row: a small round avatar photo of the creator (same person as the reference
+     photos, identity locked, may be slightly desaturated like a real profile
+     picture) inside a thin, subtle keyline ring, followed by the handle in bold
+     black, immediately followed by the blue verified
+     checkmark badge. The handle is "@" + creator_name with all spaces removed,
+     keeping each word's capitalization (creator_name "Tom Wheelwright" →
+     "@TomWheelwright"). Below the handle row: the tweet text in very heavy
+     black sans-serif (the flat geometric style of a Twitter/X post), sentence
+     case, over one or two lines, strictly LEFT-ALIGNED to the card's left
+     padding with tight line spacing, filling most of the card's width. NOTHING
+     else on the card: no date, no likes, no reply icons, no other tweet UI.
+   - TWEET TEXT: 2 to 5 words, sentence case (capitalize only the first word and
+     proper nouns), written as a bold, confident CLAIM or verdict the creator
+     could have tweeted — a statement that opens a loop with the title, e.g.
+     "Sell to the Rich", "Your trust is worthless", "Stop funding the IRS".
+     STANCE TEST: the strongest tweet is a STANCE — a statement a passing viewer
+     instinctively wants to argue with, or needs to see defended ("Renting beats
+     buying" beats "Save more money"). If your line is something everyone
+     already agrees with, sharpen it until it picks a side. It
+     follows the OVERLAY emotion rules in spirit (hit a nerve, never merely name
+     the topic, never repeat or reword the title) but NOT its length, casing or
+     highlight rules — no ALL CAPS, no highlight block, no red words. It must
+     read as something a real person tweeted, not a screamed caption.
+   - CREATOR: LARGE on the right, framed roughly chest-to-crown, face sharp and
+     dominant, looking straight into the lens with the hot-but-credible
+     expression that fits this concept's register (Principle 2 applies in
+     full). He stands IN FRONT of the card, overlapping its right edge, and
+     bleeds off the RIGHT and BOTTOM edges of the frame. Photorealistic per the
+     reference photos, lit with clean, even frontal light, one subtle soft drop
+     shadow onto the background — never a hard cut-out edge.
+   - The normal caption pipeline is OFF for this archetype (enforced in code):
+     set overlay words to an empty string, caption_zone to null, and do NOT
+     describe any other text in the scene. The card IS the text.
+   - In scene_prompt, describe this full composition INCLUDING the exact handle
+     and the exact tweet text in quotes, so the image model renders them
+     verbatim, crisp and correctly spelled.
 
-3) REACTION-TO-OBJECT (office) — CAUGHT IN THE ACT
-   Creator framed large in his OWN studio set (creator_visual_notes), CAUGHT
-   MID-ACTION doing something dramatic with ONE ordinary, instantly recognizable
-   object — his own hands carry the drama, photographed in the same scene with
-   real materials, weight and real contact shadows.
-   CORE LENS — THE ACT, not the object: the tension comes from what the creator
-   is DOING at this exact moment, something a photographer could genuinely catch
-   on a real shoot. The act menu spans far MORE than paper — vary it:
-   - MONEY: holding a wallet upside down, emptied, nothing left; counting a
-     thick stack of cash onto the desk; sliding or sweeping a stack of cash off
-     the desk, out of reach; cutting a bank card in half with scissors.
-   - KEYS & LOCKS (use with care — see the handover rule below): clicking a
-     padlock shut; house keys held out TOWARD THE LENS as a forced handover.
-   HANDOVER RULE: there is never a second person in frame, so any act of giving,
-   taking or losing must be directed AT THE LENS — the viewer is the other party.
-   Never stage a handover between the creator's own two hands (dangling keys over
-   his own palm reads as giving them to himself — nonsense). And the stake must be
-   SELF-EVIDENT from the object alone: cash and a wallet are money on sight, but
-   bare keys could be anything — a key act only works when the frame makes clear
-   WHAT the keys unlock, otherwise pick a money act instead.
-   - PAPER (use sparingly, see PAPER QUOTA below): feeding a document into a
-     RUNNING paper shredder with strips already falling; letting a fistful of
-     shredded strips rain down onto the desk; pressing a red rubber stamp down
-     onto the front page, caught mid-press; crumpling a page into his fist;
-     yanking open an overflowing drawer stuffed with papers; holding a page up
-     to the lens like damning evidence — and only as the LAST resort, tearing a
-     contract in half. Tearing is the single most overused paper act: reach for
-     any of the others first, and never make it the automatic pick.
-   Pick the act that fits THIS script — do NOT default to tearing a document;
-   tearing is one option, not the house style. The object itself stays
-   completely NORMAL (cash, a wallet, keys, a padlock, a bank card, a phone, a
-   document with a short readable 1-3 word header) — the ACT is what makes it
-   dramatic.
-   PAPER QUOTA — HARD RULE: at most ONE of the three concepts in a run may use
-   paper or a document as its hero object. Evidence-closeup already uses a
-   document, so whenever evidence-closeup is in the run, this concept MUST
-   build on a NON-PAPER object and a non-paper act (money, wallet, card, keys,
-   padlock, phone). A cold viewer must parse ACT + OBJECT in a single glance; if it
-   needs a second look to understand what is physically happening, it is too
-   clever — simplify. The object must MEAN something, not just NAME the topic:
-   what he is DOING to it IS the story (shredding the trust document = the
-   protection is worthless). A prop that merely has the subject written on it is
-   a caption, not a metaphor.
-   HARD BANS (these read as AI gimmicks and kill instant clarity):
-   - NO staged object-states no photographer would build: nothing wrapped in
-     chains, burning, frozen, floating, glowing, or melting (Principle 11).
-   - NO object-through-object or object-inside-object constructions: nothing
-     emerging through a hole in something else, no layered multi-prop tricks.
-     ONE prop only.
-   - Never a literal hole, gap or crack cut into a document to illustrate an
-     abstract "flaw".
-   - Never give the object a face, teeth, or a life of its own; never invent a
-     novelty object, a fantasy gadget, or an engraved/branded plaque; no plain
-     blank sheet or unlabeled stack as the hero object.
-   The power is the COMBINATION of the creator's hot expression and the act
-   frozen mid-motion. One act, one object, one face — no clutter.
-
-4) ON-LOCATION
-   Take the creator OUT of the studio into a meaningful real-world PLACE tied to the
-   topic — e.g. a bank lobby, a vault room, an empty or foreclosed building, a
-   construction site, in front of a mansion, a government/IRS-style building, a
-   trading floor. The location carries the context and breaks the studio look.
-   Photograph it as a real environment with depth and the natural light of that
-   place; the creator stays large and dominant in the foreground, reacting. The
-   creator carries NOTHING — no binder, folder, papers or props; hands empty,
-   reacting naturally (pointing at the place, arms crossed, a hard warning
-   gesture). The LOCATION is the metaphor; a carried prop only muddies it. This
-   archetype does NOT use the creator's studio set, so ignore creator_visual_notes
-   for this one.
 
 In each concept's "angle", say how that archetype is made to fit THIS script.
 
@@ -351,13 +295,12 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
   fleeing into a "premium" but subject-blind object (a generic vault, plain door,
   blank envelope). Give a topic-TRUE object ONE fresh, unexpected turn: reinvent
   the topic, do not abandon it.
-- The three concepts must be genuinely different from each other. HARD RULE: they
-  MUST use three DIFFERENT archetypes (see STYLE LIBRARY) and must also differ in
-  background and composition, so a run never looks like three versions of one
-  image. Within whatever archetype mix you pick, do NOT repeat the same underlying
-  metaphor family — e.g. do not submit two "open vs closing portal" ideas (a door
-  AND a vault AND an envelope are the same idea three times). If two concepts feel
-  like variants, replace one with a different archetype.
+- The three concepts must be genuinely different from each other — the run is
+  already three DIFFERENT archetypes, but they must also pull DIFFERENT hooks
+  from the script: the evidence figure, the tweet claim and the whiteboard list
+  must not all restate the same single point in three formats. If two concepts
+  feel like the same idea twice, rebuild one around a different angle from the
+  script.
 - Fresh with ONE surprising twist, but graspable in 0.3 seconds. Take a
   recognizable object or situation and give it one unexpected turn — not the 50th
   generic "person frowning at a chart", but also NOT an abstract, cryptic puzzle
@@ -381,10 +324,55 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
 - Avoid depending on an exact COUNT of objects (e.g. "five envelopes") — image
   models miscount. Use "one red among plain ones" or a single hero object.
 
-5) RANKED LINEUP (breaker — ONLY for ranking / comparison scripts)
+3) WHITEBOARD LIST (photograph)
+   A PHOTOGRAPH — not a designed graphic: the creator beside a real whiteboard
+   he has just drawn on, shot in one real frame (Principle 11 applies in full;
+   this archetype stays in the photographic quality mode). The board fills
+   roughly 90-95% of the frame, photographed straight-on or at a slight angle,
+   its edges visible plus a narrow strip of real environment around it — the
+   creator's own studio/office per creator_visual_notes when provided, otherwise
+   a neutral office space. That sliver proves it is a real board in a real room;
+   the board itself is the background.
+   ON THE BOARD, all in believable hand-drawn marker (slight natural wobble is
+   good — it must read as handwriting, not a font):
+   - TOP: the hook line in thick black marker capitals, 2-4 words, on a yellow
+     marker-highlight bar. It is a curiosity HOOK that works as the other half
+     of the video_title (title + board = one weapon), NEVER a topic label:
+     "PERFECT BUSINESS" labels, "THEY MISSED THIS" hooks.
+   - BELOW: 3 or 4 numbered items — each a circled number + 1-2 words + ONE
+     simple, universally recognizable doodle icon under or beside it (stick
+     figures, an arrow chart, a money stack, a house, a clock — never a complex
+     scene, never an icon a viewer cannot name in a glance). Follow the proven
+     color hierarchy of the format: item words in red marker, icons and numbers
+     in black, the yellow highlight only on the hook line.
+   - ITEMS MUST BE SCRIPT-TRUE (Principle 9 in spirit): every list item is a
+     real point the script actually makes, never invented filler to round out
+     the list. Three real items beat four with a weak one.
+   - HIDDEN ITEM (optional, use when it genuinely fits the script): ONE item
+     withholds the payoff — its words replaced by a bold "?" or scratched out
+     with marker strokes, the number still visible. Use it when the script has
+     one clear headline secret the viewer must click to learn; skip it when the
+     list itself is the hook. Never more than one hidden item.
+   - HARD WORD CAP: at most 12 words total on the board (hook line + all items
+     combined). More words = garbled render. Count before you write the
+     scene_prompt.
+   - CREATOR: LARGE on the right, chest-up, overlapping the board's right edge,
+     marker in hand, POINTING at the single most tension-loaded item (the
+     hidden "?" item when present) while looking straight INTO THE LENS — never
+     at the board. Hot-but-credible expression per Principle 2; the eye travels
+     face → pointing hand → the item.
+   - The normal caption pipeline is OFF for this archetype (enforced in code):
+     set overlay words to an empty string and caption_zone to null. The board
+     IS the text.
+   - In scene_prompt, spell out the hook line and every item VERBATIM in
+     quotes, plus each item's doodle icon, so the image model renders the exact
+     words, crisp, correctly spelled, in hand-drawn marker style.
+
+4) RANKED LINEUP (designed graphic — MANDATORY for ranking / comparison scripts)
    Eligible ONLY when the script ranks or compares 3 or more concrete options;
-   otherwise fit score 0. This is the ONE archetype that is an openly DESIGNED
-   GRAPHIC instead of a photograph (the sanctioned exception to Principle 11),
+   otherwise fit score 0. When eligible it is MANDATORY (see STYLE LIBRARY).
+   This archetype is an openly DESIGNED
+   GRAPHIC instead of a photograph (a sanctioned exception to Principle 11),
    and the ONE archetype where you do NOT write a free-form scene_prompt.
 
    YOUR JOB (three decisions, then copy the template):
@@ -554,7 +542,12 @@ For EACH concept, score two axes 0-10 and FIX any that fall short before output:
   shown and score LOW; rewrite until it hits a nerve. EXCEPTION: an EMPTY overlay
   on a ranked-lineup concept is the intended, correct answer for a pure ranking
   video — score it 10 and move on; NEVER invent a caption just to satisfy this
-  gate.
+  gate. On a tweet-card concept the overlay is ALSO empty by design: score the
+  TWEET TEXT instead, against the tweet-card recipe's rules (a bold claim that
+  hits a nerve, never a topic label, never a reworded title). On a
+  whiteboard-list concept the overlay is ALSO empty by design: score the board's
+  HOOK LINE instead, against the whiteboard recipe's rules (a curiosity hook,
+  never a topic label).
 - expression_match: does the creator's expression fit THIS concept's register (no
   smile or pleased look on a loss / threat / seizure concept)? If not, correct it in
   BOTH subject_direction and scene_prompt.
@@ -571,23 +564,24 @@ OUTPUT — return ONLY valid JSON, no preamble:
   "cliches_banned": ["<overused execution>", "<overused execution>"],
   "archetype_fit": {
     "evidence-closeup": "<0-10 how well this fits THIS script + one-line why>",
-    "ranked-lineup": "<0-10, ONLY eligible when the script ranks/compares 3+ concrete options, otherwise 0 + one-line why>",
-    "opposites-split": "<0-10 + why>",
-    "reaction-to-object": "<0-10 + why>",
-    "on-location": "<0-10 + why>"
+    "tweet-card": "<0-10 + one-line why: which claim would the creator tweet about THIS script>",
+    "whiteboard-list": "<0-10 + one-line why: which 3-4 script-true points would go on the board>",
+    "ranked-lineup": "<0-10, ONLY eligible when the script ranks/compares 3+ concrete options, otherwise 0 + one-line why>"
   },
-  "archetypes_chosen": ["reaction-to-object", "evidence-closeup", "<breaker: the eligible breaker (opposites-split / on-location / ranked-lineup) with the highest fit score>"],
+  "archetypes_chosen": ["evidence-closeup", "tweet-card", "<whiteboard-list by default; ranked-lineup MANDATORY when the script ranks/compares 3+ options>"],
   "concepts": [
     {
       "id": "A",
-      "archetype": "<evidence-closeup|opposites-split|reaction-to-object|on-location|ranked-lineup>",
-      "caption_zone": "<top-banner|top-left|top-right|mid-left|mid-right|bottom-left — where the composited caption sits; never where the face or hero object is, never bottom-right>",
+      "archetype": "<evidence-closeup|tweet-card|whiteboard-list|ranked-lineup>",
+      "caption_zone": "<top-banner|top-left|top-right|mid-left|mid-right|bottom-left — where the composited caption sits; never where the face or hero object is, never bottom-right. tweet-card and whiteboard-list: null>",
       "angle": "<the distinct direction in a phrase, and why this archetype fits>",
       "visual_metaphor": "...",
       "subject_direction": "<expression (hot but credible), pose, gesture, framing, placement>",
       "composition": "<focal point, rule-of-thirds, fg/bg, and where the calm caption area sits>",
       "color_and_lighting": "...",
-      "overlay": {"words": "2 TO 3 WORDS MAX — a short emotional phrase (ranked-lineup only: may be an empty string when the lineup itself is the hook)", "highlight_word": "<exactly ONE word from words that carries the stake/emotion — or null>", "highlight_style": "<none|block>", "rationale": "...", "score": "<0-10 overlay_punch, >=7 after self-audit>"},
+      "overlay": {"words": "2 TO 3 WORDS MAX — a short emotional phrase (ranked-lineup, tweet-card and whiteboard-list: MUST be an empty string)", "highlight_word": "<exactly ONE word from words that carries the stake/emotion — or null>", "highlight_style": "<none|block>", "rationale": "...", "score": "<0-10 overlay_punch, >=7 after self-audit>"},
+      "tweet": {"handle": "<tweet-card only: '@' + creator_name with all spaces removed, e.g. '@TomWheelwright' — otherwise null>", "text": "<tweet-card only: the 2-5 word tweet text in sentence case — otherwise null>", "background_color": "<tweet-card only: royal blue|deep red|dark green|vivid orange — otherwise null>"},
+      "whiteboard": {"hook": "<whiteboard-list only: the 2-4 word hook line — otherwise null>", "items": "<whiteboard-list only: array of 3-4 item strings of 1-2 words each; a hidden item is the string '?' — otherwise null>"},
       "expression_match": "<0-10, >=7 after self-audit>",
       "freshness_score": 0,
       "click_score": 0,
@@ -600,11 +594,9 @@ OUTPUT — return ONLY valid JSON, no preamble:
   "why_recommended": "<one line>"
 }
 
-archetypes_chosen is fixed: reaction-to-object and evidence-closeup (both staged
-in the creator's real studio set) are always two of the three; pick the breaker by
-fit score (the highest-scoring eligible breaker: opposites-split, on-location,
-or — for ranking scripts only — ranked-lineup). Only if evidence-closeup
-has no real figure to mark: swap it for the other breaker. Be decisive — no hedging. The recommended concept maximizes click_score
+archetypes_chosen: the default run is evidence-closeup + tweet-card +
+whiteboard-list. HARD RULE: when the script ranks or compares 3+ concrete
+options, ranked-lineup is MANDATORY and replaces whiteboard-list. Be decisive — no hedging. The recommended concept maximizes click_score
 while keeping freshness_score >= 7. Every concept you emit must ALREADY pass the
 STEP 3 self-audit at 7+ on both overlay_punch and expression_match — rewrite
 before output, never ship a sub-7 concept.`;
@@ -734,7 +726,13 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
     'reference photos. If the references show him smiling or pleasant, do NOT carry that smile over; on a ' +
     'loss, threat or warning concept his face must be serious, hard and grave exactly as the scene describes.';
   const isLineup = (concept.archetype || '') === 'ranked-lineup';
-  const quality = isLineup
+  const isTweet = (concept.archetype || '') === 'tweet-card';
+  const quality = isTweet
+    ? 'DESIGNED GRAPHIC MODE: this thumbnail is a clean, professionally DESIGNED graphic composition, not a photograph of a real scene. ' +
+      'The creator himself stays fully PHOTOREALISTIC — real skin texture with visible pores, real hair, bright even frontal light on the face with minimal shadow, exactly the person in the reference photos — composited large like a premium poster subject, casting ONE subtle soft drop shadow onto the flat background, his color grade HARMONIZED with the background color — one shared, natural white balance — so he sits IN the design instead of cut against it, never a hard cut-out edge. ' +
+      'Everything around him is intentional flat graphic design: one single, completely flat, fully saturated solid background color exactly as the scene describes (no gradient, no texture, no vignette), and one white rounded-corner tweet card rendered as crisp, perfectly flat vector-clean UI — clean left-aligned typography with tight line spacing, even spacing, correctly spelled text exactly as quoted in the scene, the card casting one subtle soft drop shadow onto the flat background. ' +
+      'Clean, balanced, deliberate — it must read as the work of a top thumbnail designer, never as a faked photograph and never as messy AI compositing.'
+    : isLineup
     ? 'DESIGNED GRAPHIC MODE: this thumbnail is a clean, professionally DESIGNED graphic composition, not a photograph of a real scene. ' +
       'The creator himself stays fully PHOTOREALISTIC — real skin texture with visible pores, real hair, bright even HIGH-KEY frontal light on the face with minimal shadow, exactly the person in the reference photos — composited large like a premium poster subject, with a subtle soft RIM LIGHT tracing his shoulders and hair and his color grade HARMONIZED with the bright grey backdrop — one shared, natural white balance across subject and backdrop — so he sits IN the space instead of cut against it. ' +
       'Everything around him is intentional graphic design: a seamless studio-backdrop gradient exactly as the scene describes, brightest directly behind his head and shoulders and falling into a soft vignette toward the corners, ' +
@@ -796,6 +794,33 @@ function buildTextDirective(concept) {
   // ranked-lineup NEVER carries a caption — enforced here, not left to the art director
   if ((concept.archetype || '') === 'ranked-lineup') {
     return 'Render absolutely NO text, letters, words, captions, or numbers anywhere in the image, except the short embossed labels the scene description explicitly places on the option tiles.';
+  }
+  // whiteboard-list: the board IS the text — no caption pipeline, enforced here
+  if ((concept.archetype || '') === 'whiteboard-list') {
+    const hook = String(concept.whiteboard?.hook || '').trim();
+    const items = Array.isArray(concept.whiteboard?.items)
+      ? concept.whiteboard.items.map((s) => String(s).trim()).filter(Boolean)
+      : [];
+    const itemList = items.map((it, i) => (it === '?' ? `item ${i + 1}: a bold hand-drawn "?"` : `item ${i + 1}: "${it}"`)).join(', ');
+    return (
+      'WHITEBOARD TEXT — the ONLY text in the image is hand-drawn marker writing on the whiteboard, exactly as the scene describes: ' +
+      (hook ? `the hook line "${hook}" in thick black marker capitals on a yellow marker-highlight bar, ` : 'the hook line in thick black marker capitals on a yellow marker-highlight bar, ') +
+      (itemList ? `and the numbered items — ${itemList} — each with its circled number and simple doodle icon per the scene. ` : 'and the numbered items with their circled numbers and simple doodle icons per the scene. ') +
+      'All writing reads as believable handwriting with slight natural marker wobble, never a printed font, yet every word stays crisp, fully legible at a small mobile size, and correctly spelled with NO extra, missing, or misspelled words or letters. ' +
+      'Render absolutely NO other text, letters, words, captions, numbers, logos, or watermarks anywhere else in the image.'
+    );
+  }
+  // tweet-card: the card IS the text — no caption pipeline, enforced here
+  if ((concept.archetype || '') === 'tweet-card') {
+    const handle = String(concept.tweet?.handle || '').trim();
+    const tweetText = String(concept.tweet?.text || '').trim();
+    return (
+      'TWEET CARD TEXT — the ONLY text in the image lives on the white tweet card: ' +
+      (handle ? `the handle "${handle}" in bold black followed by the blue verified checkmark, ` : 'the handle in bold black followed by the blue verified checkmark, ') +
+      (tweetText ? `and below it the tweet text "${tweetText}" ` : 'and below it the tweet text ') +
+      'in a very heavy black flat sans-serif, sentence case exactly as quoted, over one or two lines, filling most of the card width, crisp and perfectly legible at a small mobile size, correctly spelled with NO extra, missing, or misspelled words or letters. ' +
+      'Render absolutely NO other text, letters, words, captions, numbers, logos, or watermarks anywhere else in the image.'
+    );
   }
   const words = String(concept.overlay?.words || '').replace(/[\/|]+/g, ' ').replace(/\s+/g, ' ').trim().toUpperCase();
   if (!words) return 'Render no text anywhere in the image.';
@@ -885,7 +910,7 @@ function sanitizePrompt(scenePrompt, creatorName) {
   const parts = String(creatorName || '').trim().split(/\s+/).filter((s) => s.length > 2);
   const variants = [creatorName, ...parts].filter((s) => s && s.length > 2);
   for (const v of variants) {
-    p = p.replace(new RegExp(`\\b${escapeRegExp(v)}\\b`, 'gi'), 'the person in the reference photo');
+    p = p.replace(new RegExp(`(?<!@)\\b${escapeRegExp(v)}\\b`, 'gi'), 'the person in the reference photo');
   }
   return p;
 }
