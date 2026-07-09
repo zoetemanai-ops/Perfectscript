@@ -260,18 +260,20 @@ executions.
      backdrop the card floats in. On the
      card, top row: a small round avatar photo of the creator (same person as
      the reference photos, identity locked) inside a thin, subtle keyline ring —
-     the avatar is a DIFFERENT photo than the main shot: a relaxed
-     profile-picture look, head in slight three-quarter turn or a neutral
-     friendly expression, never the same frontal stare as the large creator
-     beside the card. It may be slightly desaturated like a real profile
-     picture. The avatar is followed by the
+     the avatar is a clearly DIFFERENT photo than the main shot: BLACK AND
+     WHITE (or very strongly desaturated) like a classic profile picture, the
+     head turned in three-quarter view LOOKING AWAY from the camera — never
+     the same frontal stare as the large creator beside the card. The avatar
+     is followed by the
      handle in bold black, immediately followed by the blue verified checkmark
      badge. The handle is the twitter_handle input, used VERBATIM — never build,
      translate or alter it. Below the handle row: the tweet text in very heavy
      black sans-serif (the flat geometric style of a Twitter/X post) with
-     NORMAL-WIDTH letterforms and even, generous letter spacing — the type is
-     never condensed, compressed, narrowed or squeezed, letters never touch or
-     crowd each other — sentence
+     NORMAL-WIDTH letterforms and TIGHT, natural headline spacing — letters
+     sit close together like a real news-headline typeface but NEVER touch,
+     overlap or merge, with clear, normal word spaces between words; never
+     wide, airy, spread-out letter gaps and never condensed or squeezed —
+     sentence
      case, set HUGE over TWO lines (always break 3+ words across two lines),
      strictly LEFT-ALIGNED to the card's left padding with tight line spacing,
      the letters running nearly edge to edge of the card's width with only
@@ -355,11 +357,13 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
    A PHOTOGRAPH — not a designed graphic: the creator beside a real whiteboard
    he has just drawn on, shot in one real frame (Principle 11 applies in full;
    this archetype stays in the photographic quality mode). The board fills
-   roughly 90-95% of the frame, photographed straight-on or at a slight angle,
-   its edges visible plus a narrow strip of real environment around it — the
+   roughly 90-95% of the frame — its full frame/edges ALWAYS visible on all
+   sides within the shot — photographed straight-on or at a slight angle, plus
+   a narrow strip of real environment around it — the
    creator's own studio/office per creator_visual_notes when provided, otherwise
    a neutral office space. That sliver proves it is a real board in a real room;
-   the board itself is the background.
+   the board itself is the background. Never zoom in so far that the board's
+   edges or the environment strip disappear.
    LIGHT & FINISH — actively counter the default dark, moody render; this must
    look hand-made by one of the best thumbnail designers in the world:
    - The board is bright, clean WHITE, fully and evenly lit as if by soft
@@ -378,6 +382,13 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
    ON THE BOARD, all in believable hand-drawn marker written quickly and
    confidently by a real person mid-explanation, never carefully lettered and
    never a handwriting font:
+   - CHISEL-TIP MARKER: all writing is done with a broad flat chisel-tip
+     whiteboard marker, giving every letter natural thick-and-thin stroke
+     contrast — vertical strokes broad, horizontal strokes narrower, the way a
+     real angled marker tip writes — NEVER the uniform round-tip stroke where
+     every line is the same width. Letters are slightly narrow, tall capitals
+     with a subtle forward slant, written fast by someone standing at the
+     board.
    - Lines drift slightly off horizontal, letter heights vary a touch, word
      spacing breathes naturally — lively, confident handwriting, not ruled.
    - REAL marker ink texture: strokes read as actual ink — slightly saturated
@@ -428,20 +439,14 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
    and the ONE archetype where you do NOT write a free-form scene_prompt.
 
    YOUR JOB (four decisions, then copy the template):
-   1. THE HELD BOARD — the ANTAGONIST, never the winner: the creator holds the
-      mainstream/default option the script argues AGAINST — the thing the
-      audience probably owns (for a pro-bitcoin script that is the 401K or the
-      index fund, NOT bitcoin). Holding the villain keeps the ranking
-      unspoiled and pairs naturally with a displeased face: "THIS is what
-      you're holding." The script's actual champion appears only as one of the
-      eight wing tiles, never as the held board. Pick the board's tile color
-      (rich and saturated) and its face graphic.
+   1. HERO — the champion or the video's named subject: pick its tile color
+      (rich and saturated; a bitcoin board is rich orange) and its face
+      graphic.
    2. THE EIGHT TILES — assign slots L1-L4 and R1-R4 below. First place every
-      ranked option (minus the held antagonist) in the slots closest to his
-      head (L1, R1, L2, R2...), the script's champion in L1 or R1. Fill any
-      remaining slots, outward, exclusively from this closed list: model
-      house, silver bars, cash stack, oil barrel. Each of the eight shows a
-      DIFFERENT option.
+      ranked option (minus the hero if it is one of them) in the slots
+      closest to his head (L1, R1, L2, R2...). Fill any remaining slots,
+      outward, exclusively from this closed list: model house, silver bars,
+      cash stack, oil barrel. Each of the eight shows a DIFFERENT option.
    3. COLORS — every tile its own color, warm and cool alternating around
       the wings, no two neighbors from the same family, no two tiles alike.
       Ranked options may carry ONE short embossed label (2-5 characters,
@@ -458,8 +463,7 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
       vertical crease between them, eyes slightly narrowed, locked straight
       into the camera, mouth closed and set — intensity 7 out of 10,
       unmistakably displeased, no snarl" — use when the video crowns a
-      winner or condemns the losers; this is the natural pairing with the
-      held antagonist board (displeased AT the thing in his hands).
+      winner or condemns the losers.
    Then output, as this concept's scene_prompt, the following template
    VERBATIM — same sentences, same numbers — with only the [BRACKETED] slots
    filled in. Do not summarize it, do not reorder it, do not omit sentences.
@@ -478,14 +482,14 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
    him crisply from the background, casting one soft drop shadow on the
    backdrop. His expression: [EXPRESSION].
    With both hands he holds one large near-square 3D tile board at chest
-   height, directly below his face: about 30% of the frame's width, [BOARD
+   height, directly below his face: about 30% of the frame's width, [HERO
    COLOR], built as a flat slab with visible thickness (about a tenth of
-   its width), crisp bevelled edges, satin finish. The held board is
+   its width), crisp bevelled edges, satin finish. The hero board is
    softly SPOTLIT — the brightest object in the frame after his face, a
    gentle sheen sweeping across its face, and the backdrop directly behind
    it a touch brighter, as if the board glows faintly. Its bottom edge is
    cropped by the bottom of the frame. On the visible part of its face,
-   perfectly centered, a clean pure white [BOARD GRAPHIC] at about 55% of
+   perfectly centered, a clean pure white [HERO GRAPHIC] at about 55% of
    the visible height, fully readable, cropped by nothing. His fingers
    wrap the board's upper sides, elbows relaxed.
    Behind him float eight 3D squircle tiles in two smooth arcing wings of
@@ -896,7 +900,7 @@ function buildTextDirective(concept) {
       'WHITEBOARD TEXT — the ONLY text in the image is hand-drawn marker writing on the whiteboard, exactly as the scene describes: ' +
       (hook ? `the hook line "${hook}" in thick black marker capitals on a yellow marker-highlight bar, ` : 'the hook line in thick black marker capitals on a yellow marker-highlight bar, ') +
       (itemList ? `and the numbered items — ${itemList} — each with its circled number and simple doodle icon per the scene. ` : 'and the numbered items with their circled numbers and simple doodle icons per the scene. ') +
-      'All writing reads as REAL handwriting written quickly and confidently by a real person — lines drifting slightly off horizontal, letter heights varying a touch, natural word spacing, real marker ink texture (slightly saturated stroke starts, drier stroke ends, the yellow highlight semi-transparent with visible overlapping swipes) — never a handwriting font, never perfectly even digital ink. Yet every word stays crisp, fully legible at a small mobile size, and correctly spelled with NO extra, missing, or misspelled words or letters. ' +
+      'All writing reads as REAL handwriting written quickly and confidently by a real person with a broad flat CHISEL-TIP whiteboard marker — every letter with natural thick-and-thin stroke contrast (vertical strokes broad, horizontal strokes narrower, the way an angled marker tip writes, never uniform round-tip lines), slightly narrow tall capitals with a subtle forward slant, lines drifting slightly off horizontal, letter heights varying a touch, natural word spacing, real marker ink texture (slightly saturated stroke starts, drier stroke ends, the yellow highlight semi-transparent with visible overlapping swipes) — never a handwriting font, never perfectly even digital ink. Yet every word stays crisp, fully legible at a small mobile size, and correctly spelled with NO extra, missing, or misspelled words or letters. ' +
       'Render absolutely NO other text, letters, words, captions, numbers, logos, or watermarks anywhere else in the image.'
     );
   }
@@ -908,7 +912,7 @@ function buildTextDirective(concept) {
       'TWEET CARD TEXT — the ONLY text in the image lives on the white tweet card: ' +
       (handle ? `the handle "${handle}" in bold black followed by the blue verified checkmark, ` : 'the handle in bold black followed by the blue verified checkmark, ') +
       (tweetText ? `and below it the tweet text "${tweetText}" ` : 'and below it the tweet text ') +
-      'in a very heavy black flat sans-serif with NORMAL-WIDTH letterforms and even, generous letter spacing — never condensed, compressed, narrowed or squeezed, letters never touching or crowding each other — sentence case exactly as quoted, set HUGE over two lines running nearly edge to edge of the card width, crisp and perfectly legible at a small mobile size, correctly spelled with NO extra, missing, or misspelled words or letters. ' +
+      'in a very heavy black flat sans-serif with NORMAL-WIDTH letterforms and TIGHT, natural headline letter spacing — letters close together like a real news-headline typeface but never touching, overlapping or merging, clear normal word spaces between words, never wide airy letter gaps and never condensed or squeezed — sentence case exactly as quoted, set HUGE over two lines running nearly edge to edge of the card width, crisp and perfectly legible at a small mobile size, correctly spelled with NO extra, missing, or misspelled words or letters. ' +
       'Render absolutely NO other text, letters, words, captions, numbers, logos, or watermarks anywhere else in the image.'
     );
   }
