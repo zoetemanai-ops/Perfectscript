@@ -226,27 +226,34 @@ executions.
    - The document reads as what it is through LAYOUT and physical cues (official
      letterhead shape, a table grid, an envelope it came from, a screen UI), not
      through readable words.
-   - The paper reads as natural paper in the scene's existing light — soft
-     off-white, a touch DARKER than the creator's face, never blinding bright
-     white or blown out. The face stays the brightest element in the frame; the
+   - The paper reads as natural paper in the scene's existing light — bright,
+     clean, softly off-white, only the SLIGHTEST touch darker than the
+     creator's face, never blinding bright
+     white or blown out, and never dim, grey, beige or sitting in shadow. The
+     face stays the brightest element in the frame; the
      document sits in the light the way a real photographer exposing for the
      face would render it.
    - The creator reacts to the marked detail — pointing at it, holding the page,
      or locking eyes with the viewer while presenting it; face stays dominant per
      Principle 8, the document angled toward the lens so the mark reads at 120px.
-   - PRO SUBJECT LIGHTING: light the creator like a professional portrait — the
-     face the brightest element (Principle 4), PLUS a clearly visible edge /
+   - PRO SUBJECT LIGHTING: light the creator like a professional portrait —
+     generously and brightly lit, the
+     face the brightest element (Principle 4) with an open, luminous exposure
+     a touch brighter than a standard portrait, PLUS a clearly visible edge /
      separation light tracing his shoulders and arms (a real light placed behind
      and to the side of him), so dark clothing NEVER melts into a dark
      background. The office keeps its real character; the creator always pops
      out of it.
    - LIT, WORKING STUDIO: render the office as it looks during a real
-     recording — the room's lights ON, lit the way it appears in the creator's
+     recording — the room's lights ON and generous, the whole space clearly
+     BRIGHT and readable edge to edge, exposed a touch brighter than the
+     room would look in person, lit the way it appears in the creator's
      actual videos. NEVER render the room darker than creator_visual_notes
-     describes, and never drift it toward dusk, twilight or a dim atmospheric
-     mood. Dark wood and warm lamps are welcome, but as a well-lit room with
-     dark materials — visible, alive and bright enough to read — not as a
-     darkened, shadowy space.
+     describes, never drift it toward dusk, twilight or a dim atmospheric
+     mood, and never leave large areas of the frame falling into deep
+     shadow. Dark wood and warm lamps are welcome, but as a well-lit room
+     with dark materials — visible, alive and bright — not as a darkened,
+     shadowy space.
 
 2) TWEET-CARD (designed graphic)
    A designed composite built around a viral-tweet card — the second sanctioned
@@ -526,12 +533,14 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
    Behind him float eight 3D squircle tiles in two smooth arcing wings of
    four that sweep around and behind his head, leaving a gap of bare
    backdrop directly above it. Each tile is a thick flat slab with crisp
-   bevels and a satin finish. The tile FACES stay nearly PARALLEL to the
-   camera — turned only a subtle few degrees in space, just enough that a
-   hint of the thick side edge shows — never strongly tilted, swung open or
-   angled like turning pages: dimensional objects hanging flat in the
-   space, NOT flat stickers pasted on the wall and NOT boards rotating
-   away. The tiles shrink outward along each wing: the tile
+   bevels and a satin finish, and every face stays perfectly PARALLEL to
+   the camera, rotated ONLY in the picture plane, like cards flat against
+   a wall — never tilted, swung open, or angled into depth. Their visible
+   thickness, bevels and shadows carry the 3D feel; the faces themselves
+   stay flat to the lens. The innermost tile of each wing sits close
+   against his head, partly tucked behind his hair, almost touching it —
+   never floating away from him. The tiles shrink outward along each wing:
+   the tile
    nearest his head full size (as wide as his head), the next about 90% of
    that, the third about 80%, the outermost about 72% — reading as gentle
    depth. Each tile clearly OVERLAPS the previous one by about a third,
@@ -883,7 +892,7 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
     'NOT a heavily stylized, over-graded or CGI look (the scene lighting itself is set by the scene description); ' +
     'it must read as captured, not generated: avoid a flawless, over-clean, perfectly symmetrical studio look. ' +
     'ANY paper or document in the scene — held, torn, shredded, or lying on the desk — reads as natural, real paper in the scene\u2019s existing light: ' +
-    'soft off-white or lightly warm-toned, a touch DARKER than the person\u2019s face, with subtle fiber texture, natural bends and soft shadows in the sheet, ' +
+    'bright, clean, softly off-white or lightly warm-toned, only the slightest touch darker than the person\u2019s face — never dim, grey or sitting in shadow — with subtle fiber texture, natural bends and soft shadows in the sheet, ' +
     'and rough, fibrous edges where it is torn — never blinding pure white, never blown out, never stiff and perfectly flat. The face stays the brightest element in the frame. ' +
     'The caption text stays sharp and fully legible, but shares the photograph\u2019s grain and white balance so it reads as part of the image, never as a pasted sticker.';
   const pngB64 = await gptImage(refFiles, `${scene}\n\n${identity}\n\n${quality}\n\n${buildTextDirective(concept)}`, creatorName);
