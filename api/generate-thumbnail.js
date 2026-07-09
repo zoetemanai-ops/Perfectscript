@@ -386,9 +386,13 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      whiteboard marker, giving every letter natural thick-and-thin stroke
      contrast — vertical strokes broad, horizontal strokes narrower, the way a
      real angled marker tip writes — NEVER the uniform round-tip stroke where
-     every line is the same width. Letters are slightly narrow, tall capitals
-     with a subtle forward slant, written fast by someone standing at the
-     board.
+     every line is the same width.
+   - LETTERFORM STYLE: fast, angular ARCHITECT / DRAFTSMAN-style marker
+     capitals — sharp corners, straight confident strokes, slightly narrow
+     letterforms with a subtle forward slant, written fast by someone standing
+     at the board mid-explanation. NEVER rounded, bubbly, friendly
+     cartoon-style capitals with soft curved corners — the letters look
+     drawn by a decisive adult hand, not a cute lettering artist.
    - Lines drift slightly off horizontal, letter heights vary a touch, word
      spacing breathes naturally — lively, confident handwriting, not ruled.
    - REAL marker ink texture: strokes read as actual ink — slightly saturated
@@ -913,7 +917,7 @@ function buildTextDirective(concept) {
       'WHITEBOARD TEXT — the ONLY text in the image is hand-drawn marker writing on the whiteboard, exactly as the scene describes: ' +
       (hook ? `the hook line "${hook}" in thick black marker capitals on a yellow marker-highlight bar, ` : 'the hook line in thick black marker capitals on a yellow marker-highlight bar, ') +
       (itemList ? `and the numbered items — ${itemList} — each with its circled number and simple doodle icon per the scene. ` : 'and the numbered items with their circled numbers and simple doodle icons per the scene. ') +
-      'All writing reads as REAL handwriting written quickly and confidently by a real person with a broad flat CHISEL-TIP whiteboard marker — every letter with natural thick-and-thin stroke contrast (vertical strokes broad, horizontal strokes narrower, the way an angled marker tip writes, never uniform round-tip lines), slightly narrow tall capitals with a subtle forward slant, lines drifting slightly off horizontal, letter heights varying a touch, natural word spacing, real marker ink texture (slightly saturated stroke starts, drier stroke ends, the yellow highlight semi-transparent with visible overlapping swipes) — never a handwriting font, never perfectly even digital ink. Yet every word stays crisp, fully legible at a small mobile size, and correctly spelled with NO extra, missing, or misspelled words or letters. ' +
+      'All writing reads as REAL handwriting written quickly and confidently by a real person with a broad flat CHISEL-TIP whiteboard marker — every letter with natural thick-and-thin stroke contrast (vertical strokes broad, horizontal strokes narrower, the way an angled marker tip writes, never uniform round-tip lines), in fast angular ARCHITECT / DRAFTSMAN-style capitals: sharp corners, straight confident strokes, slightly narrow letterforms with a subtle forward slant — NEVER rounded, bubbly, friendly cartoon-style capitals with soft curved corners. Lines drift slightly off horizontal, letter heights vary a touch, natural word spacing, real marker ink texture (slightly saturated stroke starts, drier stroke ends, the yellow highlight semi-transparent with visible overlapping swipes) — never a handwriting font, never perfectly even digital ink. Yet every word stays crisp, fully legible at a small mobile size, and correctly spelled with NO extra, missing, or misspelled words or letters. ' +
       'Render absolutely NO other text, letters, words, captions, numbers, logos, or watermarks anywhere else in the image.'
     );
   }
