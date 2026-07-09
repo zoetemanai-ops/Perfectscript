@@ -205,7 +205,10 @@ executions.
      prints it large — a bold total line, a headline figure, or a stamped amount,
      the kind of number real paperwork prints big — filling a generous share of
      the page width so it reads instantly at 120px, crisp and correctly spelled,
-     with the red marker circle hand-drawn around it. Never tiny body-text size,
+     with the red marker circle hand-drawn around it — the circle drawn as REAL
+     marker ink: a slightly irregular loop, ink saturated where the stroke
+     starts and a touch drier where it ends, ends overlapping imperfectly,
+     never a perfect flat digital ellipse. Never tiny body-text size,
      and never an artificially floating oversized number. ALL other print on the
      page stays soft-focus, blurred and illegible — never readable sentences or
      paragraphs.
@@ -231,6 +234,11 @@ executions.
    - The creator reacts to the marked detail — pointing at it, holding the page,
      or locking eyes with the viewer while presenting it; face stays dominant per
      Principle 8, the document angled toward the lens so the mark reads at 120px.
+   - PRO SUBJECT LIGHTING: light the creator like a professional portrait — the
+     face the brightest element (Principle 4), PLUS a clearly visible edge /
+     separation light tracing his shoulders and arms (a real light placed behind
+     and to the side of him), so dark clothing NEVER melts into a dark
+     background. The office may stay moody; the creator always pops out of it.
 
 2) TWEET-CARD (designed graphic)
    A designed composite built around a viral-tweet card — the second sanctioned
@@ -246,7 +254,7 @@ executions.
      gradient banding.
    - THE CARD: one white card with strongly rounded corners, perfectly straight
      (no tilt, no perspective), DOMINATING the frame: roughly 75-80% of the
-     frame's width and most of its height, bleeding off the LEFT edge, casting
+     frame's width, bleeding off both the LEFT and BOTTOM edges, casting
      one subtle, soft, even drop shadow onto the blue background so it lifts
      gently off it — the blue reads as a border around the card, not as a
      backdrop the card floats in. On the
@@ -260,7 +268,10 @@ executions.
      handle in bold black, immediately followed by the blue verified checkmark
      badge. The handle is the twitter_handle input, used VERBATIM — never build,
      translate or alter it. Below the handle row: the tweet text in very heavy
-     black sans-serif (the flat geometric style of a Twitter/X post), sentence
+     black sans-serif (the flat geometric style of a Twitter/X post) with
+     NORMAL-WIDTH letterforms and even, generous letter spacing — the type is
+     never condensed, compressed, narrowed or squeezed, letters never touch or
+     crowd each other — sentence
      case, set HUGE over TWO lines (always break 3+ words across two lines),
      strictly LEFT-ALIGNED to the card's left padding with tight line spacing,
      the letters running nearly edge to edge of the card's width with only
@@ -279,17 +290,20 @@ executions.
      the topic, never repeat or reword the title) but NOT its length, casing or
      highlight rules — no ALL CAPS, no highlight block, no red words. It must
      read as something a real person tweeted, not a screamed caption.
-   - CREATOR: LARGE on the right and cropped TIGHT — framed roughly from the
-     upper chest to the crown, the face clearly the biggest element on his side
-     of the frame, sharp and dominant, looking straight into the lens with the
-     hot-but-credible expression that fits this concept's register (Principle 2
-     applies in full). He stands IN FRONT of the card and genuinely OVERLAPS
-     it: his head and shoulder cover a clear slice of the card's right side, so
-     creator and card visibly interlock — never two separate elements side by
-     side. He bleeds off the RIGHT and BOTTOM edges of the frame.
-     Photorealistic per the reference photos, lit with clean, even frontal
-     light, one subtle soft drop shadow onto the background — never a hard
-     cut-out edge.
+   - CREATOR: HEAD-ONLY on the right, cropped like the classic viral-tweet
+     format — framed from the crown of the head to just below the chin with
+     only a hint of shoulder, the FACE itself filling most of the right side's
+     height, enormous in the frame, sharp and dominant, looking straight into
+     the lens with the hot-but-credible expression that fits this concept's
+     register (Principle 2 applies in full). Because the crop is head-only,
+     almost no clothing shows. His head sits IN FRONT of the card and genuinely
+     OVERLAPS it: the side of his head and jaw cover a clear slice of the
+     card's right side, so creator and card visibly interlock — never two
+     separate elements side by side. He bleeds off the RIGHT and BOTTOM edges
+     of the frame. Photorealistic per the reference photos, lit with clean
+     frontal light plus a clearly visible cool RIM LIGHT tracing the edges of
+     his hair and jaw, separating him crisply from the blue background, one
+     subtle soft drop shadow onto the background — never a hard cut-out edge.
    - The normal caption pipeline is OFF for this archetype (enforced in code):
      set overlay words to an empty string, caption_zone to null, and do NOT
      describe any other text in the scene. The card IS the text.
@@ -346,8 +360,31 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
    creator's own studio/office per creator_visual_notes when provided, otherwise
    a neutral office space. That sliver proves it is a real board in a real room;
    the board itself is the background.
-   ON THE BOARD, all in believable hand-drawn marker (slight natural wobble is
-   good — it must read as handwriting, not a font):
+   LIGHT & FINISH — actively counter the default dark, moody render; this must
+   look hand-made by one of the best thumbnail designers in the world:
+   - The board is bright, clean WHITE, fully and evenly lit as if by soft
+     studio light — NEVER cream, yellowish, greyish, dim or falling into
+     shadow. The board and the creator's face are the two brightest surfaces
+     in the frame.
+   - The whole scene reads bright, fresh and commercial: crisp daylight-like
+     brightness with a neutral white balance. The environment strip may keep
+     its own character, but the overall impression is LIGHT — never moody,
+     warm-dark, or atmospheric.
+   - Pro finish: subtle extra contrast and clarity on the board so the marker
+     writing pops hard off the white, the face perfectly lit, everything crisp
+     — a polished commercial YouTube look, not a documentary photo of a
+     whiteboard. The board itself stays CLEAN: no smudges, no half-erased old
+     writing, no stains.
+   ON THE BOARD, all in believable hand-drawn marker written quickly and
+   confidently by a real person mid-explanation, never carefully lettered and
+   never a handwriting font:
+   - Lines drift slightly off horizontal, letter heights vary a touch, word
+     spacing breathes naturally — lively, confident handwriting, not ruled.
+   - REAL marker ink texture: strokes read as actual ink — slightly saturated
+     at the start of a stroke and a touch drier at the end, an occasional
+     doubled stroke where a line was thickened, and the yellow highlight bar
+     semi-transparent with visible overlapping swipes — never perfectly even,
+     flat "digital" ink.
    - TOP: the hook line in thick black marker capitals, 2-4 words, on a yellow
      marker-highlight bar. It is a curiosity HOOK that works as the other half
      of the video_title (title + board = one weapon), NEVER a topic label:
@@ -379,7 +416,9 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
      IS the text.
    - In scene_prompt, spell out the hook line and every item VERBATIM in
      quotes, plus each item's doodle icon, so the image model renders the exact
-     words, crisp, correctly spelled, in hand-drawn marker style.
+     words, crisp, correctly spelled, in hand-drawn marker style — and repeat
+     the bright, clean, evenly lit white board and the lively handwritten ink
+     in the scene_prompt itself.
 
 4) RANKED LINEUP (designed graphic — MANDATORY for ranking / comparison scripts)
    Eligible ONLY when the script ranks or compares 3 or more concrete options;
@@ -388,7 +427,7 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
    GRAPHIC instead of a photograph (a sanctioned exception to Principle 11),
    and the ONE archetype where you do NOT write a free-form scene_prompt.
 
-   YOUR JOB (three decisions, then copy the template):
+   YOUR JOB (four decisions, then copy the template):
    1. HERO — the champion or the video's named subject: pick its tile color
       (rich and saturated; a bitcoin board is rich orange) and its face
       graphic.
@@ -402,52 +441,75 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
       Ranked options may carry ONE short embossed label (2-5 characters,
       e.g. "401K"); fillers carry a simple icon graphic only. No real brand
       logos.
+   4. EXPRESSION — pick the ONE that fits this script's story and fill the
+      [EXPRESSION] slot with it VERBATIM:
+      (a) overwhelmed-by-options: "eyebrows raised, eyes wide and slightly
+      strained looking straight into the camera, lips parted a fraction in
+      hesitation — the face of a man facing too many choices, intensity 6
+      out of 10, no cartoon shock" — use when the video sorts through a
+      confusing field of options.
+      (b) confident-verdict: "a firm frown, brows visibly knotted with a
+      vertical crease between them, eyes slightly narrowed, locked straight
+      into the camera, mouth closed and set — intensity 7 out of 10,
+      unmistakably displeased, no snarl" — use when the video crowns a
+      winner or condemns the losers.
    Then output, as this concept's scene_prompt, the following template
    VERBATIM — same sentences, same numbers — with only the [BRACKETED] slots
    filled in. Do not summarize it, do not reorder it, do not omit sentences.
 
    ── SCENE_PROMPT TEMPLATE (copy verbatim, fill the brackets) ──
    "A professionally designed YouTube thumbnail graphic, clean poster
-   compositing, on a light neutral grey seamless studio backdrop with a
-   subtle real-material texture, brightest directly behind the man's head
-   and softly vignetting toward the corners. The man stands centered, framed
-   from mid-chest up, the top of his hair about 6% below the top edge,
-   photorealistic, lit with bright even high-key frontal light, casting one
-   soft drop shadow on the backdrop. His expression: a firm frown, brows
-   visibly knotted with a vertical crease between them, eyes slightly
-   narrowed, locked straight into the camera, mouth closed and set —
-   intensity 7 out of 10, unmistakably displeased, no snarl.
+   compositing, on a completely SMOOTH, even, untextured light neutral grey
+   seamless studio backdrop — like fresh studio background paper, no grain,
+   no plaster, no wall texture, no stains — brightest directly behind the
+   man's head and upper body and falling gently darker toward the corners.
+   The man stands centered, framed from mid-chest up, the top of his hair
+   about 6% below the top edge, photorealistic, lit like a commercial
+   studio portrait: a bright, fresh key light from the front so his face
+   reads clearly BRIGHTER than the backdrop, plus a clearly visible cool
+   RIM LIGHT tracing the edges of his hair and both shoulders, separating
+   him crisply from the background, casting one soft drop shadow on the
+   backdrop. His expression: [EXPRESSION].
    With both hands he holds one large near-square 3D tile board at chest
    height, directly below his face: about 30% of the frame's width, [HERO
-   COLOR], built as a flat slab with visible thickness (about a tenth of its
-   width), crisp bevelled edges, satin finish. Its bottom edge is cropped by
-   the bottom of the frame. On the visible part of its face, perfectly
-   centered, a clean pure white [HERO GRAPHIC] at about 55% of the visible
-   height, with a subtle diagonal sheen across it, fully readable, cropped
-   by nothing. His fingers wrap the board's upper sides, elbows relaxed.
-   Behind him float eight identical-sized 3D squircle tiles, each as wide as
-   his head, each a flat slab with visible thickness, crisp bevels and a
-   satin finish, every face perfectly parallel to the camera (rotated only
-   in the picture plane, like cards flat against a wall), and every tile
-   casting one identical soft drop shadow straight down onto the backdrop.
-   They form two wings of four that leave an open gap of bare backdrop
-   directly above his head, bridged by his head itself:
-   LEFT WING (each tile overlapping the previous by a third, rotated
-   counter-clockwise): tile L1, [COLOR + GRAPHIC], beside his left temple,
-   partly behind his hair, center 22% down the frame, rotated 5 degrees;
-   tile L2, [COLOR + GRAPHIC], center 26% down, rotated 12 degrees; tile
-   L3, [COLOR + GRAPHIC], center 38% down, rotated 22 degrees; tile L4,
-   [COLOR + GRAPHIC], center 52% down, rotated 32 degrees, keeping a clear
-   margin from the left frame edge.
+   COLOR], built as a flat slab with visible thickness (about a tenth of
+   its width), crisp bevelled edges, satin finish. The hero board is
+   softly SPOTLIT — the brightest object in the frame after his face, a
+   gentle sheen sweeping across its face, and the backdrop directly behind
+   it a touch brighter, as if the board glows faintly. Its bottom edge is
+   cropped by the bottom of the frame. On the visible part of its face,
+   perfectly centered, a clean pure white [HERO GRAPHIC] at about 55% of
+   the visible height, fully readable, cropped by nothing. His fingers
+   wrap the board's upper sides, elbows relaxed.
+   Behind him float eight 3D squircle tiles in two smooth arcing wings of
+   four that sweep around and behind his head, leaving a gap of bare
+   backdrop directly above it. Each tile is a thick flat slab with crisp
+   bevels and a satin finish, and each is turned a few degrees in space,
+   angled slightly AWAY from his head, so its thick side edge is subtly
+   visible — dimensional objects hanging in the space, NOT flat stickers
+   pasted on the wall. The tiles shrink outward along each wing: the tile
+   nearest his head full size (as wide as his head), the next about 90% of
+   that, the third about 80%, the outermost about 72% — reading as gentle
+   depth. Each tile clearly OVERLAPS the previous one by about a third,
+   visibly in front of its outer neighbor, and every tile casts one soft
+   shadow onto the backdrop and a faint contact shadow onto the tile it
+   overlaps.
+   LEFT WING (rotated counter-clockwise): tile L1, [COLOR + GRAPHIC],
+   beside his left temple, partly behind his hair, center 22% down the
+   frame, rotated 5 degrees; tile L2, [COLOR + GRAPHIC], center 26% down,
+   rotated 12 degrees; tile L3, [COLOR + GRAPHIC], center 38% down,
+   rotated 22 degrees; tile L4, [COLOR + GRAPHIC], center 52% down,
+   rotated 32 degrees, keeping a clear margin from the left frame edge.
    RIGHT WING, mirrored (rotated clockwise): tile R1, [COLOR + GRAPHIC],
    beside his right temple, partly behind his hair, center 22% down,
    rotated 5 degrees; tile R2, [COLOR + GRAPHIC], center 26% down, rotated
    12 degrees; tile R3, [COLOR + GRAPHIC], center 38% down, rotated 22
    degrees; tile R4, [COLOR + GRAPHIC], center 52% down, rotated 32
    degrees, keeping a clear margin from the right frame edge.
-   The man's face and the held board are tack-sharp; the outermost tiles
-   sit a breath softer, every graphic still fully readable. One shared
-   light source, one shared neutral white balance. Render no text anywhere
+   The man's face and the held board are tack-sharp; the two innermost
+   tiles of each wing stay sharp, the outer tiles sit progressively a
+   breath softer, every graphic still fully readable. One shared light
+   source, one shared neutral white balance. Render no text anywhere
    except the tile labels explicitly listed above."
    ── END TEMPLATE ──
 
@@ -737,6 +799,8 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
   const identity =
     'IDENTITY LOCK: keep the person\u2019s face, hairline, hair (same amount, length, color and style), ' +
     'glasses, facial hair and apparent age EXACTLY consistent with the supplied reference photos. ' +
+    'Preserve the person\u2019s REAL skin character exactly as the reference photos show it — the same wrinkles, ' +
+    'lines, pores, unevenness, blemishes and natural redness — do NOT beautify, smooth, even out, or de-age the skin in any way. ' +
     'Do NOT thin, shorten, recolor, add, or remove hair, and do NOT make the person look balder, younger, ' +
     'or older. ' + outfitClause + 'It must be unmistakably the ' +
     'same exact person. IDENTITY means face and hair (clothing per the outfit instruction above) — NOT the ' +
@@ -747,14 +811,14 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
   const isTweet = (concept.archetype || '') === 'tweet-card';
   const quality = isTweet
     ? 'DESIGNED GRAPHIC MODE: this thumbnail is a clean, professionally DESIGNED graphic composition, not a photograph of a real scene. ' +
-      'The creator himself stays fully PHOTOREALISTIC — real skin texture with visible pores, real hair, bright even frontal light on the face with minimal shadow, exactly the person in the reference photos — composited large like a premium poster subject, casting ONE subtle soft drop shadow onto the background, his color grade HARMONIZED with the blue background — one shared, natural white balance — so he sits IN the design instead of cut against it, never a hard cut-out edge. ' +
+      'The creator himself stays fully PHOTOREALISTIC — real skin texture with visible pores, real hair, bright even frontal light on the face with minimal shadow plus a clearly visible cool RIM LIGHT tracing the edges of his hair and jaw, separating him crisply from the blue background, exactly the person in the reference photos — composited large like a premium poster subject, casting ONE subtle soft drop shadow onto the background, his color grade HARMONIZED with the blue background — one shared, natural white balance — so he sits IN the design instead of cut against it, never a hard cut-out edge. ' +
       'Everything around him is intentional graphic design: a rich saturated royal-blue background with a subtle radial glow exactly as the scene describes — brightest around the white card, deepening toward the corners, no texture and no banding — and one white rounded-corner tweet card rendered as crisp, perfectly flat vector-clean UI — clean left-aligned typography with tight line spacing, even spacing, correctly spelled text exactly as quoted in the scene, the card casting one subtle soft drop shadow onto the blue background. ' +
       'Clean, balanced, deliberate — it must read as the work of a top thumbnail designer, never as a faked photograph and never as messy AI compositing.'
     : isLineup
     ? 'DESIGNED GRAPHIC MODE: this thumbnail is a clean, professionally DESIGNED graphic composition, not a photograph of a real scene. ' +
-      'The creator himself stays fully PHOTOREALISTIC — real skin texture with visible pores, real hair, bright even HIGH-KEY frontal light on the face with minimal shadow, exactly the person in the reference photos — composited large like a premium poster subject, with a subtle soft RIM LIGHT tracing his shoulders and hair and his color grade HARMONIZED with the bright grey backdrop — one shared, natural white balance across subject and backdrop — so he sits IN the space instead of cut against it. ' +
-      'Everything around him is intentional graphic design: a seamless studio-backdrop gradient exactly as the scene describes, brightest directly behind his head and shoulders and falling into a soft vignette toward the corners, ' +
-      'and floating 3D objects with real thickness, consistent key lighting and soft shadows cast onto the backdrop. ' +
+      'The creator himself stays fully PHOTOREALISTIC — real skin texture with visible pores, real hair, lit like a commercial studio portrait with a bright fresh frontal key light so the face reads clearly brighter than the backdrop, exactly the person in the reference photos — composited large like a premium poster subject, with a CLEARLY VISIBLE cool RIM LIGHT tracing his shoulders and hair, separating him crisply from the background, and his color grade HARMONIZED with the light grey backdrop — one shared, natural white balance across subject and backdrop — so he sits IN the space instead of cut against it. ' +
+      'Everything around him is intentional graphic design: a completely smooth, even, UNTEXTURED seamless studio-backdrop gradient exactly as the scene describes — no grain, no plaster, no wall texture — brightest directly behind his head and shoulders and falling gently darker toward the corners, ' +
+      'and floating 3D tiles with real thickness, slight spatial angles, consistent key lighting and soft shadows cast onto the backdrop and onto each other where they overlap. ' +
       'Clean, balanced, deliberate — it must read as the work of a top thumbnail designer, never as a faked photograph and never as messy AI compositing.'
     : 'PHOTOGRAPHIC REALISM (this must look like a real photo taken on a real camera, NOT a CGI render or an AI image): ' +
     'shot on a full-frame camera with an 85mm lens at a wide aperture (~f1.8), giving a genuinely SHALLOW depth of field — ' +
@@ -763,6 +827,7 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
     'with visible pores, fine lines and slight unevenness (NEVER plastic, waxy, airbrushed, over-smoothed or glossy CGI skin), ' +
     'a faint hint of chromatic aberration at the edges, and natural, slightly uneven directional lighting with real falloff and ' +
     'soft, believable catchlights in the eyes (not glassy or over-bright). ' +
+    'Give the subject professional SEPARATION: a believable edge / separation light traces the person\u2019s shoulders and arms (as from a real light behind and to the side), so dark clothing never melts into a dark background — the person always reads crisply in front of the room. ' +
     'ONE REAL CAPTURE, as if a real photographer came to the creator\u2019s actual office and shot this in one frame: the person, the background ' +
     'and every prop were photographed together in the same room, lit by the SAME light from the same direction, sharing one consistent white ' +
     'balance, exposure and color grade — so nothing looks cut out, pasted, stickered, or composited. Every object and the person cast a real, soft ' +
@@ -824,7 +889,7 @@ function buildTextDirective(concept) {
       'WHITEBOARD TEXT — the ONLY text in the image is hand-drawn marker writing on the whiteboard, exactly as the scene describes: ' +
       (hook ? `the hook line "${hook}" in thick black marker capitals on a yellow marker-highlight bar, ` : 'the hook line in thick black marker capitals on a yellow marker-highlight bar, ') +
       (itemList ? `and the numbered items — ${itemList} — each with its circled number and simple doodle icon per the scene. ` : 'and the numbered items with their circled numbers and simple doodle icons per the scene. ') +
-      'All writing reads as believable handwriting with slight natural marker wobble, never a printed font, yet every word stays crisp, fully legible at a small mobile size, and correctly spelled with NO extra, missing, or misspelled words or letters. ' +
+      'All writing reads as REAL handwriting written quickly and confidently by a real person — lines drifting slightly off horizontal, letter heights varying a touch, natural word spacing, real marker ink texture (slightly saturated stroke starts, drier stroke ends, the yellow highlight semi-transparent with visible overlapping swipes) — never a handwriting font, never perfectly even digital ink. Yet every word stays crisp, fully legible at a small mobile size, and correctly spelled with NO extra, missing, or misspelled words or letters. ' +
       'Render absolutely NO other text, letters, words, captions, numbers, logos, or watermarks anywhere else in the image.'
     );
   }
@@ -836,7 +901,7 @@ function buildTextDirective(concept) {
       'TWEET CARD TEXT — the ONLY text in the image lives on the white tweet card: ' +
       (handle ? `the handle "${handle}" in bold black followed by the blue verified checkmark, ` : 'the handle in bold black followed by the blue verified checkmark, ') +
       (tweetText ? `and below it the tweet text "${tweetText}" ` : 'and below it the tweet text ') +
-      'in a very heavy black flat sans-serif, sentence case exactly as quoted, set HUGE over two lines running nearly edge to edge of the card width, crisp and perfectly legible at a small mobile size, correctly spelled with NO extra, missing, or misspelled words or letters. ' +
+      'in a very heavy black flat sans-serif with NORMAL-WIDTH letterforms and even, generous letter spacing — never condensed, compressed, narrowed or squeezed, letters never touching or crowding each other — sentence case exactly as quoted, set HUGE over two lines running nearly edge to edge of the card width, crisp and perfectly legible at a small mobile size, correctly spelled with NO extra, missing, or misspelled words or letters. ' +
       'Render absolutely NO other text, letters, words, captions, numbers, logos, or watermarks anywhere else in the image.'
     );
   }
