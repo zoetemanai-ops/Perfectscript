@@ -245,23 +245,28 @@ executions.
      ONLY from that soft blue glow, never from a visible light source or
      gradient banding.
    - THE CARD: one white card with strongly rounded corners, perfectly straight
-     (no tilt, no perspective), covering roughly the left 70% of the frame's
-     width and only as tall as its content needs — a wide card sitting around
-     the vertical middle, bleeding off the LEFT edge, casting one subtle, soft,
-     even drop shadow onto the blue background so it lifts gently off it. On the
+     (no tilt, no perspective), DOMINATING the frame: roughly 75-80% of the
+     frame's width and most of its height, bleeding off the LEFT edge, casting
+     one subtle, soft, even drop shadow onto the blue background so it lifts
+     gently off it — the blue reads as a border around the card, not as a
+     backdrop the card floats in. On the
      card, top row: a small round avatar photo of the creator (same person as
-     the reference photos, identity locked, may be slightly desaturated like a
-     real profile picture) inside a thin, subtle keyline ring, followed by the
+     the reference photos, identity locked) inside a thin, subtle keyline ring —
+     the avatar is a DIFFERENT photo than the main shot: a relaxed
+     profile-picture look, head in slight three-quarter turn or a neutral
+     friendly expression, never the same frontal stare as the large creator
+     beside the card. It may be slightly desaturated like a real profile
+     picture. The avatar is followed by the
      handle in bold black, immediately followed by the blue verified checkmark
      badge. The handle is the twitter_handle input, used VERBATIM — never build,
      translate or alter it. Below the handle row: the tweet text in very heavy
      black sans-serif (the flat geometric style of a Twitter/X post), sentence
-     case, set LARGE over TWO lines (always break 3+ words across two lines),
+     case, set HUGE over TWO lines (always break 3+ words across two lines),
      strictly LEFT-ALIGNED to the card's left padding with tight line spacing,
-     the type filling the card's width so the handle row and the two text lines
-     together fill the card — the card hugs its content, NO large empty white
-     areas. NOTHING else on the card: no date, no likes, no reply icons, no
-     other tweet UI.
+     the letters running nearly edge to edge of the card's width with only
+     minimal padding, so the handle row and the two text lines together FILL
+     the card — NO large empty white areas right of or below the text. NOTHING
+     else on the card: no date, no likes, no reply icons, no other tweet UI.
    - TWEET TEXT: 2 to 5 words, sentence case (capitalize only the first word and
      proper nouns), written as a bold, confident CLAIM or verdict the creator
      could have tweeted — a statement that opens a loop with the title, e.g.
@@ -274,13 +279,17 @@ executions.
      the topic, never repeat or reword the title) but NOT its length, casing or
      highlight rules — no ALL CAPS, no highlight block, no red words. It must
      read as something a real person tweeted, not a screamed caption.
-   - CREATOR: LARGE on the right, framed roughly chest-to-crown, face sharp and
-     dominant, looking straight into the lens with the hot-but-credible
-     expression that fits this concept's register (Principle 2 applies in
-     full). He stands IN FRONT of the card, overlapping its right edge, and
-     bleeds off the RIGHT and BOTTOM edges of the frame. Photorealistic per the
-     reference photos, lit with clean, even frontal light, one subtle soft drop
-     shadow onto the background — never a hard cut-out edge.
+   - CREATOR: LARGE on the right and cropped TIGHT — framed roughly from the
+     upper chest to the crown, the face clearly the biggest element on his side
+     of the frame, sharp and dominant, looking straight into the lens with the
+     hot-but-credible expression that fits this concept's register (Principle 2
+     applies in full). He stands IN FRONT of the card and genuinely OVERLAPS
+     it: his head and shoulder cover a clear slice of the card's right side, so
+     creator and card visibly interlock — never two separate elements side by
+     side. He bleeds off the RIGHT and BOTTOM edges of the frame.
+     Photorealistic per the reference photos, lit with clean, even frontal
+     light, one subtle soft drop shadow onto the background — never a hard
+     cut-out edge.
    - The normal caption pipeline is OFF for this archetype (enforced in code):
      set overlay words to an empty string, caption_zone to null, and do NOT
      describe any other text in the scene. The card IS the text.
@@ -827,7 +836,7 @@ function buildTextDirective(concept) {
       'TWEET CARD TEXT — the ONLY text in the image lives on the white tweet card: ' +
       (handle ? `the handle "${handle}" in bold black followed by the blue verified checkmark, ` : 'the handle in bold black followed by the blue verified checkmark, ') +
       (tweetText ? `and below it the tweet text "${tweetText}" ` : 'and below it the tweet text ') +
-      'in a very heavy black flat sans-serif, sentence case exactly as quoted, over one or two lines, filling most of the card width, crisp and perfectly legible at a small mobile size, correctly spelled with NO extra, missing, or misspelled words or letters. ' +
+      'in a very heavy black flat sans-serif, sentence case exactly as quoted, set HUGE over two lines running nearly edge to edge of the card width, crisp and perfectly legible at a small mobile size, correctly spelled with NO extra, missing, or misspelled words or letters. ' +
       'Render absolutely NO other text, letters, words, captions, numbers, logos, or watermarks anywhere else in the image.'
     );
   }
