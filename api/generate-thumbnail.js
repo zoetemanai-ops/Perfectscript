@@ -52,6 +52,7 @@ the scroll on a mobile feed and earn the click.
 INPUTS (JSON):
 - creator_name
 - creator_visual_notes   (recurring brand look — may be empty)
+- twitter_handle         (the exact handle for tweet-card — use it VERBATIM)
 - video_title
 - hook
 - main_idea
@@ -237,27 +238,30 @@ executions.
    is intentional graphic design, while the creator himself stays fully
    photorealistic. Structure is FIXED; only the words, the background color and
    the creator's expression vary:
-   - BACKGROUND: one single, completely FLAT, fully saturated solid color filling
-     the entire frame — no gradient, no texture, no scene, no props, no vignette.
-     Pick the color to match THIS concept's register: royal blue (the default /
-     authority), deep red (warning / loss), dark green (money / winning), or
-     vivid orange (urgency). Always rich and saturated, never pastel, muted or
-     grey — it must punch against the white card in the feed.
+   - BACKGROUND: rich, saturated ROYAL BLUE filling the entire frame, with a
+     subtle radial glow: brightest royal blue immediately around the white card,
+     deepening into darker blue toward the corners and edges — as if the card
+     softly lights its surroundings. No texture, no scene, no props; depth comes
+     ONLY from that soft blue glow, never from a visible light source or
+     gradient banding.
    - THE CARD: one white card with strongly rounded corners, perfectly straight
-     (no tilt, no perspective), covering roughly the left 70% of the frame and
-     bleeding off the LEFT and BOTTOM edges, casting one subtle, soft, even drop
-     shadow onto the flat background so it lifts gently off it. On the card, top
-     row: a small round avatar photo of the creator (same person as the reference
-     photos, identity locked, may be slightly desaturated like a real profile
-     picture) inside a thin, subtle keyline ring, followed by the handle in bold
-     black, immediately followed by the blue verified
-     checkmark badge. The handle is "@" + creator_name with all spaces removed,
-     keeping each word's capitalization (creator_name "Tom Wheelwright" →
-     "@TomWheelwright"). Below the handle row: the tweet text in very heavy
+     (no tilt, no perspective), covering roughly the left 70% of the frame's
+     width and only as tall as its content needs — a wide card sitting around
+     the vertical middle, bleeding off the LEFT edge, casting one subtle, soft,
+     even drop shadow onto the blue background so it lifts gently off it. On the
+     card, top row: a small round avatar photo of the creator (same person as
+     the reference photos, identity locked, may be slightly desaturated like a
+     real profile picture) inside a thin, subtle keyline ring, followed by the
+     handle in bold black, immediately followed by the blue verified checkmark
+     badge. The handle is the twitter_handle input, used VERBATIM — never build,
+     translate or alter it. Below the handle row: the tweet text in very heavy
      black sans-serif (the flat geometric style of a Twitter/X post), sentence
-     case, over one or two lines, strictly LEFT-ALIGNED to the card's left
-     padding with tight line spacing, filling most of the card's width. NOTHING
-     else on the card: no date, no likes, no reply icons, no other tweet UI.
+     case, set LARGE over TWO lines (always break 3+ words across two lines),
+     strictly LEFT-ALIGNED to the card's left padding with tight line spacing,
+     the type filling the card's width so the handle row and the two text lines
+     together fill the card — the card hugs its content, NO large empty white
+     areas. NOTHING else on the card: no date, no likes, no reply icons, no
+     other tweet UI.
    - TWEET TEXT: 2 to 5 words, sentence case (capitalize only the first word and
      proper nouns), written as a bold, confident CLAIM or verdict the creator
      could have tweeted — a statement that opens a loop with the title, e.g.
@@ -580,7 +584,7 @@ OUTPUT — return ONLY valid JSON, no preamble:
       "composition": "<focal point, rule-of-thirds, fg/bg, and where the calm caption area sits>",
       "color_and_lighting": "...",
       "overlay": {"words": "2 TO 3 WORDS MAX — a short emotional phrase (ranked-lineup, tweet-card and whiteboard-list: MUST be an empty string)", "highlight_word": "<exactly ONE word from words that carries the stake/emotion — or null>", "highlight_style": "<none|block>", "rationale": "...", "score": "<0-10 overlay_punch, >=7 after self-audit>"},
-      "tweet": {"handle": "<tweet-card only: '@' + creator_name with all spaces removed, e.g. '@TomWheelwright' — otherwise null>", "text": "<tweet-card only: the 2-5 word tweet text in sentence case — otherwise null>", "background_color": "<tweet-card only: royal blue|deep red|dark green|vivid orange — otherwise null>"},
+      "tweet": {"handle": "<tweet-card only: the twitter_handle input VERBATIM — otherwise null>", "text": "<tweet-card only: the 2-5 word tweet text in sentence case — otherwise null>"},
       "whiteboard": {"hook": "<whiteboard-list only: the 2-4 word hook line — otherwise null>", "items": "<whiteboard-list only: array of 3-4 item strings of 1-2 words each; a hidden item is the string '?' — otherwise null>"},
       "expression_match": "<0-10, >=7 after self-audit>",
       "freshness_score": 0,
@@ -639,17 +643,22 @@ async function generate(runId, script) {
 
     const { data: client } = await supabase
       .from('client_profiles')
-      .select('client_name, thumbnail_visual_notes')
+      .select('client_name, thumbnail_visual_notes, twitter_handle')
       .eq('client_slug', script.client_slug)
       .single();
 
     const creatorName = client?.client_name || script.client_slug;
     const visualNotes = client?.thumbnail_visual_notes || '';
+    // twitter_handle column wins; fallback: creator name stripped of spaces and punctuation ("Ryan D. Lee" -> "@RyanDLee")
+    const rawHandle = String(client?.twitter_handle || '').trim().replace(/^@/, '');
+    const fallbackHandle = String(creatorName).replace(/[^A-Za-z0-9_]/g, '');
+    const twitterHandle = '@' + (rawHandle.replace(/[^A-Za-z0-9_]/g, '') || fallbackHandle);
     const hook = (script.full_script || '').slice(0, 800);
 
     const brief = await runArtDirector({
       creator_name: creatorName,
       creator_visual_notes: visualNotes,
+      twitter_handle: twitterHandle,
       video_title: script.video_title || '',
       hook,
       main_idea: script.main_idea || '',
@@ -729,8 +738,8 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
   const isTweet = (concept.archetype || '') === 'tweet-card';
   const quality = isTweet
     ? 'DESIGNED GRAPHIC MODE: this thumbnail is a clean, professionally DESIGNED graphic composition, not a photograph of a real scene. ' +
-      'The creator himself stays fully PHOTOREALISTIC — real skin texture with visible pores, real hair, bright even frontal light on the face with minimal shadow, exactly the person in the reference photos — composited large like a premium poster subject, casting ONE subtle soft drop shadow onto the flat background, his color grade HARMONIZED with the background color — one shared, natural white balance — so he sits IN the design instead of cut against it, never a hard cut-out edge. ' +
-      'Everything around him is intentional flat graphic design: one single, completely flat, fully saturated solid background color exactly as the scene describes (no gradient, no texture, no vignette), and one white rounded-corner tweet card rendered as crisp, perfectly flat vector-clean UI — clean left-aligned typography with tight line spacing, even spacing, correctly spelled text exactly as quoted in the scene, the card casting one subtle soft drop shadow onto the flat background. ' +
+      'The creator himself stays fully PHOTOREALISTIC — real skin texture with visible pores, real hair, bright even frontal light on the face with minimal shadow, exactly the person in the reference photos — composited large like a premium poster subject, casting ONE subtle soft drop shadow onto the background, his color grade HARMONIZED with the blue background — one shared, natural white balance — so he sits IN the design instead of cut against it, never a hard cut-out edge. ' +
+      'Everything around him is intentional graphic design: a rich saturated royal-blue background with a subtle radial glow exactly as the scene describes — brightest around the white card, deepening toward the corners, no texture and no banding — and one white rounded-corner tweet card rendered as crisp, perfectly flat vector-clean UI — clean left-aligned typography with tight line spacing, even spacing, correctly spelled text exactly as quoted in the scene, the card casting one subtle soft drop shadow onto the blue background. ' +
       'Clean, balanced, deliberate — it must read as the work of a top thumbnail designer, never as a faked photograph and never as messy AI compositing.'
     : isLineup
     ? 'DESIGNED GRAPHIC MODE: this thumbnail is a clean, professionally DESIGNED graphic composition, not a photograph of a real scene. ' +
@@ -907,11 +916,19 @@ async function gptImage(refFiles, scenePrompt, creatorName) {
 // so the request never names a public figure — GPT relies on the reference photos.
 function sanitizePrompt(scenePrompt, creatorName) {
   let p = String(scenePrompt || '');
+  // Shield @handles: mask them before name-replacement, restore after — a handle
+  // derived from the creator's name must never be rewritten by the sanitizer.
+  const handles = [];
+  p = p.replace(/@[A-Za-z0-9_]+/g, (m) => {
+    handles.push(m);
+    return `\u0000H${handles.length - 1}\u0000`;
+  });
   const parts = String(creatorName || '').trim().split(/\s+/).filter((s) => s.length > 2);
   const variants = [creatorName, ...parts].filter((s) => s && s.length > 2);
   for (const v of variants) {
-    p = p.replace(new RegExp(`(?<!@)\\b${escapeRegExp(v)}\\b`, 'gi'), 'the person in the reference photo');
+    p = p.replace(new RegExp(`\\b${escapeRegExp(v)}\\b`, 'gi'), 'the person in the reference photo');
   }
+  p = p.replace(/\u0000H(\d+)\u0000/g, (_, i) => handles[Number(i)] || '');
   return p;
 }
 function escapeRegExp(s) { return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
