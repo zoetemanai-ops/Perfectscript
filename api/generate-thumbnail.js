@@ -854,32 +854,36 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
   const identity =
     'IDENTITY LOCK: keep the person\u2019s face, hairline, hair (same amount, length, color and style), ' +
     'glasses, facial hair and apparent age EXACTLY consistent with the supplied reference photos. ' +
-    'Preserve the person\u2019s REAL skin character exactly as the reference photos show it — the same wrinkles, ' +
-    'lines, pores, unevenness, blemishes and natural redness — do NOT beautify, smooth, even out, or de-age the skin in any way. ' +
+    'Preserve the person\u2019s natural, unretouched skin EXACTLY as the reference photos show it — neither smoothed, ' +
+    'beautified or de-aged, NOR deepened, multiplied or exaggerated: the same amount of wrinkle and texture as the references, no more, no less. ' +
     'Do NOT thin, shorten, recolor, add, or remove hair, and do NOT make the person look balder, younger, ' +
     'or older. ' + outfitClause + 'It must be unmistakably the ' +
     'same exact person. IDENTITY means face and hair (clothing per the outfit instruction above) — NOT the ' +
     'expression: take the facial EXPRESSION exclusively from the scene description above, never from the ' +
     'reference photos. If the references show him smiling or pleasant, do NOT carry that smile over; on a ' +
-    'loss, threat or warning concept his face must be serious, hard and grave exactly as the scene describes.';
+    'loss, threat or warning concept his face must be serious, hard and grave exactly as the scene describes. ' +
+    'EXPRESSION STRENGTH: the emotion must be unmistakable at a glance at small thumbnail size — never neutral, ' +
+    'never a resting face, never watered down. Render the expression at FULL described intensity; when in doubt, ' +
+    'render it one notch STRONGER than described, not weaker — while still respecting the stated ceiling (no cartoon shock, no snarl).';
   const isLineup = (concept.archetype || '') === 'ranked-lineup';
   const isTweet = (concept.archetype || '') === 'tweet-card';
   const quality = isTweet
     ? 'DESIGNED GRAPHIC MODE: this thumbnail is a clean, professionally DESIGNED graphic composition, not a photograph of a real scene. ' +
-      'The creator himself stays fully PHOTOREALISTIC — real skin texture with visible pores, real hair, bright even frontal light on the face with minimal shadow plus a clearly visible cool RIM LIGHT tracing the edges of his hair and jaw, separating him crisply from the blue background, exactly the person in the reference photos — composited large like a premium poster subject, casting ONE subtle soft drop shadow onto the background, his color grade HARMONIZED with the blue background — one shared, natural white balance — so he sits IN the design instead of cut against it, never a hard cut-out edge. ' +
+      'The creator himself stays fully PHOTOREALISTIC — natural skin texture exactly as much as the reference photos show — never plastic, never exaggerated — real hair, bright even frontal light on the face with minimal shadow plus a clearly visible cool RIM LIGHT tracing the edges of his hair and jaw, separating him crisply from the blue background, exactly the person in the reference photos — composited large like a premium poster subject, casting ONE subtle soft drop shadow onto the background, his color grade HARMONIZED with the blue background — one shared, natural white balance — so he sits IN the design instead of cut against it, never a hard cut-out edge. ' +
       'Everything around him is intentional graphic design: a rich saturated royal-blue background with a subtle radial glow exactly as the scene describes — brightest around the white card, deepening toward the corners, no texture and no banding — and one white rounded-corner tweet card rendered as crisp, perfectly flat vector-clean UI — clean left-aligned typography with tight line spacing, even spacing, correctly spelled text exactly as quoted in the scene, the card casting one subtle soft drop shadow onto the blue background. ' +
       'Clean, balanced, deliberate — it must read as the work of a top thumbnail designer, never as a faked photograph and never as messy AI compositing.'
     : isLineup
     ? 'DESIGNED GRAPHIC MODE: this thumbnail is a clean, professionally DESIGNED graphic composition, not a photograph of a real scene. ' +
-      'The creator himself stays fully PHOTOREALISTIC — real skin texture with visible pores, real hair, lit like a commercial studio portrait with a bright fresh frontal key light so the face reads clearly brighter than the backdrop, exactly the person in the reference photos — composited large like a premium poster subject, with a CLEARLY VISIBLE cool RIM LIGHT tracing his shoulders and hair, separating him crisply from the background, and his color grade HARMONIZED with the light grey backdrop — one shared, natural white balance across subject and backdrop — so he sits IN the space instead of cut against it. ' +
+      'The creator himself stays fully PHOTOREALISTIC — natural skin texture exactly as much as the reference photos show — never plastic, never exaggerated — real hair, lit like a commercial studio portrait with a bright fresh frontal key light so the face reads clearly brighter than the backdrop, exactly the person in the reference photos — composited large like a premium poster subject, with a CLEARLY VISIBLE cool RIM LIGHT tracing his shoulders and hair, separating him crisply from the background, and his color grade HARMONIZED with the light grey backdrop — one shared, natural white balance across subject and backdrop — so he sits IN the space instead of cut against it. ' +
       'Everything around him is intentional graphic design: a completely smooth, even, UNTEXTURED seamless studio-backdrop gradient exactly as the scene describes — no grain, no plaster, no wall texture — brightest directly behind his head and shoulders and falling gently darker toward the corners, ' +
       'and floating 3D tiles with real thickness, slight spatial angles, consistent key lighting and soft shadows cast onto the backdrop and onto each other where they overlap. ' +
       'Clean, balanced, deliberate — it must read as the work of a top thumbnail designer, never as a faked photograph and never as messy AI compositing.'
     : 'PHOTOGRAPHIC REALISM (this must look like a real photo taken on a real camera, NOT a CGI render or an AI image): ' +
     'shot on a full-frame camera with an 85mm lens at a wide aperture (~f1.8), giving a genuinely SHALLOW depth of field — ' +
     'only the face is tack-sharp while the background falls into soft, natural bokeh (do NOT keep the whole frame equally sharp). ' +
-    'Add the subtle imperfections of a real photograph: fine, natural film grain / sensor noise throughout, real skin texture ' +
-    'with visible pores, fine lines and slight unevenness (NEVER plastic, waxy, airbrushed, over-smoothed or glossy CGI skin), ' +
+    'Add the subtle imperfections of a real photograph: fine, natural film grain / sensor noise throughout, and real skin texture ' +
+    'exactly as much as the reference photos show — natural pores and lines, NEVER plastic, waxy or airbrushed, but also never deepened or exaggerated beyond the references. ' +
+    'Skin texture is ORGANIC and irregular, never a drawn or etched PATTERN: no hatched or cross-hatched strokes, no engraved parallel lines on skin or neck, no repeating texture or banding, no over-sharpened crispy surface; the grain stays fine and even across the whole frame, never clumping on the face. ' +
     'a faint hint of chromatic aberration at the edges, and natural, slightly uneven directional lighting with real falloff and ' +
     'soft, believable catchlights in the eyes (not glassy or over-bright). ' +
     'Give the subject professional SEPARATION: a believable edge / separation light traces the person\u2019s shoulders and arms (as from a real light behind and to the side), so dark clothing never melts into a dark background — the person always reads crisply in front of the room. ' +
