@@ -70,6 +70,13 @@ NON-NEGOTIABLE PRINCIPLES:
    Match the expression to THIS concept's register: a loss, threat or warning concept
    needs a serious, hard or grave face — NO smile or pleased look; a subtle smirk
    fits ONLY the insider-edge register, never a loss or seizure scene.
+   WRITE IT PHYSICALLY: in subject_direction and scene_prompt, describe the
+   expression in concrete facial mechanics — brow position, the crease between
+   the brows, eye aperture, jaw set, mouth line — never only abstract adjectives
+   ("displeased", "concerned"): the renderer obeys muscles, not moods. And
+   because the renderer consistently dampens expressions by a notch, write the
+   intensity ONE notch stronger than feels right (target 7-8 out of 10, ceiling
+   intact: no cartoon shock, no snarl).
    (b) Trigger: do NOT default to fear alone. For finance and business viewers
    the strongest click driver is usually curiosity + mild indignation +
    self-interest — "there's a legal move the rich use that you don't," "you're
@@ -488,12 +495,12 @@ ANTI-CLICHÉ (run this for EVERY concept, after choosing its archetype):
       [EXPRESSION] slot with it VERBATIM:
       (a) overwhelmed-by-options: "eyebrows raised, eyes wide and slightly
       strained looking straight into the camera, lips parted a fraction in
-      hesitation — the face of a man facing too many choices, intensity 6
-      out of 10, no cartoon shock" — use when the video sorts through a
+      hesitation — the face of a man facing too many choices, intensity 7
+      out of 10, clearly readable at a glance, no cartoon shock" — use when the video sorts through a
       confusing field of options.
       (b) confident-verdict: "a firm frown, brows visibly knotted with a
       vertical crease between them, eyes slightly narrowed, locked straight
-      into the camera, mouth closed and set — intensity 7 out of 10,
+      into the camera, mouth closed and set — intensity 8 out of 10,
       unmistakably displeased, no snarl" — use when the video crowns a
       winner or condemns the losers; this is the natural pairing with the
       held antagonist board (displeased AT the thing in his hands).
