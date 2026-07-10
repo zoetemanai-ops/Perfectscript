@@ -900,7 +900,7 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
     'with no too-clean cut-out edges and no element that looks floated on top. ' +
     'Keep it clean, sharp and natural like a real editorial portrait photograph, ' +
     'NOT a heavily stylized, over-graded or CGI look (the scene lighting itself is set by the scene description); ' +
-    'it must read as captured, not generated: avoid a flawless, over-clean, perfectly symmetrical studio look. ' +
+    'it must read as captured, not generated. The ROOM reads lived-in and naturally imperfect — never a sterile, perfectly symmetrical studio set. Render the FACE with the same photographic fidelity and clean finish as the reference photos themselves — the references are the quality bar for how his face and skin look. ' +
     'ANY paper or document in the scene — held, torn, shredded, or lying on the desk — reads as natural, real paper in the scene\u2019s existing light: ' +
     'bright, clean, softly off-white or lightly warm-toned, only the slightest touch darker than the person\u2019s face — never dim, grey or sitting in shadow — with subtle fiber texture, natural bends and soft shadows in the sheet, ' +
     'and rough, fibrous edges where it is torn — never blinding pure white, never blown out, never stiff and perfectly flat. The face stays the brightest element in the frame. ' +
