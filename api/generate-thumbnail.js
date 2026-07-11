@@ -885,10 +885,10 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
       'Everything around him is intentional graphic design: a completely smooth, even, UNTEXTURED seamless studio-backdrop gradient exactly as the scene describes — no grain, no plaster, no wall texture — brightest directly behind his head and shoulders and falling gently darker toward the corners, ' +
       'and floating 3D tiles with real thickness, slight spatial angles, consistent key lighting and soft shadows cast onto the backdrop and onto each other where they overlap. ' +
       'Clean, balanced, deliberate — it must read as the work of a top thumbnail designer, never as a faked photograph and never as messy AI compositing.'
-    : 'PHOTOGRAPHIC REALISM (this must look like a real photo taken on a real camera, NOT a CGI render or an AI image): ' +
-    'shot on a full-frame camera with an 85mm lens at a wide aperture (~f1.8), giving a genuinely SHALLOW depth of field — ' +
-    'only the face is tack-sharp while the background falls into soft, natural bokeh (do NOT keep the whole frame equally sharp). ' +
-    'The person\u2019s skin reads exactly as it does in the reference photos — natural, clean and real, never plastic, waxy or airbrushed, and never given extra texture, grain, wrinkles or roughness beyond the references. ' +
+    : 'PREMIUM COMMERCIAL PHOTOGRAPH (a professionally shot, professionally lit and professionally RETOUCHED commercial portrait scene — the kind a top YouTube thumbnail team produces — still a real photograph, never a CGI render): ' +
+    'Render the creator the way a premium commercial thumbnail renders its subject: a clean, retouched commercial portrait finish on his face and skin, magazine-cover clean, with the reference photos as the EXACT quality bar — his skin reads exactly as it does in the references, natural and real, never plastic, waxy or airbrushed, and never given extra texture, grain, wrinkles, weathering or roughness beyond the references. ' +
+    'Shot on a full-frame camera with an 85mm lens at a wide aperture (~f1.8), giving a genuinely SHALLOW depth of field — ' +
+    'the face in crisp, clean FOCUS while the background falls into soft, natural bokeh (do NOT keep the whole frame equally sharp). Crisp means optical focus, never added micro-texture: sharpening the face must not synthesize extra skin detail. ' +
     'Skin is ORGANIC and irregular, never a drawn or etched PATTERN: no hatched or cross-hatched strokes, no engraved parallel lines on skin or neck, no repeating texture or banding, no over-sharpened crispy surface. ' +
     'Natural directional lighting with real falloff and ' +
     'soft, believable catchlights in the eyes (not glassy or over-bright). ' +
@@ -898,9 +898,9 @@ async function renderConcept(runId, concept, refFiles, creatorName) {
     'balance, exposure and color grade — so nothing looks cut out, pasted, stickered, or composited. Every object and the person cast a real, soft ' +
     'CONTACT SHADOW where they meet a surface, hand or wall; foreground, subject and background sit in the same believable space and atmosphere, ' +
     'with no too-clean cut-out edges and no element that looks floated on top. ' +
-    'Keep it clean, sharp and natural like a real editorial portrait photograph, ' +
-    'NOT a heavily stylized, over-graded or CGI look (the scene lighting itself is set by the scene description); ' +
-    'it must read as captured, not generated. The ROOM reads lived-in and naturally imperfect — never a sterile, perfectly symmetrical studio set. THE PERSON IS THE ONE EXCEPTION to the candid register — and this applies ONLY to the person, never to the room, props or materials: render the creator the way a premium commercial YouTube thumbnail renders its subject — a clean, professionally RETOUCHED commercial portrait finish on his face and skin, magazine-cover clean, glamorized rather than candid, with the reference photos as the exact quality bar for how his face and skin look — never weathered, never rougher or more textured than the references. The room around him keeps its honest photographic character. ' +
+    'Keep it clean, sharp and natural like a polished commercial portrait photograph, ' +
+    'NOT a heavily stylized, over-graded or CGI look (the scene lighting itself is set by the scene description). ' +
+    'The ROOM is the one honest element: it reads lived-in and naturally imperfect — never a sterile, perfectly symmetrical studio set — keeping its real photographic character around the polished subject. ' +
     'ANY paper or document in the scene — held, torn, shredded, or lying on the desk — reads as natural, real paper in the scene\u2019s existing light: ' +
     'bright, clean, softly off-white or lightly warm-toned, only the slightest touch darker than the person\u2019s face — never dim, grey or sitting in shadow — with subtle fiber texture, natural bends and soft shadows in the sheet, ' +
     'and rough, fibrous edges where it is torn — never blinding pure white, never blown out, never stiff and perfectly flat. The face stays the brightest element in the frame. ' +
