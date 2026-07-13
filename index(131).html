@@ -1,0 +1,2862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Perfect Script · Content Cartel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.29.7/babel.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #F2EFE8;
+    --surface: #FAF8F4;
+    --surface2: #FFF;
+    --s2: #F7F4EE;
+    --gold: #C4973F;
+    --goldBg: #F7EDD8;
+    --goldDark: #8B6820;
+    --goldLight: #E8D4A8;
+    --char: #0F0D0A;
+    --text: #1C1916;
+    --muted: #8A7F72;
+    --border: #E2DBD0;
+    --borderL: #EDE8DF;
+    --red: #A83030; --green: #2E6B50; --greenBg: #E8F4EE;
+    --sidebar: #0A0806;
+    --sidebar2: #141210;
+    --radius: 12px;
+  }
+  html, body, #root { height: 100%; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(ellipse at 20% 0%, rgba(196,151,63,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 100%, rgba(196,151,63,0.04) 0%, transparent 60%);
+  }
+  input, textarea, button, select { font-family: 'DM Sans', sans-serif; }
+
+  /* ── Premium inputs ───────────────────────────────── */
+  input, textarea {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 13.5px;
+    color: var(--text);
+    background: var(--surface2);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);
+  }
+  input:focus, textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(196,151,63,0.12), inset 0 1px 3px rgba(0,0,0,0.03);
+  }
+  input::placeholder, textarea::placeholder { color: var(--muted); opacity: 0.65; }
+  textarea { resize: vertical; line-height: 1.75; }
+
+  /* ── Premium select ───────────────────────────────── */
+  select {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 13.5px;
+    color: var(--text);
+    background: var(--surface2);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A7F72' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);
+  }
+  select:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(196,151,63,0.12);
+  }
+
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { color: var(--goldDark); }
+
+  /* ── Scrollbar ────────────────────────────────────── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--goldLight); border-radius: 4px; }
+
+  /* ── Animations ───────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity:0; } to { opacity:1; }
+  }
+  @keyframes slideIn {
+    from { opacity:0; transform:translateX(28px); }
+    to   { opacity:1; transform:translateX(0); }
+  }
+  @keyframes shimmer {
+    0%   { background-position: -300% center; }
+    100% { background-position: 300% center; }
+  }
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(196,151,63,0.35); }
+    50%       { box-shadow: 0 0 0 10px rgba(196,151,63,0); }
+  }
+  @keyframes spin {
+    from { transform: rotate(0deg); } to { transform: rotate(360deg); }
+  }
+  @keyframes grain {
+    0%, 100% { transform: translate(0,0); }
+    25%       { transform: translate(-1%,1%); }
+    50%       { transform: translate(1%,-1%); }
+    75%       { transform: translate(-1%,-1%); }
+  }
+  @keyframes shake-attention {
+    0%, 100% { transform: translateX(0); }
+    15%, 45%, 75% { transform: translateX(-6px); }
+    30%, 60%, 90% { transform: translateX(6px); }
+  }
+  .shake-attention { animation: shake-attention 0.5s cubic-bezier(0.36,0.07,0.19,0.97); }
+
+  .page { animation: fadeUp 0.4s cubic-bezier(0.16,1,0.3,1) forwards; }
+  .panel { animation: slideIn 0.3s cubic-bezier(0.16,1,0.3,1) forwards; }
+  .row-hover:hover { background: var(--s2) !important; cursor: pointer; transition: all 0.15s; box-shadow: inset 3px 0 0 var(--gold); }
+  .delete-btn:hover { background: var(--red) !important; color: #fff !important; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(168, 48, 48, 0.2); }
+  .pdf-btn:hover { background: var(--gold) !important; color: #fff !important; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(196, 151, 63, 0.25); }
+
+  /* ── Generate button ─────────────────────────────── */
+  .gen-btn {
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.04em;
+    transition: transform 0.15s, box-shadow 0.2s !important;
+  }
+  .gen-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(196,151,63,0.35) !important;
+  }
+  .gen-btn:active:not(:disabled) { transform: translateY(0); }
+  .gen-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.2) 50%, transparent 65%);
+    background-size: 300% auto;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .gen-btn:hover::after {
+    opacity: 1;
+    animation: shimmer 1.8s linear infinite;
+  }
+  .gen-btn-loading {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
+  /* ── Client card ─────────────────────────────────── */
+  .client-card {
+    transition: transform 0.18s cubic-bezier(0.16,1,0.3,1), box-shadow 0.18s, border-color 0.15s;
+  }
+  .client-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.06);
+  }
+  .client-card.selected {
+    box-shadow: 0 4px 20px rgba(196,151,63,0.2);
+  }
+
+  /* ── Panel overlay ───────────────────────────────── */
+  .panel-overlay {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  /* ── Table rows ──────────────────────────────────── */
+  .history-row { transition: all 0.12s; }
+  .history-row:hover { background: var(--s2) !important; box-shadow: inset 3px 0 0 var(--gold); }
+
+  /* ── Noise texture overlay ───────────────────────── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.018;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+</style>
+
+
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+const T = {
+  bg:"#F2EFE8", surface:"#FAF8F4", s2:"#F7F4EE", surface2:"#fff",
+  gold:"#C4973F", goldBg:"#F7EDD8", goldDark:"#8B6820", goldLight:"#E8D4A8",
+  char:"#0F0D0A", text:"#1C1916", muted:"#8A7F72",
+  border:"#E2DBD0", borderL:"#EDE8DF",
+  red:"#A83030", green:"#2E6B50", greenBg:"#E8F4EE",
+};
+
+const CONFIG = {
+  supabaseUrl: "https://hjbhjbqfgfshclpbyvbc.supabase.co",
+  supabaseKey: "sb_publishable_0YImfOauT-m18snB9DgWLA_z9KzWCOa",
+  webhookUrl:  "https://content-cartel-1.app.n8n.cloud/webhook/generate-script",
+  appUrl:      "https://perfectscript-gamma.vercel.app/",
+};
+
+// ── AUTH CLIENT ───────────────────────────────────────────────
+// One Supabase client, used ONLY for auth (login, session, token refresh,
+// password reset). All data reads/writes still go through the sb() helper
+// below, but that helper now rides the logged-in user's JWT instead of the
+// public key — so once RLS is on, nothing works without a valid session.
+const supaAuth = window.supabase.createClient(CONFIG.supabaseUrl, CONFIG.supabaseKey, {
+  auth: {
+    persistSession: true,       // keep the session across reloads
+    autoRefreshToken: true,     // refresh the JWT before it expires
+    detectSessionInUrl: true,   // pick up the recovery token from the reset link
+    flowType: "implicit",
+  },
+});
+
+
+const RUNTIME_OPTIONS = [
+  { value: "0:0",   label: "Default (from profile)" },
+  { value: "5:10",  label: "5–10 min" },
+  { value: "10:15", label: "10–15 min" },
+  { value: "15:20", label: "15–20 min" },
+  { value: "20:25", label: "20–25 min" },
+  { value: "25:30", label: "25–30 min" },
+  { value: "30:35", label: "30–35 min" },
+];
+
+// Topic queue items can be strings (legacy) or objects ({angle, data_point, signal_sources, signal_strength}).
+// This helper safely extracts the display text either way.
+function topicText(qt) {
+  if (qt == null) return "";
+  if (typeof qt === "string") return qt;
+  if (typeof qt === "object") {
+    const t = qt.angle || qt.topic || qt.text || qt.data_point;
+    return (typeof t === "string" && t.trim()) ? t : "Suggested topic (no title)";
+  }
+  return String(qt);
+}
+
+function sb(url, key) {
+  const base = `${url}/rest/v1`;
+  // Build headers per request so the JWT is always fresh (autoRefreshToken keeps
+  // it valid). apikey stays the publishable key (required by PostgREST); the
+  // Authorization Bearer carries the logged-in user's access token. No session =
+  // falls back to the publishable key, which RLS will reject → 0 rows. That's the gate.
+  async function hdrs() {
+    let token = key;
+    try {
+      const { data } = await supaAuth.auth.getSession();
+      if (data && data.session && data.session.access_token) token = data.session.access_token;
+    } catch {}
+    return { apikey:key, Authorization:`Bearer ${token}`, "Content-Type":"application/json", Prefer:"return=representation" };
+  }
+  async function check(r) {
+    if (!r.ok) {
+      let msg = `HTTP ${r.status}`;
+      try { const e = await r.json(); msg = e.message || e.error || JSON.stringify(e); } catch {}
+      throw new Error(msg);
+    }
+    return r.json();
+  }
+  return {
+    get:   async (t, q="")  => fetch(`${base}/${t}${q}`, { headers: await hdrs() }).then(r => r.json()),
+    post:  async (t, d)     => fetch(`${base}/${t}`, { method:"POST", headers: await hdrs(), body:JSON.stringify(d) }).then(check),
+    patch: async (t, id, d) => fetch(`${base}/${t}?id=eq.${id}`, { method:"PATCH", headers: await hdrs(), body:JSON.stringify(d) }).then(check),
+    del:   async (t, id)    => fetch(`${base}/${t}?id=eq.${id}`, { method:"DELETE", headers: await hdrs() }),
+  };
+}
+
+// ── SHARED ────────────────────────────────────────────────────
+function Btn({ children, variant="primary", onClick, disabled, full, style={} }) {
+  const base = { display:"inline-flex", alignItems:"center", justifyContent:"center", gap:8, padding:"12px 26px", borderRadius:8, fontSize:15, fontWeight:500, cursor:disabled?"not-allowed":"pointer", border:"none", transition:"all 0.15s", width:full?"100%":undefined, letterSpacing:"0.01em", ...style };
+  const v = {
+    primary: { background:T.char, color:"#fff", opacity:disabled?0.4:1 },
+    gold:    { background:T.gold, color:"#fff", opacity:disabled?0.4:1 },
+    ghost:   { background:"transparent", color:T.text, border:`1px solid ${T.border}` },
+    danger:  { background:T.red, color:"#fff" },
+    link:    { background:"none", color:T.gold, padding:0, fontWeight:500, fontSize:13 },
+  };
+  return <button onClick={disabled?undefined:onClick} style={{...base,...v[variant]}}>{children}</button>;
+}
+
+const IS = { width:"100%", padding:"11px 15px", border:`1px solid ${T.border}`, borderRadius:8, fontSize:14, color:T.text, background:T.surface, outline:"none", boxSizing:"border-box" };
+
+function InfoTooltip({ text }) {
+  const [show, setShow] = useState(false);
+  return (
+    <span style={{ position:"relative", display:"inline-flex", marginLeft:6, verticalAlign:"middle" }}>
+      <span
+        onMouseEnter={() => setShow(true)}
+        onMouseLeave={() => setShow(false)}
+        onClick={(e) => { e.preventDefault(); setShow(s => !s); }}
+        style={{ width:15, height:15, borderRadius:"50%", background:T.border, color:"#fff", fontSize:10, fontWeight:600, display:"inline-flex", alignItems:"center", justifyContent:"center", cursor:"help", userSelect:"none" }}
+      >i</span>
+      {show && (
+        <span style={{ position:"absolute", bottom:"calc(100% + 8px)", left:"50%", transform:"translateX(-50%)", background:T.char, color:"#fff", fontSize:11, lineHeight:1.5, padding:"10px 12px", borderRadius:8, width:260, textTransform:"none", letterSpacing:0, fontWeight:400, boxShadow:"0 8px 20px rgba(0,0,0,0.15)", zIndex:100, pointerEvents:"none" }}>
+          {text}
+        </span>
+      )}
+    </span>
+  );
+}
+
+function Field({ label, hint, sub, children, mb=20 }) {
+  return (
+    <div style={{ marginBottom:mb }}>
+      {label && <div style={{ display:"flex", justifyContent:"space-between", alignItems:"baseline", marginBottom:7 }}>
+        <div>
+          <label style={{ fontSize:12, fontWeight:600, color:T.text, letterSpacing:"0.07em", textTransform:"uppercase" }}>{label}</label>
+          {sub && <span style={{ fontSize:13, color:T.muted, marginLeft:8, fontWeight:400, textTransform:"none", letterSpacing:0 }}>{sub}</span>}
+        </div>
+        {hint && <span style={{ fontSize:13, color:T.muted }}>{hint}</span>}
+      </div>}
+      {children}
+    </div>
+  );
+}
+
+function Input({ label, hint, sub, value, onChange, type="text", placeholder, readOnly, mb }) {
+  return <Field label={label} hint={hint} sub={sub} mb={mb}>
+    <input type={type} value={value} onChange={e=>onChange(e.target.value)} placeholder={placeholder} readOnly={readOnly}
+      style={{...IS, background:readOnly?T.bg:T.surface, color:readOnly?T.muted:T.text}} />
+  </Field>;
+}
+
+function TextArea({ label, hint, sub, value, onChange, placeholder, rows=4, mb }) {
+  return <Field label={label} hint={hint} sub={sub} mb={mb}>
+    <textarea value={value} onChange={e=>onChange(e.target.value)} placeholder={placeholder} rows={rows} style={{...IS, lineHeight:1.7, resize:"vertical"}} />
+  </Field>;
+}
+
+function SectionDivider({ label }) {
+  return <div style={{ display:"flex", alignItems:"center", gap:14, margin:"32px 0 22px" }}>
+    <div style={{ flex:1, height:"1px", background:T.border }} />
+    <span style={{ fontSize:10, fontWeight:500, color:T.muted, letterSpacing:"0.1em", textTransform:"uppercase" }}>{label}</span>
+    <div style={{ flex:1, height:"1px", background:T.border }} />
+  </div>;
+}
+
+function Badge({ children, color="neutral" }) {
+  const c = {
+    neutral: { bg:T.bg,     text:"#6B6059" },
+    green:   { bg:T.greenBg, text:T.green },
+    gold:    { bg:T.goldBg,  text:T.goldDark }
+  }[color] || { bg:T.bg, text:"#6B6059" };
+  return <span style={{ fontSize:12, fontWeight:500, padding:"5px 14px", borderRadius:20, background:c.bg, color:c.text, whiteSpace:"nowrap" }}>{children}</span>;
+}
+
+function Toast({ msg }) {
+  if (!msg) return null;
+  const colors = { success:{bg:T.greenBg,border:"#B8DEC9",text:T.green}, error:{bg:"#FDF0F0",border:"#E8C0C0",text:T.red}, info:{bg:T.goldBg,border:"#D4B88A",text:T.goldDark} };
+  const c = colors[msg.type] || colors.info;
+  return <div style={{ position:"fixed", bottom:32, right:32, background:c.bg, color:c.text, border:`1px solid ${c.border}`, borderRadius:12, padding:"14px 22px", fontSize:13, fontWeight:500, zIndex:999, boxShadow:"0 8px 32px rgba(28,25,23,0.1)" }}>{msg.message}</div>;
+}
+
+// ── TOPIC QUEUE MANAGER ───────────────────────────────────────
+function TopicQueue({ topics, onChange }) {
+  const [newTopic, setNewTopic] = useState("");
+
+  function add() {
+    if (!newTopic.trim()) return;
+    onChange([...topics, newTopic.trim()]);
+    setNewTopic("");
+  }
+
+  function remove(i) {
+    onChange(topics.filter((_, idx) => idx !== i));
+  }
+
+  function move(i, dir) {
+    const j = i + dir;
+    if (j < 0 || j >= topics.length) return;
+    const next = [...topics];
+    [next[i], next[j]] = [next[j], next[i]];
+    onChange(next);
+  }
+
+  const arrowBtn = (enabled) => ({ display:"flex", alignItems:"center", justifyContent:"center", width:28, height:24, padding:0, background: enabled ? T.surface : "transparent", border:`1px solid ${enabled ? T.borderL : "transparent"}`, borderRadius:7, cursor: enabled ? "pointer" : "default", color: enabled ? T.char : "rgba(120,113,108,0.30)", fontSize:10, lineHeight:1 });
+
+  return (
+    <div>
+      {topics.length === 0
+        ? <div style={{ padding:"22px 18px", background:T.bg, borderRadius:10, fontSize:15, color:T.muted, textAlign:"center", marginBottom:14, lineHeight:1.6 }}>No topics yet.</div>
+        : <div style={{ marginBottom:14, border:`1px solid ${T.border}`, borderRadius:12, overflow:"hidden" }}>
+            {topics.map((t, i) => {
+              const isNext = i === 0;
+              return (
+                <div key={i} style={{ display:"flex", alignItems:"center", gap:12, padding:"13px 14px", borderBottom:i<topics.length-1?`1px solid ${T.borderL}`:"none", background:isNext?T.goldBg:T.surface }}>
+                  <div style={{ minWidth:78, flexShrink:0, display:"flex", justifyContent:"center" }}>
+                    {isNext
+                      ? <span style={{ fontSize:10, fontWeight:700, color:"#fff", background:T.gold, padding:"4px 9px", borderRadius:20, letterSpacing:"0.06em", whiteSpace:"nowrap" }}>▶ NEXT UP</span>
+                      : <span style={{ fontSize:12, fontWeight:500, color:T.muted }}>{i+1}</span>}
+                  </div>
+                  <div style={{ flex:1, fontSize:15, color:T.text, lineHeight:1.6 }}>{topicText(t)}</div>
+                  <div style={{ display:"flex", flexDirection:"column", gap:5, flexShrink:0 }}>
+                    <button title="Move up"   onClick={() => move(i, -1)} disabled={i === 0}              style={arrowBtn(i !== 0)}>▲</button>
+                    <button title="Move down" onClick={() => move(i,  1)} disabled={i === topics.length-1} style={arrowBtn(i !== topics.length-1)}>▼</button>
+                  </div>
+                  <button title="Remove this topic" onClick={() => remove(i)} className="delete-btn" style={{ flexShrink:0, padding:"7px 14px", border:`1px solid ${T.border}`, borderRadius:8, background:T.surface, color:T.muted, fontSize:12.5, fontWeight:500, cursor:"pointer", fontFamily:"'DM Sans',sans-serif", whiteSpace:"nowrap", transition:"all 0.15s" }}>Delete</button>
+                </div>
+              );
+            })}
+          </div>
+      }
+      <div style={{ display:"flex", gap:8 }}>
+        <input
+          type="text"
+          value={newTopic}
+          onChange={e => setNewTopic(e.target.value)}
+          onKeyDown={e => e.key === "Enter" && add()}
+          placeholder="Type a new topic idea and press Enter…"
+          style={{...IS, flex:1}}
+        />
+        <button onClick={add} disabled={!newTopic.trim()} style={{ padding:"11px 20px", background: newTopic.trim() ? T.char : T.border, color:"#fff", border:"none", borderRadius:8, fontSize:13, fontWeight:500, cursor: newTopic.trim() ? "pointer" : "default", whiteSpace:"nowrap" }}>Add</button>
+      </div>
+    </div>
+  );
+}
+
+// ── SIDEBAR ───────────────────────────────────────────────────
+const NAV = [
+  { id:"generate", label:"Generate",  sub:"Script Generator" },
+  { id:"topics",   label:"Topics",    sub:"Up next"          },
+  { id:"clients",  label:"Clients",   sub:"Profile Manager"  },
+  { id:"history",  label:"History",   sub:"Script Runs"      },
+];
+
+function Sidebar({ view, setView, clientCount, userEmail, onLogout }) {
+  return (
+    <nav style={{ width:236, minHeight:"100vh", background:T.char, display:"flex", flexDirection:"column", position:"fixed", top:0, left:0, zIndex:10 }}>
+      <div style={{ height:3, background:`linear-gradient(90deg, ${T.gold}, #D4A96A, ${T.gold})` }} />
+      <div style={{ padding:"32px 28px 28px" }}>
+        <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:13, fontWeight:400, color:"rgba(255,255,255,0.3)", letterSpacing:"0.16em", textTransform:"uppercase", marginBottom:10 }}>Content Cartel</div>
+        <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:26, fontWeight:300, color:"#fff", lineHeight:1.25 }}>The Perfect<br/><span style={{ fontStyle:"italic", color:T.gold }}>Script</span></div>
+      </div>
+      <div style={{ height:"1px", background:"rgba(255,255,255,0.06)", margin:"0 20px" }} />
+      <div style={{ padding:"20px 14px", flex:1 }}>
+        {NAV.map(n => {
+          const active = view === n.id;
+          return <button key={n.id} onClick={() => setView(n.id)} style={{ width:"100%", display:"block", padding:"14px 16px", marginBottom:4, borderRadius:10, border:"none", cursor:"pointer", textAlign:"left", background:active?"rgba(196,151,63,0.1)":"transparent", borderLeft:active?`2px solid ${T.gold}`:"2px solid transparent", transition:"all 0.15s" }}>
+            <div style={{ fontSize:15, fontWeight:600, color:active?T.gold:"rgba(255,255,255,0.85)" }}>{n.label}</div>
+            <div style={{ fontSize:12, color:active?"rgba(176,141,90,0.7)":"rgba(255,255,255,0.45)", marginTop:3 }}>{n.sub}</div>
+          </button>;
+        })}
+      </div>
+      <div style={{ height:"1px", background:"rgba(255,255,255,0.06)", margin:"0 20px" }} />
+      <div style={{ padding:"18px 20px 24px" }}>
+        {userEmail && (
+          <div style={{ marginBottom:12 }}>
+            <div style={{ fontSize:10, color:"rgba(255,255,255,0.35)", letterSpacing:"0.12em", textTransform:"uppercase", marginBottom:4 }}>Signed in as</div>
+            <div style={{ fontSize:12.5, color:"rgba(255,255,255,0.75)", fontWeight:500, wordBreak:"break-all", lineHeight:1.4 }}>{userEmail}</div>
+          </div>
+        )}
+        <button
+          onClick={onLogout}
+          style={{ width:"100%", padding:"10px 14px", borderRadius:9, border:"1px solid rgba(255,255,255,0.12)", background:"transparent", color:"rgba(255,255,255,0.6)", fontSize:13, fontWeight:500, cursor:"pointer", transition:"all 0.15s", display:"flex", alignItems:"center", justifyContent:"center", gap:8 }}
+          onMouseEnter={e => { e.currentTarget.style.background="rgba(168,48,48,0.15)"; e.currentTarget.style.color="#E8A0A0"; e.currentTarget.style.borderColor="rgba(168,48,48,0.4)"; }}
+          onMouseLeave={e => { e.currentTarget.style.background="transparent"; e.currentTarget.style.color="rgba(255,255,255,0.6)"; e.currentTarget.style.borderColor="rgba(255,255,255,0.12)"; }}
+        >Log out</button>
+      </div>
+    </nav>
+  );
+}
+
+// ── CLIENT PANEL ──────────────────────────────────────────────
+function FieldEditor({ label, sub, value, onChange, onClose }) {
+  const [draft, setDraft] = React.useState(value);
+  return (
+    <div style={{ position:"fixed", inset:0, background:"rgba(10,8,6,0.55)", zIndex:400, display:"flex", alignItems:"center", justifyContent:"center" }} onClick={onClose}>
+      <div style={{ width:640, height:"68vh", background:T.surface2, borderRadius:16, display:"flex", flexDirection:"column", boxShadow:"0 24px 80px rgba(0,0,0,0.22)" }} onClick={e=>e.stopPropagation()}>
+        <div style={{ padding:"24px 32px 18px", borderBottom:`1px solid ${T.border}`, display:"flex", justifyContent:"space-between", alignItems:"center", flexShrink:0 }}>
+          <div>
+            <div style={{ fontSize:14, fontWeight:600, color:T.char }}>{label}</div>
+            {sub && <div style={{ fontSize:11, color:T.muted, marginTop:3 }}>{sub}</div>}
+          </div>
+          <button onClick={onClose} style={{ background:"none", border:"none", fontSize:22, cursor:"pointer", color:T.muted, lineHeight:1, padding:"4px 6px" }}>×</button>
+        </div>
+        <textarea value={draft} onChange={e=>setDraft(e.target.value)} style={{ flex:1, width:"calc(100% - 64px)", boxSizing:"border-box", margin:"20px 32px", border:`1px solid ${T.border}`, borderRadius:10, padding:"16px 18px", fontSize:14, color:T.text, background:T.surface, resize:"none", outline:"none", lineHeight:1.8 }} autoFocus />
+        <div style={{ padding:"18px 32px", borderTop:`1px solid ${T.border}`, display:"flex", gap:10, flexShrink:0 }}>
+          <button onClick={onClose} style={{ flex:1, padding:"12px", border:`1px solid ${T.border}`, borderRadius:8, background:"transparent", fontSize:13, cursor:"pointer", color:T.muted }}>Cancel</button>
+          <button onClick={()=>{onChange(draft);onClose();}} style={{ flex:2, padding:"12px", border:"none", borderRadius:8, background:T.gold, color:"#fff", fontSize:13, fontWeight:600, cursor:"pointer" }}>Save field →</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CollapsibleField({ label, hint, value, children, defaultOpen=false }) {
+  const [open, setOpen] = React.useState(defaultOpen);
+  const filled = value && String(value).trim().length > 0;
+  return (
+    <div style={{ marginBottom:12, border:`1px solid ${T.border}`, borderRadius:10, overflow:"hidden", background:T.surface }}>
+      <div onClick={()=>setOpen(!open)} style={{ display:"flex", alignItems:"center", justifyContent:"space-between", padding:"14px 16px", cursor:"pointer", userSelect:"none" }}>
+        <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+          <div style={{ width:8, height:8, borderRadius:"50%", background:filled?T.gold:"transparent", border:`1.5px solid ${filled?T.gold:T.border}`, flexShrink:0 }} />
+          <label style={{ fontSize:12, fontWeight:600, color:T.text, letterSpacing:"0.07em", textTransform:"uppercase", cursor:"pointer" }}>{label}</label>
+          {hint && <span style={{ fontSize:13, color:T.muted, fontWeight:400, textTransform:"none", letterSpacing:0 }}>{hint}</span>}
+        </div>
+        <span style={{ fontSize:14, color:T.muted, transform:open?"rotate(90deg)":"rotate(0deg)", transition:"transform 0.15s" }}>›</span>
+      </div>
+      {open && (
+        <div style={{ padding:"4px 16px 16px", borderTop:`1px solid ${T.borderL}` }}>
+          {children}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function BareAutoGrowTextArea({ value, onChange, placeholder, minRows=2 }) {
+  const ref = React.useRef(null);
+  React.useEffect(() => {
+    if (ref.current) {
+      ref.current.style.height = "auto";
+      ref.current.style.height = ref.current.scrollHeight + "px";
+    }
+  }, [value]);
+  return (
+    <textarea
+      ref={ref}
+      value={value}
+      onChange={e=>onChange(e.target.value)}
+      placeholder={placeholder}
+      rows={minRows}
+      style={{ width:"100%", padding:"11px 14px", border:`1px solid ${T.borderL}`, borderRadius:8, fontSize:14, color:T.text, background:T.bg, outline:"none", boxSizing:"border-box", fontFamily:"'DM Sans',sans-serif", lineHeight:1.6, resize:"none", overflow:"hidden", minHeight:`${minRows * 24 + 22}px` }}
+    />
+  );
+}
+
+function AutoGrowTextArea({ label, sub, hint, value, onChange, placeholder, minRows=2 }) {
+  const ref = React.useRef(null);
+  React.useEffect(() => {
+    if (ref.current) {
+      ref.current.style.height = "auto";
+      ref.current.style.height = ref.current.scrollHeight + "px";
+    }
+  }, [value]);
+  return (
+    <div style={{ marginBottom:20 }}>
+      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"baseline", marginBottom:7 }}>
+        <div>
+          <label style={{ fontSize:12, fontWeight:600, color:T.text, letterSpacing:"0.07em", textTransform:"uppercase" }}>{label}</label>
+          {sub && <span style={{ fontSize:13, color:T.muted, marginLeft:8 }}>{sub}</span>}
+        </div>
+        {hint && <span style={{ fontSize:13, color:T.muted }}>{hint}</span>}
+      </div>
+      <textarea
+        ref={ref}
+        value={value}
+        onChange={e=>onChange(e.target.value)}
+        placeholder={placeholder}
+        rows={minRows}
+        style={{ width:"100%", padding:"11px 15px", border:`1px solid ${T.border}`, borderRadius:8, fontSize:14, color:T.text, background:T.surface, outline:"none", boxSizing:"border-box", fontFamily:"'DM Sans',sans-serif", lineHeight:1.6, resize:"none", overflow:"hidden", minHeight:`${minRows * 24 + 22}px` }}
+      />
+    </div>
+  );
+}
+
+function SearchableSelect({ value, onChange, options, placeholder = "— Choose —", emptyText = "No matches" }) {
+  const [open, setOpen] = React.useState(false);
+  const [search, setSearch] = React.useState("");
+  const wrapperRef = React.useRef(null);
+  const inputRef = React.useRef(null);
+
+  // Close on outside click
+  React.useEffect(() => {
+    function onDoc(e) {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+        setOpen(false); setSearch("");
+      }
+    }
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, []);
+
+  // Auto-focus search when opened
+  React.useEffect(() => {
+    if (open && inputRef.current) inputRef.current.focus();
+  }, [open]);
+
+  const filtered = options.filter(o => o.label.toLowerCase().includes(search.toLowerCase()));
+  const selected = options.find(o => o.value === value);
+
+  return (
+    <div ref={wrapperRef} style={{ position:"relative", border:`2px solid ${value?T.gold:T.border}`, borderRadius:12, background:value?T.goldBg:T.surface2, boxShadow:value?"0 2px 12px rgba(196,151,63,0.1)":"none", transition:"all 0.15s" }}>
+      <div onClick={() => setOpen(!open)} style={{ width:"100%", padding:"14px 18px", paddingRight:42, fontSize:17, color:value?T.goldDark:T.muted, background:"transparent", cursor:"pointer", fontFamily:"'DM Sans',sans-serif", fontWeight:500, display:"flex", alignItems:"center", justifyContent:"space-between" }}>
+        <span style={{ overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>{selected ? selected.label : placeholder}</span>
+        <span style={{ fontSize:14, color:T.gold, transform:open?"rotate(180deg)":"rotate(0deg)", transition:"transform 0.15s", flexShrink:0, marginLeft:12 }}>▾</span>
+      </div>
+      {open && (
+        <div style={{ position:"absolute", top:"calc(100% + 4px)", left:0, right:0, background:T.surface, border:`1px solid ${T.border}`, borderRadius:12, boxShadow:"0 8px 32px rgba(28,25,23,0.14)", zIndex:50, overflow:"hidden", maxHeight:360, display:"flex", flexDirection:"column" }}>
+          <div style={{ padding:"10px 12px", borderBottom:`1px solid ${T.borderL}`, background:T.surface2, flexShrink:0 }}>
+            <input
+              ref={inputRef}
+              type="text"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              placeholder="Search..."
+              style={{ width:"100%", padding:"8px 12px", border:`1px solid ${T.border}`, borderRadius:8, fontSize:14, color:T.text, background:T.surface, outline:"none", boxSizing:"border-box", fontFamily:"'DM Sans',sans-serif" }}
+            />
+          </div>
+          <div style={{ overflowY:"auto", flex:1 }}>
+            {filtered.length === 0
+              ? <div style={{ padding:"16px 18px", fontSize:14, color:T.muted, textAlign:"center" }}>{emptyText}</div>
+              : filtered.map(o => {
+                  const isSelected = o.value === value;
+                  return <div key={o.value} onClick={() => { onChange(o.value); setOpen(false); setSearch(""); }} style={{ padding:"11px 18px", fontSize:15, color:isSelected?T.goldDark:T.text, background:isSelected?T.goldBg:"transparent", cursor:"pointer", fontWeight:isSelected?500:400, transition:"background 0.1s" }} onMouseEnter={e => { if (!isSelected) e.currentTarget.style.background = T.bg; }} onMouseLeave={e => { if (!isSelected) e.currentTarget.style.background = "transparent"; }}>
+                    {o.label}
+                  </div>;
+                })
+            }
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ExpandableInput({ label, sub, hint, value, onChange }) {
+  const [open, setOpen] = React.useState(false);
+  const preview = value && value.length > 52 ? value.slice(0,52).trimEnd() + "…" : value;
+  return (
+    <div style={{ marginBottom:20 }}>
+      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"baseline", marginBottom:7 }}>
+        <div>
+          <label style={{ fontSize:12, fontWeight:600, color:T.text, letterSpacing:"0.07em", textTransform:"uppercase" }}>{label}</label>
+          {sub && <span style={{ fontSize:13, color:T.muted, marginLeft:8, fontWeight:400, textTransform:"none", letterSpacing:0 }}>{sub}</span>}
+        </div>
+        {hint && <span style={{ fontSize:13, color:T.muted }}>{hint}</span>}
+      </div>
+      <div onClick={()=>setOpen(true)} style={{ width:"100%", padding:"13px 16px", border:`1px solid ${T.border}`, borderRadius:10, fontSize:13.5, color:value?T.text:T.muted, background:T.surface, cursor:"pointer", display:"flex", justifyContent:"space-between", alignItems:"center", gap:8, boxSizing:"border-box", transition:"border-color 0.2s" }}>
+        <span style={{ flex:1, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>{preview || <span style={{color:T.muted, opacity:0.6}}>Click to edit…</span>}</span>
+        <span style={{ fontSize:11, color:T.gold, fontWeight:600, whiteSpace:"nowrap", flexShrink:0 }}>✎ Edit</span>
+      </div>
+      {open && <FieldEditor label={label} sub={sub} value={value} onChange={onChange} onClose={()=>setOpen(false)} />}
+    </div>
+  );
+}
+
+function ExpandableTextArea({ label, sub, hint, value, onChange }) {
+  const [open, setOpen] = React.useState(false);
+  const lines = value ? value.split("\n").filter(Boolean) : [];
+  const preview = lines.length > 0 ? `${lines.length} line${lines.length!==1?"s":""} · ${lines[0].slice(0,48)}${lines[0].length>48?"…":""}` : null;
+  return (
+    <div style={{ marginBottom:20 }}>
+      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"baseline", marginBottom:7 }}>
+        <div>
+          <label style={{ fontSize:12, fontWeight:600, color:T.text, letterSpacing:"0.07em", textTransform:"uppercase" }}>{label}</label>
+          {sub && <span style={{ fontSize:13, color:T.muted, marginLeft:8 }}>{sub}</span>}
+        </div>
+        {hint && <span style={{ fontSize:13, color:T.muted }}>{hint}</span>}
+      </div>
+      <div onClick={()=>setOpen(true)} style={{ width:"100%", padding:"13px 16px", border:`1px solid ${T.border}`, borderRadius:10, fontSize:13, color:T.text, background:T.surface2, cursor:"pointer", display:"flex", justifyContent:"space-between", alignItems:"center", gap:8, boxSizing:"border-box" }}>
+        <span style={{ flex:1, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap", color:preview?T.text:T.muted, opacity:preview?1:0.6 }}>{preview || "Click to edit…"}</span>
+        <span style={{ fontSize:11, color:T.gold, fontWeight:600, whiteSpace:"nowrap", flexShrink:0 }}>✎ Edit</span>
+      </div>
+      {open && <FieldEditor label={label} sub={sub} value={value} onChange={onChange} onClose={()=>setOpen(false)} />}
+    </div>
+  );
+}
+
+function ClientPanel({ client, onClose, onSave, onDelete }) {
+  const isNew = !client.id;
+  const [f, setF] = useState({
+    id:                 client.id || null,
+    client_slug:        client.client_slug ?? "",
+    client_name:        client.client_name ?? "",
+    niche:              client.niche ?? "",
+    tone_of_voice:      client.tone_of_voice ?? "",
+    limiting_beliefs:   client.limiting_beliefs ?? "",
+    credibility_statement: client.credibility_statement ?? "",
+    script_format:       client.script_format || "word_for_word",
+    signature_closing:  client.signature_closing ?? "",
+    next_video_cta:     client.next_video_cta ?? "",
+    client_dna:         client.client_dna ?? "",
+    sponsor_name:       client.sponsor_name ?? "",
+    sponsor_brief:      client.sponsor_brief ?? "",
+    cta_primary:        client.cta_primary ?? "",
+    script_length_min:  client.script_length_min || 10,
+    script_length_max:  client.script_length_max || 15,
+    active:             client.active !== undefined ? client.active : true,
+    whiteboard_enabled: client.whiteboard_enabled !== false,
+    creative_owner:     client.creative_owner ?? "",
+  });
+  const set = k => v => setF(p => ({ ...p, [k]:v }));
+  const scrollRef = React.useRef(null);
+
+  // Unsaved-changes guard: snapshot the form when the panel opens, warn on any exit while changed.
+  const baseline = React.useRef(null);
+  if (baseline.current === null) baseline.current = JSON.stringify(f);
+  const dirty = JSON.stringify(f) !== baseline.current;
+  function attemptClose() {
+    if (dirty && !window.confirm("You have unsaved changes. Close without saving?")) return;
+    onClose();
+  }
+  React.useEffect(() => {
+    function h(e) { if (dirty) { e.preventDefault(); e.returnValue = ""; } }
+    window.addEventListener("beforeunload", h);
+    return () => window.removeEventListener("beforeunload", h);
+  }, [dirty]);
+
+  React.useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = ""; };
+  }, []);
+
+  React.useLayoutEffect(() => {
+    if (scrollRef.current) scrollRef.current.scrollTop = 0;
+  }, []);
+
+  function handleSave() {
+    onSave({ ...f, active: true });
+  }
+
+  const Divider = ({ label, sub }) => (
+    <div style={{ margin:"40px 0 20px" }}>
+      <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:30, fontWeight:700, color:T.char, lineHeight:1.15, letterSpacing:"-0.01em" }}>{label}</div>
+      {sub && <div style={{ fontSize:13, color:T.muted, marginTop:6, lineHeight:1.5 }}>{sub}</div>}
+      <div style={{ height:1, background:T.border, marginTop:14 }} />
+    </div>
+  );
+
+  return ReactDOM.createPortal(
+    <div className="panel-overlay" style={{ position:"fixed", inset:0, display:"flex", alignItems:"flex-start", justifyContent:"flex-end", zIndex:200 }}>
+      <div onClick={attemptClose} style={{ position:"absolute", inset:0, background:"rgba(10,8,6,0.3)", cursor:"default" }} />
+      <div className="panel" style={{ width:680, height:"100vh", background:T.surface2, display:"flex", flexDirection:"column", boxShadow:"-20px 0 80px rgba(28,25,23,0.12)" }}>
+
+        {/* ── Sticky header ── */}
+        <div style={{ padding:"28px 44px 20px", borderBottom:`1px solid ${T.border}`, background:T.surface2, position:"sticky", top:0, zIndex:2, display:"flex", justifyContent:"space-between", alignItems:"center" }}>
+          <div>
+            <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:28, fontWeight:300, color:T.char, lineHeight:1.1 }}>{isNew ? "New Client" : f.client_name}</div>
+          </div>
+          <button onClick={attemptClose} style={{ background:"none", border:"none", fontSize:22, cursor:"pointer", color:T.muted, lineHeight:1, padding:"4px 6px" }}>×</button>
+        </div>
+
+        {/* ── Scrollable body ── */}
+        <div ref={scrollRef} style={{ flex:1, minHeight:0, overflowY:"auto", padding:"4px 44px 80px" }}>
+
+          <Divider label="Identity" />
+          <ExpandableInput label="Client Name" value={f.client_name} onChange={v => {
+            setF(p => ({ 
+              ...p, 
+              client_name: v,
+              // Auto-generate slug for new clients only, from name
+              client_slug: isNew ? v.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') : p.client_slug
+            }));
+          }} />
+
+          <div style={{ marginBottom:20 }}>
+            <label style={{ fontSize:12, fontWeight:600, color:T.text, letterSpacing:"0.07em", textTransform:"uppercase", display:"block", marginBottom:7 }}>Creative Owner</label>
+            <select value={f.creative_owner} onChange={e => set("creative_owner")(e.target.value)} style={{ width:"100%", padding:"11px 15px", border:`1px solid ${T.border}`, borderRadius:8, fontSize:14, color:f.creative_owner?T.text:T.muted, background:T.surface, outline:"none", boxSizing:"border-box", appearance:"none", cursor:"pointer", backgroundImage:"url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A7F72' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E\")", backgroundRepeat:"no-repeat", backgroundPosition:"right 14px center", paddingRight:36 }}>
+              <option value="">— Unassigned —</option>
+              <option value="Jan">Jan</option>
+              <option value="Joshua">Joshua</option>
+              <option value="Justin">Justin</option>
+              <option value="Lucas">Lucas</option>
+            </select>
+          </div>
+
+          <ExpandableInput label="Niche" sub="the topic area this creator covers, used by web research" value={f.niche} onChange={set("niche")} />
+
+          <Divider label="Voice" />
+          <ExpandableInput label="Credibility Statement" sub="one line about this creator's authority, spoken verbatim in every hook" value={f.credibility_statement} onChange={set("credibility_statement")} />
+          <ExpandableInput label="Tone of Voice" sub="how this creator sounds on camera" value={f.tone_of_voice} onChange={set("tone_of_voice")} />
+          <ExpandableInput label="Client DNA" sub="who the client is, their views and specific stances (2 pager)" value={f.client_dna} onChange={set("client_dna")} />
+          <ExpandableInput label="Limiting Beliefs" sub="what does the audience wrongly believe" value={f.limiting_beliefs} onChange={set("limiting_beliefs")} />
+
+          <Divider label="Script" />
+          <div style={{ marginBottom:16 }}>
+            <div style={{ fontSize:12, fontWeight:600, color:T.text, letterSpacing:"0.07em", textTransform:"uppercase", marginBottom:10 }}>Format</div>
+            <div style={{ display:"flex", gap:8 }}>
+              {[
+                { value:"word_for_word",      label:"Word for Word",      desc:"Teleprompter" },
+                { value:"directed_bullets",         label:"Directed Bullets",         desc:"One-line directions" },
+                { value:"question_outline", label:"Question Outline", desc:"Themes + 2 questions" },
+              ].map(opt => (
+                <div key={opt.value} onClick={() => setF(p => ({ ...p, script_format: opt.value }))} style={{ flex:1, padding:"10px 12px", borderRadius:10, border:`2px solid ${f.script_format===opt.value?T.gold:T.border}`, background:f.script_format===opt.value?T.goldBg:T.surface, cursor:"pointer", transition:"all 0.12s" }}>
+                  <div style={{ fontWeight:600, fontSize:12, color:f.script_format===opt.value?T.goldDark:T.char }}>{opt.label}</div>
+                  <div style={{ fontSize:13, color:T.muted, marginTop:2 }}>{opt.desc}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style={{ marginBottom:16 }}>
+            <label style={{ fontSize:12, fontWeight:600, color:T.text, letterSpacing:"0.07em", textTransform:"uppercase", display:"block", marginBottom:7 }}>Target Runtime</label>
+            <select 
+              value={`${f.script_length_min}:${f.script_length_max}`}
+              onChange={e => {
+                const [min, max] = e.target.value.split(":").map(Number);
+                setF(p => ({ ...p, script_length_min: min, script_length_max: max }));
+              }}
+              style={{ width:"100%", padding:"11px 15px", border:`1px solid ${T.border}`, borderRadius:8, fontSize:14, color:T.text, background:T.surface, outline:"none", boxSizing:"border-box", appearance:"none", cursor:"pointer", backgroundImage:"url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A7F72' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E\")", backgroundRepeat:"no-repeat", backgroundPosition:"right 14px center", paddingRight:36 }}
+            >
+              <option value="5:10">5–10 min</option>
+              <option value="10:15">10–15 min</option>
+              <option value="15:20">15–20 min</option>
+              <option value="20:25">20–25 min</option>
+              <option value="25:30">25–30 min</option>
+              <option value="30:35">30–35 min</option>
+              <option value={`${f.script_length_min}:${f.script_length_max}`} hidden>{f.script_length_min}–{f.script_length_max} min (custom)</option>
+            </select>
+          </div>
+          <div onClick={() => set("whiteboard_enabled")(!f.whiteboard_enabled)} style={{ display:"flex", alignItems:"center", gap:10, padding:"12px 14px", border:`1px solid ${f.whiteboard_enabled?T.gold:T.border}`, borderRadius:10, marginBottom:4, cursor:"pointer", background:f.whiteboard_enabled?T.goldBg:T.surface, transition:"all 0.15s" }}>
+            <input type="checkbox" checked={f.whiteboard_enabled} onChange={e=>set("whiteboard_enabled")(e.target.checked)} style={{ width:15, height:15, accentColor:T.gold, cursor:"pointer" }} onClick={e=>e.stopPropagation()} />
+            <div>
+              <div style={{ fontSize:13, fontWeight:500, color:f.whiteboard_enabled?T.goldDark:T.text }}>Whiteboard Examples</div>
+              <div style={{ fontSize:13, color:T.muted, marginTop:1 }}>Show drawn examples on screen during the video</div>
+            </div>
+          </div>
+
+          <Divider label="Content" />
+          <ExpandableInput label="Primary CTA" sub="the offer to promote – read verbatim mid-video and after the hook" value={f.cta_primary} onChange={set("cta_primary")} />
+          <ExpandableInput label="Signature Closing" sub="this creator's signature line, word for word at end of every outro" value={f.signature_closing} onChange={set("signature_closing")} />
+          <ExpandableInput label="Next Video CTA" sub="suggestion to watch another video – YouTube retention line at the very end" value={f.next_video_cta} onChange={set("next_video_cta")} />
+
+          <ExpandableInput label="Sponsor Name" value={f.sponsor_name} onChange={set("sponsor_name")} />
+          <ExpandableInput label="Sponsor Description" value={f.sponsor_brief} onChange={set("sponsor_brief")} />
+
+          {onDelete && (
+            <div style={{ marginTop:56, paddingTop:32, borderTop:`1px solid ${T.borderL}`, display:"flex", justifyContent:"center" }}>
+              <button onClick={onDelete} className="delete-btn" style={{ padding:"10px 22px", background:"transparent", border:`1px solid ${T.red}`, borderRadius:8, color:T.red, fontSize:13, fontWeight:500, cursor:"pointer", letterSpacing:"0.02em", fontFamily:"'DM Sans',sans-serif", transition:"all 0.15s" }}>Delete this client</button>
+            </div>
+          )}
+
+        </div>
+
+        {/* ── Sticky footer with Save / Cancel ── */}
+        <div style={{ padding:"16px 44px", borderTop:`1px solid ${T.border}`, background:T.surface2, display:"flex", gap:12, flexShrink:0, boxShadow:"0 -4px 12px rgba(0,0,0,0.04)" }}>
+          <Btn variant="ghost" onClick={attemptClose} style={{ flex:1, padding:"13px" }}>Cancel</Btn>
+          <Btn variant="gold" onClick={handleSave} style={{ flex:2, padding:"13px", fontSize:14 }}>Save Changes</Btn>
+        </div>
+
+      </div>
+    </div>
+  , document.body);
+}
+
+// ── GENERATE VIEW ─────────────────────────────────────────────
+// ── PDF GENERATOR ────────────────────────────────────────────
+function downloadPDF(scriptText, filename, videoTitle, topic) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+  const pw = doc.internal.pageSize.width;
+  const ph = doc.internal.pageSize.height;
+  const ml = 22, mr = 22, mt = 24, mb = 22;
+  const cw = pw - ml - mr;
+
+  // ── PALETTE ────────────────────────────────────────────────
+  const C = {
+    char:     [15,  13,  10],
+    gold:     [196, 151, 63],
+    goldDark: [139, 104, 32],
+    goldBg:   [247, 237, 216],
+    goldLight:[232, 212, 168],
+    muted:    [138, 127, 114],
+    white:    [255, 255, 255],
+    offwhite: [250, 248, 244],
+    light:    [226, 219, 208],
+    insight:  [247, 244, 238],
+    ctaBg:    [242, 235, 220],
+    midCta:   [232, 222, 200],
+    sidebar:  [10,  8,   6],
+    cream:    [245, 241, 232],
+    creamLight: [250, 247, 240],
+  };
+
+  let y = mt;
+  let pageNum = 0;
+
+  function rgb(arr, type='fill') {
+    if (type==='fill') doc.setFillColor(...arr);
+    else doc.setTextColor(...arr);
+  }
+
+  function newPage() {
+    doc.addPage();
+    pageNum++;
+    y = mt;
+    // Subtle top border line
+    doc.setDrawColor(...C.gold);
+    doc.setLineWidth(0.4);
+    doc.line(ml, 12, pw-mr, 12);
+    y = mt;
+  }
+
+  function check(needed=10) {
+    if (y + needed > ph - mb - 10) { newPage(); return true; }
+    return false;
+  }
+
+  function hline(yp, color=C.light, w=0.3) {
+    doc.setDrawColor(...color);
+    doc.setLineWidth(w);
+    doc.line(ml, yp, pw-mr, yp);
+  }
+
+  // ── COVER PAGE ─────────────────────────────────────────────
+  pageNum = 1;
+  // Full cream background
+  rgb(C.cream,'fill');
+  doc.rect(0, 0, pw, ph, 'F');
+
+  // Top label
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(8);
+  doc.setCharSpace(3);
+  rgb(C.goldDark,'text');
+  doc.text('CONTENT CARTEL', ml, 22);
+  doc.setCharSpace(0);
+
+  // Gold accent line
+  doc.setDrawColor(...C.gold);
+  doc.setLineWidth(0.4);
+  doc.line(ml, 28, ml+60, 28);
+
+  // Parse title and meta from scriptText
+  const lines = scriptText.split('\n');
+  let i = 0;
+  while (i < lines.length && !lines[i].trim()) i++;
+  const titleText = videoTitle || lines[i]?.trim() || filename || 'Script';
+  i++;
+  while (i < lines.length && !lines[i].trim()) i++;
+  const metaText = lines[i]?.trim() || '';
+  if (metaText.startsWith('Script for')) i++;
+
+  // Title — large charcoal
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(26);
+  rgb(C.char,'text');
+  const titleLines = doc.splitTextToSize(titleText, cw);
+  let ty = 40;
+  for (const tl of titleLines) {
+    doc.text(tl, ml, ty);
+    ty += 10;
+  }
+
+  // Meta subtitle — muted gold
+  if (metaText) {
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(10);
+    rgb(C.goldDark,'text');
+    doc.text(metaText, ml, ty + 1);
+    ty += 7;
+  }
+
+  // ── MAIN IDEA — vertically centered on cover ──
+  // Passed as the `topic` parameter (main_idea, with topic fallback)
+  if (topic && String(topic).trim()) {
+    const blockTopY = ty + 14;
+
+    // Label "MAIN IDEA" — small, gold, letter-spaced
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(11);
+    doc.setCharSpace(3);
+    rgb(C.goldDark,'text');
+    doc.text('MAIN IDEA', ml, blockTopY);
+    doc.setCharSpace(0);
+
+    // Gold divider under the label
+    doc.setDrawColor(...C.gold);
+    doc.setLineWidth(0.8);
+    doc.line(ml, blockTopY + 4, ml + 38, blockTopY + 4);
+
+    // Topic text — large, charcoal
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(20);
+    rgb(C.char,'text');
+    const topicLines = doc.splitTextToSize(String(topic).trim(), cw - 10);
+    let tyM = blockTopY + 18;
+    for (const tl of topicLines) {
+      doc.text(tl, ml, tyM);
+      tyM += 10;
+    }
+  }
+
+  // Bottom of cover: page label
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(7.5);
+  doc.setCharSpace(1.5);
+  rgb(C.muted,'text');
+  doc.text('CONFIDENTIAL', ml, ph - 14);
+  doc.setCharSpace(0);
+
+  // ── HELPER: SECTION HEADER ─────────────────────────────────
+  function sectionHeader(label) {
+    // Always start a new page for major sections — strip === wrappers first
+    const stripped = label.trim().replace(/^=+\s*/, '').replace(/\s*=+$/, '').trim();
+    const isMajor = /^(OPENING HOOK|HOOK|SECTION \d|Q\d+:|FINAL CLOSE|MID CTA|OUTRO)/.test(stripped);
+    if (isMajor && y > mt + 20) { newPage(); y = 18; }
+    else if (isMajor) { y = 18; }
+    else { check(28); y += 6; }
+
+    const cleanLabel = label.replace(/===/g,'').trim();
+
+    // Dark bar
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(13);
+    const llines = doc.splitTextToSize(cleanLabel, cw - 10);
+    const bh = llines.length * 8 + 10;
+    // Light cream background for header
+    rgb(C.creamLight,'fill');
+    doc.rect(ml, y, cw, bh, 'F');
+
+    // Gold left accent strip
+    rgb(C.goldDark,'fill');
+    doc.rect(ml, y, 4, bh, 'F');
+
+    // Charcoal text
+    rgb(C.char,'text');
+    doc.text(llines, ml + 11, y + 8);
+    y += bh + 10;
+    rgb(C.char,'text');
+  }
+
+  // ── HELPER: SUB LABEL (Talking points:, Action steps: etc) ─
+  function subLabel(label) {
+    check(10);
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(9.5);
+    rgb(C.goldDark,'text');
+    doc.text(label, ml, y);
+    y += 6;
+    rgb(C.char,'text');
+  }
+
+
+  // ── HELPER: render text with **markdown bold** inline, with word wrap ─────
+  function drawLineWithBold(line, x, maxWidth) {
+    // Parse into segments
+    const re = /\*\*([^*]+)\*\*/g;
+    let last = 0, m;
+    const segs = [];
+    while ((m = re.exec(line)) !== null) {
+      if (m.index > last) segs.push({ text: line.slice(last, m.index), bold: false });
+      segs.push({ text: m[1], bold: true });
+      last = m.index + m[0].length;
+    }
+    if (last < line.length) segs.push({ text: line.slice(last), bold: false });
+    if (segs.length === 0) segs.push({ text: line, bold: false });
+
+    // Word-by-word layout with wrapping
+    let cx = x;
+    const lineHeight = 5.5;
+    for (const seg of segs) {
+      doc.setFont('helvetica', seg.bold ? 'bold' : 'normal');
+      const words = seg.text.split(/(\s+)/);
+      for (const w of words) {
+        if (!w) continue;
+        const ww = doc.getTextWidth(w);
+        if (cx + ww > x + maxWidth && w.trim()) {
+          // wrap: new line
+          y += lineHeight;
+          check(lineHeight);
+          cx = x;
+          if (/^\s+$/.test(w)) continue;
+        }
+        doc.text(w, cx, y);
+        cx += ww;
+      }
+    }
+    doc.setFont('helvetica','normal');
+  }
+
+  // ── HELPER: strip markdown bold markers (for splitTextToSize wrap calc) ─
+  function stripMarkdownBold(t) {
+    return t.replace(/\*\*([^*]+)\*\*/g, '$1');
+  }
+
+  // ── HELPER: BULLET ──────────────────────────────────────────
+  function bullet(text) {
+    const clean = text.replace(/^[●•\-]\s*/,'');
+    const colonIdx = clean.indexOf(' : ');
+    const hasColon = colonIdx !== -1;
+    const rawTrigger = hasColon ? clean.slice(0, colonIdx) : null;
+    const sanitized = rawTrigger ? rawTrigger.replace(/[`\u2018\u2019\u201C\u201D\u02BC\u0060]/g, "'").replace(/[\u2013\u2014]/g, '-') : null;
+    const trigger = sanitized ? sanitized + ':' : null;
+    const rest    = hasColon ? clean.slice(colonIdx + 3) : clean;
+
+    check(6);
+    // Draw dot
+    rgb(C.gold,'fill');
+    doc.circle(ml + 2.5, y - 1.3, 0.9, 'F');
+
+    if (hasColon) {
+      // Measure bold trigger width
+      doc.setFont('helvetica','bold');
+      doc.setFontSize(10);
+      const triggerW = doc.getTextWidth(trigger + ' ');
+      rgb(C.char,'text');
+      doc.text(trigger, ml + 7, y);
+
+      // Rest of first line fits after trigger
+      doc.setFont('helvetica','normal');
+      const restMaxW = cw - 9 - triggerW;
+      const restWrapped = doc.splitTextToSize(rest, restMaxW);
+      doc.text(restWrapped[0], ml + 7 + triggerW, y);
+      y += 5.5;
+
+      // Continuation lines indented, no dot
+      for (let wi = 1; wi < restWrapped.length; wi++) {
+        check(6);
+        doc.text(restWrapped[wi], ml + 7, y);
+        y += 5.5;
+      }
+    } else {
+      // No colon — render normally (with markdown bold support)
+      // Defensive: normalize "Core goal:" lines to bold prefix even if Claude omits the asterisks
+      let normalizedClean = clean;
+      const coreMatch = normalizedClean.match(/^(\*\*)?Core goal:(\*\*)?\s*(.+)/i);
+      if (coreMatch) {
+        normalizedClean = "**Core goal:** " + coreMatch[3].replace(/^\*\*|\*\*$/g, "").trim();
+      }
+      doc.setFont('helvetica','normal');
+      doc.setFontSize(10);
+      rgb(C.char,'text');
+      const cleanForWrap = stripMarkdownBold(normalizedClean);
+      const wrapped = doc.splitTextToSize(cleanForWrap, cw - 9);
+      const hasBold = /\*\*[^*]+\*\*/.test(normalizedClean);
+      if (!hasBold) {
+        doc.text(wrapped[0], ml + 7, y);
+        y += 5.5;
+        for (let wi = 1; wi < wrapped.length; wi++) {
+          check(6);
+          doc.text(wrapped[wi], ml + 7, y);
+          y += 5.5;
+        }
+      } else {
+        // Single-line bold render (directives are short — fits on one line typically)
+        drawLineWithBold(normalizedClean, ml + 7, cw - 9);
+        y += 5.5;
+      }
+    }
+    y += 1.5;
+  }
+
+  // ── HELPER: CREATOR INSIGHT — rendered as prose paragraph ─
+  // ── HELPER: CREATOR INSIGHT — rendered as plain paragraph in flow ─
+  function creatorInsight(text) {
+    // Strip bullet/dash prefixes too so insight flows as prose
+    const clean = text.replace(/^[^:']+'?s insight:\s*/i,'')
+      .split('\n')
+      .map(l => l.trim().replace(/^[●•\-\u2013\u2014\u25cf]\s*/, ''))
+      .filter(Boolean)
+      .join(' ')
+      .trim();
+    bodyText(clean);
+  }
+
+  // ── HELPER: MID CTA — bold prefix + match script format style ──
+  function midCtaBox(text) {
+    const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+    const hasBullets = lines.some(l => /^[●•\-\u25cf]/.test(l));
+
+    // Bold prefix label
+    check(10);
+    doc.setFont('helvetica','bold'); doc.setFontSize(10);
+    rgb(C.goldDark,'text');
+    doc.text('MID CALL TO ACTION:', ml, y);
+    y += 6;
+    doc.setFont('helvetica','normal');
+
+    if (hasBullets) {
+      for (const line of lines) {
+        if (/^[●•\-\u25cf]/.test(line)) bullet(line);
+        else if (line) bullet('● ' + line);
+      }
+    } else {
+      bodyText(lines.join(' '));
+    }
+  }
+
+  // ── HELPER: SPONSOR — rendered as section + prose ──────────
+  function sponsorBox(text) {
+    const clean = text.split('\n').map(l => l.replace(/^[-–—]\s*/,'')).join(' ').replace(/\*\*/g,'').trim();
+    sectionHeader('SPONSOR');
+    bodyText(clean);
+  }
+
+  // ── HELPER: WHITEBOARD ──────────────────────────────────────
+  function whiteboard(text) {
+    // Explicit charSpace reset (defensive — earlier calls may have left charSpace > 0)
+    doc.setCharSpace(0);
+    // Strip prefix and replace unsupported unicode arrows with ASCII (jsPDF helvetica can't render them)
+    let clean = text.replace(/^Whiteboard example:\s*/i,'').trim();
+    clean = clean.replace(/[\u2192\u27a1\u27a4\u279c\u2794\u2799]/g, ' -> ').replace(/\s+->\s+/g, ' -> ');
+    const wrapped = doc.splitTextToSize(clean, cw - 10);
+    const bh = wrapped.length * 5.5 + 10;
+    check(bh + 4);
+    y += 2;
+    doc.setDrawColor(...C.gold);
+    doc.setLineWidth(0.4);
+    doc.roundedRect(ml, y, cw, bh, 2, 2, 'D');
+    doc.setFont('helvetica','bolditalic');
+    doc.setFontSize(8.5);
+    rgb(C.goldDark,'text');
+    doc.setCharSpace(0);
+    doc.text('Whiteboard / Digiboard', ml + 4, y + 5.5);
+    doc.setFont('helvetica','italic');
+    doc.setFontSize(9.5);
+    rgb(C.char,'text');
+    doc.setCharSpace(0);
+    doc.text(wrapped, ml + 4, y + 11);
+    y += bh + 5;
+  }
+
+  // ── HELPER: SUB BULLET (legacy direction-line renderer, kept as no-op safety net) ──
+  function subBullet(text) {
+    // Renders an indented direction-line (no marker character) under a main bullet
+    const clean = text.replace(/^[\u2013\-]\s*/, '').trim();
+    check(5);
+    doc.setCharSpace(0);
+    doc.setFont('helvetica','italic');
+    doc.setFontSize(9.5);
+    rgb(C.muted,'text');
+    const wrapped = doc.splitTextToSize(clean, cw - 14);
+    doc.text(wrapped[0], ml + 8, y);
+    y += 5;
+    for (let i = 1; i < wrapped.length; i++) {
+      check(5);
+      doc.text(wrapped[i], ml + 8, y);
+      y += 5;
+    }
+    rgb(C.char,'text');
+    y += 1.5;
+  }
+
+  // ── HELPER: CONTEXT BOX (gold-bordered, mirrors whiteboard) ─
+  function contextBox(bullets) {
+    if (!bullets || !bullets.length) return;
+    doc.setCharSpace(0);
+    const FS = 9.5, LH = 5, innerW = cw - 14;
+    doc.setFontSize(FS);
+
+    // Each bullet is "anchor: explanation". The anchor (incl. the colon) is BOLD, the
+    // explanation normal. Lay out word-by-word with a hanging indent so a LONG bold anchor
+    // WRAPS INSIDE the box instead of running off the right edge. Line 1 carries the marker;
+    // continuation lines align under the first word after the marker. Both wrap at the box edge.
+    doc.setFont('helvetica','bold');
+    const markerW = doc.getTextWidth('o  ');
+    doc.setFont('helvetica','normal');
+    const spaceW  = doc.getTextWidth(' ');
+    const xStart  = ml + 4;            // marker / line-1 left
+    const xHang   = ml + 4 + markerW;  // continuation (hanging) indent
+    const xRight  = ml + 4 + innerW;   // right edge of the text area
+    const measure = (w, bold) => { doc.setFont('helvetica', bold ? 'bold' : 'normal'); return doc.getTextWidth(w); };
+
+    // Build laid-out lines for every bullet: [{ tokens: [{ text, bold, x }] }]
+    const allLines = [];
+    bullets.forEach(b => {
+      const ci = b.indexOf(': ');
+      let words;
+      if (ci === -1) {
+        words = b.split(' ').filter(Boolean).map(w => ({ text: w, bold: true }));
+      } else {
+        const factWords = b.slice(0, ci + 1).split(' ').filter(Boolean).map(w => ({ text: w, bold: true }));
+        const restWords = b.slice(ci + 1).replace(/^\s+/, '').split(' ').filter(Boolean).map(w => ({ text: w, bold: false }));
+        words = factWords.concat(restWords);
+      }
+      let line = { tokens: [{ text: 'o  ', bold: true, x: xStart }] };
+      let cursor = xStart + markerW;
+      let wordsOnLine = 0;
+      words.forEach(tok => {
+        const w = measure(tok.text, tok.bold);
+        if (cursor + w > xRight && wordsOnLine > 0) {
+          allLines.push(line);
+          line = { tokens: [] };
+          cursor = xHang;
+          wordsOnLine = 0;
+        }
+        line.tokens.push({ text: tok.text, bold: tok.bold, x: cursor });
+        cursor += w + spaceW;
+        wordsOnLine++;
+      });
+      allLines.push(line);
+    });
+
+    const bh = allLines.length * LH + 10;
+    check(bh + 4);
+    y += 2;
+    doc.setCharSpace(0);
+    doc.setDrawColor(...C.gold);
+    doc.setLineWidth(0.4);
+    doc.roundedRect(ml, y, cw, bh, 2, 2, 'D');
+
+    doc.setFont('helvetica','bolditalic');
+    doc.setFontSize(8.5);
+    rgb(C.goldDark,'text');
+    doc.text('Context', ml + 4, y + 5.5);
+
+    doc.setFontSize(FS);
+    rgb(C.char,'text');
+    let by = y + 11;
+    allLines.forEach(ln => {
+      ln.tokens.forEach(tk => {
+        doc.setFont('helvetica', tk.bold ? 'bold' : 'normal');
+        doc.text(tk.text, tk.x, by);
+      });
+      by += LH;
+    });
+
+    y += bh + 5;
+    doc.setCharSpace(0);
+  }
+
+  // ── HELPER: SPEAKER LINE (creator to camera staccato) ───────────
+  function speakerLine(text) {
+    check(7);
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(11);
+    rgb(C.char,'text');
+    const wrapped = doc.splitTextToSize(text, cw);
+    for (const wl of wrapped) {
+      check(6.5);
+      doc.text(wl, ml, y);
+      y += 6.5;
+    }
+  }
+
+  // ── HELPER: BODY TEXT ────────────────────────────────────────
+  function bodyText(text) {
+    check(6);
+    // Defensive: normalize "Core goal:" lines to bold prefix
+    let normText = text;
+    const coreMatchBT = normText.match(/^(\*\*)?Core goal:(\*\*)?\s*(.+)/i);
+    if (coreMatchBT) {
+      normText = "**Core goal:** " + coreMatchBT[3].replace(/^\*\*|\*\*$/g, "").trim();
+    }
+    // Defensive: normalize "Beat:" lines to bold prefix even if Claude omits asterisks
+    const beatMatchBT = normText.match(/^(\*\*)?Beat:(\*\*)?\s*(.+)/i);
+    if (beatMatchBT && !coreMatchBT) {
+      normText = "**Beat:** " + beatMatchBT[3].replace(/^\*\*|\*\*$/g, "").trim();
+    }
+    const cleanText = stripMarkdownBold(normText);
+    const wrapped = doc.splitTextToSize(cleanText, cw);
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(10);
+    rgb(C.char,'text');
+    const hasBold = /\*\*[^*]+\*\*/.test(normText);
+    if (hasBold) {
+      // drawLineWithBold handles its own word-by-word wrapping with bold support
+      drawLineWithBold(normText, ml, cw);
+      y += 5.5;
+    } else {
+      // No bold — use jsPDF wrap (faster)
+      for (const wl of wrapped) {
+        check(6);
+        doc.text(wl, ml, y);
+        y += 5.5;
+      }
+    }
+    y += 1.5;
+  }
+
+  // ── PARSE AND RENDER ─────────────────────────────────────────
+  newPage();
+
+  // Skip title and meta (already on cover)
+  i; // already advanced past title/meta above
+
+  let inInsight = false, insightBuf = [];
+  let inMidCta = false, midCtaBuf = [], midCtaDash = false;
+  let inSponsor = false, sponsorBuf = [];
+  let speakerMode = false;
+  let inHook = false;
+  let inFacts = false;
+  let inContext = false; let contextBuf = [];
+  let lastWasMainBullet = false;
+  let finalCloseRendered = false;
+  let hookSeen = new Set();
+  let inBulletSection = false;
+
+  while (i < lines.length) {
+    const raw = lines[i]; i++;
+    const t = raw.trim();
+
+    // Skip dividers
+    if (/^-{5,}$/.test(t) || /^={5,}$/.test(t)) {
+      speakerMode = false;
+      if (inInsight) { creatorInsight(insightBuf.join(' ')); inInsight=false; insightBuf=[]; }
+      if (inMidCta && midCtaBuf.length) { if (contextBuf.length) { contextBox(contextBuf); contextBuf=[]; inContext=false; y += 3; } midCtaBox(midCtaBuf.join('\n')); inMidCta=false; midCtaBuf=[]; midCtaDash=false; }
+      continue;
+    }
+
+
+    // Flush insight buffer if new section starts
+    if (inInsight && (t.startsWith('SECTION') || t.startsWith('FINAL') || t.startsWith('MID CTA') || t.startsWith('---') || /^Q[1-9]:/.test(t) || t.startsWith('===') || t === '')) {
+      if (t !== '') { creatorInsight(insightBuf.join(' ')); inInsight=false; insightBuf=[]; }
+      else { insightBuf.push(''); continue; }
+    }
+    if (inInsight) { insightBuf.push(t); continue; }
+
+    // Flush mid CTA
+    if (inMidCta) {
+      if (t === '–' || t === '-') { midCtaDash=true; continue; }
+      if (t.startsWith('SECTION') || t.startsWith('FINAL') || t.startsWith('---') || /^Q[1-9]:\s/.test(t) || (t.startsWith('=== ') && t.endsWith(' ==='))) {
+        if (contextBuf.length) { contextBox(contextBuf); contextBuf=[]; inContext=false; y += 3; }
+        if (midCtaBuf.length) { midCtaBox(midCtaBuf.join('\n')); }
+        inMidCta=false; midCtaBuf=[]; midCtaDash=false;
+        // fall through
+      } else { if(t) midCtaBuf.push(t); continue; }
+    }
+
+    if (!t) { y += inHook ? 0 : speakerMode ? 1.5 : 3; continue; }
+    // Skip QC meta-commentary lines Claude sometimes prepends
+    if (/^(Let me |I will |I have |Here is the |I've )/i.test(t) && t.length < 120 && !t.includes('●')) { continue; }
+
+    // Section headers
+    if (t.startsWith('=== ') && t.endsWith(' ===')) { lastWasMainBullet=false; if (contextBuf.length) { contextBox(contextBuf); contextBuf=[]; inContext=false; } const lbl = t.replace(/===/g,'').trim(); if (lbl === 'MAIN CONTENT') { speakerMode=false; continue; } if (lbl === 'OUTRO') { if (inSponsor && sponsorBuf.length) { sponsorBox(sponsorBuf.join('\n')); inSponsor=false; sponsorBuf=[]; } sectionHeader('FINAL CLOSE'); speakerMode=false; inHook=false; inBulletSection=false; inFacts=false; finalCloseRendered=true; continue; } if (lbl === 'SPONSOR') { inSponsor=true; speakerMode=false; inHook=false; inBulletSection=false; inFacts=false; continue; } if (inSponsor && sponsorBuf.length) { sponsorBox(sponsorBuf.join('\n')); inSponsor=false; sponsorBuf=[]; } sectionHeader(t); speakerMode=false; inBulletSection=false; inFacts=false; if (lbl === 'HOOK') { inHook=true; } else { inHook=false; } continue; }
+    if (/^(OPENING HOOK|HOOK)$/.test(t)) { if (!inHook) { sectionHeader(t); } speakerMode=false; inHook=true; inBulletSection=false; inFacts=false; continue; }
+    if (/^SECTION \d+:/.test(t)) { lastWasMainBullet=false; if (contextBuf.length) { contextBox(contextBuf); } inContext=false; contextBuf=[]; if (inSponsor && sponsorBuf.length) { sponsorBox(sponsorBuf.join('\n')); inSponsor=false; sponsorBuf=[]; } sectionHeader(t); speakerMode=false; inHook=false; inBulletSection=false; inFacts=false; continue; }
+    if (/^Q[1-9]:\s/.test(t)) { if (contextBuf.length) { contextBox(contextBuf); } inContext=false; contextBuf=[]; if (inSponsor && sponsorBuf.length) { sponsorBox(sponsorBuf.join('\n')); inSponsor=false; sponsorBuf=[]; } sectionHeader(t); speakerMode=false; inHook=false; inBulletSection=false; inFacts=false; continue; }
+    if (/^FINAL CLOSE/.test(t)) { if (contextBuf.length) { contextBox(contextBuf); } inContext=false; contextBuf=[]; if (!finalCloseRendered) { sectionHeader(t); finalCloseRendered=true; } speakerMode=false; continue; }
+    if (/^OUTRO$/.test(t)) { speakerMode=false; continue; }
+    if (/^MAIN CONTENT$/.test(t)) { speakerMode=false; continue; }
+
+    // Sponsor buffer — after section headers (so flush triggers work), before everything else
+    if (inSponsor) { if (t) sponsorBuf.push(t); continue; }
+
+    // MID CTA header
+    if (t === 'MID CTA' || t.startsWith('MID CTA ')) { if (t.startsWith('MID CTA ')) { midCtaBuf.push(t.slice('MID CTA '.length).trim()); } inMidCta=true; continue; }
+
+    // Speaker label — generic: matches any 'NAME (to camera):'
+    if (/^[A-Z][A-Z .'-]+ \(to camera\):?$/.test(t)) {
+      check(8);
+      doc.setFont('helvetica','bold'); doc.setFontSize(9);
+      rgb(C.goldDark,'text');
+      doc.text(t.replace(/:$/,'') + ':', ml, y);
+      y += 7; speakerMode=true; continue;
+    }
+
+    // Sub labels — skip "Talking points:" / "Action steps:" / "Context if needed:" entirely.
+    // Bullets read directly under the section header, no extra label noise.
+    // Context block start — collect open-circle bullets until next section/divider/whiteboard
+    if (/^Context if needed:?$/i.test(t)) { inContext = true; contextBuf = []; continue; }
+    if (/^(Talking points|Action steps):?$/.test(t)) { continue; }
+
+    // Creator's insight
+    if (/^[^:']+'?s insight:?/i.test(t)) {
+      inInsight=true;
+      insightBuf=[t.replace(/^[^:']+'?s insight:\s*/i,'')];
+      continue;
+    }
+
+    // Whiteboard
+    // Open-circle bullet — Context block content (collect, don't render yet — render at section boundary)
+    if (inContext && /^\u25cb/.test(t)) { contextBuf.push(t.replace(/^[\u25cb\s]+/, '')); continue; }
+    // Non-○ line while inContext — close collection state but DON'T flush yet (defer to section boundary so whiteboard can render in between if Claude reordered)
+    if (inContext && !/^\u25cb/.test(t)) { inContext = false; }
+    if (/^Whiteboard example:/i.test(t)) { whiteboard(t); continue; }
+
+    // Facts block — detect and render as plain prose, ignoring leading bullets/dashes
+    {
+      // Strip any leading bullet/dash/dot markers to test for Facts label
+      const stripped = t.replace(/^[\u25cf\u2022\-\u2013\u2014\.\s]+/, '');
+      if (/^\*\*Facts about/i.test(stripped)) {
+        // First line of Facts block — bold label, with extra blank line above for separation
+        y += 6;
+        check(10);
+        bodyText(stripped);
+        inFacts = true;
+        continue;
+      }
+      if (inFacts) {
+        // Continuation line of Facts block — strip leading bullet markers, render as prose
+        if (stripped.length === 0) { continue; }
+        bodyText(stripped);
+        continue;
+      }
+    }
+
+    // Bullets
+    if (/^[-–—]+$/.test(t)) { continue; }
+    // Direction-line (legacy, indented prose right after a • main bullet) indented prose line right after a • main bullet (no bullet marker)
+    // Trigger conditions: (a) previous rendered element was a main bullet, (b) raw line has leading whitespace, (c) line isn't section header / divider / new bullet / Context trigger
+    if (lastWasMainBullet && /^\s{2,}/.test(raw) && t && !/^[●•\-\u25cf\u25cb]/.test(t) && !/^Context/i.test(t) && !/^SECTION/i.test(t) && !/^Whiteboard/i.test(t) && !/^---/.test(t)) {
+      subBullet(t);
+      lastWasMainBullet = false;
+      continue;
+    }
+    // Legacy: en-dash sub-bullet (still supported for backward compat, treated as direction-line)
+    if (/^\u2013\s/.test(t)) { subBullet(t); lastWasMainBullet = false; continue; }
+    if (/^[●•\-\u25cf]/.test(t)) { bullet(t); inBulletSection=true; lastWasMainBullet = true; continue; }
+
+    // CTA subscribe lines — skip subscribe, render "If you want" as gold border
+    if ((t.toLowerCase().includes('cta')) && t.length < 180 && !t.startsWith('Section')) { continue; }
+
+    // Speaker mode staccato lines
+    if (speakerMode) {
+      if (t === 'Watch that next.' || t === 'Watch that next') { continue; }
+      speakerLine(t); continue;
+    }
+
+    // Default body — deduplicate within hook (relaxed)
+    if (inHook) {
+      if (/^HOOK:/i.test(t)) continue;
+      const key = t.trim().toLowerCase();
+      if (hookSeen.has(key)) continue;
+      hookSeen.add(key);
+    }
+    // If we are inside a bullet-style section, render bridge/loose lines as bullets so style stays consistent
+    if (inBulletSection && !inHook) { bullet('● ' + t); continue; }
+    bodyText(t);
+  }
+
+  // Flush any remaining
+  if (inInsight && insightBuf.length) creatorInsight(insightBuf.join(' '));
+  if (inMidCta && midCtaBuf.length) { if (contextBuf.length) { contextBox(contextBuf); contextBuf=[]; y += 3; } midCtaBox(midCtaBuf.join('\n')); }
+  if (inSponsor && sponsorBuf.length) sponsorBox(sponsorBuf.join('\n'));
+
+  // (MAIN IDEA now lives on cover — no separate page)
+
+  // ── UPDATE ALL FOOTERS ──────────────────────────────────────
+  const total = doc.internal.getNumberOfPages();
+  for (let p = 2; p <= total; p++) {
+    doc.setPage(p);
+    hline(ph-14, C.light, 0.3);
+    doc.setFont('helvetica','normal'); doc.setFontSize(7.5);
+    doc.setCharSpace(1);
+    rgb(C.muted,'text');
+    doc.text('CONTENT CARTEL  ·  CONFIDENTIAL', ml, ph-8);
+    doc.setCharSpace(0);
+    doc.text(`${p-1} / ${total-1}`, pw-mr, ph-8, {align:'right'});
+  }
+
+  doc.save((filename||'script')+'.pdf');
+}
+
+// ── Download an image url as a file (blob, falls back to opening the url) ──
+function downloadImageFile(url, filename) {
+  return fetch(url).then(res => res.blob()).then(blob => {
+    const obj = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = obj; a.download = filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(obj), 1000);
+  }).catch(() => window.open(url, "_blank"));
+}
+function thumbFilename(img) {
+  const base = ((img.overlay_words || "thumbnail").trim().replace(/[^a-zA-Z0-9]+/g, "-").toLowerCase() || "thumbnail");
+  return base + (img.concept_id ? "-" + img.concept_id : "") + ".png";
+}
+
+
+// ── GENERATE VIEW ─────────────────────────────────────────────
+function GenerateView({ clients, onEditClient }) {
+  const [slug, setSlug] = useState("");
+  const [topic, setTopic] = useState("");
+  const [customTitle, setCustomTitle] = useState("");
+  const [scriptNotes, setScriptNotes] = useState("");
+  const [runtimeOverride, setRuntimeOverride] = useState("0:0");
+  const [scriptFormatOverride, setScriptFormatOverride] = useState("");
+  const [queueIndex, setQueueIndex] = useState(0);
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [clientSearch, setClientSearch] = useState("");
+  const [status, setStatus] = useState(null);
+  const [runData, setRunData] = useState(null);
+  const [thumbRun, setThumbRun] = useState(null);
+  const [thumbStatus, setThumbStatus] = useState(null); // null | loading | success | error
+  const [pollCount, setPollCount] = useState(0);
+  const [showSettings, setShowSettings] = useState(false);
+  const [selectedQueueTopic, setSelectedQueueTopic] = useState("");
+  const [batchItems, setBatchItems] = useState(null);
+  const [mode, setMode] = useState("single");
+  const emptyTopicRow = () => ({ topic:"", title:"", notes:"", open:false });
+  const [multiTopics, setMultiTopics] = useState([emptyTopicRow(), emptyTopicRow(), emptyTopicRow(), emptyTopicRow()]);
+  const [confirmBatch, setConfirmBatch] = useState(false);
+
+  // ── Perfect Thumbnail: trigger the Vercel function, then poll thumbnail_runs ──
+  async function generateThumbnail() {
+    if (!runData?.id) return;
+    setThumbStatus("loading"); setThumbRun(null);
+    try {
+      const res = await fetch("/api/generate-thumbnail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ script_run_id: runData.id })
+      });
+      if (!res.ok) throw new Error("trigger failed: HTTP " + res.status);
+      const { thumbnail_run_id } = await res.json();
+
+      const db = sb(CONFIG.supabaseUrl, CONFIG.supabaseKey);
+      let attempts = 0;
+      const timer = setInterval(async () => {
+        attempts++;
+        try {
+          const rows = await db.get("thumbnail_runs", `?id=eq.${thumbnail_run_id}&limit=1`);
+          const row = Array.isArray(rows) ? rows[0] : null;
+          if (row && row.status === "complete") {
+            clearInterval(timer); setThumbRun(row); setThumbStatus("success");
+          } else if (row && row.status === "error") {
+            clearInterval(timer); console.error("[thumb] run error:", row.error); setThumbStatus("error");
+          }
+        } catch (e) { console.error("[thumb] poll error:", e); }
+        if (attempts > 90) { clearInterval(timer); setThumbStatus("error"); } // ~7.5 min safety
+      }, 5000);
+    } catch (e) {
+      console.error("[thumb] error:", e); setThumbStatus("error");
+    }
+  }
+  // ── Perfect Thumbnail per batch item: trigger Vercel fn, poll thumbnail_runs, store on the item ──
+  function generateBatchThumb(i, runId) {
+    if (!runId) return;
+    const patch = (fields) => setBatchItems(prev => prev ? prev.map((it, idx) => idx === i ? { ...it, ...fields } : it) : prev);
+    patch({ thumbStatus: "loading" });
+    (async () => {
+      try {
+        const res = await fetch("/api/generate-thumbnail", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ script_run_id: runId })
+        });
+        if (!res.ok) throw new Error("trigger failed: HTTP " + res.status);
+        const { thumbnail_run_id } = await res.json();
+
+        const db = sb(CONFIG.supabaseUrl, CONFIG.supabaseKey);
+        let attempts = 0;
+        const timer = setInterval(async () => {
+          attempts++;
+          try {
+            const rows = await db.get("thumbnail_runs", `?id=eq.${thumbnail_run_id}&limit=1`);
+            const row = Array.isArray(rows) ? rows[0] : null;
+            if (row && row.status === "complete") {
+              clearInterval(timer); patch({ thumbStatus: "success", thumbRun: row, thumbOpen: true });
+            } else if (row && row.status === "error") {
+              clearInterval(timer); console.error("[thumb] batch run error:", row.error); patch({ thumbStatus: "error" });
+            }
+          } catch (e) { console.error("[thumb] batch poll error:", e); }
+          if (attempts > 90) { clearInterval(timer); patch({ thumbStatus: "error" }); } // ~7.5 min safety
+        }, 5000);
+      } catch (e) {
+        console.error("[thumb] batch error:", e); patch({ thumbStatus: "error" });
+      }
+    })();
+  }
+  async function downloadImage(url, filename) {
+    try {
+      const res = await fetch(url);
+      const blob = await res.blob();
+      const obj = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = obj; a.download = filename;
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(obj);
+    } catch (e) {
+      window.open(url, "_blank");
+    }
+  }
+  const generatingSlugRef = React.useRef("");
+
+  const active = clients.filter(c => c.active);
+  const filtered_active = active.filter(c => c.client_name.toLowerCase().includes(clientSearch.toLowerCase()));
+  const sel = clients.find(c => c.client_slug === slug);
+
+  useEffect(() => {
+    if (status !== "loading" || !generatingSlugRef.current) return;
+    const pollingSlug = generatingSlugRef.current;
+    const startTime = new Date().toISOString();
+    let attempts = 0;
+    const timer = setInterval(async () => {
+      attempts++;
+      setPollCount(attempts);
+      if (attempts > 48) { clearInterval(timer); setStatus("timeout"); return; }
+      try {
+        const db = sb(CONFIG.supabaseUrl, CONFIG.supabaseKey);
+        const rows = await db.get('script_runs',
+          `?client_slug=eq.${pollingSlug}&status=eq.complete&created_at=gt.${startTime}&order=created_at.desc&limit=1`
+        );
+        console.log("[PerfectScript] poll attempt", attempts, "for slug:", pollingSlug, "rows:", rows?.length, rows?.[0]?.client_slug);
+        if (Array.isArray(rows) && rows.length > 0 && rows[0].status === "complete") {
+          const returned_slug = rows[0].client_slug;
+          console.log("[PerfectScript] found completed script:", returned_slug, rows[0].video_title);
+          if (returned_slug !== pollingSlug) {
+            console.error("[PerfectScript] SLUG MISMATCH — polled for:", pollingSlug, "but got:", returned_slug, "— ignoring");
+            return;
+          }
+          clearInterval(timer); setRunData(rows[0]); setStatus("success");
+        }
+      } catch(e) { console.error("[PerfectScript] poll error:", e); }
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [status]);
+
+  async function generate() {
+    if (!slug) return;
+    generatingSlugRef.current = slug;
+    console.log("[PerfectScript] generate() fired for slug:", slug);
+    setStatus("loading"); setRunData(null); setPollCount(0);
+    try {
+      const [rMin, rMax] = runtimeOverride.split(":").map(Number);
+      const payload = { client_slug: slug, topic_override: topic||"", custom_title: customTitle||"", script_format_override: scriptFormatOverride||"", script_notes: scriptNotes||"", runtime_min: rMin||0, runtime_max: rMax||0 };
+      console.log("[PerfectScript] webhook payload:", JSON.stringify(payload));
+      await fetch(CONFIG.webhookUrl, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+    } catch(e) { console.error("[PerfectScript] webhook error:", e); }
+  }
+
+  function pollForCompletion(pollingSlug, startTime, onTick) {
+    return new Promise(resolve => {
+      let attempts = 0;
+      const timer = setInterval(async () => {
+        attempts++;
+        if (onTick) onTick(attempts);
+        if (attempts > 48) { clearInterval(timer); resolve(null); return; }
+        try {
+          const db = sb(CONFIG.supabaseUrl, CONFIG.supabaseKey);
+          const rows = await db.get('script_runs',
+            `?client_slug=eq.${pollingSlug}&status=eq.complete&created_at=gt.${startTime}&order=created_at.desc&limit=1`);
+          if (Array.isArray(rows) && rows.length > 0 && rows[0].status === "complete" && rows[0].client_slug === pollingSlug) {
+            clearInterval(timer); resolve(rows[0]); return;
+          }
+        } catch(e) { console.error("[PerfectScript] batch poll error:", e); }
+      }, 5000);
+    });
+  }
+
+  async function runBatch(list) {
+    setStatus("batch"); setRunData(null);
+    setBatchItems(list.map(t => ({ topic:t.topic, status:"queued", runData:null, pollCount:0 })));
+    const [rMin, rMax] = runtimeOverride.split(":").map(Number);
+    for (let i = 0; i < list.length; i++) {
+      setBatchItems(prev => prev.map((it, idx) => idx === i ? { ...it, status:"running" } : it));
+      const startTime = new Date().toISOString();
+      try {
+        const payload = { client_slug: slug, topic_override: list[i].topic, custom_title: list[i].title || "", script_format_override: scriptFormatOverride||"", script_notes: list[i].notes || "", runtime_min: rMin||0, runtime_max: rMax||0 };
+        await fetch(CONFIG.webhookUrl, { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(payload) });
+      } catch(e) { console.error("[PerfectScript] batch webhook error:", e); }
+      const result = await pollForCompletion(slug, startTime, n => setBatchItems(prev => prev.map((it, idx) => idx === i ? { ...it, pollCount:n } : it)));
+      setBatchItems(prev => prev.map((it, idx) => idx === i ? { ...it, status: result ? "done" : "timeout", runData: result } : it));
+    }
+    setStatus("batchdone");
+  }
+
+  const multiList = multiTopics.filter(r => r.topic.trim()).map(r => ({ topic: r.topic.trim(), title: (r.title||"").trim(), notes: (r.notes||"").trim() }));
+  const canGenerate = !!slug && status !== "loading" && status !== "batch" && (mode === "multiple" ? multiList.length >= 1 : (!!topic.trim() || (sel?.topic_queue?.length > 0)));
+
+  return (
+    <div className="page">
+      {confirmBatch && (
+        <div onClick={() => setConfirmBatch(false)} style={{ position:"fixed", inset:0, background:"rgba(30,24,12,0.45)", zIndex:300, display:"flex", alignItems:"center", justifyContent:"center", padding:20 }}>
+          <div onClick={e => e.stopPropagation()} style={{ background:"#fff", borderRadius:16, maxWidth:440, width:"100%", padding:"32px 30px", boxShadow:"0 20px 60px rgba(0,0,0,0.25)" }}>
+            <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:26, fontWeight:400, color:T.char, marginBottom:12 }}>Generate {multiList.length} scripts?</div>
+            <div style={{ fontSize:14, color:T.text, lineHeight:1.6, marginBottom:24 }}>
+              They run one at a time, so this takes roughly {multiList.length * 2} minutes in total. <strong style={{ color:T.goldDark }}>Keep this tab open</strong> until it finishes. If you close it, scripts already running will still complete, but the ones not started yet will not be generated.
+            </div>
+            <div style={{ display:"flex", gap:10 }}>
+              <button onClick={() => setConfirmBatch(false)} style={{ flex:1, padding:"13px", background:"transparent", color:T.muted, border:`1px solid ${T.border}`, borderRadius:10, fontSize:14, fontWeight:500, cursor:"pointer", fontFamily:"'DM Sans',sans-serif" }}>Cancel</button>
+              <button onClick={() => { setConfirmBatch(false); runBatch(multiList); }} style={{ flex:1, padding:"13px", background:T.gold, color:"#fff", border:"none", borderRadius:10, fontSize:14, fontWeight:500, cursor:"pointer", fontFamily:"'DM Sans',sans-serif", boxShadow:"0 2px 12px rgba(196,151,63,0.2)" }}>Start generating</button>
+            </div>
+          </div>
+        </div>
+      )}
+      <div style={{ marginTop:-24, marginLeft:-16, marginBottom:48 }}>
+        <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:68, fontWeight:300, color:T.char, lineHeight:0.92, letterSpacing:"-0.02em" }}>Generate<br/><span style={{ fontStyle:"italic", color:T.gold }}>the script.</span></div>
+      </div>
+      {showWelcome && !slug && status !== "loading" && (
+        <div style={{ maxWidth:760, margin:"0 auto 32px", padding:"22px 26px", background:T.goldBg, border:`1px solid ${T.goldLight}`, borderRadius:14, position:"relative", boxShadow:"0 2px 16px rgba(196,151,63,0.08)" }}>
+          <button onClick={() => setShowWelcome(false)} aria-label="Dismiss" style={{ position:"absolute", top:12, right:12, background:"none", border:"none", fontSize:20, cursor:"pointer", color:T.muted, lineHeight:1, padding:"4px 8px" }}>×</button>
+          <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:20, fontWeight:400, color:T.goldDark, marginBottom:12 }}>How this works</div>
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(4, 1fr)", gap:20 }}>
+            <div>
+              <div style={{ fontSize:11, fontWeight:600, color:T.gold, letterSpacing:"0.08em", textTransform:"uppercase", marginBottom:4 }}>Step 1</div>
+              <div style={{ fontSize:13, color:T.text, lineHeight:1.5 }}>Pick a client from the dropdown below.</div>
+            </div>
+            <div>
+              <div style={{ fontSize:11, fontWeight:600, color:T.gold, letterSpacing:"0.08em", textTransform:"uppercase", marginBottom:4 }}>Step 2</div>
+              <div style={{ fontSize:13, color:T.text, lineHeight:1.5 }}>Type a topic, or pick one from the upcoming topics.</div>
+            </div>
+            <div>
+              <div style={{ fontSize:11, fontWeight:600, color:T.gold, letterSpacing:"0.08em", textTransform:"uppercase", marginBottom:4 }}>Step 3</div>
+              <div style={{ fontSize:13, color:T.text, lineHeight:1.5 }}>Open Advanced settings if you want to add context or adjust anything.</div>
+            </div>
+            <div>
+              <div style={{ fontSize:11, fontWeight:600, color:T.gold, letterSpacing:"0.08em", textTransform:"uppercase", marginBottom:4 }}>Step 4</div>
+              <div style={{ fontSize:13, color:T.text, lineHeight:1.5 }}>Hit generate. Script will be ready in ~2 minutes.</div>
+            </div>
+          </div>
+        </div>
+      )}
+      <div style={{ maxWidth:760, margin:"0 auto" }}>
+        <div style={{ marginBottom:slug ? 24 : 0 }}>
+          <div style={{ fontSize:13, fontWeight:600, color:T.text, letterSpacing:"0.06em", textTransform:"uppercase", marginBottom:10 }}>Select client <span style={{ fontWeight:400, textTransform:"none", letterSpacing:0, fontSize:12, color:T.muted }}>– {active.length} active</span></div>
+          {active.length === 0
+            ? <div style={{ padding:"24px 20px", background:T.surface, borderRadius:12, border:`1px solid ${T.border}`, textAlign:"center", fontSize:14, color:T.muted }}>No active clients. Add one from the Clients tab.</div>
+            : <SearchableSelect
+                value={slug}
+                onChange={newSlug => {
+                  setSlug(newSlug);
+                  // Reset everything form-related on client switch so we don't leak state between clients
+                  setStatus(null);
+                  setRunData(null);
+                  setTopic("");
+                  setSelectedQueueTopic("");
+                  setScriptNotes("");
+                  setCustomTitle("");
+                  setScriptFormatOverride("");
+                  setRuntimeOverride("0:0");
+                  setShowSettings(false); setQueueIndex(0);
+                }}
+                options={active.map(c => ({ value: c.client_slug, label: c.client_name }))}
+                placeholder="— Choose a client —"
+              />
+          }
+        </div>
+
+        {slug && (
+        <div style={{ background:T.surface2, borderRadius:16, border:`1px solid ${T.border}`, overflow:"hidden", boxShadow:"0 4px 32px rgba(0,0,0,0.06), 0 1px 8px rgba(0,0,0,0.04)" }}>
+          {batchItems ? (
+            <div style={{ padding:"32px 28px" }}>
+              <div style={{ fontSize:11, fontWeight:600, color:T.gold, letterSpacing:"0.08em", textTransform:"uppercase", marginBottom:16, display:"flex", alignItems:"center", justifyContent:"space-between" }}>
+                <span>{status==="batchdone" ? "Batch complete" : "Generating batch, keep this tab open"}</span>
+                <span style={{ color:T.muted }}>{batchItems.filter(it=>it.status==="done").length}/{batchItems.length} done</span>
+              </div>
+              <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
+                {batchItems.map((it, i) => {
+                  const dot = it.status==="done" ? T.green : it.status==="timeout" ? T.red : it.status==="running" ? T.gold : T.border;
+                  return (
+                    <div key={i} style={{ display:"flex", alignItems:"flex-start", gap:12, padding:"14px 16px", border:`1px solid ${T.border}`, borderRadius:10, background:T.surface }}>
+                      <div style={{ width:8, height:8, borderRadius:"50%", background:dot, marginTop:6, flexShrink:0, animation: it.status==="running" ? "ps-pulse 1.5s ease-in-out infinite" : "none" }} />
+                      <div style={{ flex:1, minWidth:0 }}>
+                        <div style={{ fontSize:14, color:T.text, lineHeight:1.4 }}>{it.topic}</div>
+                        <div style={{ fontSize:12, color:T.muted, marginTop:4 }}>
+                          {it.status==="queued" && "Queued"}
+                          {it.status==="running" && `Generating… ${Math.round(it.pollCount*5/60*10)/10 || 0} min`}
+                          {it.status==="timeout" && "Timed out — check n8n executions"}
+                          {it.status==="done" && (
+                            <span style={{ display:"inline-flex", alignItems:"center", gap:16, flexWrap:"wrap" }}>
+                              {it.runData?.doc_url
+                                ? <a href={it.runData.doc_url} target="_blank" rel="noopener noreferrer" style={{ color:T.gold, fontWeight:500, textDecoration:"none" }}>Open in Google Docs →</a>
+                                : <button onClick={() => downloadPDF(it.runData.full_script, it.runData.doc_title || 'script', it.runData.video_title, it.runData.main_idea || it.runData.topic)} style={{ background:"none", border:"none", padding:0, color:T.gold, fontWeight:500, cursor:"pointer", fontFamily:"'DM Sans',sans-serif", fontSize:12 }}>Download PDF</button>}
+                              {!it.thumbStatus && (
+                                <button onClick={() => generateBatchThumb(i, it.runData?.id)} style={{ fontSize:12, fontWeight:600, color:T.goldDark, background:"transparent", border:`1px solid ${T.gold}`, borderRadius:8, padding:"5px 12px", cursor:"pointer", letterSpacing:"0.02em", fontFamily:"'DM Sans',sans-serif" }}>
+                                  Generate thumbnails
+                                </button>
+                              )}
+                              {it.thumbStatus==="loading" && <span style={{ color:T.muted }}>Generating thumbnails… 1–2 min</span>}
+                              {it.thumbStatus==="error" && (
+                                <button onClick={() => generateBatchThumb(i, it.runData?.id)} style={{ fontSize:12, fontWeight:600, color:T.red, background:"transparent", border:`1px solid ${T.red}`, borderRadius:8, padding:"5px 12px", cursor:"pointer", letterSpacing:"0.02em", fontFamily:"'DM Sans',sans-serif" }}>
+                                  Thumbnails failed — retry
+                                </button>
+                              )}
+                              {it.thumbStatus==="success" && (
+                                <button onClick={() => setBatchItems(prev => prev ? prev.map((x, idx) => idx === i ? { ...x, thumbOpen: !x.thumbOpen } : x) : prev)} style={{ fontSize:12, fontWeight:600, color:T.gold, background:"transparent", border:`1px solid ${T.gold}`, borderRadius:8, padding:"5px 12px", cursor:"pointer", letterSpacing:"0.02em", fontFamily:"'DM Sans',sans-serif" }}>
+                                  {it.thumbOpen ? "Hide thumbnails" : "View thumbnails"}
+                                </button>
+                              )}
+                            </span>
+                          )}
+                        </div>
+                        {it.thumbStatus==="success" && it.thumbOpen && it.thumbRun && (
+                          <div style={{ marginTop:12 }}>
+                            <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
+                              {(it.thumbRun.images || []).map(img => {
+                                const angle = (img.angle || "").replace(/\s*[—–]\s*/g, " - ");
+                                return (
+                                  <div key={img.concept_id} style={{ border:`1.5px solid ${T.border}`, borderRadius:12, overflow:"hidden" }}>
+                                    <a href={img.url} target="_blank" rel="noopener noreferrer" style={{ display:"block" }}>
+                                      <img src={img.url} alt={angle || "thumbnail"} style={{ width:"100%", display:"block", aspectRatio:"16/9", objectFit:"cover" }} />
+                                    </a>
+                                    <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", gap:10, padding:"10px 12px", background:T.surface }}>
+                                      <span style={{ fontSize:13, color:T.text, fontWeight:500, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>{img.overlay_words}{angle ? "  ·  " + angle : ""}</span>
+                                      <button onClick={() => downloadImage(img.url, thumbFilename(img))} style={{ flexShrink:0, fontSize:12, fontWeight:600, color:T.goldDark, background:T.goldBg, border:"none", padding:"6px 13px", borderRadius:6, cursor:"pointer", fontFamily:"'DM Sans',sans-serif", letterSpacing:"0.03em" }}>Download</button>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                            <button onClick={() => generateBatchThumb(i, it.runData?.id)} style={{ width:"100%", marginTop:10, padding:"11px", background:"transparent", color:T.goldDark, border:`1px solid ${T.gold}`, borderRadius:10, fontSize:13, fontWeight:500, cursor:"pointer", fontFamily:"'DM Sans',sans-serif", letterSpacing:"0.02em" }}>
+                              Regenerate thumbnails
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              {status==="batchdone" && (
+                <button onClick={() => { setBatchItems(null); setStatus(null); setTopic(""); setSelectedQueueTopic(""); setMultiTopics([emptyTopicRow(), emptyTopicRow(), emptyTopicRow(), emptyTopicRow()]); }} style={{ width:"100%", marginTop:18, padding:"12px", background:"transparent", color:T.muted, border:`1px solid ${T.border}`, borderRadius:10, fontSize:13, fontWeight:500, cursor:"pointer", fontFamily:"'DM Sans',sans-serif", letterSpacing:"0.02em" }}>
+                  Generate more
+                </button>
+              )}
+            </div>
+          ) : status === "success" && runData ? (
+            <div style={{ padding:"32px 28px" }}>
+              <div style={{ fontSize:12, fontWeight:600, color:T.green, letterSpacing:"0.08em", textTransform:"uppercase", marginBottom:8, display:"flex", alignItems:"center", gap:6 }}>
+                <span style={{ fontSize:15 }}>✓</span>
+                <span>Script ready</span>
+              </div>
+              <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:24, fontWeight:400, color:T.char, lineHeight:1.25, marginBottom:24 }}>
+                {(runData.full_script ? runData.full_script.split('\n').find(l => l.trim()) : null) || runData.video_title || "Your script is ready"}
+              </div>
+              {runData.doc_url ? (
+                <a href={runData.doc_url} target="_blank" rel="noopener noreferrer" style={{ display:"block", width:"100%", padding:"16px", background:T.gold, color:"#fff", borderRadius:12, fontSize:15, fontWeight:500, cursor:"pointer", fontFamily:"'DM Sans',sans-serif", letterSpacing:"0.02em", textAlign:"center", textDecoration:"none", boxSizing:"border-box", boxShadow:"0 2px 12px rgba(196,151,63,0.2)", marginBottom:10 }}>
+                  Open in Google Docs →
+                </a>
+              ) : runData.full_script && (
+                <button onClick={() => downloadPDF(runData.full_script, runData.doc_title || 'script', runData.video_title, runData.main_idea || runData.topic)} style={{ width:"100%", padding:"16px", background:T.gold, color:"#fff", border:"none", borderRadius:12, fontSize:15, fontWeight:500, cursor:"pointer", fontFamily:"'DM Sans',sans-serif", letterSpacing:"0.02em", boxShadow:"0 2px 12px rgba(196,151,63,0.2)", marginBottom:10 }}>
+                  Download PDF
+                </button>
+              )}
+              {/* ── Perfect Thumbnail ── */}
+              <div style={{ marginBottom:10 }}>
+                {thumbStatus === null && (
+                  <button onClick={generateThumbnail} style={{ width:"100%", padding:"16px", background:"transparent", color:T.goldDark, border:`1.5px solid ${T.gold}`, borderRadius:12, fontSize:15, fontWeight:500, cursor:"pointer", fontFamily:"'DM Sans',sans-serif", letterSpacing:"0.02em" }}>
+                    Generate thumbnail
+                  </button>
+                )}
+                {thumbStatus === "loading" && (
+                  <div style={{ width:"100%", padding:"16px", background:T.surface, border:`1px solid ${T.border}`, borderRadius:12, fontSize:14, color:T.muted, textAlign:"center", fontFamily:"'DM Sans',sans-serif" }}>
+                    Generating thumbnails… 1–2 min, keep this tab open
+                  </div>
+                )}
+                {thumbStatus === "error" && (
+                  <button onClick={generateThumbnail} style={{ width:"100%", padding:"14px", background:"transparent", color:T.muted, border:`1px solid ${T.border}`, borderRadius:12, fontSize:14, fontWeight:500, cursor:"pointer", fontFamily:"'DM Sans',sans-serif" }}>
+                    Thumbnail generation failed — retry
+                  </button>
+                )}
+                {thumbStatus === "success" && thumbRun && (
+                  <div>
+                    <div style={{ fontSize:12, fontWeight:600, color:T.green, letterSpacing:"0.08em", textTransform:"uppercase", marginTop:20, marginBottom:12, display:"flex", alignItems:"center", gap:6 }}>
+                      <span style={{ fontSize:15 }}>✓</span>
+                      <span>Thumbnails ready</span>
+                    </div>
+                    <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
+                      {(thumbRun.images || []).map(img => {
+                        const isRec = img.concept_id === thumbRun.recommended_concept;
+                        const angle = (img.angle || "").replace(/\s*[—–]\s*/g, " - ");
+                        const fname = ((img.overlay_words || "thumbnail").trim().replace(/[^a-zA-Z0-9]+/g, "-").toLowerCase() || "thumbnail") + ".png";
+                        return (
+                          <div key={img.concept_id} style={{ border:`1.5px solid ${T.border}`, borderRadius:12, overflow:"hidden" }}>
+                            <a href={img.url} target="_blank" rel="noopener noreferrer" style={{ display:"block" }}>
+                              <img src={img.url} alt={angle || "thumbnail"} style={{ width:"100%", display:"block", aspectRatio:"16/9", objectFit:"cover" }} />
+                            </a>
+                            <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", gap:10, padding:"10px 12px", background:T.surface }}>
+                              <span style={{ fontSize:14, color:T.text, fontWeight:500, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>{img.overlay_words}{angle ? "  ·  " + angle : ""}</span>
+                              <button onClick={() => downloadImage(img.url, fname)} style={{ flexShrink:0, fontSize:12, fontWeight:600, color:T.goldDark, background:T.goldBg, border:"none", padding:"6px 13px", borderRadius:6, cursor:"pointer", fontFamily:"'DM Sans',sans-serif", letterSpacing:"0.03em" }}>Download</button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <button onClick={generateThumbnail} style={{ width:"100%", marginTop:14, padding:"16px", background:"transparent", color:T.goldDark, border:`1.5px solid ${T.gold}`, borderRadius:12, fontSize:15, fontWeight:500, cursor:"pointer", fontFamily:"'DM Sans',sans-serif", letterSpacing:"0.02em" }}>
+                      Regenerate thumbnails
+                    </button>
+                  </div>
+                )}
+              </div>
+              <button onClick={() => { setStatus(null); setRunData(null); setThumbRun(null); setThumbStatus(null); setTopic(""); setSelectedQueueTopic(""); setScriptNotes(""); setVideoArchetype(""); setHookArchetype(""); setScriptFormatOverride(""); setRuntimeOverride("0:0"); setShowSettings(false); setQueueIndex(0); }} style={{ width:"100%", marginTop:10, padding:"16px", background:"transparent", color:T.goldDark, border:`1.5px solid ${T.gold}`, borderRadius:12, fontSize:15, fontWeight:500, cursor:"pointer", fontFamily:"'DM Sans',sans-serif", letterSpacing:"0.02em", transition:"all 0.15s" }}>
+                Generate another script
+              </button>
+            </div>
+          ) : (<>
+          <div style={{ padding:"28px 28px 0" }}>
+            <div style={{ display:"flex", gap:8, background:T.surface, border:`1px solid ${T.border}`, borderRadius:10, padding:4 }}>
+              {[["single","One script"],["multiple","Multiple scripts"]].map(([m,label]) => (
+                <button key={m} onClick={() => setMode(m)} style={{ flex:1, padding:"10px 12px", borderRadius:8, border:"none", cursor:"pointer", fontSize:14, fontWeight:500, fontFamily:"'DM Sans',sans-serif", letterSpacing:"0.02em", background: mode===m ? T.gold : "transparent", color: mode===m ? "#fff" : T.muted, transition:"all 0.15s" }}>{label}</button>
+              ))}
+            </div>
+          </div>
+          {mode === "multiple" && (
+            <div style={{ padding:"24px 28px 0" }}>
+              <div style={{ fontSize:13, fontWeight:600, color:T.text, letterSpacing:"0.06em", textTransform:"uppercase", marginBottom:8 }}>Topics <span style={{ fontWeight:400, color:T.muted, textTransform:"none", letterSpacing:0, fontSize:13, marginLeft:4 }}>– one script per box</span></div>
+              <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
+                {multiTopics.map((t, i) => {
+                  const hasExtras = !!((t.title||"").trim() || (t.notes||"").trim());
+                  return (
+                  <div key={i} style={{ border:`1px solid ${t.open ? T.goldLight : "transparent"}`, borderRadius:12, background:t.open ? T.goldBg : "transparent", padding:t.open ? "10px 12px 16px" : 0, transition:"all 0.15s" }}>
+                    <div style={{ display:"flex", alignItems:"flex-start", gap:8 }}>
+                      <span style={{ width:22, flexShrink:0, fontSize:13, color:T.muted, textAlign:"right", paddingTop:14 }}>{i+1}</span>
+                      <textarea value={t.topic} rows={1} onChange={e => setMultiTopics(prev => prev.map((x,idx) => idx===i ? { ...x, topic:e.target.value } : x))} onInput={e=>{ e.target.style.height="auto"; e.target.style.height=e.target.scrollHeight+"px"; }} ref={el=>{ if(el){ el.style.height="auto"; el.style.height=el.scrollHeight+"px"; } }} placeholder={`Topic ${i+1}`} style={{ flex:1, padding:"12px 14px", border:`1px solid ${T.border}`, borderRadius:8, fontSize:15, color:T.text, background:T.surface, outline:"none", boxSizing:"border-box", fontFamily:"'DM Sans',sans-serif", resize:"none", lineHeight:1.5, overflow:"hidden", minHeight:46 }} />
+                      <button onClick={() => setMultiTopics(prev => prev.map((x,idx) => idx===i ? { ...x, open:!x.open } : x))} title="Add a custom title or extra context for this script (optional)" style={{ flexShrink:0, marginTop:6, padding:"9px 12px", border:`1px solid ${(t.open || hasExtras) ? T.gold : T.border}`, borderRadius:8, background:t.open ? "#fff" : T.surface, cursor:"pointer", fontSize:12, fontWeight:500, color:(t.open || hasExtras) ? T.goldDark : T.muted, fontFamily:"'DM Sans',sans-serif", whiteSpace:"nowrap", display:"flex", alignItems:"center", gap:6, transition:"all 0.15s" }}>
+                        <span>Title &amp; notes</span>
+                        {hasExtras && !t.open && <span style={{ width:6, height:6, borderRadius:"50%", background:T.gold, display:"inline-block" }} />}
+                        <span style={{ fontSize:10, display:"inline-block", transition:"transform 0.2s", transform:t.open ? "rotate(90deg)" : "rotate(0deg)" }}>▶</span>
+                      </button>
+                      {multiTopics.length > 1 && (
+                        <button onClick={() => setMultiTopics(prev => prev.filter((_,idx) => idx!==i))} aria-label="Remove topic" style={{ width:34, flexShrink:0, border:`1px solid ${T.border}`, borderRadius:8, background:T.surface, cursor:"pointer", color:T.muted, fontSize:18, lineHeight:1, marginTop:6, alignSelf:"stretch", maxHeight:46 }}>×</button>
+                      )}
+                    </div>
+                    {t.open && (
+                      <div style={{ marginLeft:30, marginTop:12, display:"flex", flexDirection:"column", gap:14 }}>
+                        <div>
+                          <div style={{ fontSize:12, fontWeight:600, color:T.text, letterSpacing:"0.06em", textTransform:"uppercase", marginBottom:6 }}>Custom title <span style={{ fontWeight:400, color:T.muted, textTransform:"none", letterSpacing:0, fontSize:12, marginLeft:4 }}>– leave blank for auto-generated</span></div>
+                          <input type="text" value={t.title} onChange={e => setMultiTopics(prev => prev.map((x,idx) => idx===i ? { ...x, title:e.target.value } : x))} placeholder="Leave blank for auto-generated title" style={{ width:"100%", padding:"10px 14px", border:`1px solid ${T.border}`, borderRadius:8, fontSize:14, color:T.text, background:T.surface, outline:"none", boxSizing:"border-box", fontFamily:"'DM Sans',sans-serif" }} />
+                        </div>
+                        <div>
+                          <div style={{ fontSize:12, fontWeight:600, color:T.text, letterSpacing:"0.06em", textTransform:"uppercase", marginBottom:6 }}>What to include <span style={{ fontWeight:400, color:T.muted, textTransform:"none", letterSpacing:0, fontSize:12, marginLeft:4 }}>– points, angles, or directions for this script. One per line.</span></div>
+                          <textarea value={t.notes} onChange={e => setMultiTopics(prev => prev.map((x,idx) => idx===i ? { ...x, notes:e.target.value } : x))} rows={3} placeholder={"e.g.\n4.4 million new renters by 2026\nask daring questions throughout the script"} style={{ width:"100%", padding:"10px 14px", border:`1px solid ${T.border}`, borderRadius:8, fontSize:14, color:T.text, background:T.surface, outline:"none", boxSizing:"border-box", fontFamily:"'DM Sans',sans-serif", resize:"none", lineHeight:1.7 }} />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  );
+                })}
+              </div>
+              <div style={{ display:"flex", gap:10, marginTop:12 }}>
+                <button onClick={() => setMultiTopics(prev => [...prev, emptyTopicRow()])} style={{ flex:1, padding:"10px 14px", background:"transparent", border:`1px dashed ${T.border}`, borderRadius:8, cursor:"pointer", fontSize:13, fontWeight:500, color:T.muted, fontFamily:"'DM Sans',sans-serif" }}>+ Add another topic</button>
+                {sel?.topic_queue?.length > 0 && (
+                  <button onClick={() => { const queueTexts = sel.topic_queue.map(topicText); setMultiTopics(prev => { const used = new Set(prev.map(r => r.topic.trim()).filter(Boolean)); const avail = queueTexts.filter(q => q && !used.has(q)); let k = 0; return prev.map(r => r.topic.trim() ? r : (k < avail.length ? { ...r, topic: avail[k++] } : r)); }); }} title="Fills the empty topic boxes with this client's upcoming topics" style={{ flex:1, padding:"10px 14px", background:"transparent", border:`1px dashed ${T.goldLight}`, borderRadius:8, cursor:"pointer", fontSize:13, fontWeight:500, color:T.goldDark, fontFamily:"'DM Sans',sans-serif" }}>↓ Fill with upcoming topics</button>
+                )}
+              </div>
+            </div>
+          )}
+          {mode === "single" && (<>
+          {/* Upcoming topics — one at a time, arrows to browse, click to use */}
+          {sel?.topic_queue?.length > 0 && (() => {
+            const safeIndex = ((queueIndex % sel.topic_queue.length) + sel.topic_queue.length) % sel.topic_queue.length;
+            const currentText = topicText(sel.topic_queue[safeIndex]);
+            const isSelected = selectedQueueTopic === currentText && topic === currentText;
+            const count = sel.topic_queue.length;
+            return (
+              <div style={{ padding:"28px 28px 0" }}>
+                <div style={{ fontSize:13, fontWeight:600, color:T.text, letterSpacing:"0.06em", textTransform:"uppercase", marginBottom:12 }}>Upcoming topic <span style={{ fontWeight:400, textTransform:"none", letterSpacing:0, fontSize:12, color:T.muted }}>– click the topic to use it</span></div>
+                <div style={{ display:"flex", alignItems:"stretch", gap:8 }}>
+                  <button
+                    onClick={() => setQueueIndex(i => i - 1)}
+                    disabled={count <= 1}
+                    aria-label="Previous topic"
+                    style={{ width:38, flexShrink:0, border:`1px solid ${T.border}`, borderRadius:8, background:T.surface, cursor:count>1?"pointer":"default", color:count>1?T.text:T.muted, fontSize:20, fontWeight:400, lineHeight:1, transition:"all 0.12s", display:"flex", alignItems:"center", justifyContent:"center" }}
+                  >‹</button>
+                  <button
+                    onClick={() => { const next = isSelected ? "" : currentText; setSelectedQueueTopic(next); setTopic(next); }}
+                    style={{ flex:1, padding:"13px 16px", borderRadius:8, border:`1px solid ${isSelected?T.gold:T.border}`, background:isSelected?T.goldBg:T.surface, cursor:"pointer", fontSize:15, fontWeight:500, color:isSelected?T.goldDark:T.text, transition:"all 0.12s", textAlign:"left", lineHeight:1.5, fontFamily:"'DM Sans',sans-serif" }}
+                  >{currentText}</button>
+                  <button
+                    onClick={() => setQueueIndex(i => i + 1)}
+                    disabled={count <= 1}
+                    aria-label="Next topic"
+                    style={{ width:38, flexShrink:0, border:`1px solid ${T.border}`, borderRadius:8, background:T.surface, cursor:count>1?"pointer":"default", color:count>1?T.text:T.muted, fontSize:20, fontWeight:400, lineHeight:1, transition:"all 0.12s", display:"flex", alignItems:"center", justifyContent:"center" }}
+                  >›</button>
+                </div>
+                <div style={{ fontSize:12, color:T.muted, marginTop:10, textAlign:"center" }}>{safeIndex + 1} of {count}</div>
+              </div>
+            );
+          })()}
+
+          {/* Topic — always visible */}
+          <div style={{ padding:sel?.topic_queue?.length > 0 ? "24px 28px 0" : "28px 28px 0" }}>
+            <div style={{ fontSize:13, fontWeight:600, color:T.text, letterSpacing:"0.06em", textTransform:"uppercase", marginBottom:8 }}>Topic <span style={{ fontWeight:400, color:T.muted, textTransform:"none", letterSpacing:0, fontSize:13, marginLeft:4 }}>– leave empty to use the upcoming topic, or type to override.</span></div>
+            <textarea
+              value={topic}
+              onChange={e=>{ setTopic(e.target.value); setSelectedQueueTopic(""); }}
+              onInput={e=>{ e.target.style.height = "auto"; e.target.style.height = Math.min(e.target.scrollHeight, 400) + "px"; }}
+              ref={el => { if (el) { el.style.height = "auto"; el.style.height = Math.min(el.scrollHeight, 400) + "px"; } }}
+              rows={3}
+              placeholder="Type ONLY a topic. For instructions, open Advanced settings below."
+              style={{...IS, lineHeight:1.7, resize:"none", fontSize:15, minHeight:90, maxHeight:400, overflow:"auto"}}
+            />
+          </div>
+
+          {/* Custom title override — direct visible, not in advanced */}
+          <div style={{ padding:"18px 28px 0" }}>
+            <div style={{ fontSize:13, fontWeight:600, color:T.text, letterSpacing:"0.06em", textTransform:"uppercase", marginBottom:8 }}>Custom title</div>
+            <input type="text" value={customTitle} onChange={e=>setCustomTitle(e.target.value)} placeholder="Leave blank for auto-generated title" style={{ width:"100%", padding:"10px 14px", border:`1px solid ${T.border}`, borderRadius:8, fontSize:14, color:T.text, background:T.surface, outline:"none", boxSizing:"border-box" }} />
+          </div>
+
+          </>)}
+          {/* Advanced settings — now between Topic and Generate, includes What to include */}
+          <div style={{ padding:"18px 28px 0" }}>
+            <button onClick={() => setShowSettings(s => !s)} style={{ width:"100%", background:showSettings?T.goldBg:T.surface, border:`1px solid ${showSettings?T.goldLight:T.border}`, cursor:"pointer", fontSize:14, color:showSettings?T.goldDark:T.text, display:"flex", alignItems:"center", justifyContent:"space-between", padding:"13px 16px", borderRadius:8, fontFamily:"'DM Sans',sans-serif", fontWeight:500, letterSpacing:"0.02em", transition:"all 0.15s" }}>
+              <span>Advanced settings <span style={{ fontWeight:400, color:T.muted, fontSize:13 }}>– extra context and overrides</span></span>
+              <span style={{ fontSize:12, display:"inline-block", transition:"transform 0.2s", transform:showSettings?"rotate(90deg)":"rotate(0deg)" }}>▶</span>
+            </button>
+            {showSettings && (
+              <div style={{ marginTop:18, display:"flex", flexDirection:"column", gap:18 }}>
+
+                {mode === "single" && (<>
+                {/* What to include — combined directive field */}
+                <div>
+                  <div style={{ fontSize:13, fontWeight:600, color:T.text, letterSpacing:"0.06em", textTransform:"uppercase", marginBottom:8 }}>What to include <span style={{ fontWeight:400, color:T.muted, textTransform:"none", letterSpacing:0, fontSize:13, marginLeft:4 }}>– specific points, angles, or stylistic directions. One per line.</span></div>
+                  <textarea value={scriptNotes} onChange={e=>setScriptNotes(e.target.value)} rows={4} placeholder={"e.g.\n4.4 million new renters by 2026\nrespond to last week's WSJ article on cap rates\nask daring questions throughout the script"} style={{...IS, lineHeight:1.7, resize:"none", fontSize:14}} />
+                </div>
+                </>)}
+
+                {/* Script style override */}
+                <div>
+                  <div style={{ fontSize:13, fontWeight:600, color:T.text, letterSpacing:"0.06em", textTransform:"uppercase", marginBottom:8 }}>Script style</div>
+                  <select value={scriptFormatOverride} onChange={e=>setScriptFormatOverride(e.target.value)} style={{ width:"100%", padding:"10px 14px", border:`1px solid ${T.border}`, borderRadius:8, fontSize:14, color:T.text, background:T.surface, outline:"none", appearance:"none", cursor:"pointer" }}>
+                    <option value="">★ Use client default{sel?.script_format ? " (" + (sel.script_format === "directed_bullets" ? "Directed Bullets" : sel.script_format === "question_outline" ? "Question Outline" : "Word for Word") + ")" : ""}</option>
+                    <option value="word_for_word">Word for Word (Teleprompter)</option>
+                    <option value="directed_bullets">Directed Bullets (One-line directions)</option>
+                    <option value="question_outline">Question Outline (Themes + 2 questions)</option>
+                  </select>
+                </div>
+
+                {/* Target runtime */}
+                <div>
+                  <div style={{ fontSize:13, fontWeight:600, color:T.text, letterSpacing:"0.06em", textTransform:"uppercase", marginBottom:8 }}>Target runtime</div>
+                  <select value={runtimeOverride} onChange={e=>setRuntimeOverride(e.target.value)} style={{ width:"100%", padding:"10px 14px", border:`1px solid ${T.border}`, borderRadius:8, fontSize:14, color:T.text, background:T.surface, outline:"none", appearance:"none", cursor:"pointer" }}>
+                    {RUNTIME_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+                  </select>
+                </div>
+
+              </div>
+            )}
+          </div>
+
+          {/* Generate button — always visible */}
+          <div style={{ padding:"16px 28px 32px" }}>
+            <button onClick={() => { if (mode === "multiple") setConfirmBatch(true); else generate(); }} disabled={!canGenerate} className={`gen-btn ${status==="loading" ? "gen-btn-loading" : ""}`} style={{ width:"100%", padding:"18px 24px", background:canGenerate?T.gold:T.border, color:canGenerate?"#fff":T.muted, border:"none", borderRadius:10, fontSize:16, fontWeight:500, cursor:canGenerate?"pointer":"not-allowed", transition:"all 0.2s", letterSpacing:"0.02em", fontFamily:"'DM Sans',sans-serif" }}>
+              {status==="loading" ? "Generating..." : mode === "multiple" ? `Generate ${multiList.length} scripts →` : "Generate Script →"}
+            </button>
+            {canGenerate && status !== "loading" && status !== "success" && <div style={{ fontSize:12, color:T.muted, textAlign:"center", marginTop:8 }}>Takes about {mode === "multiple" ? multiList.length * 2 : 2} minutes</div>}
+            {status === "loading" && (() => {
+  const steps = ['Hook','Script','Quality','Polish','Done'];
+  const elapsed = Math.round(pollCount*5/60*10)/10 || 0;
+  const stepIndex = Math.min(Math.floor(pollCount / 3), steps.length - 1);
+  const clientName = clients.find(c=>c.client_slug===generatingSlugRef.current)?.client_name || generatingSlugRef.current;
+  return (
+    <div style={{ marginTop:16, background:T.goldBg, border:`1px solid ${T.goldLight}`, borderRadius:14, padding:'18px 20px', boxShadow:'0 4px 20px rgba(196,151,63,0.12)' }}>
+      <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:12 }}>
+        <div style={{ display:'flex', alignItems:'center', gap:10 }}>
+          <div style={{ width:8, height:8, borderRadius:'50%', background:T.gold, animation:'ps-pulse 1.5s ease-in-out infinite', flexShrink:0 }} />
+          <span style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:17, fontWeight:400, color:T.goldDark }}>{clientName}</span>
+        </div>
+        <span style={{ fontSize:12, color:T.goldDark, fontWeight:500, opacity:0.75 }}>{elapsed} min</span>
+      </div>
+      <div style={{ display:'flex', gap:4, alignItems:'center' }}>
+        {steps.map((s, i) => (
+          <React.Fragment key={s}>
+            <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:4 }}>
+              <div style={{ width:28, height:28, borderRadius:'50%', background: i < stepIndex ? T.gold : i === stepIndex ? T.goldBg : 'transparent', border:`1.5px solid ${i <= stepIndex ? T.gold : T.goldLight}`, display:'flex', alignItems:'center', justifyContent:'center', transition:'all 0.4s' }}>
+                {i < stepIndex
+                  ? <span style={{ fontSize:11, color:'#fff' }}>✓</span>
+                  : i === stepIndex
+                  ? <div style={{ width:6, height:6, borderRadius:'50%', background:T.gold, animation:'ps-pulse 1s ease-in-out infinite' }} />
+                  : null}
+              </div>
+              <span style={{ fontSize:9, color: i <= stepIndex ? T.goldDark : T.muted, fontWeight: i === stepIndex ? 600 : 400, letterSpacing:'0.04em', textTransform:'uppercase' }}>{s}</span>
+            </div>
+            {i < steps.length - 1 && <div style={{ flex:1, height:1.5, background: i < stepIndex ? T.gold : T.goldLight, marginBottom:16, transition:'background 0.4s' }} />}
+          </React.Fragment>
+        ))}
+      </div>
+    </div>
+  );
+})()}
+            {status === "success" && runData && null /* success now rendered at top of panel */}
+            {status === "timeout" && <div style={{ marginTop:14, padding:"14px 18px", background:"#FDF0F0", borderRadius:10, fontSize:13, color:T.red }}>Timeout after 4 minutes. Check n8n executions.</div>}
+            {status === "error" && <div style={{ marginTop:14, padding:"14px 18px", background:"#FDF0F0", borderRadius:10, fontSize:13, color:T.red }}>Something went wrong. Check the n8n execution log.</div>}
+          </div>
+
+          </>)}
+        </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ── CLIENTS VIEW
+
+// ── CLIENTS VIEW ──────────────────────────────────────────────
+function ClientsView({ clients, onReload, db, toast, editClient, setEditClient }) {
+  const [delId, setDelId] = useState(null);
+  const [selectedSlug, setSelectedSlug] = useState("");
+  const sortedClients = [...clients].sort((a, b) => a.client_name.localeCompare(b.client_name));
+
+  async function saveClient(data) {
+    try {
+      if (data.id) { const { id, created_at, updated_at, ...rest } = data; await db.patch("client_profiles", id, rest); }
+      else { const { id, created_at, updated_at, ...rest } = data; await db.post("client_profiles", rest); }
+      setEditClient(null); setSelectedSlug(""); onReload(); toast("Saved", "success");
+    } catch(e) { toast("Save failed: " + e.message, "error"); }
+  }
+
+  async function deleteClient(id) {
+    try { await db.del("client_profiles", id); setDelId(null); setEditClient(null); setSelectedSlug(""); onReload(); toast("Deleted", "success"); }
+    catch(e) { toast("Failed: " + e.message, "error"); }
+  }
+
+  // When user picks a client from dropdown, open their edit panel directly
+  function handleSelect(slug) {
+    setSelectedSlug(slug);
+    if (slug) {
+      const client = clients.find(c => c.client_slug === slug);
+      if (client) setEditClient(client);
+    }
+  }
+
+  // When edit panel closes, reset the selector so user lands back on chooser
+  function handleClose() {
+    setEditClient(null);
+    setSelectedSlug("");
+  }
+
+  return (
+    <div className="page">
+      <div style={{ marginTop:-24, marginLeft:-16, marginBottom:48 }}>
+        <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:68, fontWeight:300, color:T.char, lineHeight:0.92, letterSpacing:"-0.02em" }}>Your<br/><span style={{ fontStyle:"italic", color:T.gold }}>clients.</span></div>
+      </div>
+
+      <div style={{ maxWidth:720, margin:"0 auto" }}>
+        <div style={{ fontSize:14, color:T.muted, marginBottom:24, lineHeight:1.5 }}>Pick a client to edit their profile, or create a new one below.</div>
+        <div style={{ marginBottom:24 }}>
+          <div style={{ fontSize:13, fontWeight:600, color:T.text, letterSpacing:"0.06em", textTransform:"uppercase", marginBottom:10 }}>Select a client to edit <span style={{ fontWeight:500, textTransform:"none", letterSpacing:0, fontSize:14, color:T.gold, marginLeft:4 }}>– {clients.length} total</span></div>
+          {clients.length === 0
+            ? <div style={{ padding:"24px 20px", background:T.surface, borderRadius:12, border:`1px solid ${T.border}`, textAlign:"center", fontSize:14, color:T.muted }}>No clients yet. Add your first one below.</div>
+            : <SearchableSelect
+                value={selectedSlug}
+                onChange={handleSelect}
+                options={sortedClients.map(c => ({ value: c.client_slug, label: c.client_name + (c.active ? "" : " (paused)") }))}
+                placeholder="— Choose a client —"
+              />
+          }
+        </div>
+
+        <div style={{ display:"flex", justifyContent:"center", marginTop:32 }}>
+          <Btn variant="gold" onClick={() => setEditClient({})} style={{ padding:"14px 32px", fontSize:14 }}>+ Add New Client</Btn>
+        </div>
+      </div>
+
+      {editClient !== null && <ClientPanel client={editClient} onClose={handleClose} onSave={saveClient} onDelete={editClient.id ? () => setDelId(editClient.id) : null} />}
+
+      {delId && ReactDOM.createPortal(
+        <div style={{ position:"fixed", inset:0, background:"rgba(20,17,15,0.5)", display:"flex", alignItems:"center", justifyContent:"center", zIndex:400 }}>
+          <div style={{ background:T.surface, borderRadius:20, padding:"48px 56px", maxWidth:400, textAlign:"center", boxShadow:"0 16px 80px rgba(28,25,23,0.2)" }}>
+            <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:32, fontWeight:300, color:T.char, marginBottom:12 }}>Delete client?</div>
+            <div style={{ fontSize:14, color:T.muted, marginBottom:36, lineHeight:1.7 }}>The profile will be permanently removed. Script run history is kept.</div>
+            <div style={{ display:"flex", gap:12 }}>
+              <Btn variant="ghost" onClick={() => setDelId(null)} style={{ flex:1, padding:"12px" }}>Cancel</Btn>
+              <Btn variant="danger" onClick={() => deleteClient(delId)} style={{ flex:1, padding:"12px" }}>Delete</Btn>
+            </div>
+          </div>
+        </div>
+      , document.body)}
+    </div>
+  );
+}
+
+// ── HISTORY VIEW ──────────────────────────────────────────────
+function HistoryView({ runs, onReload }) {
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const [refreshing, setRefreshing] = useState(false);
+  const [thumbsByRun, setThumbsByRun] = useState({}); // script_run_id -> latest complete thumbnail_run
+  const [thumbBusy, setThumbBusy] = useState({});     // script_run_id -> bool (regen in flight)
+  const [thumbErr, setThumbErr] = useState({});       // script_run_id -> bool
+  const [expanded, setExpanded] = useState(null);     // script_run_id currently expanded
+  const PAGE_SIZE = 25;
+  const filtered = runs.filter(r => {
+    const q = search.toLowerCase();
+    const matchSearch = !q || (r.video_title||r.topic||"").toLowerCase().includes(q) || (r.client_name||"").toLowerCase().includes(q);
+    if (!matchSearch) return false;
+    // Hide failed runs — keep recent runs without output (still running) visible
+    const hasOutput = r.doc_url || r.full_script;
+    if (hasOutput) return true;
+    const ageMs = r.created_at ? Date.now() - new Date(r.created_at).getTime() : 0;
+    const isRecent = ageMs > 0 && ageMs < 10 * 60 * 1000;
+    return isRecent;
+  });
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const paginated = filtered.slice((page-1)*PAGE_SIZE, page*PAGE_SIZE);
+  function handleSearch(val) { setSearch(val); setPage(1); }
+
+  // ── Batch-load the latest complete thumbnail_run for every visible run (one query per page) ──
+  const pageThumbIds = paginated.filter(r => r.doc_url || r.full_script).map(r => r.id);
+  const pageThumbKey = pageThumbIds.join(",");
+  useEffect(() => {
+    if (!pageThumbIds.length) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const db = sb(CONFIG.supabaseUrl, CONFIG.supabaseKey);
+        const rows = await db.get("thumbnail_runs",
+          `?script_run_id=in.(${pageThumbIds.join(",")})&status=eq.complete&select=id,script_run_id,images,video_title,created_at&order=created_at.desc`
+        );
+        if (cancelled || !Array.isArray(rows)) return;
+        setThumbsByRun(prev => {
+          const next = { ...prev };
+          for (const row of rows) {
+            const sid = row.script_run_id;
+            // rows are desc by created_at, so first seen = latest; never downgrade a newer local entry
+            if (!next[sid] || new Date(row.created_at) >= new Date(next[sid].created_at)) next[sid] = row;
+          }
+          return next;
+        });
+      } catch (e) { console.error("[hist-thumb] batch load error:", e); }
+    })();
+    return () => { cancelled = true; };
+  }, [pageThumbKey]);
+
+  // ── Regenerate thumbnails for one run: trigger Vercel fn, poll thumbnail_runs until complete ──
+  function regenerateThumb(runId) {
+    setThumbBusy(p => ({ ...p, [runId]: true }));
+    setThumbErr(p => ({ ...p, [runId]: false }));
+    (async () => {
+      try {
+        const res = await fetch("/api/generate-thumbnail", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ script_run_id: runId })
+        });
+        if (!res.ok) throw new Error("trigger failed: HTTP " + res.status);
+        const { thumbnail_run_id } = await res.json();
+        const db = sb(CONFIG.supabaseUrl, CONFIG.supabaseKey);
+        let attempts = 0;
+        const timer = setInterval(async () => {
+          attempts++;
+          try {
+            const rows = await db.get("thumbnail_runs", `?id=eq.${thumbnail_run_id}&limit=1`);
+            const row = Array.isArray(rows) ? rows[0] : null;
+            if (row && row.status === "complete") {
+              clearInterval(timer);
+              setThumbsByRun(p => ({ ...p, [runId]: row }));
+              setThumbBusy(p => ({ ...p, [runId]: false }));
+              setExpanded(runId);
+            } else if (row && row.status === "error") {
+              clearInterval(timer);
+              console.error("[hist-thumb] run error:", row.error);
+              setThumbBusy(p => ({ ...p, [runId]: false }));
+              setThumbErr(p => ({ ...p, [runId]: true }));
+            }
+          } catch (e) { console.error("[hist-thumb] poll error:", e); }
+          if (attempts > 90) { clearInterval(timer); setThumbBusy(p => ({ ...p, [runId]: false })); setThumbErr(p => ({ ...p, [runId]: true })); }
+        }, 5000);
+      } catch (e) {
+        console.error("[hist-thumb] error:", e);
+        setThumbBusy(p => ({ ...p, [runId]: false }));
+        setThumbErr(p => ({ ...p, [runId]: true }));
+      }
+    })();
+  }
+
+  async function downloadAll(images) {
+    for (let i = 0; i < images.length; i++) {
+      await downloadImageFile(images[i].url, thumbFilename(images[i]));
+      await new Promise(res => setTimeout(res, 350)); // stagger so the browser allows multiple downloads
+    }
+  }
+
+  return (
+    <div className="page">
+      <div style={{ marginTop:-24, marginLeft:-16, marginBottom:32, display:"flex", justifyContent:"space-between", alignItems:"flex-end", gap:24 }}>
+        <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:68, fontWeight:300, color:T.char, lineHeight:0.92, letterSpacing:"-0.02em" }}>Run<br/><span style={{ fontStyle:"italic", color:T.gold }}>history.</span></div>
+        <div style={{ flexShrink:0, paddingBottom:8 }}>
+          <Btn variant="ghost" disabled={refreshing} onClick={async () => { setRefreshing(true); await onReload(); setRefreshing(false); }}>{refreshing ? "Refreshing..." : "↻ Refresh"}</Btn>
+        </div>
+      </div>
+
+      <div style={{ marginBottom:20, border:`2px solid ${search?T.gold:T.border}`, borderRadius:12, background:search?T.goldBg:T.surface2, boxShadow:search?"0 2px 12px rgba(196,151,63,0.1)":"none", transition:"all 0.15s", display:"flex", alignItems:"center", padding:"0 18px" }}>
+        <span style={{ fontSize:16, color:T.muted, marginRight:12, flexShrink:0 }}>🔍</span>
+        <input value={search} onChange={e=>handleSearch(e.target.value)} placeholder="Search by title or client..." style={{ flex:1, padding:"14px 0", border:"none", fontSize:15, color:T.text, background:"transparent", outline:"none", fontFamily:"'DM Sans',sans-serif", fontWeight:500 }} />
+      </div>
+
+      <div style={{ fontSize:14, color:T.muted, marginBottom:24 }}>{filtered.length} script{filtered.length===1?"":"s"}</div>
+
+      <div style={{ background:T.surface2, borderRadius:16, border:`1px solid ${T.border}`, overflow:"hidden", boxShadow:"0 4px 24px rgba(0,0,0,0.06)" }}>
+        <table style={{ width:"100%", borderCollapse:"collapse" }}>
+          <thead>
+            <tr style={{ background:T.bg }}>
+              {["Client","Title","Date","Download","Thumbnail"].map((h,i) => (
+                <th key={i} style={{ padding:"15px 22px", textAlign:"left", fontSize:13, fontWeight:600, color:T.text, letterSpacing:"0.07em", textTransform:"uppercase", borderBottom:`1px solid ${T.border}` }}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {paginated.map((r,i) => {
+              const ageMs = r.created_at ? Date.now() - new Date(r.created_at).getTime() : 0;
+              const isRecent = ageMs > 0 && ageMs < 10 * 60 * 1000; // <10 minutes
+              const hasOutput = r.doc_url || r.full_script;
+              const isRunning = isRecent && !hasOutput && (r.status === "running" || r.status === "pending" || !r.status);
+              const isFailed = !hasOutput && !isRunning;
+              const rowClickable = !!r.doc_url;
+              const thumb = thumbsByRun[r.id];
+              const busy = !!thumbBusy[r.id];
+              const errored = !!thumbErr[r.id];
+              const isExpanded = expanded === r.id;
+              const images = (thumb && Array.isArray(thumb.images)) ? thumb.images : [];
+              const isLast = i === paginated.length - 1;
+              return (
+                <React.Fragment key={r.id}>
+                <tr className={rowClickable ? "history-row" : ""} onClick={rowClickable ? () => window.open(r.doc_url, "_blank") : undefined} style={{ borderBottom:(!isExpanded && !isLast)?`1px solid ${T.borderL}`:"none", cursor:rowClickable?"pointer":"default" }}>
+                  <td style={{ padding:"22px 22px", fontSize:15, fontWeight:500, color:T.char, whiteSpace:"nowrap" }}>{r.client_name}</td>
+                  <td style={{ padding:"22px 22px", maxWidth:340 }}>
+                    <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+                      <div style={{ flex:1, minWidth:0, fontSize:16, fontWeight:500, color:T.char, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>{r.video_title || (r.full_script ? r.full_script.split('\n').find(l => l.trim()) : null) || "—"}</div>
+                      {isFailed && <Badge color="neutral">Failed</Badge>}
+                      {isRunning && <Badge color="gold">Running</Badge>}
+                    </div>
+                  </td>
+                  <td style={{ padding:"22px 22px", fontSize:14, color:T.muted, whiteSpace:"nowrap" }}>
+                    {r.created_at ? new Date(r.created_at).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"}) : "—"}
+                  </td>
+                  <td style={{ padding:"22px 22px" }}>
+                    <div style={{ display:"flex", gap:16, alignItems:"center" }}>
+                      {r.doc_url && <a href={r.doc_url} target="_blank" onClick={e=>e.stopPropagation()} style={{ fontSize:14, fontWeight:500, color:T.gold, textDecoration:"none" }}>Docs →</a>}
+                      {r.full_script && <button onClick={e => { e.stopPropagation(); downloadPDF(r.full_script, r.doc_title || r.video_title || 'script', r.video_title, r.main_idea || r.topic); }} className="pdf-btn" style={{ fontSize:13, fontWeight:600, color:T.gold, background:"transparent", border:`1px solid ${T.gold}`, borderRadius:8, padding:"6px 14px", cursor:"pointer", letterSpacing:"0.02em", fontFamily:"'DM Sans',sans-serif", transition:"all 0.15s", display:"inline-flex", alignItems:"center", gap:6 }}>↓ PDF</button>}
+                      {!hasOutput && <span style={{ fontSize:14, color:T.muted }}>—</span>}
+                    </div>
+                  </td>
+                  <td style={{ padding:"22px 22px" }} onClick={e => e.stopPropagation()}>
+                    {!hasOutput ? (
+                      <span style={{ fontSize:14, color:T.muted }}>—</span>
+                    ) : busy ? (
+                      <span style={{ fontSize:13, color:T.muted, display:"inline-flex", alignItems:"center", gap:7 }}><span className="thumb-spin" style={{ width:12, height:12, border:`2px solid ${T.border}`, borderTopColor:T.gold, borderRadius:"50%", display:"inline-block", animation:"spin 0.7s linear infinite" }} />Generating…</span>
+                    ) : (thumb && images.length) ? (
+                      <div style={{ display:"flex", gap:10, alignItems:"center" }}>
+                        <button onClick={() => setExpanded(isExpanded ? null : r.id)} style={{ fontSize:13, fontWeight:600, color:T.gold, background:"transparent", border:`1px solid ${T.gold}`, borderRadius:8, padding:"6px 13px", cursor:"pointer", letterSpacing:"0.02em", fontFamily:"'DM Sans',sans-serif", display:"inline-flex", alignItems:"center", gap:6 }}>{isExpanded ? "Hide thumbnails" : "View thumbnails"}</button>
+                        <button onClick={() => regenerateThumb(r.id)} style={{ fontSize:13, fontWeight:600, color:T.muted, background:"transparent", border:`1px solid ${T.border}`, borderRadius:8, padding:"6px 13px", cursor:"pointer", fontFamily:"'DM Sans',sans-serif", letterSpacing:"0.02em" }}>Generate new</button>
+                      </div>
+                    ) : (
+                      <button onClick={() => regenerateThumb(r.id)} style={{ fontSize:13, fontWeight:600, color:errored?T.red:T.goldDark, background:errored?"transparent":T.goldBg, border:errored?`1px solid ${T.red}`:"none", borderRadius:8, padding:"6px 14px", cursor:"pointer", letterSpacing:"0.02em", fontFamily:"'DM Sans',sans-serif" }}>{errored ? "Try again" : "Generate thumbnails"}</button>
+                    )}
+                  </td>
+                </tr>
+                {isExpanded && images.length > 0 && (
+                  <tr style={{ borderBottom:isLast?"none":`1px solid ${T.borderL}` }}>
+                    <td colSpan={5} style={{ padding:"4px 22px 26px", background:T.surface }}>
+                      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:14, flexWrap:"wrap", gap:12 }}>
+                        <span style={{ fontSize:12, fontWeight:600, color:T.muted, letterSpacing:"0.06em", textTransform:"uppercase" }}>Latest version{thumb.created_at ? " · " + new Date(thumb.created_at).toLocaleString("en-GB",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}) : ""}</span>
+                        <div style={{ display:"flex", gap:10 }}>
+                          <button onClick={() => downloadAll(images)} style={{ fontSize:13, fontWeight:600, color:T.goldDark, background:T.goldBg, border:"none", borderRadius:8, padding:"7px 15px", cursor:"pointer", fontFamily:"'DM Sans',sans-serif", letterSpacing:"0.02em" }}>↓ Download all</button>
+                          <button onClick={() => regenerateThumb(r.id)} style={{ fontSize:13, fontWeight:600, color:T.goldDark, background:"transparent", border:`1.5px solid ${T.gold}`, borderRadius:8, padding:"7px 15px", cursor:"pointer", fontFamily:"'DM Sans',sans-serif", letterSpacing:"0.02em" }}>Generate new</button>
+                        </div>
+                      </div>
+                      <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(220px, 1fr))", gap:14 }}>
+                        {images.map(img => (
+                          <div key={img.concept_id || img.url} style={{ border:`1.5px solid ${T.border}`, borderRadius:12, overflow:"hidden", background:T.surface2 }}>
+                            <a href={img.url} target="_blank" rel="noopener noreferrer" style={{ display:"block", position:"relative" }}>
+                              <img src={img.url} alt={img.overlay_words || "thumbnail"} style={{ width:"100%", display:"block", aspectRatio:"16/9", objectFit:"cover" }} />
+                              {img.concept_id && <span style={{ position:"absolute", top:8, left:8, background:"rgba(10,8,6,0.78)", color:"#fff", fontSize:11, fontWeight:600, padding:"2px 8px", borderRadius:5, letterSpacing:"0.05em" }}>{img.concept_id}</span>}
+                            </a>
+                            <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", gap:10, padding:"10px 12px" }}>
+                              <span style={{ fontSize:13, color:T.text, fontWeight:500, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>{img.overlay_words || "—"}</span>
+                              <button onClick={() => downloadImageFile(img.url, thumbFilename(img))} style={{ flexShrink:0, fontSize:12, fontWeight:600, color:T.goldDark, background:T.goldBg, border:"none", padding:"6px 13px", borderRadius:6, cursor:"pointer", fontFamily:"'DM Sans',sans-serif", letterSpacing:"0.03em" }}>Download</button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </td>
+                  </tr>
+                )}
+                </React.Fragment>
+              );
+            })}
+          </tbody>
+        </table>
+        {filtered.length === 0 && <div style={{ padding:72, textAlign:"center", color:T.muted, fontSize:14 }}>No runs yet. Generate your first script.</div>}
+      </div>
+
+      {totalPages > 1 && (
+        <div style={{ display:"flex", justifyContent:"center", alignItems:"center", gap:8, marginTop:40 }}>
+          <button onClick={() => setPage(p => Math.max(1, p-1))} disabled={page===1} style={{ padding:"10px 20px", border:`1px solid ${T.border}`, borderRadius:8, fontSize:13, fontWeight:500, color:page===1?T.muted:T.char, background:T.surface2, cursor:page===1?"default":"pointer", opacity:page===1?0.4:1 }}>← Prev</button>
+          {Array.from({length:totalPages}, (_,i) => i+1).map(p => (
+            <button key={p} onClick={() => setPage(p)} style={{ padding:"10px 16px", border:`1px solid ${p===page?T.gold:T.border}`, borderRadius:8, fontSize:13, fontWeight:p===page?600:400, color:p===page?T.gold:T.muted, background:p===page?T.goldBg:T.surface2, cursor:"pointer" }}>{p}</button>
+          ))}
+          <button onClick={() => setPage(p => Math.min(totalPages, p+1))} disabled={page===totalPages} style={{ padding:"10px 20px", border:`1px solid ${T.border}`, borderRadius:8, fontSize:13, fontWeight:500, color:page===totalPages?T.muted:T.char, background:T.surface2, cursor:page===totalPages?"default":"pointer", opacity:page===totalPages?0.4:1 }}>Next →</button>
+        </div>
+      )}
+    </div>
+  );
+}
+// ── TOPICS VIEW (creative-facing topic queue editor) ──────────
+function TopicsView({ clients, db, toast, onReload, onDirtyChange }) {
+  const [slug, setSlug]       = useState("");
+  const [clientId, setClientId] = useState(null);
+  const [draft, setDraft]     = useState([]);   // working copy
+  const [saved, setSaved]     = useState([]);   // last-saved baseline
+  const [loading, setLoading] = useState(false);
+  const [saving, setSaving]   = useState(false);
+
+  const sel = clients.find(c => c.client_slug === slug);
+  const dirty = JSON.stringify(draft) !== JSON.stringify(saved);
+
+  // Report unsaved-state up so the sidebar can warn before navigating away; clear it on unmount.
+  useEffect(() => { if (onDirtyChange) onDirtyChange(dirty); }, [dirty]);
+  useEffect(() => () => { if (onDirtyChange) onDirtyChange(false); }, []);
+
+  // Warn before closing / refreshing the tab with unsaved edits.
+  useEffect(() => {
+    function handler(e) { if (dirty) { e.preventDefault(); e.returnValue = ""; } }
+    window.addEventListener("beforeunload", handler);
+    return () => window.removeEventListener("beforeunload", handler);
+  }, [dirty]);
+
+  // Always pull a FRESH copy of the queue from Supabase when a client is picked,
+  // so a creative never edits a stale list and overwrites Monday's fresh topics.
+  async function loadQueue(s) {
+    setLoading(true);
+    try {
+      const rows = await db.get("client_profiles", `?client_slug=eq.${s}&select=id,client_slug,topic_queue`);
+      const row = Array.isArray(rows) ? rows[0] : rows;
+      const q = (row && Array.isArray(row.topic_queue)) ? row.topic_queue : [];
+      setClientId(row ? row.id : null);
+      setDraft(q);
+      setSaved(q);
+    } catch (e) {
+      toast("Couldn't load topics: " + e.message, "error");
+      setDraft([]); setSaved([]); setClientId(null);
+    }
+    setLoading(false);
+  }
+
+  function pickClient(newSlug) {
+    if (newSlug === slug) return;
+    if (dirty && !window.confirm("You have unsaved changes that will be lost. Switch client anyway?")) return;
+    setSlug(newSlug);
+    if (newSlug) loadQueue(newSlug);
+    else { setDraft([]); setSaved([]); setClientId(null); }
+  }
+
+  async function save() {
+    const id = clientId || (sel && sel.id);
+    if (!id) { toast("No client selected.", "error"); return; }
+    setSaving(true);
+    try {
+      const res = await db.patch("client_profiles", id, { topic_queue: draft });
+      // With Prefer: return=representation a real update echoes the row(s).
+      // An empty result = 0 rows changed: almost always the anon key lacking
+      // UPDATE permission (RLS) on client_profiles, or an id that didn't match.
+      if (!Array.isArray(res) || res.length === 0) {
+        throw new Error("Supabase changed 0 rows — likely the anon key has no UPDATE permission (RLS) on client_profiles.");
+      }
+      setSaved(draft);
+      toast("Topics saved", "success");
+      if (onReload) onReload();
+    } catch (e) {
+      toast("Save failed: " + e.message, "error");
+    }
+    setSaving(false);
+  }
+
+  return (
+    <div className="page">
+      <div style={{ marginTop:-24, marginLeft:-16, marginBottom:40 }}>
+        <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:68, fontWeight:300, color:T.char, lineHeight:0.92, letterSpacing:"-0.02em" }}>Upcoming<br/><span style={{ fontStyle:"italic", color:T.gold }}>topics.</span></div>
+      </div>
+
+      <div style={{ maxWidth:720, margin:"0 auto" }}>
+        {/* How it works */}
+        <div style={{ marginBottom:28, padding:"16px 20px", background:T.goldBg, border:`1px solid ${T.goldLight}`, borderRadius:12, fontSize:13, color:T.goldDark, lineHeight:1.65 }}>
+          Every <strong>Monday</strong>, fresh topic ideas land here automatically. Review them and swap in your own anytime. On <strong>Friday</strong> the scripts get written from this list, <strong>top to bottom</strong>.
+        </div>
+
+        {/* Select client — same control as the Generate tab */}
+        <div style={{ marginBottom: slug ? 24 : 0 }}>
+          <div style={{ fontSize:13, fontWeight:600, color:T.text, letterSpacing:"0.06em", textTransform:"uppercase", marginBottom:10 }}>Select client <span style={{ fontWeight:400, textTransform:"none", letterSpacing:0, fontSize:12, color:T.muted }}>– {clients.length} total</span></div>
+          {clients.length === 0
+            ? <div style={{ padding:"24px 20px", background:T.surface, borderRadius:12, border:`1px solid ${T.border}`, textAlign:"center", fontSize:14, color:T.muted }}>No clients yet. Add one from the Clients tab.</div>
+            : <SearchableSelect
+                value={slug}
+                onChange={pickClient}
+                options={clients.map(c => ({ value:c.client_slug, label: c.active ? c.client_name : c.client_name + "  ·  paused" }))}
+                placeholder="Choose a client…"
+              />
+          }
+        </div>
+
+        {slug && (
+          <div style={{ background:T.surface2, borderRadius:16, border:`1px solid ${T.border}`, overflow:"hidden", boxShadow:"0 4px 32px rgba(0,0,0,0.06), 0 1px 8px rgba(0,0,0,0.04)" }}>
+            <div style={{ padding:"26px 28px" }}>
+              {loading
+                ? <div style={{ padding:"40px 0", textAlign:"center", color:T.muted, fontSize:14 }}>Loading topics…</div>
+                : <React.Fragment>
+                    <div style={{ fontSize:13, fontWeight:600, color:T.muted, letterSpacing:"0.08em", textTransform:"uppercase", marginBottom:6 }}>Topic queue</div>
+                    <div style={{ fontSize:13, color:T.muted, marginBottom:18, lineHeight:1.5 }}>The top topic is used first. Use the arrows to reorder, Delete to remove, or add your own at the bottom.</div>
+
+                    <TopicQueue topics={draft} onChange={setDraft} />
+
+                    <div style={{ display:"flex", alignItems:"center", gap:12, marginTop:24, paddingTop:20, borderTop:`1px solid ${T.border}` }}>
+                      <button onClick={save} disabled={!dirty || saving} style={{ flex:2, padding:"13px", border:"none", borderRadius:10, background:(dirty && !saving)?T.gold:T.border, color:"#fff", fontSize:14, fontWeight:600, cursor:(dirty && !saving)?"pointer":"default", letterSpacing:"0.02em", fontFamily:"'DM Sans',sans-serif", boxShadow:(dirty && !saving)?"0 2px 12px rgba(196,151,63,0.2)":"none" }}>
+                        {saving ? "Saving…" : dirty ? "Save changes" : "Saved ✓"}
+                      </button>
+                      <button onClick={() => setDraft(saved)} disabled={!dirty || saving} style={{ flex:1, padding:"13px", border:`1px solid ${T.border}`, borderRadius:10, background:"transparent", fontSize:13, fontWeight:500, color: dirty ? T.muted : "rgba(0,0,0,0.22)", cursor: dirty ? "pointer" : "default", fontFamily:"'DM Sans',sans-serif" }}>Discard</button>
+                    </div>
+                    {dirty && <div style={{ marginTop:10, fontSize:12, color:T.goldDark, textAlign:"center" }}>You have unsaved changes.</div>}
+                  </React.Fragment>
+              }
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ── APP ────────────────────────────────────────────────────────
+function App({ session, onLogout }) {
+  const [view, setView] = useState("generate");
+  const [clients, setClients] = useState([]);
+  const [runs, setRuns] = useState([]);
+  const [toast, setToast] = useState(null);
+  const [editClient, setEditClient] = useState(null);
+  const [topicsDirty, setTopicsDirty] = useState(false);
+
+  const db = sb(CONFIG.supabaseUrl, CONFIG.supabaseKey);
+
+  // Guard against silently losing unsaved topic edits when leaving the Topics tab via the sidebar.
+  function navTo(next) {
+    if (next !== view && view === "topics" && topicsDirty &&
+        !window.confirm("You have unsaved topic changes that will be lost. Leave this tab anyway?")) return;
+    setView(next);
+  }
+
+  useEffect(() => {
+    setEditClient(null);
+    loadClients();
+    if (view === "history") loadRuns();
+  }, [view]);
+
+  async function loadClients() {
+    try { const d = await db.get("client_profiles","?select=*&order=client_name.asc&limit=10000000"); setClients(Array.isArray(d)?d:[]); } catch {}
+  }
+  async function loadRuns() {
+    try { const d = await db.get("script_runs","?select=*&order=created_at.desc&limit=10000000"); setRuns(Array.isArray(d)?d:[]); } catch {}
+  }
+  function showToast(message, type="success") {
+    setToast({message,type});
+    setTimeout(() => setToast(null), 3000);
+  }
+
+  function handleEditClient(c) {
+    setEditClient(c);
+    setView("clients");
+  }
+
+  return (
+    <div style={{ display:"flex", minHeight:"100vh", background:T.bg }}>
+      <Sidebar view={view} setView={navTo} clientCount={clients.filter(c=>c.active).length} userEmail={session?.user?.email} onLogout={onLogout} />
+      <main style={{ marginLeft:236, flex:1, padding:"72px 80px", minHeight:"100vh", boxSizing:"border-box" }}>
+        {view === "generate" && <GenerateView clients={clients} onEditClient={handleEditClient} />}
+        {view === "topics"   && <TopicsView clients={clients} db={db} toast={showToast} onReload={loadClients} onDirtyChange={setTopicsDirty} />}
+        {view === "clients"  && <ClientsView clients={clients} onReload={loadClients} db={db} toast={showToast} editClient={editClient} setEditClient={setEditClient} />}
+        {view === "history"  && <HistoryView runs={runs} onReload={loadRuns} />}
+      </main>
+      <Toast msg={toast} />
+    </div>
+  );
+}
+
+// ══════════════════════════════════════════════════════════════
+// AUTH LAYER
+// ══════════════════════════════════════════════════════════════
+
+// Shared framed shell so login / forgot / reset all look identical.
+function AuthShell({ children, subtitle }) {
+  return (
+    <div style={{ minHeight:"100vh", display:"flex", alignItems:"center", justifyContent:"center", padding:"40px 20px", background:T.bg }}>
+      <div className="page" style={{ width:"100%", maxWidth:468 }}>
+        <div style={{ background:T.surface2, borderRadius:16, border:`1px solid ${T.border}`, boxShadow:"0 24px 60px rgba(28,25,23,0.10)", overflow:"hidden" }}>
+          <div style={{ height:3, background:`linear-gradient(90deg, ${T.gold}, #D4A96A, ${T.gold})` }} />
+          <div style={{ padding:"52px 52px 48px" }}>
+            <div style={{ textAlign:"center", marginBottom:38 }}>
+              <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:13, fontWeight:400, color:T.muted, letterSpacing:"0.18em", textTransform:"uppercase", marginBottom:12 }}>Content Cartel</div>
+              <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:40, fontWeight:300, color:T.char, lineHeight:1.15 }}>The Perfect <span style={{ fontStyle:"italic", color:T.gold }}>Script</span></div>
+              {subtitle && <div style={{ fontSize:14.5, color:T.muted, marginTop:14, lineHeight:1.55 }}>{subtitle}</div>}
+            </div>
+            {children}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AuthField({ label, type="text", value, onChange, onEnter, placeholder, autoFocus }) {
+  return (
+    <div style={{ marginBottom:20 }}>
+      <label style={{ display:"block", fontSize:13, fontWeight:600, color:T.text, marginBottom:8, letterSpacing:"0.02em" }}>{label}</label>
+      <input
+        type={type}
+        value={value}
+        autoFocus={autoFocus}
+        placeholder={placeholder}
+        onChange={e => onChange(e.target.value)}
+        onKeyDown={e => { if (e.key === "Enter" && onEnter) onEnter(); }}
+        style={{ padding:"15px 17px", fontSize:15 }}
+      />
+    </div>
+  );
+}
+
+function AuthBtn({ children, onClick, disabled, loading }) {
+  return (
+    <button
+      className="gen-btn"
+      onClick={disabled || loading ? undefined : onClick}
+      disabled={disabled || loading}
+      style={{ width:"100%", padding:"16px 28px", borderRadius:11, border:"none", fontSize:16.5, fontWeight:600, letterSpacing:"0.03em", color:"#fff", background:`linear-gradient(135deg, ${T.gold}, ${T.goldDark})`, cursor:(disabled||loading)?"not-allowed":"pointer", opacity:(disabled||loading)?0.55:1 }}
+    >
+      {loading ? "Please wait…" : children}
+    </button>
+  );
+}
+
+function AuthMsg({ error, ok }) {
+  if (!error && !ok) return null;
+  const isErr = !!error;
+  return (
+    <div style={{ marginBottom:20, padding:"12px 15px", borderRadius:10, fontSize:13.5, lineHeight:1.5,
+      background:isErr?"#FDF0F0":T.greenBg, color:isErr?T.red:T.green, border:`1px solid ${isErr?"#E8C0C0":"#B8DEC9"}` }}>
+      {error || ok}
+    </div>
+  );
+}
+
+// ── LOGIN + FORGOT PASSWORD ───────────────────────────────────
+function LoginScreen() {
+  const [mode, setMode] = useState("login");   // "login" | "forgot"
+  const [email, setEmail] = useState("");
+  const [pw, setPw] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  const [ok, setOk] = useState("");
+
+  async function login() {
+    setErr(""); setOk("");
+    if (!email.trim() || !pw) { setErr("Enter your email and password."); return; }
+    setBusy(true);
+    const { error } = await supaAuth.auth.signInWithPassword({ email: email.trim(), password: pw });
+    setBusy(false);
+    if (error) setErr(error.message === "Invalid login credentials" ? "Incorrect email or password." : error.message);
+    // success → onAuthStateChange in Root swaps to the app automatically
+  }
+
+  async function sendReset() {
+    setErr(""); setOk("");
+    if (!email.trim()) { setErr("Enter your email to receive a reset link."); return; }
+    setBusy(true);
+    const { error } = await supaAuth.auth.resetPasswordForEmail(email.trim(), { redirectTo: CONFIG.appUrl });
+    setBusy(false);
+    if (error) { setErr(error.message); return; }
+    setOk("If this email has an account, a reset link has been sent. Check your spam folder too.");
+  }
+
+  if (mode === "forgot") {
+    return (
+      <AuthShell subtitle="Enter your email and we'll send you a link to reset your password.">
+        <AuthMsg error={err} ok={ok} />
+        <AuthField label="Email" type="email" value={email} onChange={setEmail} onEnter={sendReset} placeholder="you@contentcartel.com" autoFocus />
+        <div style={{ marginTop:6 }}>
+          <AuthBtn onClick={sendReset} loading={busy}>Send reset link</AuthBtn>
+        </div>
+        <div style={{ textAlign:"center", marginTop:20 }}>
+          <button onClick={() => { setMode("login"); setErr(""); setOk(""); }} style={{ background:"none", border:"none", color:T.gold, fontSize:14, fontWeight:500, cursor:"pointer" }}>← Back to login</button>
+        </div>
+      </AuthShell>
+    );
+  }
+
+  return (
+    <AuthShell>
+      <AuthMsg error={err} ok={ok} />
+      <AuthField label="Email" type="email" value={email} onChange={setEmail} onEnter={login} placeholder="you@contentcartel.com" autoFocus />
+      <AuthField label="Password" type="password" value={pw} onChange={setPw} onEnter={login} placeholder="••••••••" />
+      <div style={{ marginTop:6 }}>
+        <AuthBtn onClick={login} loading={busy}>Log in</AuthBtn>
+      </div>
+      <div style={{ textAlign:"center", marginTop:20 }}>
+        <button onClick={() => { setMode("forgot"); setErr(""); setOk(""); }} style={{ background:"none", border:"none", color:T.muted, fontSize:13.5, fontWeight:500, cursor:"pointer", textDecoration:"underline", textDecorationColor:T.border, textUnderlineOffset:3 }}>Forgot password?</button>
+      </div>
+    </AuthShell>
+  );
+}
+
+// ── SET NEW PASSWORD (recovery link) ──────────────────────────
+function ResetPasswordScreen({ onDone }) {
+  const [pw, setPw] = useState("");
+  const [pw2, setPw2] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  const [ok, setOk] = useState("");
+
+  async function save() {
+    setErr(""); setOk("");
+    if (pw.length < 8) { setErr("Use at least 8 characters."); return; }
+    if (pw !== pw2) { setErr("The passwords don't match."); return; }
+    setBusy(true);
+    const { error } = await supaAuth.auth.updateUser({ password: pw });
+    setBusy(false);
+    if (error) { setErr(error.message); return; }
+    setOk("Password updated. Logging you in…");
+    setTimeout(() => onDone && onDone(), 900);
+  }
+
+  return (
+    <AuthShell subtitle="Choose a new password for your account.">
+      <AuthMsg error={err} ok={ok} />
+      <AuthField label="New password" type="password" value={pw} onChange={setPw} onEnter={save} placeholder="at least 8 characters" autoFocus />
+      <AuthField label="Confirm password" type="password" value={pw2} onChange={setPw2} onEnter={save} placeholder="repeat password" />
+      <div style={{ marginTop:6 }}>
+        <AuthBtn onClick={save} loading={busy}>Save password</AuthBtn>
+      </div>
+    </AuthShell>
+  );
+}
+
+// ── SESSION SPLASH ────────────────────────────────────────────
+function Splash() {
+  return (
+    <div style={{ minHeight:"100vh", display:"flex", alignItems:"center", justifyContent:"center", background:T.bg }}>
+      <div style={{ textAlign:"center" }}>
+        <div style={{ width:32, height:32, border:`3px solid ${T.goldLight}`, borderTopColor:T.gold, borderRadius:"50%", margin:"0 auto 18px", animation:"spin 0.8s linear infinite" }} />
+        <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:15, color:T.muted, letterSpacing:"0.04em" }}>Loading session…</div>
+      </div>
+    </div>
+  );
+}
+
+// ── ROOT GATE ─────────────────────────────────────────────────
+function Root() {
+  const [session, setSession] = useState(undefined); // undefined = still loading
+  const [recovery, setRecovery] = useState(false);
+
+  useEffect(() => {
+    // If the page was opened from a password-reset link, Supabase flags it here.
+    if (typeof window !== "undefined" && window.location.hash.includes("type=recovery")) setRecovery(true);
+
+    supaAuth.auth.getSession().then(({ data }) => setSession(data.session ?? null));
+
+    const { data: sub } = supaAuth.auth.onAuthStateChange((event, sess) => {
+      setSession(sess ?? null);
+      if (event === "PASSWORD_RECOVERY") setRecovery(true);
+      if (event === "SIGNED_OUT") setRecovery(false);
+    });
+    return () => sub.subscription.unsubscribe();
+  }, []);
+
+  async function logout() {
+    await supaAuth.auth.signOut();
+    setSession(null);
+  }
+
+  if (session === undefined) return <Splash />;
+  if (recovery) return <ResetPasswordScreen onDone={() => { setRecovery(false); if (window.history.replaceState) window.history.replaceState(null, "", CONFIG.appUrl); }} />;
+  if (!session) return <LoginScreen />;
+  return <App session={session} onLogout={logout} />;
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<Root />);
+</script>
+</body>
+</html>
